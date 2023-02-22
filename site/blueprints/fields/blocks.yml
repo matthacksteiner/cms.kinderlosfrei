@@ -5,7 +5,3 @@ options:
 
 fieldsets:
   - block-text
-  - block-image
-  - block-cards
-  - block-list
-  - block-columns

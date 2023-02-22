@@ -226,7 +226,7 @@ tabs:
             type: fields
             fields:
               fontHeadline:
-                label: Schriftgrößen
+                label: Schriften
                 type: headline
                 numbered: false
               fontStructure:
