@@ -1,0 +1,11 @@
+type: blocks
+
+options:
+  preview: false
+
+fieldsets:
+  - block-text
+  - block-image
+  - block-cards
+  - block-list
+  - block-columns

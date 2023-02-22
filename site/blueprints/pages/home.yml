@@ -1,0 +1,25 @@
+title: Start
+icon: home
+
+options:
+  delete: false
+  status: false
+  template: false
+  duplicate: false
+
+tabs:
+  content:
+    label: Content
+    icon: page
+    columns:
+      - width: 2/3
+        sections:
+          content:
+            type: fields
+            fields:
+              blocks: fields/blocks
+      - width: 1/3
+        sections:
+          files:
+            headline: Alle Dateien dieser Seite
+  seotab: seo

@@ -1,0 +1,8 @@
+Title: SVG
+accept: image/svg+xml
+
+fields:
+  alt:
+    type: text
+    label: Alternativ Text
+    width: 2/3

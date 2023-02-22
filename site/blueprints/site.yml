@@ -1,0 +1,166 @@
+title: Site
+
+tabs:
+  pages:
+    label: Dashboard
+    icon: dashboard
+    columns:
+      main:
+        width: 2/3
+        sections:
+          contentMain:
+            headline: Inhalt
+            type: pages
+            info: "Seitentyp: {{ page.blueprint.title }}"
+            template:
+              - default
+      sidebar:
+        width: 1/3
+        sections:
+          contentHome:
+            type: pages
+            label: Startseite
+            template:
+              - home
+              - error
+            image: icon
+            status: unlisted
+          sidebarDeploy:
+            type: fields
+            fields:
+              deploy:
+                type: webhook
+                label: Deploy on Netlify
+  siteConfig:
+    label: Einstellungen
+    icon: settings
+    columns:
+      menuSite:
+        width: 1/1
+        sections:
+          menu:
+            type: fields
+            fields:
+              settingsMenuHeadline:
+                label: Navigations Menüs
+                type: headline
+                numbered: false
+              menuHeader:
+                width: 1/3
+                label: Header
+                type: pages
+                query: site.index.filterBy('intendedTemplate', 'in', ['default'])
+                required: false
+              menuFooter:
+                width: 1/3
+                label: Footer
+                type: pages
+                query: site.index.filterBy('intendedTemplate', 'in', ['default'])
+                required: false
+              menuHambuger:
+                width: 1/3
+                label: Hamburger
+                type: pages
+                query: site.index.filterBy('intendedTemplate', 'in', ['default'])
+                required: false
+              divider:
+                width: 1/1
+                type: line
+      settingsAddress:
+        width: 2/3
+        sections:
+          siteConfigContent:
+            type: fields
+            fields:
+              headlineAddress:
+                label: Adresse
+                type: headline
+                numbered: false
+              addressCompany:
+                label: Firma
+                type: text
+                width: 1/3
+              addressStreet:
+                label: Straße
+                type: text
+                width: 1/3
+              addressZIP:
+                label: PLZ
+                type: text
+                width: 1/3
+              addressCity:
+                label: Stadt
+                type: text
+                width: 1/2
+              addressCountry:
+                label: Land
+                type: text
+                width: 1/2
+              addressTelephone:
+                label: Telefon
+                type: tel
+                width: 1/2
+              addressEmail:
+                label: E-Mail
+                type: email
+                width: 1/2
+              addressCompanyNumber:
+                label: Firmenbuch Nummer
+                type: text
+                width: 1/2
+              addressCourt:
+                label: Zuständiges Gericht
+                type: text
+                width: 1/2
+          janitor:
+            type: fields
+            fields:
+              line2:
+                width: 1/1
+                type: line
+              headlineJanitor:
+                label: Wartung
+                type: headline
+                numbered: false
+              janitorBackup:
+                type: janitor
+                label: Backup as .zip
+                progress: Backing up...
+                job: backupZip
+              janitorDownloadBackup:
+                type: janitor
+                label: Download backup
+                progress: Downloading...
+                job: downloadBackup
+      settingsDivision:
+        width: 1/3
+        sections:
+          divisionConfig:
+            type: fields
+            fields:
+              headlineSocial:
+                label: Social Media Accounts
+                type: headline
+                numbered: false
+              social:
+                label: On the web
+                type: structure
+                fields:
+                  name:
+                    width: 1/4
+                    label: Name
+                    type: text
+                  url:
+                    width: 2/4
+                    label: URL
+                    type: url
+                  image:
+                    width: 1/4
+                    label: Bild
+                    type: files
+                    help: Erlaubtes Format - SVG
+                    uploads:
+                      template: svg
+                    max: 1
+                    back: white
+  seotab: seo

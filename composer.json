@@ -1,0 +1,19 @@
+{
+  "name": "getkirby/weitweit",
+  "description": "weitweit Kirby Dev Kit",
+  "require": {
+    "php": ">=8.1",
+    "getkirby/cms": "^3.7",
+    "flokosiol/focus": "^3.0",
+    "oblik/kirby-link-field": "^4.0",
+    "diesdasdigital/kirby-meta-knight": "^1.2",
+    "medienbaecker/autoresize": "^2.1",
+    "getkirby/cli": "^1.1",
+    "bnomei/kirby3-janitor": "^3.4"
+  },
+  "config": {
+    "allow-plugins": {
+      "getkirby/composer-installer": true
+    }
+  }
+}

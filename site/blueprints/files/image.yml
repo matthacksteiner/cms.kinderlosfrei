@@ -1,0 +1,12 @@
+Title: Bild
+accept: image/jpeg, image/png
+
+fields:
+  alt:
+    label: field.blocks.image.alt
+    type: text
+    icon: title
+    width: 1/2
+  focus:
+    label: Fokus
+    type: focus
