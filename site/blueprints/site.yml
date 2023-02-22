@@ -9,9 +9,8 @@ tabs:
         width: 2/3
         sections:
           contentMain:
-            headline: Inhalt
+            headline: Seiten / optional
             type: pages
-            info: "Seitentyp: {{ page.blueprint.title }}"
             template:
               - default
       sidebar:
@@ -19,7 +18,7 @@ tabs:
         sections:
           contentHome:
             type: pages
-            label: Startseite
+            label: Startseite / notwendig
             template:
               - home
               - error
@@ -31,17 +30,17 @@ tabs:
               deploy:
                 type: webhook
                 label: Deploy on Netlify
-  siteConfig:
+  settings:
     label: Einstellungen
     icon: settings
     columns:
-      menuSite:
+      settingsMenu:
         width: 1/1
         sections:
           menu:
             type: fields
             fields:
-              settingsMenuHeadline:
+              menuHeadline:
                 label: Navigations Menüs
                 type: headline
                 numbered: false
@@ -63,16 +62,16 @@ tabs:
                 type: pages
                 query: site.index.filterBy('intendedTemplate', 'in', ['default'])
                 required: false
-              divider:
+              line1:
                 width: 1/1
                 type: line
       settingsAddress:
         width: 2/3
         sections:
-          siteConfigContent:
+          adress:
             type: fields
             fields:
-              headlineAddress:
+              addressHeadline:
                 label: Adresse
                 type: headline
                 numbered: false
@@ -112,38 +111,19 @@ tabs:
                 label: Zuständiges Gericht
                 type: text
                 width: 1/2
-          janitor:
-            type: fields
-            fields:
-              line2:
-                width: 1/1
-                type: line
-              headlineJanitor:
-                label: Wartung
-                type: headline
-                numbered: false
-              janitorBackup:
-                type: janitor
-                label: Backup as .zip
-                progress: Backing up...
-                job: backupZip
-              janitorDownloadBackup:
-                type: janitor
-                label: Download backup
-                progress: Downloading...
-                job: downloadBackup
-      settingsDivision:
+
+      settingsSocial:
         width: 1/3
         sections:
-          divisionConfig:
+          social:
             type: fields
             fields:
-              headlineSocial:
-                label: Social Media Accounts
+              socialHeadline:
+                label: Social Media
                 type: headline
                 numbered: false
-              social:
-                label: On the web
+              socialStructure:
+                label: Social Media Links
                 type: structure
                 fields:
                   name:
@@ -163,4 +143,90 @@ tabs:
                       template: svg
                     max: 1
                     back: white
+              line2:
+                type: line
+          maintenance:
+            type: fields
+            fields:
+              maintenanceHeadline:
+                label: Wartung
+                type: headline
+                numbered: false
+              maintenanceBackup:
+                type: janitor
+                label: Backup as .zip
+                progress: Backing up...
+                job: backupZip
+              maintenanceDownload:
+                type: janitor
+                label: Download backup
+                progress: Downloading...
+                job: downloadBackup
+  design:
+    label: Design
+    icon: brush
+    columns:
+      designHeader:
+        width: 1/2
+        sections:
+          header:
+            type: fields
+            fields:
+              headerHeadline:
+                label: Header
+                type: headline
+                numbered: false
+              headerLogo:
+                label: Logo
+                type: files
+                help: Erlaubtes Format - SVG
+                uploads:
+                  template: svg
+                multiple: false
+                width: 1/2
+              headerAlign:
+                label: Ausrichtung
+                type: select
+                default: left
+                options:
+                  left: Links
+                  center: Zentriert
+                  right: Rechts
+                width: 1/2
+
+      designColors:
+        width: 1/2
+        sections:
+          colors:
+            type: fields
+            fields:
+              colorHeadline:
+                label: Farben
+                type: headline
+                numbered: false
+              colorPrimary:
+                type: colors
+                label: Primäre Farbe
+                default: #000000
+                width: 1/3
+              colorSecondary:
+                type: colors
+                label: Sekundäre Farbe
+                width: 1/3
+                default: #ffffff
+              colorTertiary:
+                type: colors
+                label: Teritäre Farbe
+                width: 1/3
+                default: #aaaaaa
+      designFonts:
+        width: 1/2
+        sections:
+          fonts:
+            type: fields
+            fields:
+              fontHeadline:
+                label: Schriftarten
+                type: headline
+                numbered: false
   seotab: seo

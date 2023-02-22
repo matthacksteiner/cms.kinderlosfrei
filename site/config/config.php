@@ -31,8 +31,10 @@ return [
 	'medienbaecker.autoresize.maxWidth' => 3600,
 	'medienbaecker.autoresize.maxHeight' => 3600,
 	'medienbaecker.autoresize.quality' => 99,
-	'f-mahler.kirby-vercel.deployurl' => 'https://api.vercel.com/v1/integrations/deploy/prj_1pcYb8rWqv2XlqTUd5VJQkKVAGME/4hS6ckdcac',
-	'f-mahler.kirby-vercel.hooks' => [],
+	'diesdasdigital.meta-knight' => [
+		'siteTitleAsHomePageTitle' => true,
+		'separator' => ' | ',
+	],
 	'bnomei.janitor.jobs' => [
 		'downloadBackup' => function (Kirby\Cms\Page $page = null, string $data = null) {
 			$dir = realpath(kirby()->roots()->accounts() . '/../') . '/backups';

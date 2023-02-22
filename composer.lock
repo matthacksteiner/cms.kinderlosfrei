@@ -4,8 +4,56 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "512da425fc5c45ec4cf0676d5dc51ed7",
+    "content-hash": "b1b1c748bd0afbb60657536663fc6156",
     "packages": [
+        {
+            "name": "bnomei/kirby3-fontselector",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bnomei/kirby3-fontselector.git",
+                "reference": "b3f5cf1a877046957fca17c7477e929d9511946f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bnomei/kirby3-fontselector/zipball/b3f5cf1a877046957fca17c7477e929d9511946f",
+                "reference": "b3f5cf1a877046957fca17c7477e929d9511946f",
+                "shasum": ""
+            },
+            "require": {
+                "getkirby/composer-installer": "^1.2"
+            },
+            "type": "kirby-plugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bruno Meilick",
+                    "email": "b@bnomei.com"
+                }
+            ],
+            "description": "Kirby 3 Section to select font family and font weight with two synced fields",
+            "keywords": [
+                "changes",
+                "familiy",
+                "fields",
+                "font",
+                "kirby3",
+                "kirby3-cms",
+                "kirby3-plugin",
+                "select",
+                "sync",
+                "watch",
+                "weight"
+            ],
+            "support": {
+                "issues": "https://github.com/bnomei/kirby3-fontselector/issues",
+                "source": "https://github.com/bnomei/kirby3-fontselector/tree/v1.1.1"
+            },
+            "time": "2022-06-28T08:15:53+00:00"
+        },
         {
             "name": "bnomei/kirby3-janitor",
             "version": "3.4.5",
@@ -930,6 +978,46 @@
             "time": "2022-10-26T14:07:24+00:00"
         },
         {
+            "name": "hananils/kirby-colors",
+            "version": "1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hananils/kirby-colors.git",
+                "reference": "6b49acf525cdd987e6063de7ee33f4035a2d5824"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hananils/kirby-colors/zipball/6b49acf525cdd987e6063de7ee33f4035a2d5824",
+                "reference": "6b49acf525cdd987e6063de7ee33f4035a2d5824",
+                "shasum": ""
+            },
+            "require": {
+                "getkirby/composer-installer": "^1.2"
+            },
+            "type": "kirby-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Hananils\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "hana+nils · Büro für Gestaltung",
+                    "email": "buero@hananils.de"
+                }
+            ],
+            "description": "A color field for Kirby 3",
+            "support": {
+                "issues": "https://github.com/hananils/kirby-colors/issues/",
+                "source": "https://github.com/hananils/kirby-colors/tree/1.7.0"
+            },
+            "time": "2022-11-11T11:15:13+00:00"
+        },
+        {
             "name": "laminas/laminas-escaper",
             "version": "2.12.0",
             "source": {
@@ -1348,6 +1436,44 @@
                 }
             ],
             "time": "2022-12-08T13:30:06+00:00"
+        },
+        {
+            "name": "pju/kirby-webhook-field",
+            "version": "1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pju-/kirby-webhook-field.git",
+                "reference": "637494f80e755402a1455b86f6f5c2e6554dcbdf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pju-/kirby-webhook-field/zipball/637494f80e755402a1455b86f6f5c2e6554dcbdf",
+                "reference": "637494f80e755402a1455b86f6f5c2e6554dcbdf",
+                "shasum": ""
+            },
+            "require": {
+                "getkirby/composer-installer": "^1.1"
+            },
+            "type": "kirby-plugin",
+            "extra": {
+                "installer-name": "webhook-field"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Philip Jonas Ulrich",
+                    "email": "hi@philipjonas.cc"
+                }
+            ],
+            "description": "A Kirby 3 plugin providing a field to easily use webhooks, e.g. for deploying your site to services such as Netlify ",
+            "support": {
+                "issues": "https://github.com/pju-/kirby-webhook-field/issues",
+                "source": "https://github.com/pju-/kirby-webhook-field/tree/1.1.2"
+            },
+            "time": "2021-10-21T13:43:14+00:00"
         },
         {
             "name": "psr/http-client",
