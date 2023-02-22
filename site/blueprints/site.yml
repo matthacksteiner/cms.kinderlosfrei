@@ -197,7 +197,7 @@ tabs:
       designColors:
         width: 1/2
         sections:
-          colors:
+          color:
             type: fields
             fields:
               colorHeadline:
@@ -220,13 +220,208 @@ tabs:
                 width: 1/3
                 default: #aaaaaa
       designFonts:
-        width: 1/2
+        width: 1/1
         sections:
-          fonts:
+          font:
             type: fields
             fields:
               fontHeadline:
-                label: Schriftarten
+                label: Schriftgrößen
                 type: headline
                 numbered: false
+              fontStructure:
+                label: Schriftgrößen
+                type: structure
+                fields:
+                  name:
+                    width: 1/4
+                    label: Name
+                    type: text
+                  fontSize:
+                    width: 1/4
+                    label: Schriftgröße
+                    type: number
+                    default: 16
+                    after: px
+                  fontHeight:
+                    width: 1/4
+                    label: Zeilenhöhe
+                    type: number
+                    default: 24
+                    after: px
+                  fontWeight:
+                    width: 1/4
+                    label: Schriftstärke
+                    type: number
+                    default: 400
+                    after: px
+              # fontSize-xs:
+              #   label: XS-FontSize
+              #   type: number
+              #   default: 12
+              #   after: px
+              #   help: Standard 12px
+              #   width: 1/6
+              # fontHeight-xs:
+              #   label: LineHeight-XS
+              #   type: number
+              #   default: 16
+              #   after: px
+              #   help: Standard 16px
+              #   width: 1/6
+              # fontSize-sm:
+              #   label: SM-FontSize
+              #   type: number
+              #   default: 14
+              #   after: px
+              #   help: Standard 14px
+              #   width: 1/6
+              # fontHeight-sm:
+              #   label: SM-LineHeight
+              #   type: number
+              #   default: 20
+              #   after: px
+              #   help: Standard 20px
+              #   width: 1/6
+              # fontSize-base:
+              #   label: BASE-FontSize
+              #   type: number
+              #   default: 16
+              #   after: px
+              #   help: Standard 16px
+              #   width: 1/6
+              # fontHeight-base:
+              #   label: BASE-LineHeight
+              #   type: number
+              #   default: 24
+              #   after: px
+              #   help: Standard 24px
+              #   width: 1/6
+              # fontSize-lg:
+              #   label: LG-FontSize
+              #   type: number
+              #   default: 18
+              #   after: px
+              #   help: Standard 18px
+              #   width: 1/6
+              # fontHeight-lg:
+              #   label: LG-LineHeight
+              #   type: number
+              #   default: 28
+              #   after: px
+              #   help: Standard 28px
+              #   width: 1/6
+              # fontSize-xl:
+              #   label: XL-FontSize
+              #   type: number
+              #   default: 20
+              #   after: px
+              #   help: Standard 20px
+              #   width: 1/6
+              # fontHeight-xl:
+              #   label: XL-LineHeight
+              #   type: number
+              #   default: 28
+              #   after: px
+              #   help: Standard 28px
+              #   width: 1/6
+              # fontSize-2xl:
+              #   label: 2XL-FontSize
+              #   type: number
+              #   default: 24
+              #   after: px
+              #   help: Standard 24px
+              #   width: 1/6
+              # fontHeight-2xl:
+              #   label: 2XL-LineHeight
+              #   type: number
+              #   default: 32
+              #   after: px
+              #   help: Standard 32px
+              #   width: 1/6
+              # fontSize-3xl:
+              #   label: 3XL-FontSize
+              #   type: number
+              #   default: 30
+              #   after: px
+              #   help: Standard 30px
+              #   width: 1/6
+              # fontHeight-3xl:
+              #   label: 3XL-LineHeight
+              #   type: number
+              #   default: 36
+              #   after: px
+              #   help: Standard 36px
+              #   width: 1/6
+              # fontSize-4xl:
+              #   label: 4XL-FontSize
+              #   type: number
+              #   default: 36
+              #   after: px
+              #   help: Standard 36px
+              #   width: 1/6
+              # fontHeight-4xl:
+              #   label: 4XL-LineHeight
+              #   type: number
+              #   default: 40
+              #   after: px
+              #   help: Standard 40px
+              #   width: 1/6
+              # fontSize-5xl:
+              #   label: 5XL-FontSize
+              #   type: number
+              #   default: 48
+              #   after: px
+              #   help: Standard 48px
+              #   width: 1/6
+              # fontHeight-5xl:
+              #   label: 5XL-LineHeight
+              #   type: number
+              #   default: 56
+              #   after: px
+              #   help: Standard 56px
+              #   width: 1/6
+              # fontSize-6xl:
+              #   label: 6XL-FontSize
+              #   type: number
+              #   default: 64
+              #   after: px
+              #   help: Standard 64px
+              #   width: 1/6
+              # fontHeight-6xl:
+              #   label: 6XL-LineHeight
+              #   type: number
+              #   default: 72
+              #   after: px
+              #   help: Standard 72px
+              #   width: 1/6
+              # fontSize-7xl:
+              #   label: 7XL-FontSize
+              #   type: number
+              #   default: 72
+              #   after: px
+              #   help: Standard 72px
+              #   width: 1/6
+              # fontHeight-7xl:
+              #   label: 7XL-LineHeight
+              #   type: number
+              #   default: 80
+              #   after: px
+              #   help: Standard 80px
+              #   width: 1/6
+              # fontSize-8xl:
+              #   label: 8XL-FontSize
+              #   type: number
+              #   default: 96
+              #   after: px
+              #   help: Standard 96px
+              #   width: 1/6
+              # fontHeight-8xl:
+              #   label: 8XL-LineHeight
+              #   type: number
+              #   default: 104
+              #   after: px
+              #   help: Standard 104px
+              #   width: 1/6
+
   seotab: seo
