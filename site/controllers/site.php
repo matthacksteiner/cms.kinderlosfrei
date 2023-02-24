@@ -296,6 +296,7 @@ return function ($site, $page, $kirby) {
 				"colorTertiary" => (string) $site->colorTertiary(),
 				"colorBlack" => (string) $site->colorBlack(),
 				"colorWhite" => (string) $site->colorWhite(),
+				"colorTransparent" => (string) $site->colorTransparent(),
 
 				"backgroundColor" => (string) $site->backgroundColor(),
 
