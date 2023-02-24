@@ -12,7 +12,7 @@
 /public/assets/dist
 /kirby
 
-site/plugins/**
+site/plugins/*
 !site/plugins/weitweit-blocks-preview/
 !site/plugins/weitweit-field-methods/
 !site/plugins/weitweit-icons/
