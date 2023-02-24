@@ -68,6 +68,12 @@ columns:
               template: svg
             multiple: false
             width: 1/2
+          headerGridSize:
+            label: Größe
+            type: select
+            default: col-span-2
+            width: 1/4
+            extends: fields/grid
           headerAlign:
             label: Ausrichtung
             type: select
@@ -76,7 +82,7 @@ columns:
               left: Links
               center: Zentriert
               right: Rechts
-            width: 1/2
+            width: 1/4
           headerColor:
             label: Farbe Text
             type: select

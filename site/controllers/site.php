@@ -306,6 +306,7 @@ return function ($site, $page, $kirby) {
 				"headerColorActive" => (string) $site->headerColorActive(),
 				"headerBackground" => (string) $site->headerBackground(),
 				"headerBackgroundActive" => (string) $site->headerBackgroundActive(),
+				"headerGridSize" => (string) $site->headerGridSize(),
 
 			],
 			'intendedTemplate' => $page->intendedTemplate()->name(),
