@@ -25,25 +25,6 @@ if ($page->blocks()->isNotEmpty()) {
   }
 }
 
-if ($page->blocksFooter()->isNotEmpty()) {
-  $json['blocksFooter'] = [];
-
-  foreach ($page->blocksFooter()->toBlocks() as $block) {
-    if (!method_exists($block, 'getBlockArray')) {
-      continue;
-    }
-
-    $blockArray = [
-      'id' => $block->id(),
-      'type' => $block->type(),
-      'content' => [],
-    ];
-
-    $blockArray['content'] = $block->getBlockArray();
-
-    $json['blocksFooter'][] = $blockArray;
-  }
-}
 
 if (method_exists($page, 'getJsonData')) {
   $content = $page->content()->toArray();

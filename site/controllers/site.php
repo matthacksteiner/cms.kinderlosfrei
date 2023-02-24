@@ -222,17 +222,53 @@ function getMeta($site, $page, $kirby)
 }
 
 return function ($site, $page, $kirby) {
-	$nav = [];
-	foreach ($site->pages()->listed() as $navPage) {
-		$nav[] = [
-			"uri" => $navPage->uri(),
-			"title" => (string) $navPage->title(),
-			"active" => $navPage->isOpen(),
-			"intendedtemplate" => (string) $navPage->intendedTemplate(),
+
+	// ---------- settings ----------
+
+	// header menu
+	$header = [];
+	foreach ($site->navHeader()->toStructure() as $headerItem) {
+		$header[] = $headerItem->link()->getLinkArray();
+	}
+	$header = count($header) > 0 ? $header : null;
+
+	// footer menu
+	$footer = [];
+	foreach ($site->navFooter()->toStructure() as $footerItem) {
+		$footer[] = $footerItem->link()->getLinkArray();
+	}
+	$footer = count($footer) > 0 ? $footer : null;
+
+	// hambuger menu
+	$hambuger = [];
+	foreach ($site->navhambuger()->toStructure() as $hambugerItem) {
+		$hambuger[] = $hambugerItem->link()->getLinkArray();
+	}
+	$hambuger = count($hambuger) > 0 ? $hambuger : null;
+
+	// social media
+	$social = [];
+	foreach ($site->socialStructure()->toStructure() as $socialItem) {
+		$social[] = [
+			"href" => (string)$socialItem->href(),
+			"title" => (string)$socialItem->title(),
+			"image" => (string)$socialItem->image()->toFile()->url(),
+			"uri" => null,
 		];
 	}
+	$social = count($social) > 0 ? $social : null;
 
-	$nav = count($nav) > 0 ? $nav : null;
+
+	// ---------- design ----------
+
+	// header
+	$headerlogo = [];
+	if ($site->headerLogo()->isNotEmpty()) {
+		$headerlogo = [
+			"src" => (string) $site->headerLogo()->toFile()->url(),
+			"alt" => (string) $site->headerLogo()->toFile()->alt()->or($site->title() . " Logo"),
+		];
+	}
 
 
 
@@ -241,17 +277,35 @@ return function ($site, $page, $kirby) {
 			'global' => [
 				'siteTitle' => (string) $site->title(),
 				"meta" => getMeta($site, $page, $kirby),
-				"instagramUrl" => (string) $site->instagramUrl(),
-				"facebookUrl" => (string) $site->facebookUrl(),
-				"nav" => $nav,
-				"legalName" => (string) $site->legalName(),
-				"ownerName" => (string) $site->ownerName(),
+				"navHeader" => $header,
+				"navFooter" => $footer,
+				"navHamburger" => $hambuger,
+				"company" => (string) $site->addressCompany(),
 				"street" => (string) $site->street(),
 				"zip" => (string) $site->zip(),
 				"city" => (string) $site->city(),
 				"country" => (string) $site->country(),
 				"phone" => (string) $site->phone(),
 				"email" => (string) $site->email(),
+				"register" => (string) $site->addressRegister(),
+				"court" => (string) $site->addressCourt(),
+				"social" => $social,
+
+				"colorPrimary" => (string) $site->colorPrimary(),
+				"colorSecondary" => (string) $site->colorSecondary(),
+				"colorTertiary" => (string) $site->colorTertiary(),
+				"colorBlack" => (string) $site->colorBlack(),
+				"colorWhite" => (string) $site->colorWhite(),
+
+				"backgroundColor" => (string) $site->backgroundColor(),
+
+				"headerLogo" => $headerlogo,
+				"headerAlign" => (string) $site->headerAlign(),
+				"headerColor" => (string) $site->headerColor(),
+				"headerColorActive" => (string) $site->headerColorActive(),
+				"headerBackground" => (string) $site->headerBackground(),
+				"headerBackgroundActive" => (string) $site->headerBackgroundActive(),
+
 			],
 			'intendedTemplate' => $page->intendedTemplate()->name(),
 			'title' => (string) $page->title(),
