@@ -300,14 +300,17 @@ return function ($site, $page, $kirby) {
 
 				"backgroundColor" => (string) $site->backgroundColor(),
 
-				"headerLogo" => $headerlogo,
-				"headerAlign" => (string) $site->headerAlign(),
 				"headerColor" => (string) $site->headerColor(),
 				"headerColorActive" => (string) $site->headerColorActive(),
 				"headerBackground" => (string) $site->headerBackground(),
 				"headerBackgroundActive" => (string) $site->headerBackgroundActive(),
-				"headerGridSize" => (string) $site->headerGridSize(),
 
+				// "logoFile" => $logoFile,
+				"logoAlign" => (string) $site->logoAlign(),
+				"logoDesktop" => (string) $site->logoDesktop(),
+				"logoMobile" => (string) $site->logoMobile(),
+				"logoDesktopActive" => (string) $site->logoDesktopActive(),
+				"logoMobileActive" => (string) $site->logoMobileActive(),
 			],
 			'intendedTemplate' => $page->intendedTemplate()->name(),
 			'title' => (string) $page->title(),

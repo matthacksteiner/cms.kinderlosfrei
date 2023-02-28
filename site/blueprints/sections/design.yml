@@ -8,7 +8,7 @@ columns:
           colorHeadline:
             label: Farben
             type: headline
-            numbered: false
+            numbered: true
           colorPrimary:
             type: colors
             label: Primäre Farbe
@@ -43,15 +43,16 @@ columns:
           backgroundHeadline:
             label: Hintergrund
             type: headline
-            numbered: false
+            numbered: true
           backgroundColor:
             label: Hintergrundfarbe
             type: select
+            width: 1/2
             default: transparent
             extends: fields/colors
 
   designHeader:
-    width: 1/1
+    width: 1/2
     sections:
       header:
         type: fields
@@ -59,54 +60,83 @@ columns:
           headerHeadline:
             label: Header
             type: headline
-            numbered: false
-          headerLogo:
+            numbered: true
+          headerColor:
+            label: Farbe Text
+            type: select
+            default: primary
+            extends: fields/colors
+            width: 1/2
+          headerColorActive:
+            label: Farbe Text Aktiv
+            type: select
+            default: primary
+            extends: fields/colors
+            width: 1/2
+          headerBackground:
+            label: Farbe Hintergrund
+            type: select
+            default: secondary
+            extends: fields/colors
+            width: 1/2
+          headerBackgroundActive:
+            label: Farbe Hintergrund Aktiv
+            type: select
+            default: secondary
+            extends: fields/colors
+            width: 1/2
+
+  designLogo:
+    width: 1/2
+    sections:
+      logo:
+        type: fields
+        fields:
+          logoHeadline:
             label: Logo
+            type: headline
+            numbered: true
+          logoFile:
+            label: Logo Datei
             type: files
             help: Erlaubtes Format - SVG
             uploads:
               template: svg
             multiple: false
             width: 1/2
-          headerGridSize:
-            label: Größe
-            type: select
-            default: col-span-2
-            width: 1/4
-            extends: fields/grid
-          headerAlign:
-            label: Ausrichtung
+          logoAlign:
+            label: Logo Ausrichtung
             type: select
             default: left
             options:
               left: Links
               center: Zentriert
               right: Rechts
-            width: 1/4
-          headerColor:
-            label: Farbe Text
-            type: select
-            default: primary
-            extends: fields/colors
-            width: 1/4
-          headerBackground:
-            label: Farbe Hintergrund
-            type: select
-            default: secondary
-            extends: fields/colors
-            width: 1/4
-          headerColorActive:
-            label: Farbe Text Aktiv
-            type: select
-            default: primary
-            extends: fields/colors
-            width: 1/4
-          headerBackgroundActive:
-            label: Farbe Hintergrund Aktiv
-            type: select
-            default: secondary
-            extends: fields/colors
-            width: 1/4
+            width: 1/2
+          logoDesktop:
+            label: Logo Breite Desktop
+            type: number
+            default: 400
+            after: px
+            width: 1/2
+          logoMobile:
+            label: Logo Breite Mobile
+            type: number
+            default: 200
+            after: px
+            width: 1/2
+          logoDesktopActive:
+            label: Logo Breite Desktop Aktiv
+            type: number
+            default: 200
+            after: px
+            width: 1/2
+          logoMobileActive:
+            label: Logo Breite Mobile Aktiv
+            type: number
+            default: 100
+            after: px
+            width: 1/2
   designFonts:
     width: 1/2
     sections:
@@ -116,7 +146,7 @@ columns:
           fontHeadline:
             label: Schriften
             type: headline
-            numbered: false
+            numbered: true
           fontStructure:
             label: Schriftgrößen
             type: structure
