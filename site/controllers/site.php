@@ -262,11 +262,11 @@ return function ($site, $page, $kirby) {
 	// ---------- design ----------
 
 	// header
-	$headerlogo = [];
-	if ($site->headerLogo()->isNotEmpty()) {
-		$headerlogo = [
-			"src" => (string) $site->headerLogo()->toFile()->url(),
-			"alt" => (string) $site->headerLogo()->toFile()->alt()->or($site->title() . " Logo"),
+	$logoFile = [];
+	if ($site->logoFile()->isNotEmpty()) {
+		$logoFile = [
+			"src" => (string) $site->logoFile()->toFile()->url(),
+			"alt" => (string) $site->logoFile()->toFile()->alt()->or($site->title() . " Logo"),
 		];
 	}
 
@@ -304,8 +304,9 @@ return function ($site, $page, $kirby) {
 				"headerColorActive" => (string) $site->headerColorActive(),
 				"headerBackground" => (string) $site->headerBackground(),
 				"headerBackgroundActive" => (string) $site->headerBackgroundActive(),
+				"headerOverlayBackground" => (string) $site->headerOverlayBackground(),
 
-				// "logoFile" => $logoFile,
+				"logoFile" => $logoFile,
 				"logoAlign" => (string) $site->logoAlign(),
 				"logoDesktop" => (string) $site->logoDesktop(),
 				"logoMobile" => (string) $site->logoMobile(),

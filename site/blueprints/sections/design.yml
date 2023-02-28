@@ -85,6 +85,12 @@ columns:
             default: secondary
             extends: fields/colors
             width: 1/2
+          headerOverlayBackground:
+            label: Farbe Overlay
+            type: select
+            default: primary
+            extends: fields/colors
+            width: 1/2
 
   designLogo:
     width: 1/2
@@ -111,7 +117,6 @@ columns:
             options:
               left: Links
               center: Zentriert
-              right: Rechts
             width: 1/2
           logoDesktop:
             label: Logo Breite Desktop
