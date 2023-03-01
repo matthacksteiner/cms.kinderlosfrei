@@ -270,7 +270,16 @@ return function ($site, $page, $kirby) {
 		];
 	}
 
-	// font
+	//font
+	$font = [];
+	foreach ($site->fontFile()->toStructure() as $fontItem) {
+		$font[] = [
+			"name" => (string)$fontItem->name(),
+			"url1" => (string)$fontItem->file1()->toFile()->url(),
+			"url2" => (string)$fontItem->file2()->toFile()->url(),
+		];
+	}
+	$font = count($font) > 0 ? $font : null;
 
 
 
@@ -300,14 +309,16 @@ return function ($site, $page, $kirby) {
 				"colorBlack" => (string) $site->colorBlack(),
 				"colorWhite" => (string) $site->colorWhite(),
 				"colorTransparent" => (string) $site->colorTransparent(),
+				"colorBackground" => (string) $site->colorBackground(),
 
-				"backgroundColor" => (string) $site->backgroundColor(),
+				"font" => $font,
 
 				"headerColor" => (string) $site->headerColor(),
 				"headerColorActive" => (string) $site->headerColorActive(),
 				"headerBackground" => (string) $site->headerBackground(),
 				"headerBackgroundActive" => (string) $site->headerBackgroundActive(),
 				"headerOverlayBackground" => (string) $site->headerOverlayBackground(),
+				"headerFont" => (string) $site->headerFont(),
 
 				"logoFile" => $logoFile,
 				"logoAlign" => (string) $site->logoAlign(),
