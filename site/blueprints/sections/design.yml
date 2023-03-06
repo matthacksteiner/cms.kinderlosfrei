@@ -135,35 +135,39 @@ columns:
             type: select
             default: primary
             extends: fields/colors
-            width: 1/4
+            width: 1/6
           headerColorActive:
             label: Farbe Text Aktiv
             type: select
             default: primary
             extends: fields/colors
-            width: 1/4
+            width: 1/6
           headerBackground:
             label: Farbe Hintergrund
             type: select
             default: secondary
             extends: fields/colors
-            width: 1/4
+            width: 1/6
           headerBackgroundActive:
             label: Farbe Hintergrund Aktiv
             type: select
             default: secondary
             extends: fields/colors
-            width: 1/4
+            width: 1/6
           headerOverlayBackground:
             label: Farbe Overlay
             type: select
             default: primary
             extends: fields/colors
-            width: 1/4
+            width: 1/6
+          headerGap:
+            label: Abstand
+            type: gap
+            width: 1/6
           headerFont:
             label: Schriftart
             type: select
-            width: 1/4
+            width: 1/6
             options:
               type: query
               query: site.fontFile.toStructure
@@ -172,7 +176,7 @@ columns:
           headerFontSize:
             label: Schriftgröße
             type: select
-            width: 1/4
+            width: 1/6
             options:
               type: query
               query: site.fontSize.toStructure
