@@ -1,6 +1,6 @@
 columns:
   designColors:
-    width: 1/2
+    width: 1/1
     sections:
       colors:
         type: fields
@@ -41,9 +41,9 @@ columns:
             default: white
             extends: fields/colors
   designFonts:
-    width: 1/2
+    width: 1/1
     sections:
-      font:
+      fontFiles:
         type: fields
         fields:
           fontHeadline:
@@ -53,17 +53,20 @@ columns:
           fontFile:
             label: Schrift Dateien
             type: structure
+            width: 1/2
             fields:
               name:
                 label: Name
                 type: text
                 width: 1/1
+                required: true
               file1:
                 label: Datei WOFF
                 type: files
                 multiple: false
                 required: true
                 help: Erlaubtes Format - WOFF
+                query: site.files.filterBy('template', 'woff')
                 uploads:
                   template: woff
                 width: 1/2
@@ -73,12 +76,52 @@ columns:
                 multiple: false
                 required: true
                 help: Erlaubtes Format - WOFF2
+                query: site.files.filterBy('template', 'woff2')
                 uploads:
                   template: woff2
                 width: 1/2
+          fontSize:
+            label: Schriftgrößen
+            type: structure
+            width: 1/2
+            fields:
+              name:
+                label: Name
+                type: text
+                width: 1/3
+                required: true
+              sizeGap:
+                type: gap
+                width: 2/3
+                required: true
+                after: px
+              sizeMobile:
+                label: Größe Mobile
+                type: number
+                width: 1/2
+                required: true
+                after: px
+              lineHeightMobile:
+                label: Zeilenhöhe Mobile
+                type: number
+                width: 1/2
+                required: true
+                after: px
+              sizeDesktop:
+                label: Größe Desktop
+                type: number
+                width: 1/2
+                required: true
+                after: px
+              lineHeightDesktop:
+                label: Zeilenhöhe Desktop
+                type: number
+                width: 1/2
+                required: true
+                after: px
 
   designHeader:
-    width: 1/2
+    width: 1/1
     sections:
       header:
         type: fields
@@ -92,38 +135,47 @@ columns:
             type: select
             default: primary
             extends: fields/colors
-            width: 1/2
+            width: 1/4
           headerColorActive:
             label: Farbe Text Aktiv
             type: select
             default: primary
             extends: fields/colors
-            width: 1/2
+            width: 1/4
           headerBackground:
             label: Farbe Hintergrund
             type: select
             default: secondary
             extends: fields/colors
-            width: 1/2
+            width: 1/4
           headerBackgroundActive:
             label: Farbe Hintergrund Aktiv
             type: select
             default: secondary
             extends: fields/colors
-            width: 1/2
+            width: 1/4
           headerOverlayBackground:
             label: Farbe Overlay
             type: select
             default: primary
             extends: fields/colors
-            width: 1/2
+            width: 1/4
           headerFont:
             label: Schriftart
             type: select
-            width: 1/2
+            width: 1/4
             options:
               type: query
               query: site.fontFile.toStructure
+              text: "{{ structureItem.name}}"
+              value: "{{ structureItem.name}}"
+          headerFontSize:
+            label: Schriftgröße
+            type: select
+            width: 1/4
+            options:
+              type: query
+              query: site.fontSize.toStructure
               text: "{{ structureItem.name}}"
               value: "{{ structureItem.name}}"
 
@@ -141,6 +193,7 @@ columns:
             label: Logo Datei
             type: files
             help: Erlaubtes Format - SVG
+            query: site.files.filterBy('template', 'svg')
             uploads:
               template: svg
             multiple: false

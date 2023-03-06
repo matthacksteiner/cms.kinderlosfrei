@@ -246,17 +246,17 @@ return function ($site, $page, $kirby) {
 	}
 	$hambuger = count($hambuger) > 0 ? $hambuger : null;
 
-	// social media
-	$social = [];
-	foreach ($site->socialStructure()->toStructure() as $socialItem) {
-		$social[] = [
-			"href" => (string)$socialItem->href(),
-			"title" => (string)$socialItem->title(),
-			"image" => (string)$socialItem->image()->toFile()->url(),
-			"uri" => null,
-		];
-	}
-	$social = count($social) > 0 ? $social : null;
+	//social media
+	// $social = [];
+	// foreach ($site->socialStructure()->toStructure() as $socialItem) {
+	// 	$social[] = [
+	// 		"href" => (string)$socialItem->href(),
+	// 		"title" => (string)$socialItem->title(),
+	// 		"image" => (string)$socialItem->image()->toFile()->url(),
+	// 		"uri" => null,
+	// 	];
+	// }
+	// $social = count($social) > 0 ? $social : null;
 
 
 	// ---------- design ----------
@@ -270,7 +270,7 @@ return function ($site, $page, $kirby) {
 		];
 	}
 
-	//font
+	//font files
 	$font = [];
 	foreach ($site->fontFile()->toStructure() as $fontItem) {
 		$font[] = [
@@ -280,6 +280,18 @@ return function ($site, $page, $kirby) {
 		];
 	}
 	$font = count($font) > 0 ? $font : null;
+
+	//font sizes
+	$fontSize = [];
+	foreach ($site->fontSize()->toStructure() as $fontSizeItem) {
+		$fontSize[] = [
+			"name" => (string)$fontSizeItem->name(),
+			"sizeMobile" => (string)$fontSizeItem->sizeMobile(),
+			"lineHeightMobile" => (string)$fontSizeItem->lineHeightMobile(),
+			"sizeDesktop" => (string)$fontSizeItem->sizeDesktop(),
+			"lineHeightDesktop" => (string)$fontSizeItem->lineHeightDesktop(),
+		];
+	}
 
 
 
@@ -301,7 +313,7 @@ return function ($site, $page, $kirby) {
 				"email" => (string) $site->email(),
 				"register" => (string) $site->addressRegister(),
 				"court" => (string) $site->addressCourt(),
-				"social" => $social,
+				// "social" => $social,
 
 				"colorPrimary" => (string) $site->colorPrimary(),
 				"colorSecondary" => (string) $site->colorSecondary(),
@@ -312,6 +324,7 @@ return function ($site, $page, $kirby) {
 				"colorBackground" => (string) $site->colorBackground(),
 
 				"font" => $font,
+				"fontSize" => $fontSize,
 
 				"headerColor" => (string) $site->headerColor(),
 				"headerColorActive" => (string) $site->headerColorActive(),
@@ -319,6 +332,7 @@ return function ($site, $page, $kirby) {
 				"headerBackgroundActive" => (string) $site->headerBackgroundActive(),
 				"headerOverlayBackground" => (string) $site->headerOverlayBackground(),
 				"headerFont" => (string) $site->headerFont(),
+				"headerFontSize" => (string) $site->headerFontSize(),
 
 				"logoFile" => $logoFile,
 				"logoAlign" => (string) $site->logoAlign(),
