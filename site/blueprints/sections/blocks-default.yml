@@ -1,0 +1,45 @@
+type: fields
+fields:
+  baukastenBuilder:
+    label: Blöcke
+    type: blocks
+    fieldsets:
+      text:
+        label: Text
+        type: group
+        fieldsets:
+          blockText: blocks/block-text
+          # blockQuotes: blocks/block--quotes
+          # blockTextImage: blocks/block--textimage
+          # blockColumn: blocks/block--column
+      media:
+        label: Medien
+        type: group
+        fieldsets:
+          blockImage: blocks/block-image
+      #     blockHero: blocks/block--hero
+      #     blockPartner: blocks/block--partner
+      #     blockGallery: blocks/block--gallery
+      #     blockLogoSlider: blocks/block--logoSlider
+      #     blockTeam: blocks/block--team
+      #     blockDownload: blocks/block--download
+      # forms:
+      #   label: Formulare und Informationen
+      #   type: group
+      #   open: false
+      #   fieldsets:
+      #     blockNewsletter: blocks/block--newsletter
+      #     blockContactform: blocks/block--contactform
+      #     blockCallback: blocks/block--callback
+      #     blockFacts: blocks/block--facts
+      #     blockDealer: blocks/block--dealer
+      #     blockInfo: blocks/block--info
+      #     blockFaq: blocks/block--faq
+      #     blockContact: blocks/block--contact
+      #     blockLink: blocks/block--link
+      tools:
+        label: Werkzeuge
+        type: group
+        open: true
+        fieldsets:
+          blockDivider: blocks/block-divider

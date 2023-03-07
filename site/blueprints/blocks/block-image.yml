@@ -1,0 +1,36 @@
+name: Bild | Slider mit Text
+icon: image
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      text:
+        label: Text
+        type: text
+        width: 1/2
+        icon: text
+      size:
+        label: Schrift
+        type: select
+        width: 1/2
+        options:
+          type: query
+          query: site.fontSize.toStructure
+          text: "{{ structureItem.name}}"
+          value: "{{ structureItem.name}}"
+      image:
+        label: Bild
+        type: files
+        multiple: true
+        query: images
+        uploads:
+          template: image
+      link:
+        type: link
+        label: Link
+        options:
+          - page
+          - url
+        settings: true
+  config: tabs/config

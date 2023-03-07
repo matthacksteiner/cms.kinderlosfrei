@@ -10,6 +10,9 @@ return [
 	'locale' => 'de_AT.utf-8',
 	'error' => 'z-error',
 	'frontendUrl' => 'www.foo.com',
+	'panel' => [
+		'css' => 'assets/css/baukasten-panel.css'
+	],
 	'routes' => [
 		[
 			'pattern' => 'index.json',

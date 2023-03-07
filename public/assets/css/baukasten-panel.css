@@ -1,0 +1,20 @@
+:root {
+	--color-gray-900: #182d31;
+	--color-background: #f3f3f4;
+}
+
+.k-tabs {
+	background-color: var(--color-gray-300);
+}
+
+.k-header::before {
+	float: right;
+	content: "";
+	margin-top: 10px;
+	width: 150px;
+	height: 35px;
+	background-image: url("../img/baukasten-logo.svg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	clear: right;
+}

@@ -2,57 +2,41 @@ name: Text
 icon: text
 preview: textCustom
 
-fields:
-  textWeight:
-    label: Text-Stil
-    type: toggles
-    default: medium
-    width: 1/3
-    required: true
-    options:
-      medium: Medium
-      light: Light
-  textColor:
-    label: Text-Farbe
-    type: toggles
-    default: black
-    width: 1/3
-    required: true
-    options:
-      black: Schwarz
-      white: Weiß
-  width:
-    label: Element-Breite
-    type: toggles
-    default: default
-    width: 1/3
-    required: true
-    options:
-      default: Standard
-      wide: Breit
-  gapSize:
-    type: gap
-    width: 1/3
-  text:
-    label: Text
-    type: writer
-    icon: text
-    required: true
-    help: H1, H2 und Absatz Format sind nur für SEO relevant
-    nodes:
-      - h1
-      - h2
-      - paragraph
-    marks:
-      - link
-      - email
-  textSmall:
-    label: Text (klein)
-    type: writer
-    help: z.B. bei Zitaten
-    icon: quote
-    nodes: false
-    inline: true
-    marks:
-      - link
-      - email
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      textFont:
+        label: Schriftart
+        type: select
+        width: 1/3
+        options:
+          type: query
+          query: site.fontFile.toStructure
+          text: "{{ structureItem.name}}"
+          value: "{{ structureItem.name}}"
+      textSize:
+        label: Textgröße
+        type: select
+        width: 1/3
+        options:
+          type: query
+          query: site.fontSize.toStructure
+          text: "{{ structureItem.name}}"
+          value: "{{ structureItem.name}}"
+      textAlign:
+        label: Textausrichtung
+        type: select
+        default: left
+        width: 1/3
+        options:
+          left: Links
+          center: Zentriert
+          right: Rechts
+      text:
+        label: Text
+        type: textarea
+        buttons: false
+        icon: text
+        required: true
+  config: tabs/config

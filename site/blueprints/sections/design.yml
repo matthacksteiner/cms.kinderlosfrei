@@ -194,7 +194,7 @@ columns:
             type: headline
             numbered: true
           logoFile:
-            label: Logo Datei
+            label: Datei
             type: files
             help: Erlaubtes Format - SVG
             query: site.files.filterBy('template', 'svg')
@@ -203,34 +203,34 @@ columns:
             multiple: false
             width: 1/6
           logoAlign:
-            label: Logo Ausrichtung
+            label: Ausrichtung
             type: select
             default: left
             options:
               left: Links
               center: Zentriert
             width: 1/6
-          logoDesktop:
-            label: Logo Breite Desktop
-            type: number
-            default: 400
-            after: px
-            width: 1/6
           logoMobile:
-            label: Logo Breite Mobile
-            type: number
-            default: 200
-            after: px
-            width: 1/6
-          logoDesktopActive:
-            label: Logo Breite Desktop Aktiv
+            label: Breite Mobile
             type: number
             default: 200
             after: px
             width: 1/6
           logoMobileActive:
-            label: Logo Breite Mobile Aktiv
+            label: Breite Mobile Aktiv
             type: number
             default: 100
+            after: px
+            width: 1/6
+          logoDesktop:
+            label: Breite Desktop
+            type: number
+            default: 400
+            after: px
+            width: 1/6
+          logoDesktopActive:
+            label: Breite Desktop Aktiv
+            type: number
+            default: 200
             after: px
             width: 1/6

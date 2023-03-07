@@ -5,26 +5,42 @@
 
 use Kirby\Cms\Page;
 
-if ($page->blocks()->isNotEmpty()) {
-  $json['blocks'] = [];
+function getBlockArray(\Kirby\Cms\Block $block)
+{
+  $blockArray = [
+    "id" => $block->id(),
+    "type" => $block->type(),
+    "content" => [],
+  ];
 
-  foreach ($page->blocks()->toBlocks() as $block) {
-    if (!method_exists($block, 'getBlockArray')) {
+  switch ($block->type()) {
+    case "anchor":
+      $blockArray['content'] = $block->toArray()['content'];
+      $slug = (string)$block->title()->slug();
+      $blockArray['content']['slug'] = $slug;
+      break;
+
+    default:
+      $blockArray['content'] = $block->toArray()['content'];
+      break;
+  }
+
+  return $blockArray;
+}
+
+if ($page->baukastenbuilder()->isNotEmpty()) {
+  $json["blocks"] = [];
+
+  foreach ($page->baukastenbuilder()->toBlocks() as $block) {
+    $blockData = getBlockArray($block);
+
+    if (!$blockData) {
       continue;
     }
 
-    $blockArray = [
-      'id' => $block->id(),
-      'type' => $block->type(),
-      'content' => [],
-    ];
-
-    $blockArray['content'] = $block->getBlockArray();
-
-    $json['blocks'][] = $blockArray;
+    $json["blocks"][] = $blockData;
   }
 }
-
 
 if (method_exists($page, 'getJsonData')) {
   $content = $page->content()->toArray();
