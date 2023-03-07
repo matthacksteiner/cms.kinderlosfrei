@@ -13,7 +13,5 @@
 /kirby
 
 site/plugins/*
-!site/plugins/weitweit-blocks-preview/
-!site/plugins/weitweit-field-methods/
-!site/plugins/weitweit-icons/
-!site/plugins/weitweit-page-methods/
+!site/plugins/baukasten-blocks-preview/
+!site/plugins/baukasten-field-methods/

@@ -2,7 +2,7 @@
 
 use Kirby\Toolkit\Str;
 
-Kirby::plugin("weitweit/field-methods", [
+Kirby::plugin("baukasten/field-methods", [
 	"fieldMethods" => [
 		"getLinkArray" => function ($field, $title = true) {
 			return getLinkArray($field, $title);

@@ -1,0 +1,36 @@
+.k-block-type-imageCustom .k-field-help {
+	text-align: left;
+}
+
+.k-block-type-galleryCustom ul,
+.k-block-type-imageCustom,
+.k-block-type-imageCaptionCustom .grid {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-gap: 0.75rem;
+}
+
+.k-block-type-imageCustom img,
+.k-block-type-imageCaptionCustom img,
+.k-block-type-imagesCustom ul li img {
+	width: 100%;
+}
+
+.k-block-type-text ul {
+	margin-left: 1rem;
+}
+
+.k-block-type-text ul li {
+	list-style-type: disc;
+}
+
+.k-block-type-accordionCustom ul li {
+	padding-left: 0.75rem;
+	position: relative;
+}
+
+.k-block-type-accordionCustom ul li::before {
+	content: "- ";
+	position: absolute;
+	left: 0;
+}

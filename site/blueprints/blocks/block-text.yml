@@ -1,8 +1,58 @@
 name: Text
 icon: text
+preview: textCustom
+
 fields:
+  textWeight:
+    label: Text-Stil
+    type: toggles
+    default: medium
+    width: 1/3
+    required: true
+    options:
+      medium: Medium
+      light: Light
+  textColor:
+    label: Text-Farbe
+    type: toggles
+    default: black
+    width: 1/3
+    required: true
+    options:
+      black: Schwarz
+      white: Weiß
+  width:
+    label: Element-Breite
+    type: toggles
+    default: default
+    width: 1/3
+    required: true
+    options:
+      default: Standard
+      wide: Breit
+  gapSize:
+    type: gap
+    width: 1/3
   text:
-    extends: fields/writer
     label: Text
     type: writer
     icon: text
+    required: true
+    help: H1, H2 und Absatz Format sind nur für SEO relevant
+    nodes:
+      - h1
+      - h2
+      - paragraph
+    marks:
+      - link
+      - email
+  textSmall:
+    label: Text (klein)
+    type: writer
+    help: z.B. bei Zitaten
+    icon: quote
+    nodes: false
+    inline: true
+    marks:
+      - link
+      - email
