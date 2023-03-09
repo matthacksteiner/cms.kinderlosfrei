@@ -24,12 +24,12 @@ tabs:
               - error
             image: icon
             status: unlisted
-          sidebarDeploy:
-            type: fields
-            fields:
-              deploy:
-                type: webhook
-                label: Deploy on Netlify
+          # sidebarDeploy:
+          #   type: fields
+          #   fields:
+          #     deploy:
+          #       type: webhook
+          #       label: Deploy on Netlify
   settings:
     label: Einstellungen
     icon: settings

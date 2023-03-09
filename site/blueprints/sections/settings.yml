@@ -155,31 +155,31 @@ columns:
                 back: white
           line2:
             type: line
-      maintenance:
-        type: fields
-        fields:
-          maintenanceHeadline:
-            label: Wartung
-            type: headline
-            numbered: false
-          maintenanceBackup:
-            type: janitor
-            label: Backup as .zip
-            progress: Backing up...
-            job: backupZip
-          maintenanceDownload:
-            type: janitor
-            label: Download backup
-            progress: Downloading...
-            job: downloadBackup
-          maintenanceClean:
-            type: janitor
-            label: Clean Content
-            command: 'janitor:cleancontent'
-            label: Call `Example` Command
-          janitor_backupzip:
-            type: janitor
-            command: 'janitor:backupzip'
-            cooldown: 5000
-            label: Generate Backup ZIP
-            icon: archive
+      # maintenance:
+      #   type: fields
+      #   fields:
+      #     maintenanceHeadline:
+      #       label: Wartung
+      #       type: headline
+      #       numbered: false
+      #     maintenanceBackup:
+      #       type: janitor
+      #       label: Backup as .zip
+      #       progress: Backing up...
+      #       job: backupZip
+      #     maintenanceDownload:
+      #       type: janitor
+      #       label: Download backup
+      #       progress: Downloading...
+      #       job: downloadBackup
+      #     maintenanceClean:
+      #       type: janitor
+      #       label: Clean Content
+      #       command: 'janitor:cleancontent'
+      #       label: Call `Example` Command
+      #     janitor_backupzip:
+      #       type: janitor
+      #       command: 'janitor:backupzip'
+      #       cooldown: 5000
+      #       label: Generate Backup ZIP
+      #       icon: archive

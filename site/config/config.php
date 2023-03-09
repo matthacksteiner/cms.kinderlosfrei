@@ -6,6 +6,7 @@ use Kirby\Http\Response;
 
 return [
 	'debug' => true,
+	'panel.install' => true,
 	'date.handler' => 'strftime',
 	'locale' => 'de_AT.utf-8',
 	'error' => 'z-error',
