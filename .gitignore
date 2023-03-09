@@ -1,6 +1,7 @@
 .DS_Store
 .idea
 .run
+.vscode
 
 /content/
 /storage/cache
@@ -11,6 +12,7 @@
 /public/media
 /public/assets/dist
 /kirby
+
 
 site/plugins/*
 !site/plugins/baukasten-blocks-preview/
