@@ -26,13 +26,15 @@ fields:
   widthMobile:
     label: Breite Mobile
     type: select
-    default: col-span-4
+    default: col-span-6
     width: 1/4
     options:
-      col-span-1: 1/4
-      col-span-2: 2/4
-      col-span-3: 3/4
-      col-span-4: 4/4
+      col-span-1: 1/6
+      col-span-2: 2/6
+      col-span-3: 3/6
+      col-span-4: 4/6
+      col-span-5: 5/6
+      col-span-6: 6/6
   startMobile:
     label: Start Mobile
     type: select
@@ -43,6 +45,8 @@ fields:
       col-start-2: Spalte 2
       col-start-3: Spalte 3
       col-start-4: Spalte 4
+      col-start-5: Spalte 5
+      col-start-6: Spalte 6
   widthDesktop:
     label: Breite Desktop
     type: select

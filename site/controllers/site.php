@@ -334,6 +334,11 @@ return function ($site, $page, $kirby) {
 				"headerFont" => (string) $site->headerFont(),
 				"headerFontSize" => (string) $site->headerFontSize(),
 
+				"gridGapMobile" => (string) $site->gridGapMobile(),
+				"gridMarginMobile" => (string) $site->gridMarginMobile(),
+				"gridGapDesktop" => (string) $site->gridGapDesktop(),
+				"gridMarginDesktop" => (string) $site->gridMarginDesktop(),
+
 				"logoFile" => $logoFile,
 				"logoAlign" => (string) $site->logoAlign(),
 				"logoDesktop" => (string) $site->logoDesktop(),
