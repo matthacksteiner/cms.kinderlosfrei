@@ -24,7 +24,7 @@ fields:
     label: Breite
     numbered: false
   widthMobile:
-    label: Breite Mobile
+    label: Breite 📱
     type: select
     default: col-span-6
     width: 1/4
@@ -36,7 +36,7 @@ fields:
       col-span-5: 5/6
       col-span-6: 6/6
   startMobile:
-    label: Start Mobile
+    label: Start 📱
     type: select
     default: col-start-1
     width: 1/4
@@ -48,7 +48,7 @@ fields:
       col-start-5: Spalte 5
       col-start-6: Spalte 6
   widthDesktop:
-    label: Breite Desktop
+    label: Breite 🖥️
     type: select
     default: col-span-12
     width: 1/4
@@ -66,7 +66,7 @@ fields:
       col-span-11: 11/12
       col-span-12: 12/12
   startDesktop:
-    label: Start Desktop
+    label: Start 🖥️
     type: select
     default: col-start-1
     width: 1/4
@@ -88,22 +88,22 @@ fields:
     label: Abstände
     numbered: false
   spacingMobileTop:
-    label: ⬆️ Mobile
+    label: ⬆️ 📱
     type: number
     after: px
     width: 1/4
   spacingMobileBottom:
-    label: ⬇️ Mobile
+    label: ⬇️ 📱
     type: number
     after: px
     width: 1/4
   spacingDesktopTop:
-    label: ⬆️ Desktop
+    label: ⬆️ 🖥️
     type: number
     after: px
     width: 1/4
   spacingDesktopBottom:
-    label: ⬇️ Desktop
+    label: ⬇️ 🖥️
     type: number
     after: px
     width: 1/4

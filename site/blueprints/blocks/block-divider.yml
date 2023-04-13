@@ -2,26 +2,24 @@ name: Abstände
 icon: divider
 preview: divider
 
-preview: divider
-
 fields:
   spacingMobileTop:
-    label: ⬆️ Mobile
+    label: ⬆️ 📱
     type: number
     after: px
     width: 1/4
   spacingMobileBottom:
-    label: ⬇️ Mobile
+    label: ⬇️ 📱
     type: number
     after: px
     width: 1/4
   spacingDesktopTop:
-    label: ⬆️ Desktop
+    label: ⬆️ 🖥️
     type: number
     after: px
     width: 1/4
   spacingDesktopBottom:
-    label: ⬇️ Desktop
+    label: ⬇️ 🖥️
     type: number
     after: px
     width: 1/4

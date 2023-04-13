@@ -1,36 +1,42 @@
-name: Bild | Slider mit Text
+name: Bilder
 icon: image
+preview: image
 
 tabs:
   content:
     label: Inhalt
     fields:
-      text:
-        label: Text
-        type: text
-        width: 1/2
-        icon: text
-      size:
-        label: Schrift
+      ratio:
+        label: Seitenverhältnis
         type: select
         width: 1/2
+        default: 1:1
         options:
-          type: query
-          query: site.fontSize.toStructure
-          text: "{{ structureItem.name}}"
-          value: "{{ structureItem.name}}"
-      image:
-        label: Bild
+          1:1: 1:1
+          16:9: 16:9
+          4:3: 4:3
+          3:4: 3:4
+          5:4: 5:4
+          9:16: 9:16
+      width:
+        label: Verhältnis
+        type: select
+        width: 1/2
+        default: "equal"
+        options:
+          - value: "equal"
+            text: "gleich"
+          - value: "big-small"
+            text: "groß | klein"
+          - value: "small-big"
+            text: "klein | groß"
+
+      images:
+        label: Bilder
         type: files
         multiple: true
-        query: images
+        query: page.images
+        layout: cards
         uploads:
           template: image
-      link:
-        type: link
-        label: Link
-        options:
-          - page
-          - url
-        settings: true
   config: tabs/config

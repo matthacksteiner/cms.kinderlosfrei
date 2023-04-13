@@ -1,15 +1,38 @@
 panel.plugin("baukasten-blocks-preview/preview", {
 	blocks: {
-		textCustom: `
-		<div
-			@dblclick="open"
-		>
-			<div class="k-grid">
-			<template><div v-html="content.text" class="k-column" data-width="4/4"></div></template>
+		image: `
+			<div>
+				<ul
+					@dblclick="open"
+				>
+					<template>
+						<li v-for="image in content.images" :key="image.id">
+							<img :src="image.url" :srcset="image.image.srcset" :alt="image.alt" />
+						</li>
+					</template>
+				</ul>
+				<div data-theme="help" class="k-text k-field-help">
+					<k-icon type="images" />
+					<span>Slider</span>
+				</div>
 			</div>
-			<div data-theme="help" class="k-text k-field-help"><span>Text</div>
-		</div>
-    `,
+		`,
+		textCustom: `
+			<div
+				@dblclick="open"
+			>
+				<div class="k-grid">
+					<template>
+						<div v-html="content.text" class="k-column" data-width="4/4">
+						</div>
+					</template>
+					</div>
+					<div data-theme="help" class="k-text k-field-help">
+						<k-icon type="text" />
+						<span>Text</span>
+					</div>
+			</div>
+		`,
 		divider: `
 		<div
 			@dblclick="open"

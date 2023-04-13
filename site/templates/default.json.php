@@ -20,6 +20,24 @@ function getBlockArray(\Kirby\Cms\Block $block)
       $blockArray['content']['slug'] = $slug;
       break;
 
+    case 'blockImage':
+      $blockArray['content'] = $block->toArray()['content'];
+      $images = [];
+
+      foreach ($block->images()->toFiles() as $file) {
+        $image = $file->focusCrop(1920, 1920);
+        $images[] = [
+          'url' => $image->url(),
+          'width' => $image->width(),
+          'height' => $image->height(),
+          'alt' => (string)$image->alt(),
+        ];
+      }
+      $blockArray['content']['images'] = $images;
+      break;
+
+
+
     default:
       $blockArray['content'] = $block->toArray()['content'];
       break;

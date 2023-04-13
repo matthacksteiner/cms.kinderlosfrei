@@ -274,3 +274,87 @@ columns:
             default: 200
             after: px
             width: 1/6
+  designButton:
+    width: 1/1
+    sections:
+      button:
+        type: fields
+        fields:
+          buttonHeadline:
+            label: Button
+            type: headline
+            numbered: true
+          buttonFont:
+            label: Schriftart
+            type: select
+            width: 1/6
+            options:
+              type: query
+              query: site.fontFile.toStructure
+              text: "{{ structureItem.name}}"
+              value: "{{ structureItem.name}}"
+          buttonFontSize:
+            label: Schriftgröße
+            type: select
+            width: 1/6
+            options:
+              type: query
+              query: site.fontSize.toStructure
+              text: "{{ structureItem.name}}"
+              value: "{{ structureItem.name}}"
+          buttonBorderRadius:
+            label: Rand Rundung
+            type: number
+            default: 0
+            after: px
+            width: 1/6
+          buttonBorderWidth:
+            label: Rand Strichstärke
+            type: number
+            default: 0
+            after: px
+            width: 1/6
+          buttonPadding:
+            label: Abstand
+            type: number
+            width: 1/6
+            after: px
+          buttonGap:
+            type: gap
+            width: 1/6
+          buttonBackgroundColor:
+            label: Farbe Hintergrund
+            type: select
+            default: primary
+            extends: fields/colors
+            width: 1/6
+          buttonBackgroundColorActive:
+            label: Farbe Hintergrund Hover
+            type: select
+            default: primary
+            extends: fields/colors
+            width: 1/6
+          buttonTextColor:
+            label: Farbe Text
+            type: select
+            default: secondary
+            extends: fields/colors
+            width: 1/6
+          buttonTextColorActive:
+            label: Farbe Text Hover
+            type: select
+            default: secondary
+            extends: fields/colors
+            width: 1/6
+          buttonBorderColor:
+            label: Rand Farbe
+            type: select
+            default: primary
+            extends: fields/colors
+            width: 1/6
+          buttonBorderColorActive:
+            label: Rand Farbe Hover
+            type: select
+            default: primary
+            extends: fields/colors
+            width: 1/6
