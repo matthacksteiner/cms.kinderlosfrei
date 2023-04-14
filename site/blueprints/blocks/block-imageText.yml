@@ -6,6 +6,9 @@ tabs:
   content:
     label: Inhalt
     fields:
+      headline0:
+        label: Layout
+        type: headline
       headline1:
         label: Überschrift
         type: headline
@@ -30,6 +33,10 @@ tabs:
         extends: fields/images
         multiple: false
         layout: list
+        width: 4/6
+      ratio:
+        extends: fields/ratio
+        width: 2/6
       headline4:
         label: Link | Button
         type: headline

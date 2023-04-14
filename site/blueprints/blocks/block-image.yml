@@ -7,21 +7,15 @@ tabs:
     label: Inhalt
     fields:
       ratio:
-        width: 1/2
+        width: 1/4
         extends: fields/ratio
-      width:
-        label: Verhältnis
-        type: select
-        width: 1/2
-        default: "equal"
-        options:
-          - value: "equal"
-            text: "gleich"
-          - value: "big-small"
-            text: "groß | klein"
-          - value: "small-big"
-            text: "klein | groß"
-
+      align:
+        extends: fields/align
+        width: 1/4
+      layout:
+        width: 2/4
+        extends: fields/layout
       images:
         extends: fields/images
+        max: 4
   config: tabs/config

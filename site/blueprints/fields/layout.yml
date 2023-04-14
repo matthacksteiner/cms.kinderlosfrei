@@ -1,0 +1,26 @@
+label: Layout
+type: select
+default: "6-6"
+options:
+  - value: "6-6"
+    text: "6 Spalten | 6 Spalten"
+  - value: "3-3-3-3"
+    text: "3 Spalten | 3 Spalten | 3 Spalten | 3 Spalten"
+  - value: "4-8"
+    text: "4 Spalten | 8 Spalten"
+  - value: "8-4"
+    text: "8 Spalten | 4 Spalten"
+  - value: "5-7"
+    text: "5 Spalten | 7 Spalten"
+  - value: "7-5"
+    text: "7 Spalten | 5 Spalten"
+
+  - value: "5-5"
+    text: "5 Spalten | 1 Spalte | 5 Spalten | 1 Spalte"
+  - value: "5-5-rev"
+
+    text: "1 Spalte | 5 Spalten | 1 Spalte | 5 Spalten"
+  - value: "7-3"
+    text: "7 Spalten | 1 Spalte | 3 Spalten | 1 Spalte"
+  - value: "3-7"
+    text: "1 Spalte | 3 Spalten | 1 Spalte | 7 Spalten"
