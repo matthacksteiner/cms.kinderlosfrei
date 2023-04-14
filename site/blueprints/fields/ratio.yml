@@ -1,0 +1,10 @@
+label: Seitenverhältnis
+type: select
+default: 1:1
+options:
+  1:1: 1:1
+  16:9: 16:9
+  4:3: 4:3
+  3:4: 3:4
+  5:4: 5:4
+  9:16: 9:16

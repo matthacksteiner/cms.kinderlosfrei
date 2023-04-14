@@ -7,17 +7,8 @@ tabs:
     label: Inhalt
     fields:
       ratio:
-        label: Seitenverhältnis
-        type: select
         width: 1/2
-        default: 1:1
-        options:
-          1:1: 1:1
-          16:9: 16:9
-          4:3: 4:3
-          3:4: 3:4
-          5:4: 5:4
-          9:16: 9:16
+        extends: fields/ratio
       width:
         label: Verhältnis
         type: select
@@ -32,11 +23,5 @@ tabs:
             text: "klein | groß"
 
       images:
-        label: Bilder
-        type: files
-        multiple: true
-        query: page.images
-        layout: cards
-        uploads:
-          template: image
+        extends: fields/images
   config: tabs/config

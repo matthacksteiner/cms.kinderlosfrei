@@ -10,6 +10,7 @@ fields:
         fieldsets:
           blockTitle: blocks/block-title
           blockText: blocks/block-text
+          blockImageText: blocks/block-imageText
           # blockQuotes: blocks/block--quotes
           # blockTextImage: blocks/block--textimage
           # blockColumn: blocks/block--column

@@ -1,0 +1,40 @@
+name: Bild + Text
+icon: layers
+preview: imageText
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      headline1:
+        label: Überschrift
+        type: headline
+      titleOptions:
+        extends: fields/titleOptions
+      title:
+        label: Titel
+        type: text
+      headline2:
+        label: Text
+        type: headline
+      textOptions:
+        extends: fields/textOptions
+      text:
+        label: Text
+        required: true
+        extends: fields/textarea
+      headline3:
+        label: Bild
+        type: headline
+      image:
+        extends: fields/images
+        multiple: false
+        layout: list
+      headline4:
+        label: Link | Button
+        type: headline
+      link:
+        label: Link
+        extends: fields/link
+
+  config: tabs/config

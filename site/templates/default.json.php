@@ -41,6 +41,22 @@ function getBlockArray(\Kirby\Cms\Block $block)
       $blockArray['content']['text'] = (string)$block->text()->kt();
       break;
 
+    case "blockImageText":
+      $blockArray['content'] = $block->toArray()['content'];
+
+      $image = null;
+      if ($file1 = $block->image()->toFile()) {
+        $image = $file1->focusCrop(1920, 1920);
+
+        $image = [
+          'url' => $image->url(),
+          'width' => $image->width(),
+          'height' => $image->height(),
+          'alt' => (string)$image->alt(),
+        ];
+      }
+      $blockArray['content']['image'] = $image;
+      break;
 
     default:
       $blockArray['content'] = $block->toArray()['content'];

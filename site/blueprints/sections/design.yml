@@ -287,23 +287,10 @@ columns:
             type: headline
             numbered: true
           buttonFont:
-            label: Schriftart
-            type: select
+            extends: fields/fontFile
             width: 1/6
-            options:
-              type: query
-              query: site.fontFile.toStructure
-              text: "{{ structureItem.name}}"
-              value: "{{ structureItem.name}}"
           buttonFontSize:
-            label: Schriftgröße
-            type: select
-            width: 1/6
-            options:
-              type: query
-              query: site.fontSize.toStructure
-              text: "{{ structureItem.name}}"
-              value: "{{ structureItem.name}}"
+            extends: fields/fontSize
           buttonBorderRadius:
             label: Rand Rundung
             type: number
