@@ -8,6 +8,7 @@ fields:
         label: Text
         type: group
         fieldsets:
+          blockTitle: blocks/block-title
           blockText: blocks/block-text
           # blockQuotes: blocks/block--quotes
           # blockTextImage: blocks/block--textimage

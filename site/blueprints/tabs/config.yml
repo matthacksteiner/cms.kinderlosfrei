@@ -90,20 +90,24 @@ fields:
   spacingMobileTop:
     label: ⬆️ 📱
     type: number
+    default: 0
     after: px
     width: 1/4
   spacingMobileBottom:
     label: ⬇️ 📱
     type: number
+    default: 0
     after: px
     width: 1/4
   spacingDesktopTop:
     label: ⬆️ 🖥️
     type: number
+    default: 0
     after: px
     width: 1/4
   spacingDesktopBottom:
     label: ⬇️ 🖥️
     type: number
     after: px
+    default: 0
     width: 1/4

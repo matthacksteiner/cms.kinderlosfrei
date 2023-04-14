@@ -1,7 +1,0 @@
-type: blocks
-
-options:
-  preview: false
-
-fieldsets:
-  - block-text

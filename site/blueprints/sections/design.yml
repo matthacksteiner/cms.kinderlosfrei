@@ -76,6 +76,7 @@ columns:
             after: px
           gridInfo:
             label: Info
+            theme: info
             type: info
             text: >
               Mobil wird das Grid auf 6 Spalten aufgeteilt und am Desktop auf 12 Spalten.
@@ -93,6 +94,7 @@ columns:
           fontFile:
             label: Schrift Dateien
             type: structure
+            help: Die Schriftdateien müssen im Format WOFF und WOFF2 vorliegen. Sie können auf https://transfonter.org/ mit den default Einstellungen generiert werden.
             width: 1/2
             fields:
               name:

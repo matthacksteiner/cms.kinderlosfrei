@@ -6,37 +6,9 @@ tabs:
   content:
     label: Inhalt
     fields:
-      textFont:
-        label: Schriftart
-        type: select
-        width: 1/3
-        options:
-          type: query
-          query: site.fontFile.toStructure
-          text: "{{ structureItem.name}}"
-          value: "{{ structureItem.name}}"
-      textSize:
-        label: Textgröße
-        type: select
-        width: 1/3
-        options:
-          type: query
-          query: site.fontSize.toStructure
-          text: "{{ structureItem.name}}"
-          value: "{{ structureItem.name}}"
-      textAlign:
-        label: Textausrichtung
-        type: select
-        default: left
-        width: 1/3
-        options:
-          left: Links
-          center: Zentriert
-          right: Rechts
+      textOptions: fields/textOptions
       text:
         label: Text
-        type: textarea
-        buttons: false
-        icon: text
         required: true
+        extends: fields/textarea
   config: tabs/config

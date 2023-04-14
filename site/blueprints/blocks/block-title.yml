@@ -1,0 +1,30 @@
+name: Title
+icon: title
+preview: title
+
+tabs:
+  content:
+    label: Inhalt
+    type: fields
+    fields:
+      textOptions: fields/textOptions
+      headline:
+        label: Headline
+        type: select
+        default: h2
+        options:
+          h1: h1
+          h2: h2
+          h3: h3
+          h4: h4
+          h5: h5
+          h6: h6
+        required: true
+        width: 1/4
+      title:
+        label: Titel
+        type: text
+        icon: title
+        required: true
+        width: 3/4
+  config: tabs/config

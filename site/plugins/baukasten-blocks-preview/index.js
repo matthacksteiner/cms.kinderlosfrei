@@ -17,6 +17,22 @@ panel.plugin("baukasten-blocks-preview/preview", {
 				</div>
 			</div>
 		`,
+		title: `
+			<div
+				@dblclick="open"
+			>
+				<div class="k-grid">
+					<template>
+						<h3 v-html="content.title" class="k-column" data-width="4/4">
+						</h3>
+					</template>
+					</div>
+					<div data-theme="help" class="k-text k-field-help">
+						<k-icon type="title" />
+						<span>Title</span>
+					</div>
+			</div>
+		`,
 		textCustom: `
 			<div
 				@dblclick="open"

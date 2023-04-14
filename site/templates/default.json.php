@@ -36,6 +36,10 @@ function getBlockArray(\Kirby\Cms\Block $block)
       $blockArray['content']['images'] = $images;
       break;
 
+    case 'blockText':
+      $blockArray['content'] = $block->toArray()['content'];
+      $blockArray['content']['text'] = (string)$block->text()->kt();
+      break;
 
 
     default:

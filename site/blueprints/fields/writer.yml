@@ -1,7 +1,0 @@
-type: writer
-marks:
-  - bold
-  - italic
-  - link
-nodes:
-  - heading

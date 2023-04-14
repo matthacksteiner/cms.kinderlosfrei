@@ -1,0 +1,35 @@
+type: group
+fields:
+  font:
+    label: Schriftart
+    type: select
+    width: 1/4
+    options:
+      type: query
+      query: site.fontFile.toStructure
+      text: "{{ structureItem.name}}"
+      value: "{{ structureItem.name}}"
+  size:
+    label: Textgröße
+    type: select
+    width: 1/4
+    options:
+      type: query
+      query: site.fontSize.toStructure
+      text: "{{ structureItem.name}}"
+      value: "{{ structureItem.name}}"
+  color:
+    label: Textfarbe
+    type: select
+    default: black
+    width: 1/4
+    extends: fields/colors
+  align:
+    label: Textausrichtung
+    type: select
+    default: left
+    width: 1/4
+    options:
+      left: Links
+      center: Zentrierts
+      right: Rechts
