@@ -1,6 +1,6 @@
 label: Bilder
 type: files
-multiple: true
+multiple: false
 query: page.images
 layout: cards
 uploads:

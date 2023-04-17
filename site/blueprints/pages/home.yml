@@ -7,20 +7,59 @@ options:
   template: false
   duplicate: false
 
+# tabs:
+#   content:
+#     label: Content
+#     icon: page
+#     columns:
+#       - width: 2/3
+#         sections:
+#           builder: sections/blocks-default
+#           # content:
+#           # type: fields
+#           # fields:
+#           # blocks: fields/blocks
+#       - width: 1/3
+#         sections:
+#           files:
+#             headline: Alle Dateien dieser Seite
+#   seotab: seo
+
 tabs:
   content:
-    label: Content
-    icon: page
-    columns:
-      - width: 2/3
-        sections:
-          builder: sections/blocks-default
-          # content:
-          # type: fields
-          # fields:
-          # blocks: fields/blocks
-      - width: 1/3
-        sections:
-          files:
-            headline: Alle Dateien dieser Seite
+    icon: text
+    label: content
+    fields:
+      layout:
+        label: Layout
+        type: layout
+        layouts:
+          - "1/1"
+          - "1/2, 1/2"
+          - "1/4, 1/4, 1/4, 1/4"
+          - "5/12, 1/12, 5/12, 1/12"
+          - "1/12, 5/12, 1/12, 5/12"
+          - "7/12, 1/12, 3/12, 1/12"
+          - "1/12, 3/12, 1/12, 7/12"
+        fieldsets:
+          text:
+            label: Text
+            type: group
+            fieldsets:
+              blockTitle: blocks/block-title
+              blockText: blocks/block-text
+              blockImageText: blocks/block-imageText
+          media:
+            label: Medien
+            type: group
+            fieldsets:
+              blockImage: blocks/block-image
+          tools:
+            label: Werkzeuge
+            type: group
+            open: true
+            fieldsets:
+              blockDivider: blocks/block-divider
+        settings: tabs/config
+  media: tabs/media
   seotab: seo

@@ -5,6 +5,66 @@
 
 use Kirby\Cms\Page;
 
+function getlayoutArray(\Kirby\Cms\Layout $layout)
+{
+  $columns = [];
+
+  foreach ($layout->columns() as $column) {
+    $columnArray = [
+      "id" => $column->id(),
+      "width" => $column->width(),
+      "span" => $column->span(),
+      "blocks" => []
+    ];
+
+    $blocks = $column->blocks();
+
+    foreach ($blocks as $block) {
+      $blockData = getBlockArray($block);
+
+      if (!$blockData) {
+        continue;
+      }
+
+      $columnArray['blocks'][] = $blockData;
+    }
+
+    $columns[] = $columnArray;
+  }
+
+  return [
+    "id" => $layout->id(),
+    "backgroundContainer" => $layout->backgroundContainer()->value(),
+    "backgroundColor" => $layout->backgroundColor()->value(),
+    "spacingMobileTop" => $layout->spacingMobileTop()->value(),
+    "spacingMobileBottom" => $layout->spacingMobileBottom()->value(),
+    "spacingDesktopTop" => $layout->spacingDesktopTop()->value(),
+    "spacingDesktopBottom" => $layout->spacingDesktopBottom()->value(),
+
+    "content" => [
+      "columns" => $columns,
+    ],
+  ];
+}
+
+if ($page->layout()->isNotEmpty()) {
+  $json["layouts"] = [];
+
+  foreach ($page->layout()->toLayouts() as $layout) {
+    $layoutData = getlayoutArray($layout);
+
+    if (!$layoutData) {
+      continue;
+    }
+
+    $json["layouts"][] = $layoutData;
+  }
+}
+
+
+
+
+
 function getBlockArray(\Kirby\Cms\Block $block)
 {
   $blockArray = [

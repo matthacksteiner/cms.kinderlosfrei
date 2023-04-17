@@ -7,15 +7,7 @@ tabs:
     label: Inhalt
     fields:
       ratio:
-        width: 1/4
         extends: fields/ratio
-      align:
-        extends: fields/align
-        width: 1/4
-      layout:
-        width: 2/4
-        extends: fields/layout
-      images:
-        extends: fields/images
-        max: 4
+      image:
+        extends: fields/image
   config: tabs/config

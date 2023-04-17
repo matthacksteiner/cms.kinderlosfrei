@@ -6,14 +6,14 @@ panel.plugin("baukasten-blocks-preview/preview", {
 					@dblclick="open"
 				>
 					<template>
-						<li v-for="image in content.images" :key="image.id">
+						<li v-for="image in content.image" :key="image.id">
 							<img :src="image.url" :srcset="image.image.srcset" :alt="image.alt" />
 						</li>
 					</template>
 				</ul>
 				<div data-theme="help" class="k-text k-field-help">
 					<k-icon type="images" />
-					<span>Slider</span>
+					<span>Bilder</span>
 				</div>
 			</div>
 		`,

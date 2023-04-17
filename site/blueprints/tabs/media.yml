@@ -1,0 +1,15 @@
+label: Medien
+icon: image
+sections:
+  images:
+    headline: Bilder
+    type: files
+    layout: list
+    template: image
+    width: 1/2
+  documents:
+    headline: Dokumente
+    type: files
+    layout: cards
+    template: document
+    width: 1/2

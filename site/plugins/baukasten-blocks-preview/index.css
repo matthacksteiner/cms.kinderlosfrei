@@ -1,25 +1,17 @@
-.k-block-type-imageCustom .k-field-help {
-	text-align: left;
+img {
+	width: 100%;
+	height: auto;
 }
 
-.k-block-type-hero ul,
-.k-block-type-image ul {
-	display: grid;
-	grid-template-columns: repeat(5, 1fr);
-	grid-gap: 0.75rem;
+.k-block-type-imageCustom .k-field-help {
+	text-align: left;
 }
 
 .k-block-type-hero img,
 .k-block-type-image img {
 	width: 100%;
-	max-height: 75px;
-	object-fit: cover;
-}
 
-.k-block-type-imageText img {
-	width: 100%;
 	object-fit: cover;
-	max-height: 150px;
 }
 
 .video-icon {

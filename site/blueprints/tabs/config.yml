@@ -1,5 +1,3 @@
-label: Einstellungen
-
 fields:
   backgroundHeadline:
     type: headline
@@ -19,70 +17,6 @@ fields:
     default: transparent
     width: 1/2
     extends: fields/colors
-  widthHeadline:
-    type: headline
-    label: Breite
-    numbered: false
-  widthMobile:
-    label: Breite 📱
-    type: select
-    default: col-span-6
-    width: 1/4
-    options:
-      col-span-1: 1/6
-      col-span-2: 2/6
-      col-span-3: 3/6
-      col-span-4: 4/6
-      col-span-5: 5/6
-      col-span-6: 6/6
-  startMobile:
-    label: Start 📱
-    type: select
-    default: col-start-1
-    width: 1/4
-    options:
-      col-start-1: Spalte 1
-      col-start-2: Spalte 2
-      col-start-3: Spalte 3
-      col-start-4: Spalte 4
-      col-start-5: Spalte 5
-      col-start-6: Spalte 6
-  widthDesktop:
-    label: Breite 🖥️
-    type: select
-    default: col-span-12
-    width: 1/4
-    options:
-      col-span-1: 1/12
-      col-span-2: 2/12
-      col-span-3: 3/12
-      col-span-4: 4/12
-      col-span-5: 5/12
-      col-span-6: 6/12
-      col-span-7: 7/12
-      col-span-8: 8/12
-      col-span-9: 9/12
-      col-span-10: 10/12
-      col-span-11: 11/12
-      col-span-12: 12/12
-  startDesktop:
-    label: Start 🖥️
-    type: select
-    default: col-start-1
-    width: 1/4
-    options:
-      col-start-1: Spalte 1
-      col-start-2: Spalte 2
-      col-start-3: Spalte 3
-      col-start-4: Spalte 4
-      col-start-5: Spalte 5
-      col-start-6: Spalte 6
-      col-start-7: Spalte 7
-      col-start-8: Spalte 8
-      col-start-9: Spalte 9
-      col-start-10: Spalte 10
-      col-start-11: Spalte 11
-      col-start-12: Spalte 12
   spacingHeadline:
     type: headline
     label: Abstände

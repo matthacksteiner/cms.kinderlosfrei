@@ -8,9 +8,7 @@
     "oblik/kirby-link-field": "^4.0",
     "diesdasdigital/kirby-meta-knight": "^1.2",
     "medienbaecker/autoresize": "^2.1",
-    "bnomei/kirby3-janitor": "^3.4",
     "hananils/kirby-colors": "^1.7",
-    "bnomei/kirby3-fontselector": "^1.1",
     "pju/kirby-webhook-field": "^1.1"
   },
   "config": {

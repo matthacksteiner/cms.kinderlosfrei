@@ -7,11 +7,10 @@ tabs:
     label: Inhalt
     type: fields
     fields:
-      titleOptions: fields/titleOptions
+      titleGroup: groups/titleGroup
       title:
         label: Titel
         type: text
         icon: title
         required: true
         width: 3/4
-  config: tabs/config
