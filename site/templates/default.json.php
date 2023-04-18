@@ -36,6 +36,7 @@ function getlayoutArray(\Kirby\Cms\Layout $layout)
     "id" => $layout->id(),
     "backgroundContainer" => $layout->backgroundContainer()->value(),
     "backgroundColor" => $layout->backgroundColor()->value(),
+    "backgroundAlign" => $layout->backgroundAlign()->value(),
     "spacingMobileTop" => $layout->spacingMobileTop()->value(),
     "spacingMobileBottom" => $layout->spacingMobileBottom()->value(),
     "spacingDesktopTop" => $layout->spacingDesktopTop()->value(),

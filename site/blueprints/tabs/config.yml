@@ -7,7 +7,7 @@ fields:
     label: Breite
     type: toggles
     default: container
-    width: 1/2
+    width: 2/4
     options:
       container: Container
       w-full: Volle Breite
@@ -15,8 +15,12 @@ fields:
     type: select
     label: Farbe
     default: transparent
-    width: 1/2
+    width: 1/4
     extends: fields/colors
+  backgroundAlign:
+    width: 1/4
+    label: Ausrichtung
+    extends: fields/align
   spacingHeadline:
     type: headline
     label: Abstände
