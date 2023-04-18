@@ -95,7 +95,13 @@ function getBlockArray(\Kirby\Cms\Block $block)
         ];
       }
 
+      $link = [];
+      if ($block->link()->isNotEmpty()) {
+        $link = getLinkArray($block->link());
+      }
+
       $blockArray['content']['image'] = $image;
+      $blockArray['content']['link'] = $link;
       break;
 
     case 'text':
