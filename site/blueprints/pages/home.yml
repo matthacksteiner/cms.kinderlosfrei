@@ -8,62 +8,6 @@ options:
   duplicate: false
 
 tabs:
-  content:
-    icon: text
-    label: content
-    fields:
-      layout:
-        label: Layout
-        type: layout
-        layouts:
-          - "1/1"
-          - "1/2, 1/2"
-          - "1/4, 1/4, 1/4, 1/4"
-          - "5/12, 1/12, 5/12, 1/12"
-          - "1/12, 5/12, 1/12, 5/12"
-          - "7/12, 1/12, 3/12, 1/12"
-          - "1/12, 3/12, 1/12, 7/12"
-        fieldsets:
-          text:
-            label: Text
-            type: group
-            fieldsets:
-              text:
-                extends: blocks/text
-                fields:
-                  textGroup: groups/textGroup
-              title:
-                extends: blocks/heading
-                fields:
-                  titleGroup: groups/textGroup
-          media:
-            label: Medien
-            type: group
-            fieldsets:
-              image:
-                extends: blocks/image
-                fields:
-                  location: false
-                  src: false
-                  image:
-                    uploads:
-                      template: image
-                    when: false
-                    help: "Bild anklicken um den Focus zu setzen."
-                  crop: false
-                  ratioMobile:
-                    extends: fields/ratio
-                    label: Seitenverhältnis 📱
-                  ratio:
-                    extends: fields/ratio
-                    label: Seitenverhältnis 🖥️
-
-          tools:
-            label: Werkzeuge
-            type: group
-            open: true
-            fieldsets:
-              blockDivider: blocks/block-divider
-        settings: tabs/config
+  content: tabs/blocks
   media: tabs/media
   seotab: seo

@@ -92,7 +92,6 @@ function getBlockArray(\Kirby\Cms\Block $block)
           'url' => $image->url(),
           'width' => $image->width(),
           'height' => $image->height(),
-          'alt' => (string)$image->alt(),
         ];
       }
 
