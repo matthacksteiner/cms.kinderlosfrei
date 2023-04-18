@@ -1,7 +1,0 @@
-label: Bilder
-type: files
-multiple: false
-query: page.images
-layout: cards
-uploads:
-  template: image

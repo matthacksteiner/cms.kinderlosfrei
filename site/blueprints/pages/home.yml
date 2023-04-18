@@ -7,24 +7,6 @@ options:
   template: false
   duplicate: false
 
-# tabs:
-#   content:
-#     label: Content
-#     icon: page
-#     columns:
-#       - width: 2/3
-#         sections:
-#           builder: sections/blocks-default
-#           # content:
-#           # type: fields
-#           # fields:
-#           # blocks: fields/blocks
-#       - width: 1/3
-#         sections:
-#           files:
-#             headline: Alle Dateien dieser Seite
-#   seotab: seo
-
 tabs:
   content:
     icon: text
@@ -46,20 +28,42 @@ tabs:
             label: Text
             type: group
             fieldsets:
-              blockTitle: blocks/block-title
-              blockText: blocks/block-text
-              blockImageText: blocks/block-imageText
+              text:
+                extends: blocks/text
+                fields:
+                  textGroup: groups/textGroup
+              title:
+                extends: blocks/heading
+                fields:
+                  titleGroup: groups/textGroup
           media:
             label: Medien
             type: group
             fieldsets:
-              blockImage: blocks/block-image
-          tools:
-            label: Werkzeuge
-            type: group
-            open: true
-            fieldsets:
-              blockDivider: blocks/block-divider
+              image:
+                extends: blocks/image
+                fields:
+                  location: false
+                  src: false
+                  image:
+                    uploads:
+                      template: image
+                    when: false
+                    help: "Bild anklicken um den Focus zu setzen."
+                  crop: false
+                  ratioMobile:
+                    extends: fields/ratio
+                    label: Seitenverhältnis 📱
+                  ratio:
+                    extends: fields/ratio
+                    label: Seitenverhältnis 🖥️
+
+          # tools:
+          #   label: Werkzeuge
+          #   type: group
+          #   open: true
+          #   fieldsets:
+          #     blockDivider: blocks/block-divider
         settings: tabs/config
   media: tabs/media
   seotab: seo

@@ -23,25 +23,13 @@ fields:
     numbered: false
   spacingMobileTop:
     label: ⬆️ 📱
-    type: number
-    default: 0
-    after: px
-    width: 1/4
+    extends: fields/spacing
   spacingMobileBottom:
     label: ⬇️ 📱
-    type: number
-    default: 0
-    after: px
-    width: 1/4
+    extends: fields/spacing
   spacingDesktopTop:
     label: ⬆️ 🖥️
-    type: number
-    default: 0
-    after: px
-    width: 1/4
+    extends: fields/spacing
   spacingDesktopBottom:
     label: ⬇️ 🖥️
-    type: number
-    after: px
-    default: 0
-    width: 1/4
+    extends: fields/spacing
