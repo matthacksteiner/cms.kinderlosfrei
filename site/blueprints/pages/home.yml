@@ -58,12 +58,12 @@ tabs:
                     extends: fields/ratio
                     label: Seitenverhältnis 🖥️
 
-          # tools:
-          #   label: Werkzeuge
-          #   type: group
-          #   open: true
-          #   fieldsets:
-          #     blockDivider: blocks/block-divider
+          tools:
+            label: Werkzeuge
+            type: group
+            open: true
+            fieldsets:
+              blockDivider: blocks/block-divider
         settings: tabs/config
   media: tabs/media
   seotab: seo

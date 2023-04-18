@@ -1,0 +1,25 @@
+name: Abstände
+icon: divider
+preview: divider
+
+fields:
+  spacingMobileTop:
+    label: ⬆️ 📱
+    type: number
+    after: px
+    width: 1/4
+  spacingMobileBottom:
+    label: ⬇️ 📱
+    type: number
+    after: px
+    width: 1/4
+  spacingDesktopTop:
+    label: ⬆️ 🖥️
+    type: number
+    after: px
+    width: 1/4
+  spacingDesktopBottom:
+    label: ⬇️ 🖥️
+    type: number
+    after: px
+    width: 1/4
