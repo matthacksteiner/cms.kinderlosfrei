@@ -1,0 +1,38 @@
+name: field.blocks.image.name
+icon: image
+preview: image
+fields:
+  image:
+    label: field.blocks.image.name
+    type: files
+    query: model.images
+    multiple: false
+    image:
+      back: black
+    uploads:
+      template: image
+    help: "Bild anklicken um den Focus zu setzen."
+  alt:
+    label: field.blocks.image.alt
+    type: text
+    icon: title
+  ratioMobile:
+    extends: fields/ratio
+    label: Seitenverhältnis 📱
+  ratio:
+    extends: fields/ratio
+    label: Seitenverhältnis 🖥️
+  toggle:
+    label: Link?
+    type: toggle
+    default: false
+    width: 1/6
+  linkExternal:
+    type: link
+    label: false
+    width: 5/6
+    when:
+      toggle: true
+    linkTypes:
+      - page
+      - url

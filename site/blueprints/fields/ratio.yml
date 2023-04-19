@@ -1,5 +1,6 @@
 type: select
-placeholder: Auto
+placeholder: false
+default: 1/1
 width: 1/2
 options:
   1/1: "1:1"

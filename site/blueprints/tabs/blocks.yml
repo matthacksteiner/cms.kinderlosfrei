@@ -37,32 +37,10 @@ fields:
         fieldsets:
           image:
             extends: blocks/image
-            fields:
-              location: false
-              src: false
-              caption: false
-              link:
-                type: link
-                label: Link
-                linkTypes:
-                  - page
-                  - url
-              image:
-                uploads:
-                  template: image
-                when: false
-                help: "Bild anklicken um den Focus zu setzen."
-              crop: false
-              ratioMobile:
-                extends: fields/ratio
-                label: Seitenverhältnis 📱
-              ratio:
-                extends: fields/ratio
-                label: Seitenverhältnis 🖥️
       tools:
         label: Werkzeuge
         type: group
         open: true
         fieldsets:
-          blockDivider: blocks/block-divider
+          blockDivider: blocks/divider
     settings: tabs/config
