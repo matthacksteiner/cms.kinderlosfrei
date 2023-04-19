@@ -37,6 +37,10 @@ fields:
         fieldsets:
           image:
             extends: blocks/image
+          slider:
+            extends: blocks/gallery
+            name: Slider
+            icon: images
       tools:
         label: Werkzeuge
         type: group

@@ -1,0 +1,44 @@
+name: field.blocks.gallery.name
+icon: dashboard
+preview: gallery
+
+fields:
+  images:
+    label: field.blocks.gallery.images.label
+    type: files
+    query: model.images
+    multiple: true
+    layout: list
+    uploads:
+      template: blocks/image
+    image:
+      ratio: 1/1
+  ratioMobile:
+    extends: fields/ratio
+    label: Seitenverhältnis 📱
+  ratio:
+    extends: fields/ratio
+    label: Seitenverhältnis 🖥️
+  controls:
+    label: Slider Elemente
+    type: checkboxes
+    width: 1/3
+    default:
+      - arrows
+      - dots
+    options:
+      arrows: Navigation
+      dots: Punkte
+      line: Linie
+  color:
+    label: Slider Farbe
+    type: select
+    width: 1/3
+    default: black
+    extends: fields/colors
+  time:
+    label: Slider Timing
+    type: number
+    width: 1/3
+    default: 5000
+    after: ms

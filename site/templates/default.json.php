@@ -100,10 +100,24 @@ function getBlockArray(\Kirby\Cms\Block $block)
         $linkexternal = getLinkArray($block->linkexternal());
       }
 
-
-
       $blockArray['content']['image'] = $image;
       $blockArray['content']['linkexternal'] = $linkexternal;
+      break;
+
+    case 'slider':
+      $blockArray['content'] = $block->toArray()['content'];
+      $images = [];
+
+      foreach ($block->images()->toFiles() as $file) {
+        $image = $file->focusCrop(1840);
+        $images[] = [
+          'url' => $image->url(),
+          'width' => $image->width(),
+          'height' => $image->height(),
+          'alt' => (string)$image->alt(),
+        ];
+      }
+      $blockArray['content']['images'] = $images;
       break;
 
     case 'text':
