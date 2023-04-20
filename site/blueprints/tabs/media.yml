@@ -1,10 +1,9 @@
 label: Medien
 icon: image
-fields:
-  images:
+sections:
+  files:
     headline: Bilder
     type: files
     layout: cards
-    uploads:
-      template: image
+    template: image
     query: page.images

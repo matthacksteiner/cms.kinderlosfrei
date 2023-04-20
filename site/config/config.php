@@ -32,8 +32,8 @@ return [
 			}
 		]
 	],
-	'medienbaecker.autoresize.maxWidth' => 3600,
-	'medienbaecker.autoresize.maxHeight' => 3600,
+	'medienbaecker.autoresize.maxWidth' => 2048,
+	'medienbaecker.autoresize.maxHeight' => 2048,
 	'medienbaecker.autoresize.quality' => 99,
 	'diesdasdigital.meta-knight' => [
 		'siteTitleAsHomePageTitle' => true,
