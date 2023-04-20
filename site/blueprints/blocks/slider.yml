@@ -88,5 +88,7 @@ fields:
           toggle: true
       textAlign:
         extends: fields/fontAlign
+        fields:
+          default: center
         when:
           toggle: true

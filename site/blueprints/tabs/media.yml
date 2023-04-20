@@ -1,6 +1,6 @@
 label: Medien
 icon: image
-sections:
+fields:
   images:
     headline: Bilder
     type: files
@@ -8,4 +8,3 @@ sections:
     uploads:
       template: image
     query: page.images
-    width: 1/2

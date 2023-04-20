@@ -7,11 +7,15 @@ fields:
     layouts:
       - "1/1"
       - "1/2, 1/2"
+      - "1/3, 1/3, 1/3"
       - "1/4, 1/4, 1/4, 1/4"
       - "5/12, 1/12, 5/12, 1/12"
       - "1/12, 5/12, 1/12, 5/12"
-      - "7/12, 1/12, 3/12, 1/12"
-      - "1/12, 3/12, 1/12, 7/12"
+      - "6/12, 1/12, 4/12, 1/12"
+      - "1/12, 4/12, 1/12, 6/12"
+      - "3/12, 6/12, 3/12"
+      - "1/12, 4/12, 2/12, 4/12, 1/12"
+
     fieldsets:
       text:
         label: Text
@@ -38,7 +42,7 @@ fields:
           image:
             extends: blocks/image
           slider:
-            extends: blocks/gallery
+            extends: blocks/slider
             name: Slider
             icon: images
       tools:
