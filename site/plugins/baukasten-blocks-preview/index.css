@@ -1,39 +1,12 @@
-img {
-	width: 100%;
-	height: auto;
+.linkButton {
+	border: 2px solid #000;
+	border-radius: 3rem;
+	padding: 0.25rem 1rem;
+	cursor: pointer;
+	font: inherit;
+	text-align: center;
 }
 
-.k-block-type-imageCustom .k-field-help {
-	text-align: left;
-}
-
-.k-block-type-hero img,
-.k-block-type-image img {
-	width: 100%;
-
-	object-fit: cover;
-}
-
-.video-icon {
-	--size: 5rem;
-	padding: 2rem 0;
-}
-
-.k-field-help {
-	display: flex;
-	justify-content: space-between;
-}
-
-.k-text[data-theme="help"] {
-	margin-top: 8px;
-	padding: 8px;
-	background-color: #efefef;
-}
-
-.k-block-container:not(:last-of-type) {
-	border-bottom: 1px dashed rgba(0, 0, 0, 0.5);
-}
-
-.k-items[data-layout="cards"] .k-item-figure .k-item-icon {
-	--size: 64px;
+.linkButton .k-button-text {
+	opacity: 1;
 }

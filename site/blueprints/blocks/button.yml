@@ -1,0 +1,12 @@
+name: Button
+icon: url
+wysiwyg: false
+preview: button
+fields:
+  link:
+    type: link
+    label: Link
+    required: true
+    settings:
+      text:
+        required: true

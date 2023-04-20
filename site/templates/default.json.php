@@ -34,6 +34,7 @@ function getlayoutArray(\Kirby\Cms\Layout $layout)
 
   return [
     "id" => $layout->id(),
+    "anchor" => $layout->anchor()->value(),
     "backgroundContainer" => $layout->backgroundContainer()->value(),
     "backgroundColor" => $layout->backgroundColor()->value(),
     "backgroundAlign" => $layout->backgroundAlign()->value(),
@@ -104,6 +105,21 @@ function getBlockArray(\Kirby\Cms\Block $block)
       $blockArray['content']['linkexternal'] = $linkexternal;
       $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
       break;
+
+    case 'button':
+      $blockArray['content'] = $block->toArray()['content'];
+
+      $link = [];
+      if ($block->link()->isNotEmpty()) {
+        $link = getLinkArray($block->link());
+        if ($link['uri'] === 'home') { // check if uri is 'home'
+          $link['uri'] = '/'; // replace uri with an empty string
+        }
+        $blockArray['content']['link'] = $link;
+      }
+
+      break;
+
 
     case 'slider':
       $blockArray['content'] = $block->toArray()['content'];

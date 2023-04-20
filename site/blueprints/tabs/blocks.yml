@@ -45,6 +45,12 @@ fields:
             extends: blocks/slider
             name: Slider
             icon: images
+      elements:
+        label: Elemente
+        type: group
+        fieldsets:
+          button:
+            extends: blocks/button
       tools:
         label: Werkzeuge
         type: group

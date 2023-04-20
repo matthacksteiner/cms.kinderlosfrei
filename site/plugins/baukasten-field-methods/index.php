@@ -26,7 +26,7 @@ function getLinkArray($field): ?array
 		"href" => $linkObject->page() ? null : $linkObject->href(),
 		"title" => $title,
 		"type" => $linkObject->type(),
-		"uri" => $linkObject->page() ? (string) $linkObject->page()->uri() : null,
+		"uri" => $linkObject->page() ? (string) $linkObject->page()->uri() . ($linkObject->file() ? (string) $linkObject->page()->uri() : '') : null,
 		"popup" => (bool) $linkObject->popup(),
 		"hash" => $linkObject->hash(),
 	];

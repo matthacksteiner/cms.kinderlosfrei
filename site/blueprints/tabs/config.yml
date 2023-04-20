@@ -1,4 +1,12 @@
 fields:
+  anchorHeadline:
+    type: headline
+    label: Navigation
+    numbered: false
+  anchor:
+    label: ID
+    type: text
+    help: "Wird für die Navigation benötigt."
   backgroundHeadline:
     type: headline
     label: Hintergrund

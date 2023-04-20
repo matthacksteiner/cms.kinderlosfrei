@@ -79,5 +79,8 @@ panel.plugin("baukasten-blocks-preview/preview", {
 			</div>
 		</div>
     `,
+		button: `
+		<k-button class="linkButton" icon="url">Button</k-button>
+  `,
 	},
 });

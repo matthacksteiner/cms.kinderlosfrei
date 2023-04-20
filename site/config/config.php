@@ -30,8 +30,10 @@ return [
 
 				return response::json($index);
 			}
-		]
+		],
+
 	],
+
 	'medienbaecker.autoresize.maxWidth' => 2048,
 	'medienbaecker.autoresize.maxHeight' => 2048,
 	'medienbaecker.autoresize.quality' => 99,
