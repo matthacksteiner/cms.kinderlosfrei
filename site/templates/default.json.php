@@ -102,6 +102,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
 
       $blockArray['content']['image'] = $image;
       $blockArray['content']['linkexternal'] = $linkexternal;
+      $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
       break;
 
     case 'slider':
@@ -118,6 +119,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
         ];
       }
       $blockArray['content']['images'] = $images;
+      $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
       break;
 
     case 'text':
