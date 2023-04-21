@@ -10,3 +10,18 @@
 .linkButton .k-button-text {
 	opacity: 1;
 }
+
+details {
+	margin-left: 1rem;
+}
+
+details summary {
+	margin-left: -1rem;
+	margin-bottom: 0.5rem;
+	font-weight: 600;
+}
+
+details summary .k-writer {
+	display: inline-block;
+	width: calc(100% - 2rem);
+}

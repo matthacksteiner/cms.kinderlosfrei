@@ -65,8 +65,6 @@ if ($page->layout()->isNotEmpty()) {
 
 
 
-
-
 function getBlockArray(\Kirby\Cms\Block $block)
 {
   $blockArray = [
@@ -119,7 +117,6 @@ function getBlockArray(\Kirby\Cms\Block $block)
       }
 
       break;
-
 
     case 'slider':
       $blockArray['content'] = $block->toArray()['content'];
@@ -207,8 +204,6 @@ if (method_exists($page, 'getJsonData')) {
   foreach ($unsetFields as $key) {
     unset($content[$key]);
   }
-
-  $json['content'] = $page->getJsonData($content);
 }
 
 echo json_encode($json);

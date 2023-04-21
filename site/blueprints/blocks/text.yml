@@ -1,0 +1,17 @@
+name: field.blocks.text.name
+icon: text
+wysiwyg: true
+preview: text
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      text:
+        type: writer
+        nodes: false
+        placeholder: field.blocks.text.placeholder
+  settings:
+    label: Einstellungen
+    fields:
+      textGroup: groups/textGroup

@@ -1,0 +1,62 @@
+name: Akkordeon
+icon: bars
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      acc:
+        label: Akkordeon
+        type: structure
+        fields:
+          title:
+            label: Titel
+            extends: fields/writer
+            inline: true
+            marks: false
+            placeholder: Hier kommt der Titel rein…
+          text:
+            label: Text
+            extends: fields/writer
+  settings:
+    label: Einstellungen
+    fields:
+      titleHeadline:
+        label: Titel Einstellungen
+        type: headline
+        numbered: false
+      titleSettings:
+        label: Titel Einstellungen
+        extends: groups/titleGroup
+        fields:
+          titleGap: false
+          titleAlign: false
+      textHeadline:
+        label: Text Einstellungen
+        type: headline
+        numbered: false
+      textSettings:
+        label: Text Einstellungen
+        extends: groups/textGroup
+      borderHeadline:
+        label: Rahmen Einstellungen
+        type: headline
+        numbered: false
+      borderWidth:
+        label: Rahmen Stärke
+        type: select
+        default: 1px
+        required: true
+        width: 1/2
+        options:
+          - 1px
+          - 2px
+          - 4px
+          - 6px
+      borderColor:
+        label: Rahmen Farbe
+        width: 1/2
+        type: select
+        default: black
+        required: true
+        extends: fields/colors

@@ -1,6 +1,7 @@
 name: Abstände
 icon: divider
 preview: divider
+wysiwyg: true
 
 fields:
   spacingMobileTop:

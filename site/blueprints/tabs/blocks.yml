@@ -21,20 +21,8 @@ fields:
         label: Text
         type: group
         fieldsets:
-          text:
-            extends: blocks/text
-            fields:
-              textGroup: groups/textGroup
-              text:
-                marks:
-                  - bold
-                  - italic
-                  - link
-                  - email
-          title:
-            extends: blocks/heading
-            fields:
-              titleGroup: groups/textGroup
+          text: blocks/text
+          title: blocks/heading
       media:
         label: Medien
         type: group
@@ -49,8 +37,8 @@ fields:
         label: Elemente
         type: group
         fieldsets:
-          button:
-            extends: blocks/button
+          button: blocks/button
+          accordion: blocks/accordion
       tools:
         label: Werkzeuge
         type: group

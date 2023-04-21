@@ -1,6 +1,7 @@
 label: Textgröße
 type: select
 width: 1/6
+required: true
 options:
   type: query
   query: site.fontSize.toStructure

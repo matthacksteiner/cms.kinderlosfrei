@@ -1,6 +1,7 @@
 type: select
 label: Ausrichtung
 default: start
+required: true
 options:
   start: Start
   center: Mittig

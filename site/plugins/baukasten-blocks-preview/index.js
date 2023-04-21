@@ -1,54 +1,47 @@
 panel.plugin("baukasten-blocks-preview/preview", {
 	blocks: {
-		// image: `
-		// 	<div>
-		// 		<ul
-		// 			@dblclick="open"
-		// 		>
-		// 			<template>
-		// 				<li v-for="image in content.image" :key="image.id">
-		// 					<img :src="image.url" :srcset="image.image.srcset" :alt="image.alt" />
-		// 				</li>
-		// 			</template>
-		// 		</ul>
-		// 		<div data-theme="help" class="k-text k-field-help">
-		// 			<k-icon type="images" />
-		// 			<span>Bilder</span>
-		// 		</div>
-		// 	</div>
-		// `,
-		// title: `
-		// 	<div
-		// 		@dblclick="open"
-		// 	>
-		// 		<div class="k-grid">
-		// 			<template>
-		// 				<h3 v-html="content.title" class="k-column" data-width="4/4">
-		// 				</h3>
-		// 			</template>
-		// 			</div>
-		// 			<div data-theme="help" class="k-text k-field-help">
-		// 				<k-icon type="title" />
-		// 				<span>Title</span>
-		// 			</div>
-		// 	</div>
-		// `,
-		// textCustom: `
-		// 	<div
-		// 		@dblclick="open"
-		// 	>
-		// 		<div class="k-grid">
-		// 			<template>
-		// 				<div v-html="content.text" class="k-column" data-width="4/4">
-		// 				</div>
-		// 			</template>
-		// 			</div>
-		// 			<div data-theme="help" class="k-text k-field-help">
-		// 				<k-icon type="text" />
-		// 				<span>Text</span>
-		// 			</div>
-		// 	</div>
-		// `,
+		accordion: {
+			computed: {
+				items() {
+					return this.content.acc || { marks: true };
+				},
+			},
+			methods: {
+				updateItem(content, index, fieldName, value) {
+					content.acc[index][fieldName] = value;
+					this.$emit("update", {
+						...this.content,
+						...content,
+					});
+				},
+			},
+			template: `
+			  <div>
+				<div v-if="items.length">
+				  <details v-for="(item, index) in items" :key="index">
+					<summary>
+					  <k-writer
+						ref="title"
+						:inline="true"
+						:marks="false"
+						:value="item.title"
+						@input="updateItem(content, index, 'title', $event)"
+					  />
+					</summary>
+					<k-writer
+					  class="label"
+					  ref="text"
+					  :nodes="false"
+					  :marks="false"
+					  :value="item.text"
+					  @input="updateItem(content, index, 'text', $event)"
+					/>
+				  </details>
+				</div>
+				<div v-else>Noch keine Akkordeon Elemente vorhanden.</div>
+			  </div>
+			`,
+		},
 		divider: `
 		<div
 			@dblclick="open"

@@ -1,0 +1,8 @@
+label: Titel
+type: writer
+inline: true
+marks:
+  - bold
+  - italic
+  - link
+  - email

@@ -2,4 +2,5 @@ label: Textfarbe
 type: select
 default: black
 width: 2/6
+required: true
 extends: fields/colors

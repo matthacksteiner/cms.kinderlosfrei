@@ -2,93 +2,99 @@ name: field.blocks.gallery.name
 icon: dashboard
 preview: gallery
 
-fields:
-  images:
-    label: field.blocks.gallery.images.label
-    type: files
-    query: model.images
-    multiple: true
-    layout: list
-    uploads:
-      template: image
-    image:
-      ratio: 1/1
-  ratioMobile:
-    extends: fields/ratio
-    label: Seitenverhältnis 📱
-  ratio:
-    extends: fields/ratio
-    label: Seitenverhältnis 🖥️
-  controls:
-    label: Slider Optionen
-    type: checkboxes
-    width: 1/3
-    default:
-      - arrows
-      - dots
-    options:
-      arrows: Navigation
-      dots: Punkte
-      line: Linie
-      full: Vollbild
-      overlay: Overlay
-  color:
-    label: Slider Farbe
-    type: select
-    width: 1/3
-    default: black
-    extends: fields/colors
-  time:
-    label: Slider Timing
-    type: number
-    width: 1/3
-    default: 5000
-    after: ms
-  toggle:
-    label: Text?
-    type: toggle
-    default: false
-    width: 1/6
-  level:
-    label: field.blocks.heading.level
-    type: select
-    empty: false
-    default: "h2"
-    width: 1/6
-    options:
-      - h1
-      - h2
-      - h3
-      - h4
-      - h5
-      - h6
-    when:
-      toggle: true
-  caption:
-    label: Title
-    type: text
-    width: 4/6
-    when:
-      toggle: true
-  captionOptions:
-    label: Text Optionen
-    extends: groups/textGroup
+tabs:
+  content:
+    label: Inhalt
     fields:
-      textFont:
-        extends: fields/fontFile
+      images:
+        label: field.blocks.gallery.images.label
+        type: files
+        query: model.images
+        multiple: true
+        layout: list
+        uploads:
+          template: image
+        image:
+          ratio: 1/1
+  settings:
+    label: Einstellungen
+    fields:
+      ratioMobile:
+        extends: fields/ratio
+        label: Seitenverhältnis 📱
+      ratio:
+        extends: fields/ratio
+        label: Seitenverhältnis 🖥️
+      controls:
+        label: Slider Optionen
+        type: checkboxes
+        width: 1/3
+        default:
+          - arrows
+          - dots
+        options:
+          arrows: Navigation
+          dots: Punkte
+          line: Linie
+          full: Vollbild
+          overlay: Overlay
+      color:
+        label: Slider Farbe
+        type: select
+        width: 1/3
+        default: black
+        extends: fields/colors
+      time:
+        label: Slider Timing
+        type: number
+        width: 1/3
+        default: 5000
+        after: ms
+      toggle:
+        label: Text?
+        type: toggle
+        default: false
+        width: 1/6
+      level:
+        label: field.blocks.heading.level
+        type: select
+        empty: false
+        default: "h2"
+        width: 1/6
+        options:
+          - h1
+          - h2
+          - h3
+          - h4
+          - h5
+          - h6
         when:
           toggle: true
-      textSize:
-        extends: fields/fontSize
+      caption:
+        label: Title
+        type: text
+        width: 4/6
         when:
           toggle: true
-      textColor:
-        extends: fields/fontColor
-        when:
-          toggle: true
-      textAlign:
-        extends: fields/fontAlign
+      captionOptions:
+        label: Text Optionen
+        extends: groups/textGroup
         fields:
-          default: center
-        when:
-          toggle: true
+          textFont:
+            extends: fields/fontFile
+            when:
+              toggle: true
+          textSize:
+            extends: fields/fontSize
+            when:
+              toggle: true
+          textColor:
+            extends: fields/fontColor
+            when:
+              toggle: true
+          textAlign:
+            extends: fields/fontAlign
+            fields:
+              default: center
+            when:
+              toggle: true
