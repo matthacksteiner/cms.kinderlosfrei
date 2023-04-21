@@ -288,6 +288,7 @@ columns:
             numbered: true
           buttonFont:
             extends: fields/fontFile
+            required: false
             width: 1/6
           buttonFontSize:
             extends: fields/fontSize
