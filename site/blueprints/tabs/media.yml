@@ -7,3 +7,9 @@ sections:
     layout: cards
     template: image
     query: page.images
+  vector:
+    headline: Vektorgrafiken
+    type: files
+    layout: cards
+    template: svg
+    query: page.images.filterBy('extension', 'svg')

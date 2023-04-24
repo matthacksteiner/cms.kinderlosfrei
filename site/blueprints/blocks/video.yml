@@ -1,0 +1,36 @@
+name: Video
+icon: video
+preview: video
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      source:
+        type: toggles
+        label: Video Quelle
+        options:
+          - value: remote
+            text: Externer Link
+            icon: url
+          - value: local
+            text: Video Datei
+            icon: file
+      url:
+        label: field.blocks.video.url.label
+        type: url
+        placeholder: field.blocks.video.url.placeholder
+        when:
+          source: remote
+      caption: false
+      file:
+        label: Video-Datei
+        type: files
+        query: page.images.filterBy('extension', 'mp4')
+        multiple: false
+        uploads:
+          template: video
+        when:
+          source: local
+  settings:
+    label: Einstellungen

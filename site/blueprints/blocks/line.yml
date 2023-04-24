@@ -1,5 +1,5 @@
 name: field.blocks.line.name
-icon: divider
+icon: dots
 preview: line
 wysiwyg: true
 
@@ -11,7 +11,7 @@ tabs:
         label: Info
         type: info
         text: >
-          <p>Linien sind ein einfaches Mittel, um Inhalte zu strukturieren. Alle Einstellungen finden Sie im Einstellungs Tab.</p>
+          Alle Einstellungen sind im Einstellungs Tab zu finden.
   settings:
     label: Einstellungen
     fields:

@@ -140,6 +140,40 @@ function getBlockArray(\Kirby\Cms\Block $block)
       $blockArray['content']['text'] = (string)$block->text();
       break;
 
+    case "vector":
+      $blockArray['content'] = $block->toArray()['content'];
+      $image = null;
+      if ($file1 = $block->image()->toFile()) {
+        $image = [
+          'url' => $file1->url(),
+          'alt' => (string)$file1->alt(),
+        ];
+      }
+
+      $linkexternal = [];
+      if ($block->linkexternal()->isNotEmpty()) {
+        $linkexternal = getLinkArray($block->linkexternal());
+      }
+
+      $blockArray['content']['image'] = $image;
+      $blockArray['content']['linkexternal'] = $linkexternal;
+      $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
+      break;
+
+
+    case "video":
+      $blockArray['content'] = $block->toArray()['content'];
+      $video = null;
+      if ($file1 = $block->file()->toFile()) {
+        $video = [
+          'url' => $file1->url(),
+          'alt' => (string)$file1->alt(),
+        ];
+      }
+      $blockArray['content']['file'] = $video;
+      break;
+
+
     default:
       $blockArray['content'] = $block->toArray()['content'];
       break;

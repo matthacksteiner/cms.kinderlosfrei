@@ -1,5 +1,5 @@
-name: field.blocks.image.name
-icon: image
+name: Vektorgrafik
+icon: draft
 preview: image
 
 tabs:
@@ -7,24 +7,18 @@ tabs:
     label: Inhalt
     fields:
       image:
-        label: field.blocks.image.name
+        label: SVG Bild
         type: files
-        query: model.images
+        icon: image
+        layout: cards
         multiple: false
-        image:
-          back: black
+        back: white
+        query: page.images.filterBy('extension', 'svg')
         uploads:
-          template: image
-        help: "Bild anklicken um den Focus zu setzen."
+          template: svg
   settings:
-    label: Einstellungen
+     label: Einstellungen
     fields:
-      ratioMobile:
-        extends: fields/ratio
-        label: Seitenverhältnis 📱
-      ratio:
-        extends: fields/ratio
-        label: Seitenverhältnis 🖥️
       toggle:
         label: Link?
         type: toggle

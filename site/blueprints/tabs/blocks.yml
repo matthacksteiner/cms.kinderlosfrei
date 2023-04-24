@@ -32,11 +32,11 @@ fields:
           slider:
             extends: blocks/slider
             name: Slider
-            icon: images
+          vector:
+            extends: blocks/vector
+            name: Vektor
           video:
             extends: blocks/video
-            name: Video
-            icon: video-camera
       elements:
         label: Elemente
         type: group
