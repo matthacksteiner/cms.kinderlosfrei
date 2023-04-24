@@ -351,6 +351,9 @@ return function ($site, $page, $kirby) {
 				"gridMarginMobile" => (string) $site->gridMarginMobile(),
 				"gridGapDesktop" => (string) $site->gridGapDesktop(),
 				"gridMarginDesktop" => (string) $site->gridMarginDesktop(),
+				"gridBlockMobile" => (string) $site->gridBlockMobile(),
+				"gridBlockDesktop" => (string) $site->gridBlockDesktop(),
+
 
 				"logoFile" => $logoFile,
 				"logoAlign" => (string) $site->logoAlign(),

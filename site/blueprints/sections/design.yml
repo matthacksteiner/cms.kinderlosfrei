@@ -74,12 +74,18 @@ columns:
             width: 1/4
             default: 40
             after: px
-          gridInfo:
-            label: Info
-            theme: info
-            type: info
-            text: >
-              Mobil wird das Grid auf 6 Spalten aufgeteilt und am Desktop auf 12 Spalten.
+          gridBlockMobile:
+            label: Abstand zwischen Blöcken 📱
+            type: number
+            width: 1/2
+            default: 1
+            after: rem
+          gridBlockDesktop:
+            label: Abstand zwischen Blöcken 🖥️
+            type: number
+            width: 1/2
+            default: 1
+            after: rem
 
   designFonts:
     width: 1/1

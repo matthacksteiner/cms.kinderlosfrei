@@ -25,3 +25,10 @@ details summary .k-writer {
 	display: inline-block;
 	width: calc(100% - 2rem);
 }
+
+.k-divider input {
+	border: none;
+	padding: 0.2rem 0.5rem;
+	max-width: 50px;
+	font-size: 1rem;
+}

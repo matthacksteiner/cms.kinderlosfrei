@@ -21,8 +21,8 @@ fields:
         label: Text
         type: group
         fieldsets:
-          text: blocks/text
           title: blocks/heading
+          text: blocks/text
       media:
         label: Medien
         type: group
@@ -44,5 +44,5 @@ fields:
         type: group
         open: true
         fieldsets:
-          blockDivider: blocks/divider
+          divider: blocks/divider
     settings: tabs/config

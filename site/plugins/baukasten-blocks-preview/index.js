@@ -43,34 +43,28 @@ panel.plugin("baukasten-blocks-preview/preview", {
 			`,
 		},
 		divider: `
-		<div
-			@dblclick="open"
-		>
-			<div class="k-grid">
-			<template>
+			<div class="k-divider k-grid">
 				<div class="k-column" data-width="1/4">
-				<span>⬆️ Mobile:</span>
-				<span v-html="content.spacingmobiletop"></span>
+				<span>⬆️ 📱</span>
+				<input type="number" :value="content.spacingmobiletop" :placeholder="0" @input="update({ spacingmobiletop: $event.target.value })">
 				<span>px</span>
 				</div>
 				<div class="k-column" data-width="1/4">
-				<span>⬇️ Mobile:</span>
-				<span v-html="content.spacingmobilebottom"></span>
+				<span>⬇️ 📱</span>
+				<input type="number" :value="content.spacingmobilebottom" :placeholder="0" @input="update({ spacingmobilebottom: $event.target.value })">
 				<span>px</span>
 				</div>
 				<div class="k-column" data-width="1/4">
-				<span>⬆️ Desktop</span>
-				<span v-html="content.spacingdesktoptop"></span>
+				<span>⬆️ 🖥️</span>
+				<input type="number" :value="content.spacingdesktoptop" :placeholder="0" @input="update({ spacingdesktoptop: $event.target.value })">
 				<span>px</span>
 				</div>
 				<div class="k-column" data-width="1/4">
-				<span>⬇️ Desktop:</span>
-				<span v-html="content.spacingdesktopbottom"></span>
+				<span>⬇️ 🖥️</span>
+				<input type="number" :value="content.spacingdesktopbottom" :placeholder="0" @input="update({ spacingdesktopbottom: $event.target.value })">
 				<span>px</span>
 				</div>
-			</template>
 			</div>
-		</div>
     `,
 		button: `
 		<k-button class="linkButton" icon="url">Button</k-button>
