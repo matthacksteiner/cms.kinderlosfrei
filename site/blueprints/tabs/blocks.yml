@@ -33,6 +33,10 @@ fields:
             extends: blocks/slider
             name: Slider
             icon: images
+          video:
+            extends: blocks/video
+            name: Video
+            icon: video-camera
       elements:
         label: Elemente
         type: group
@@ -45,4 +49,5 @@ fields:
         open: true
         fieldsets:
           divider: blocks/divider
+          line: blocks/line
     settings: tabs/config

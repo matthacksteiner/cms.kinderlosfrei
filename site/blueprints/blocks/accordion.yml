@@ -43,20 +43,6 @@ tabs:
         type: headline
         numbered: false
       borderWidth:
-        label: Rahmen Stärke
-        type: select
-        default: 1px
-        required: true
-        width: 1/2
-        options:
-          - 1px
-          - 2px
-          - 4px
-          - 6px
+        extends: fields/borderWidth
       borderColor:
-        label: Rahmen Farbe
-        width: 1/2
-        type: select
-        default: black
-        required: true
-        extends: fields/colors
+        extends: fields/borderColor

@@ -1,0 +1,31 @@
+name: field.blocks.line.name
+icon: divider
+preview: line
+wysiwyg: true
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      info:
+        label: Info
+        type: info
+        text: >
+          <p>Linien sind ein einfaches Mittel, um Inhalte zu strukturieren. Alle Einstellungen finden Sie im Einstellungs Tab.</p>
+  settings:
+    label: Einstellungen
+    fields:
+      borderStyle:
+        label: Linienstil
+        type: select
+        width: 1/3
+        default: solid
+        options:
+          solid: durchgehend
+          dashed: strich
+          dotted: punktiert
+          double: doppelt
+      borderWidth:
+        extends: fields/borderWidth
+      borderColor:
+        extends: fields/borderColor
