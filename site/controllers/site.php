@@ -343,7 +343,9 @@ return function ($site, $page, $kirby) {
 				"headerColorActive" => (string) $site->headerColorActive(),
 				"headerBackground" => (string) $site->headerBackground(),
 				"headerBackgroundActive" => (string) $site->headerBackgroundActive(),
-				"headerOverlayBackground" => (string) $site->headerOverlayBackground(),
+				"headerHamburgerOverlay" => (string) $site->headerHamburgerOverlay(),
+				"headerHamburgerColor" => (string) $site->headerHamburgerColor(),
+				"headerHamburgerColorActive" => (string) $site->headerHamburgerColorActive(),
 				"headerFont" => (string) $site->headerFont(),
 				"headerFontSize" => (string) $site->headerFontSize(),
 
@@ -353,7 +355,6 @@ return function ($site, $page, $kirby) {
 				"gridMarginDesktop" => (string) $site->gridMarginDesktop(),
 				"gridBlockMobile" => (string) $site->gridBlockMobile(),
 				"gridBlockDesktop" => (string) $site->gridBlockDesktop(),
-
 
 				"logoFile" => $logoFile,
 				"logoAlign" => (string) $site->logoAlign(),

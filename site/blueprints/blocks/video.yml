@@ -20,7 +20,7 @@ tabs:
         label: field.blocks.video.url.label
         type: url
         placeholder: field.blocks.video.url.placeholder
-        help: YouTube und Vimeo Links werden unterstützt.
+        help: YouTube (Format https://www.youtube.com/watch?v=vH1poPSIvOk) und Vimeo (Format https://vimeo.com/22775048) Links werden unterstützt.
         when:
           source: remote
       caption: false

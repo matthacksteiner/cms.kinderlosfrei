@@ -202,13 +202,29 @@ columns:
             default: secondary
             extends: fields/colors
             width: 1/6
-          headerOverlayBackground:
-            label: Farbe Overlay
+          headerGap:
+            label: Abstand
+            type: gap
+            width: 2/6
+          headerHamburgerColor:
+            label: Hamburger Farbe
+            type: select
+            width: 1/6
+            default: primary
+            extends: fields/colors
+          headerHamburgerColorActive:
+            label: Hamburger Farbe Aktiv
+            type: select
+            width: 1/6
+            default: primary
+            extends: fields/colors
+          headerHamburgerOverlay:
+            label: Hamburger Farbe Overlay
             type: select
             default: primary
             extends: fields/colors
             width: 1/6
-          headerGap:
+          headerGap2:
             label: Abstand
             type: gap
             width: 1/6
