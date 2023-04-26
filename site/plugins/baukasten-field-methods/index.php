@@ -22,7 +22,7 @@ function getLinkArray($field): ?array
 		$title = (string) $linkObject->page()->title();
 	}
 
-	return [
+	$linkArray = [
 		"href" => $linkObject->page() ? null : $linkObject->href(),
 		"title" => $title,
 		"type" => $linkObject->type(),
@@ -30,4 +30,11 @@ function getLinkArray($field): ?array
 		"popup" => (bool) $linkObject->popup(),
 		"hash" => $linkObject->hash(),
 	];
+
+	// Check if uri is 'home' and replace it with an empty string '/'
+	if ($linkArray['uri'] === 'home') {
+		$linkArray['uri'] = '/';
+	}
+
+	return $linkArray;
 }

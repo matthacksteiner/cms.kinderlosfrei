@@ -228,11 +228,8 @@ return function ($site, $page, $kirby) {
 	// header menu
 	$header = [];
 	foreach ($site->navHeader()->toStructure() as $headerItem) {
-		$linkArray = $headerItem->link()->getLinkArray();
-		if ($linkArray['uri'] === 'home') { // check if uri is 'home'
-			$linkArray['uri'] = '/'; // replace uri with an empty string
-		}
-		$header[] = $linkArray;
+		$linkArrayHeader = $headerItem->link()->getLinkArray();
+		$header[] = $linkArrayHeader;
 	}
 	$header = count($header) > 0 ? $header : null;
 
@@ -240,22 +237,16 @@ return function ($site, $page, $kirby) {
 	// footer menu
 	$footer = [];
 	foreach ($site->navFooter()->toStructure() as $footerItem) {
-		$footer[] = $footerItem->link()->getLinkArray();
-		if ($linkArray['uri'] === 'home') { // check if uri is 'home'
-			$linkArray['uri'] = '/'; // replace uri with an empty string
-		}
-		$footer[] = $linkArray;
+		$linkArrayFooter = $footerItem->link()->getLinkArray();
+		$footer[] = $linkArrayFooter;
 	}
 	$footer = count($footer) > 0 ? $footer : null;
 
 	// hambuger menu
 	$hambuger = [];
 	foreach ($site->navhambuger()->toStructure() as $hambugerItem) {
-		$hambuger[] = $hambugerItem->link()->getLinkArray();
-		if ($linkArray['uri'] === 'home') { // check if uri is 'home'
-			$linkArray['uri'] = '/'; // replace uri with an empty string
-		}
-		$hambuger[] = $linkArray;
+		$linkArrayHamburger = $hambugerItem->link()->getLinkArray();
+		$hambuger[] = $linkArrayHamburger;
 	}
 	$hambuger = count($hambuger) > 0 ? $hambuger : null;
 

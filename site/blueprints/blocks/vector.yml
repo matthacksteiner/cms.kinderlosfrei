@@ -17,8 +17,17 @@ tabs:
         uploads:
           template: svg
   settings:
-     label: Einstellungen
+    label: Einstellungen
     fields:
+      controls:
+        label: Optionen
+        type: checkboxes
+        width: 1/3
+        options:
+          full: Vollbild
+      gap:
+        type: gap
+        width: 2/3
       toggle:
         label: Link?
         type: toggle
