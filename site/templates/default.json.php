@@ -111,9 +111,6 @@ function getBlockArray(\Kirby\Cms\Block $block)
       $link = [];
       if ($block->link()->isNotEmpty()) {
         $link = getLinkArray($block->link());
-        if ($link['uri'] === 'home') { // check if uri is 'home'
-          $link['uri'] = '/'; // replace uri with an empty string
-        }
         $blockArray['content']['link'] = $link;
       }
 
@@ -159,6 +156,23 @@ function getBlockArray(\Kirby\Cms\Block $block)
       $blockArray['content']['image'] = $image;
       $blockArray['content']['linkexternal'] = $linkexternal;
       $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
+      break;
+
+    case "iconlist":
+      $blockArray['content'] = $block->toArray()['content'];
+
+      foreach ($block->list()->toStructure() as $key => $item) {
+        $icon = null;
+        if ($file = $item->icon()->toFile()) {
+          $icon = [
+            'url' => $file->url(),
+            'alt' => (string)$file->alt(),
+          ];
+        }
+
+        $blockArray['content']['list'][$key]["icon"] = $icon;
+      }
+
       break;
 
 

@@ -42,6 +42,40 @@ panel.plugin("baukasten-blocks-preview/preview", {
 			  </div>
 			`,
 		},
+		iconlist: {
+			computed: {
+				items() {
+					return this.content.list || { marks: true };
+				},
+			},
+			methods: {
+				updateItem(content, index, fieldName, value) {
+					content.list[index][fieldName] = value;
+					this.$emit("update", {
+						...this.content,
+						...content,
+					});
+				},
+			},
+			template: `
+			  <div class="k-iconlist">
+				<div v-if="items.length">
+				  <details v-for="(item, index) in items" :key="index">
+					<summary>
+					  <k-writer
+						ref="text"
+						:inline="true"
+						:nodes="false"
+					  	:marks="false"
+						:value="item.text"
+						@input="updateItem(content, index, 'text', $event)"
+					  />
+				  </details>
+				</div>
+				<div v-else>Noch keine Icon Liste Elemente vorhanden.</div>
+			  </div>
+			`,
+		},
 		divider: `
 			<div class="k-divider k-grid">
 				<div class="k-column" data-width="1/4">

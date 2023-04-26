@@ -1,0 +1,55 @@
+name: Icon Liste
+icon: list-bullet
+wysiwyg: true
+preview: iconlist
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      list:
+        label: Liste
+        type: structure
+        fields:
+          text:
+            label: Text
+            extends: fields/writer
+            inline: true
+            marks: false
+            icon: text
+            placeholder: Hier kommt der Titel rein…
+          url:
+            label: Url
+            type: url
+          icon:
+            label: Icon
+            type: files
+            multiple: false
+            icon: image
+            query: site.images.filterBy('extension', 'svg')
+            uploads:
+              template: svg
+  settings:
+    label: Einstellungen
+    fields:
+      iconSize:
+        label: Icon Größe
+        type: number
+        default: 40
+        width: 1/3
+        after: px
+      iconGap:
+        label: Icon Abstand
+        type: number
+        width: 1/3
+        default: 16
+        after: px
+      iconListGap:
+        label: Listen Abstand
+        type: number
+        width: 1/3
+        default: 16
+        after: px
+      textSettings:
+        label: Text Einstellungen
+        extends: groups/textGroup

@@ -44,6 +44,7 @@ fields:
         fieldsets:
           button: blocks/button
           accordion: blocks/accordion
+          iconlist: blocks/iconlist
       tools:
         label: Werkzeuge
         type: group
