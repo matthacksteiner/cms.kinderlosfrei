@@ -31,7 +31,6 @@ function getLinkArray($field): ?array
 		"hash" => $linkObject->hash(),
 	];
 
-	// Check if uri is 'home' and replace it with an empty string '/'
 	if ($linkArray['uri'] === 'home') {
 		$linkArray['uri'] = '/';
 	}

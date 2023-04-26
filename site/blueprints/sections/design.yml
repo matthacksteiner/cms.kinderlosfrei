@@ -169,69 +169,19 @@ columns:
                 after: px
 
   designHeader:
-    width: 1/1
+    width: 1/2
     sections:
       header:
         type: fields
         fields:
           headerHeadline:
-            label: Header
+            label: Header Menü
             type: headline
             numbered: true
-          headerColor:
-            label: Farbe Text
-            type: select
-            default: primary
-            extends: fields/colors
-            width: 1/6
-          headerColorActive:
-            label: Farbe Text Aktiv
-            type: select
-            default: primary
-            extends: fields/colors
-            width: 1/6
-          headerBackground:
-            label: Farbe Hintergrund
-            type: select
-            default: secondary
-            extends: fields/colors
-            width: 1/6
-          headerBackgroundActive:
-            label: Farbe Hintergrund Aktiv
-            type: select
-            default: secondary
-            extends: fields/colors
-            width: 1/6
-          headerGap:
-            label: Abstand
-            type: gap
-            width: 2/6
-          headerHamburgerColor:
-            label: Hamburger Farbe
-            type: select
-            width: 1/6
-            default: primary
-            extends: fields/colors
-          headerHamburgerColorActive:
-            label: Hamburger Farbe Aktiv
-            type: select
-            width: 1/6
-            default: primary
-            extends: fields/colors
-          headerHamburgerOverlay:
-            label: Hamburger Farbe Overlay
-            type: select
-            default: primary
-            extends: fields/colors
-            width: 1/6
-          headerGap2:
-            label: Abstand
-            type: gap
-            width: 1/6
           headerFont:
             label: Schriftart
             type: select
-            width: 1/6
+            width: 1/3
             options:
               type: query
               query: site.fontFile.toStructure
@@ -240,13 +190,89 @@ columns:
           headerFontSize:
             label: Schriftgröße
             type: select
-            width: 1/6
+            width: 1/3
             options:
               type: query
               query: site.fontSize.toStructure
               text: "{{ structureItem.name}}"
               value: "{{ structureItem.name}}"
+          headerColor:
+            label: Farbe Text
+            type: select
+            default: primary
+            extends: fields/colors
+            width: 1/3
+          headerColorActive:
+            label: Farbe Text Aktiv
+            type: select
+            default: primary
+            extends: fields/colors
+            width: 1/3
+          headerBackground:
+            label: Farbe Hintergrund
+            type: select
+            default: secondary
+            extends: fields/colors
+            width: 1/3
+          headerBackgroundActive:
+            label: Farbe Hintergrund Aktiv
+            type: select
+            default: secondary
+            extends: fields/colors
+            width: 1/3
 
+  designHamburger:
+    width: 1/2
+    sections:
+      hamburger:
+        type: fields
+        fields:
+          hamburgerHeadline:
+            label: Hamburger Menü
+            type: headline
+            numbered: true
+          hamburgerFont:
+            label: Schriftart
+            type: select
+            width: 1/3
+            options:
+              type: query
+              query: site.fontFile.toStructure
+              text: "{{ structureItem.name}}"
+              value: "{{ structureItem.name}}"
+          hamburgerFontSize:
+            label: Schriftgröße
+            type: select
+            width: 1/3
+            options:
+              type: query
+              query: site.fontSize.toStructure
+              text: "{{ structureItem.name}}"
+              value: "{{ structureItem.name}}"
+          hamburgerFontColor:
+            label: Farbe Text
+            type: select
+            width: 1/3
+            default: primary
+            extends: fields/colors
+          hamburgerMenuColor:
+            label: Farbe Menu
+            type: select
+            width: 1/3
+            default: primary
+            extends: fields/colors
+          hamburgerMenuColorActive:
+            label: Farbe Menu Aktiv
+            type: select
+            width: 1/3
+            default: primary
+            extends: fields/colors
+          hamburgerOverlay:
+            label: Farbe Overlay
+            type: select
+            default: primary
+            extends: fields/colors
+            width: 1/3
   designLogo:
     width: 1/1
     sections:
@@ -254,7 +280,7 @@ columns:
         type: fields
         fields:
           logoHeadline:
-            label: Logo
+            label: Header Logo
             type: headline
             numbered: true
           logoFile:
