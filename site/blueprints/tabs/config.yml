@@ -19,9 +19,18 @@ fields:
     options:
       container: Container
       w-full: Volle Breite
+  backgroundGap:
+    type: gap
+    width: 2/4
+  backgroundContainerColor:
+    label: Farbe Container
+    type: select
+    default: transparent
+    width: 1/4
+    extends: fields/colors
   backgroundColor:
     type: select
-    label: Farbe
+    label: Farbe Hintergrund
     default: transparent
     width: 1/4
     extends: fields/colors

@@ -63,123 +63,140 @@ columns:
           line1:
             width: 1/1
             type: line
-  settingsAddress:
-    width: 2/3
+  settingsFooter:
+    width: 1/1
     sections:
-      adress:
+      footerHeadline:
         type: fields
         fields:
-          addressHeadline:
-            label: Adresse
+          footerHeadline:
+            label: Footer
             type: headline
             numbered: false
-          addressCompany:
-            label: Firma
-            type: text
-            width: 1/3
-            icon: store
-          addressStreet:
-            label: Straße
-            type: text
-            width: 1/3
-            icon: pin
-          addressZIP:
-            label: PLZ
-            type: text
-            width: 1/3
-            icon: pin
-          addressCity:
-            label: Stadt
-            type: text
-            width: 1/2
-            icon: pin
-          addressCountry:
-            label: Land
-            type: text
-            width: 1/2
-            icon: globe
-          addressTelephone:
-            label: Telefon
-            type: tel
-            width: 1/2
-          addressEmail:
-            label: E-Mail
-            type: email
-            width: 1/2
-          addressRegister:
-            label: Firmenbuch Nummer
-            type: text
-            width: 1/2
-            icon: draft
-          addressCourt:
-            label: Zuständiges Gericht
-            type: text
-            width: 1/2
-            icon: draft
-          addressInfo:
-            label: false
-            type: info
-            text: |
-              Nicht benötigte Felder können leer gelassen werden.
+      footerContent:
+        type: fields
+        extends: tabs/blocks
+        fields:
+          layout:
+            label: Footer Layout
 
-  settingsSocial:
-    width: 1/3
-    sections:
-      social:
-        type: fields
-        fields:
-          socialHeadline:
-            label: Social Media
-            type: headline
-            numbered: false
-          socialStructure:
-            label: Social Media Links
-            type: structure
-            fields:
-              title:
-                width: 1/4
-                label: Titel
-                type: text
-              url:
-                width: 2/4
-                label: URL
-                type: url
-              image:
-                width: 1/4
-                label: Bild
-                type: files
-                help: Erlaubtes Format - SVG
-                uploads:
-                  template: svg
-                max: 1
-                back: white
-          line2:
-            type: line
-      # maintenance:
-      #   type: fields
-      #   fields:
-      #     maintenanceHeadline:
-      #       label: Wartung
-      #       type: headline
-      #       numbered: false
-      #     maintenanceBackup:
-      #       type: janitor
-      #       label: Backup as .zip
-      #       progress: Backing up...
-      #       job: backupZip
-      #     maintenanceDownload:
-      #       type: janitor
-      #       label: Download backup
-      #       progress: Downloading...
-      #       job: downloadBackup
-      #     maintenanceClean:
-      #       type: janitor
-      #       label: Clean Content
-      #       command: 'janitor:cleancontent'
-      #       label: Call `Example` Command
-      #     janitor_backupzip:
-      #       type: janitor
-      #       command: 'janitor:backupzip'
-      #       cooldown: 5000
-      #       label: Generate Backup ZIP
-      #       icon: archive
+  # settingsAddress:
+  #   width: 2/3
+  #   sections:
+  #     adress:
+  #       type: fields
+  #       fields:
+  #         addressHeadline:
+  #           label: Adresse
+  #           type: headline
+  #           numbered: false
+  #         addressCompany:
+  #           label: Firma
+  #           type: text
+  #           width: 1/3
+  #           icon: store
+  #         addressStreet:
+  #           label: Straße
+  #           type: text
+  #           width: 1/3
+  #           icon: pin
+  #         addressZIP:
+  #           label: PLZ
+  #           type: text
+  #           width: 1/3
+  #           icon: pin
+  #         addressCity:
+  #           label: Stadt
+  #           type: text
+  #           width: 1/2
+  #           icon: pin
+  #         addressCountry:
+  #           label: Land
+  #           type: text
+  #           width: 1/2
+  #           icon: globe
+  #         addressTelephone:
+  #           label: Telefon
+  #           type: tel
+  #           width: 1/2
+  #         addressEmail:
+  #           label: E-Mail
+  #           type: email
+  #           width: 1/2
+  #         addressRegister:
+  #           label: Firmenbuch Nummer
+  #           type: text
+  #           width: 1/2
+  #           icon: draft
+  #         addressCourt:
+  #           label: Zuständiges Gericht
+  #           type: text
+  #           width: 1/2
+  #           icon: draft
+  #         addressInfo:
+  #           label: false
+  #           type: info
+  #           text: |
+  #             Nicht benötigte Felder können leer gelassen werden.
+
+  # settingsSocial:
+  #   width: 1/3
+  #   sections:
+  #     social:
+  #       type: fields
+  #       fields:
+  #         socialHeadline:
+  #           label: Social Media
+  #           type: headline
+  #           numbered: false
+  #         socialStructure:
+  #           label: Social Media Links
+  #           type: structure
+  #           fields:
+  #             title:
+  #               width: 1/4
+  #               label: Titel
+  #               type: text
+  #             url:
+  #               width: 2/4
+  #               label: URL
+  #               type: url
+  #             image:
+  #               width: 1/4
+  #               label: Bild
+  #               type: files
+  #               help: Erlaubtes Format - SVG
+  #               uploads:
+  #                 template: svg
+  #               max: 1
+  #               back: white
+  #         line2:
+  #           type: line
+  # maintenance:
+  #   type: fields
+  #   fields:
+  #     maintenanceHeadline:
+  #       label: Wartung
+  #       type: headline
+  #       numbered: false
+  #     maintenanceBackup:
+  #       type: janitor
+  #       label: Backup as .zip
+  #       progress: Backing up...
+  #       job: backupZip
+  #     maintenanceDownload:
+  #       type: janitor
+  #       label: Download backup
+  #       progress: Downloading...
+  #       job: downloadBackup
+  #     maintenanceClean:
+  #       type: janitor
+  #       label: Clean Content
+  #       command: 'janitor:cleancontent'
+  #       label: Call `Example` Command
+  #     janitor_backupzip:
+  #       type: janitor
+  #       command: 'janitor:backupzip'
+  #       cooldown: 5000
+  #       label: Generate Backup ZIP
+  #       icon: archive
