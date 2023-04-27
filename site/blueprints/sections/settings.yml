@@ -62,6 +62,7 @@ columns:
           layoutFooter:
             label: Layout
             extends: fields/layout
+            settings: tabs/config
 
   # maintenance:
   #   type: fields

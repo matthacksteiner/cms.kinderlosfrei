@@ -78,14 +78,14 @@ columns:
             label: Abstand zwischen Blöcken 📱
             type: number
             width: 1/2
-            default: 1
-            after: rem
+            default: 16
+            after: px
           gridBlockDesktop:
             label: Abstand zwischen Blöcken 🖥️
             type: number
             width: 1/2
-            default: 1
-            after: rem
+            default: 16
+            after: px
 
   designFonts:
     width: 1/1
