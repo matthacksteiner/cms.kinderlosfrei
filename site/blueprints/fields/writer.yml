@@ -1,7 +1,6 @@
-label: Titel
+label: Text
 icon: text
 type: writer
-inline: true
 marks:
   - bold
   - italic

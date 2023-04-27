@@ -38,4 +38,8 @@ tabs:
     label: Design
     icon: brush
     extends: sections/design
+  fonts:
+    label: Schriften
+    icon: title
+    extends: sections/fonts
   seotab: seo
