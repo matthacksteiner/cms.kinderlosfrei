@@ -9,7 +9,8 @@
     "diesdasdigital/kirby-meta-knight": "^1.2",
     "medienbaecker/autoresize": "^2.1",
     "hananils/kirby-colors": "^1.7",
-    "pju/kirby-webhook-field": "^1.1"
+    "pju/kirby-webhook-field": "^1.1",
+    "oblik/kirby-entity-field": "^2.0"
   },
   "config": {
     "allow-plugins": {

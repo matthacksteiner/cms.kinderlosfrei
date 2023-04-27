@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2e617a85227e1361a46ea4963d4b9910",
+    "content-hash": "d03ebd00146774c64b37525cfe1c4d60",
     "packages": [
         {
             "name": "claviska/simpleimage",
@@ -709,6 +709,55 @@
                 "source": "https://github.com/michelf/php-smartypants/tree/1.8.1"
             },
             "time": "2016-12-13T01:01:17+00:00"
+        },
+        {
+            "name": "oblik/kirby-entity-field",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/OblikStudio/kirby-entity-field.git",
+                "reference": "a65a6669ac30d5531bd56eb33367f23c3a6d9404"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/OblikStudio/kirby-entity-field/zipball/a65a6669ac30d5531bd56eb33367f23c3a6d9404",
+                "reference": "a65a6669ac30d5531bd56eb33367f23c3a6d9404",
+                "shasum": ""
+            },
+            "require": {
+                "getkirby/cms": "^3.7",
+                "getkirby/composer-installer": "^1.1"
+            },
+            "type": "kirby-plugin",
+            "extra": {
+                "installer-name": "entity-field"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oblik Studio",
+                    "email": "hello@oblik.studio",
+                    "homepage": "https://oblik.studio/"
+                },
+                {
+                    "name": "Hristiyan Dodov",
+                    "email": "hello@dodov.dev",
+                    "homepage": "https://dodov.dev/"
+                }
+            ],
+            "description": "Kirby field that acts as a one-entry structure.",
+            "keywords": [
+                "kirby",
+                "kirby-plugin"
+            ],
+            "support": {
+                "issues": "https://github.com/OblikStudio/kirby-entity-field/issues",
+                "source": "https://github.com/OblikStudio/kirby-entity-field"
+            },
+            "time": "2023-01-11T05:32:42+00:00"
         },
         {
             "name": "oblik/kirby-link-field",

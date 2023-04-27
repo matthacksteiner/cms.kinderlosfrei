@@ -277,7 +277,25 @@ return function ($site, $page, $kirby) {
 		];
 	}
 
+	// headlines
+	$headlines = [];
 
+	for ($i = 1; $i <= 6; $i++) {
+		$tag = "h$i";
+		$fontKey = "{$tag}font";
+		$sizeKey = "{$tag}size";
+		$colorKey = "{$tag}color";
+		$alignKey = "{$tag}align";
+
+		$headline = [
+			"font" => (string) $site->headlines()->toEntity()->$fontKey(),
+			"size" => (string) $site->headlines()->toEntity()->$sizeKey(),
+			"color" => (string) $site->headlines()->toEntity()->$colorKey(),
+			"align" => (string) $site->headlines()->toEntity()->$alignKey(),
+		];
+
+		$headlines[$tag] = $headline;
+	}
 
 
 	return [
@@ -296,7 +314,6 @@ return function ($site, $page, $kirby) {
 				"email" => (string) $site->email(),
 				"register" => (string) $site->addressRegister(),
 				"court" => (string) $site->addressCourt(),
-				// "social" => $social,
 
 				"colorPrimary" => (string) $site->colorPrimary(),
 				"colorSecondary" => (string) $site->colorSecondary(),
@@ -308,6 +325,11 @@ return function ($site, $page, $kirby) {
 
 				"font" => $font,
 				"fontSize" => $fontSize,
+				"headlines" => $headlines,
+				"h1font" => (string) $site->headlines()->toEntity()->H1font(),
+				"h1size" => (string) $site->headlines()->toEntity()->H1size(),
+				"h1color" => (string) $site->headlines()->toEntity()->H1color(),
+				"h1align" => (string) $site->headlines()->toEntity()->H1align(),
 
 				"headerFont" => (string) $site->headerFont(),
 				"headerFontSize" => (string) $site->headerFontSize(),
