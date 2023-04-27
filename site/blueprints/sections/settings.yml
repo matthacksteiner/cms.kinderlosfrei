@@ -10,7 +10,7 @@ columns:
             type: headline
             numbered: false
           navHeader:
-            width: 1/3
+            width: 1/2
             type: structure
             label: Header
             fields:
@@ -26,25 +26,8 @@ columns:
                 settings:
                   text:
                     required: true
-          navFooter:
-            width: 1/3
-            type: structure
-            label: Footer
-            fields:
-              link:
-                type: link
-                label: Link
-                required: true
-                pages:
-                  query: site.index.filterBy('intendedTemplate', 'in', ['default', 'home'])
-                linkTypes:
-                  - page
-                  - url
-                settings:
-                  text:
-                    required: true
           navHambuger:
-            width: 1/3
+            width: 1/2
             type: structure
             label: Hamburger
             fields:
@@ -75,10 +58,10 @@ columns:
             numbered: false
       footerContent:
         type: fields
-        extends: tabs/blocks
         fields:
-          layout:
-            label: Footer Layout
+          layoutFooter:
+            label: Layout
+            extends: fields/layout
 
   # maintenance:
   #   type: fields

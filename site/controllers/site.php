@@ -233,15 +233,6 @@ return function ($site, $page, $kirby) {
 	}
 	$header = count($header) > 0 ? $header : null;
 
-
-	// footer menu
-	$footer = [];
-	foreach ($site->navFooter()->toStructure() as $footerItem) {
-		$linkArrayFooter = $footerItem->link()->getLinkArray();
-		$footer[] = $linkArrayFooter;
-	}
-	$footer = count($footer) > 0 ? $footer : null;
-
 	// hambuger menu
 	$hambuger = [];
 	foreach ($site->navhambuger()->toStructure() as $hambugerItem) {
@@ -250,17 +241,6 @@ return function ($site, $page, $kirby) {
 	}
 	$hambuger = count($hambuger) > 0 ? $hambuger : null;
 
-	//social media
-	// $social = [];
-	// foreach ($site->socialStructure()->toStructure() as $socialItem) {
-	// 	$social[] = [
-	// 		"href" => (string)$socialItem->href(),
-	// 		"title" => (string)$socialItem->title(),
-	// 		"image" => (string)$socialItem->image()->toFile()->url(),
-	// 		"uri" => null,
-	// 	];
-	// }
-	// $social = count($social) > 0 ? $social : null;
 
 
 	// ---------- design ----------
@@ -306,7 +286,6 @@ return function ($site, $page, $kirby) {
 				'siteTitle' => (string) $site->title(),
 				"meta" => getMeta($site, $page, $kirby),
 				"navHeader" => $header,
-				"navFooter" => $footer,
 				"navHamburger" => $hambuger,
 				"company" => (string) $site->addressCompany(),
 				"street" => (string) $site->street(),

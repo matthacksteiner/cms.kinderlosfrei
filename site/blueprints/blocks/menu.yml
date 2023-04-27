@@ -1,0 +1,37 @@
+name: Navigations Menü
+icon: menu
+wysiwyg: false
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      nav:
+        label: Footer
+        type: structure
+        fields:
+          link:
+            type: link
+            label: Link
+            required: true
+            pages:
+              query: site.index.filterBy('intendedTemplate', 'in', ['default', 'home'])
+            linkTypes:
+              - page
+              - url
+            settings:
+              text:
+                required: true
+  settings:
+    label: Einstellungen
+    fields:
+      listGap:
+        label: Listen Abstand
+        type: number
+        width: 1/3
+        default: 16
+        after: px
+      gap:
+        type: gap
+        width: 2/3
+      textGroup: groups/textGroup

@@ -64,6 +64,19 @@ if ($page->layout()->isNotEmpty()) {
   }
 }
 
+if ($site->layoutFooter()->isNotEmpty()) {
+  $json["layoutFooter"] = [];
+
+  foreach ($site->layoutFooter()->toLayouts() as $layout) {
+    $layoutData = getlayoutArray($layout);
+
+    if (!$layoutData) {
+      continue;
+    }
+
+    $json["layoutFooter"][] = $layoutData;
+  }
+}
 
 
 function getBlockArray(\Kirby\Cms\Block $block)
@@ -75,11 +88,6 @@ function getBlockArray(\Kirby\Cms\Block $block)
   ];
 
   switch ($block->type()) {
-    case "anchor":
-      $blockArray['content'] = $block->toArray()['content'];
-      $slug = (string)$block->title()->slug();
-      $blockArray['content']['slug'] = $slug;
-      break;
 
     case 'image':
       $blockArray['content'] = $block->toArray()['content'];
@@ -103,6 +111,18 @@ function getBlockArray(\Kirby\Cms\Block $block)
       $blockArray['content']['image'] = $image;
       $blockArray['content']['linkexternal'] = $linkexternal;
       $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
+      break;
+
+    case "menu":
+      $blockArray['content'] = $block->toArray()['content'];
+      foreach ($block->nav()->toStructure() as $key => $item) {
+        $link = [];
+        if ($item->link()->isNotEmpty()) {
+          $link = getLinkArray($item->link());
+        }
+        $blockArray['content']['nav'][$key]["link"] = $link;
+      }
+
       break;
 
     case 'button':
