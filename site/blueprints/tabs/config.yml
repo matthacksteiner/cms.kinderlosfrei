@@ -19,9 +19,19 @@ fields:
     options:
       container: Container
       w-full: Volle Breite
-  backgroundGap:
-    type: gap
-    width: 2/4
+  backgroundHeight:
+    label: Höhe
+    type: select
+    width: 1/4
+    default: auto
+    options:
+      full: Vollbild
+      half: Halber Bildschirm
+      auto: Automatisch
+  backgroundAlign:
+    width: 1/4
+    label: Ausrichtung
+    extends: fields/align
   backgroundContainerColor:
     label: Farbe Container
     type: select
@@ -34,10 +44,6 @@ fields:
     default: transparent
     width: 1/4
     extends: fields/colors
-  backgroundAlign:
-    width: 1/4
-    label: Ausrichtung
-    extends: fields/align
   spacingHeadline:
     type: headline
     label: Abstände

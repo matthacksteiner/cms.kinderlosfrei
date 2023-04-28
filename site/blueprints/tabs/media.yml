@@ -10,6 +10,18 @@ sections:
   vector:
     headline: Vektorgrafiken
     type: files
-    layout: cards
+    layout: list
     template: svg
     query: page.images.filterBy('extension', 'svg')
+  videos:
+    headline: Videos
+    type: files
+    layout: list
+    template: video
+    query: page.videos
+  documents:
+    headline: Dokumente
+    type: files
+    layout: list
+    template: docs
+    query: page.documents
