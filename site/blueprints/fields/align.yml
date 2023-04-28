@@ -1,7 +1,8 @@
 type: select
 label: Ausrichtung
-default: start
+default: normal
 options:
+  normal: Normal
   start: Start
   center: Mittig
   end: Ende
