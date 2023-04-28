@@ -19,12 +19,20 @@ tabs:
   settings:
     label: Einstellungen
     fields:
+      ratioHeadline:
+        label: Seitenverhältnis
+        type: headline
+        numbered: false
       ratioMobile:
         extends: fields/ratio
         label: Seitenverhältnis 📱
       ratio:
         extends: fields/ratio
         label: Seitenverhältnis 🖥️
+      linkHeadline:
+        label: Link
+        type: headline
+        numbered: false
       toggle:
         label: Link?
         type: toggle

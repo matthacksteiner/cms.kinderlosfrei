@@ -23,7 +23,7 @@ tabs:
     label: Einstellungen
     fields:
       titleHeadline:
-        label: Titel Einstellungen
+        label: Titel
         type: headline
         numbered: false
       titleSettings:
@@ -33,14 +33,14 @@ tabs:
           titleGap: false
           titleAlign: false
       textHeadline:
-        label: Text Einstellungen
+        label: Text
         type: headline
         numbered: false
       textSettings:
         label: Text Einstellungen
         extends: groups/textGroup
       borderHeadline:
-        label: Rahmen Einstellungen
+        label: Rahmen
         type: headline
         numbered: false
       borderWidth:

@@ -19,6 +19,10 @@ tabs:
   settings:
     label: Einstellungen
     fields:
+      controlsHeadline:
+        label: Darstellung
+        type: headline
+        numbered: false
       controls:
         label: Optionen
         type: checkboxes
@@ -26,9 +30,15 @@ tabs:
         options:
           full: Vollbild
           arrow: Pfeil
+      arrowColor:
+        label: Pfeil Farbe
+        type: select
+        width: 1/3
+        default: black
+        extends: fields/colors
       gap:
         type: gap
-        width: 2/3
+        width: 1/3
       toggle:
         label: Link?
         type: toggle

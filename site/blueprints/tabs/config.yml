@@ -9,7 +9,7 @@ fields:
     help: "Wird für die Navigation benötigt."
   backgroundHeadline:
     type: headline
-    label: Hintergrund
+    label: Container
     numbered: false
   backgroundContainer:
     label: Breite
@@ -19,19 +19,6 @@ fields:
     options:
       container: Container
       w-full: Volle Breite
-  backgroundHeight:
-    label: Höhe
-    type: select
-    width: 1/4
-    default: auto
-    options:
-      full: Vollbild
-      half: Halber Bildschirm
-      auto: Automatisch
-  backgroundAlign:
-    width: 1/4
-    label: Ausrichtung
-    extends: fields/align
   backgroundContainerColor:
     label: Farbe Container
     type: select
@@ -44,6 +31,27 @@ fields:
     default: transparent
     width: 1/4
     extends: fields/colors
+  backgroundHeadline2:
+    type: headline
+    label: Ausrichtung
+    numbered: false
+  backgroundAlignVertical:
+    width: 1/4
+    label: Vertikal
+    extends: fields/align
+  backgroundAlignHorizontal:
+    width: 1/4
+    label: Horizontal
+    extends: fields/align
+  backgroundHeight:
+    label: Höhe
+    type: select
+    width: 1/4
+    default: auto
+    options:
+      full: Vollbild
+      half: Halber Bildschirm
+      auto: Automatisch
   spacingHeadline:
     type: headline
     label: Abstände

@@ -5,5 +5,5 @@ fields:
     type: link
     label: Link
     required: true
-    # files:
-    #   query: page.files.filterBy('template', 'docs')
+    files:
+      query: page.files.filterBy('template', 'docs')
