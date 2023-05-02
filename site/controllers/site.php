@@ -247,10 +247,10 @@ return function ($site, $page, $kirby) {
 
 	// header
 	$logoFile = [];
-	if ($site->logoFile()->isNotEmpty()) {
+	if ($site->headerLogo()->toEntity()->logoFile()->isNotEmpty()) {
 		$logoFile = [
-			"src" => (string) $site->logoFile()->toFile()->url(),
-			"alt" => (string) $site->logoFile()->toFile()->alt()->or($site->title() . " Logo"),
+			"src" => (string) $site->headerLogo()->toEntity()->logoFile()->toFile()->url(),
+			"alt" => (string) $site->headerLogo()->toEntity()->logoFile()->toFile()->alt()->or($site->title() . " Logo"),
 		];
 	}
 
@@ -326,24 +326,27 @@ return function ($site, $page, $kirby) {
 				"font" => $font,
 				"fontSize" => $fontSize,
 				"headlines" => $headlines,
-				"h1font" => (string) $site->headlines()->toEntity()->H1font(),
-				"h1size" => (string) $site->headlines()->toEntity()->H1size(),
-				"h1color" => (string) $site->headlines()->toEntity()->H1color(),
-				"h1align" => (string) $site->headlines()->toEntity()->H1align(),
 
-				"headerFont" => (string) $site->headerFont(),
-				"headerFontSize" => (string) $site->headerFontSize(),
-				"headerColor" => (string) $site->headerColor(),
-				"headerColorActive" => (string) $site->headerColorActive(),
-				"headerBackground" => (string) $site->headerBackground(),
-				"headerBackgroundActive" => (string) $site->headerBackgroundActive(),
+				"headerFont" => (string) $site->headerMenu()->toEntity()->headerFont(),
+				"headerFontSize" => (string) $site->headerMenu()->toEntity()->headerFontSize(),
+				"headerColor" => (string) $site->headerMenu()->toEntity()->headerColor(),
+				"headerColorActive" => (string) $site->headerMenu()->toEntity()->headerColorActive(),
+				"headerBackground" => (string) $site->headerMenu()->toEntity()->headerBackground(),
+				"headerBackgroundActive" => (string) $site->headerMenu()->toEntity()->headerBackgroundActive(),
 
-				"hamburgerFont" => (string) $site->hamburgerFont(),
-				"hamburgerFontSize" => (string) $site->hamburgerFontSize(),
-				"hamburgerFontColor" => (string) $site->hamburgerFontColor(),
-				"hamburgerMenuColor" => (string) $site->hamburgerMenuColor(),
-				"hamburgerMenuColorActive" => (string) $site->hamburgerMenuColorActive(),
-				"hamburgerOverlay" => (string) $site->hamburgerOverlay(),
+				"hamburgerFont" => (string) $site->headerHamburger()->toEntity()->hamburgerFont(),
+				"hamburgerFontSize" => (string) $site->headerHamburger()->toEntity()->hamburgerFontSize(),
+				"hamburgerFontColor" => (string) $site->headerHamburger()->toEntity()->hamburgerFontColor(),
+				"hamburgerMenuColor" => (string) $site->headerHamburger()->toEntity()->hamburgerMenuColor(),
+				"hamburgerMenuColorActive" => (string) $site->headerHamburger()->toEntity()->hamburgerMenuColorActive(),
+				"hamburgerOverlay" => (string) $site->headerHamburger()->toEntity()->hamburgerOverlay(),
+
+				"logoFile" => $logoFile,
+				"logoAlign" => (string) $site->headerLogo()->toEntity()->logoAlign(),
+				"logoDesktop" => (string) $site->headerLogo()->toEntity()->logoDesktop(),
+				"logoMobile" => (string) $site->headerLogo()->toEntity()->logoMobile(),
+				"logoDesktopActive" => (string) $site->headerLogo()->toEntity()->logoDesktopActive(),
+				"logoMobileActive" => (string) $site->headerLogo()->toEntity()->logoMobileActive(),
 
 				"gridGapMobile" => (string) $site->gridGapMobile(),
 				"gridMarginMobile" => (string) $site->gridMarginMobile(),
@@ -352,24 +355,17 @@ return function ($site, $page, $kirby) {
 				"gridBlockMobile" => (string) $site->gridBlockMobile(),
 				"gridBlockDesktop" => (string) $site->gridBlockDesktop(),
 
-				"logoFile" => $logoFile,
-				"logoAlign" => (string) $site->logoAlign(),
-				"logoDesktop" => (string) $site->logoDesktop(),
-				"logoMobile" => (string) $site->logoMobile(),
-				"logoDesktopActive" => (string) $site->logoDesktopActive(),
-				"logoMobileActive" => (string) $site->logoMobileActive(),
-
-				"buttonFont" => (string) $site->buttonFont(),
-				"buttonFontSize" => (string) $site->buttonFontSize(),
-				"buttonBackgroundColor" => (string) $site->buttonBackgroundColor(),
-				"buttonBackgroundColorActive" => (string) $site->buttonBackgroundColorActive(),
-				"buttonTextColor" => (string) $site->buttonTextColor(),
-				"buttonTextColorActive" => (string) $site->buttonTextColorActive(),
-				"buttonBorderColor"	=> (string) $site->buttonBorderColor(),
-				"buttonBorderColorActive" => (string) $site->buttonBorderColorActive(),
-				"buttonBorderRadius" => (string) $site->buttonBorderRadius(),
-				"buttonBorderWidth" => (string) $site->buttonBorderWidth(),
-				"buttonPadding" => (string) $site->buttonPadding(),
+				"buttonFont" => (string) $site->buttonSettings()->toEntity()->buttonFont(),
+				"buttonFontSize" => (string) $site->buttonSettings()->toEntity()->buttonFontSize(),
+				"buttonBorderRadius" => (string) $site->buttonSettings()->toEntity()->buttonBorderRadius(),
+				"buttonBorderWidth" => (string) $site->buttonSettings()->toEntity()->buttonBorderWidth(),
+				"buttonPadding" => (string) $site->buttonSettings()->toEntity()->buttonPadding(),
+				"buttonBackgroundColor" => (string) $site->buttonColors()->toEntity()->buttonBackgroundColor(),
+				"buttonBackgroundColorActive" => (string) $site->buttonColors()->toEntity()->buttonBackgroundColorActive(),
+				"buttonTextColor" => (string) $site->buttonColors()->toEntity()->buttonTextColor(),
+				"buttonTextColorActive" => (string) $site->buttonColors()->toEntity()->buttonTextColorActive(),
+				"buttonBorderColor"	=> (string) $site->buttonColors()->toEntity()->buttonBorderColor(),
+				"buttonBorderColorActive" => (string) $site->buttonColors()->toEntity()->buttonBorderColorActive(),
 
 			],
 			'intendedTemplate' => $page->intendedTemplate()->name(),

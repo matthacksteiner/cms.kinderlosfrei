@@ -1,9 +1,21 @@
 name: Button
 icon: url
-fields:
-  link:
-    type: link
-    label: Link
-    required: true
-    files:
-      query: page.files.filterBy('template', 'docs')
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      link:
+        type: link
+        label: Link
+        required: true
+        files:
+          query: page.files.filterBy('template', 'docs')
+  settings:
+    label: Einstellungen
+    fields:
+      info:
+        label: Info
+        type: info
+        text: |
+          Die Darstellung aller Button wird im **Tab** Design festgelegt.

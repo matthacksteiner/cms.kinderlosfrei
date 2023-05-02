@@ -1,6 +1,6 @@
 columns:
   designColors:
-    width: 1/2
+    width: 1/1
     sections:
       colors:
         type: fields
@@ -41,7 +41,7 @@ columns:
             default: white
             extends: fields/colors
   designGrid:
-    width: 1/2
+    width: 1/1
     sections:
       grid:
         type: fields
@@ -53,196 +53,197 @@ columns:
           gridGapMobile:
             label: Abstand 📱
             type: number
-            width: 1/4
+            width: 1/6
             default: 20
             after: px
           gridMarginMobile:
             label: Rand 📱
             type: number
-            width: 1/4
+            width: 1/6
             default: 20
             after: px
           gridGapDesktop:
             label: Abstand 🖥️
             type: number
-            width: 1/4
+            width: 1/6
             default: 40
             after: px
           gridMarginDesktop:
             label: Rand 🖥️
             type: number
-            width: 1/4
+            width: 1/6
             default: 40
             after: px
           gridBlockMobile:
-            label: Abstand zwischen Blöcken 📱
+            label: Abstand Blöcke 📱
             type: number
-            width: 1/2
+            width: 1/6
             default: 16
             after: px
           gridBlockDesktop:
-            label: Abstand zwischen Blöcken 🖥️
+            label: Abstand Blöcke 🖥️
             type: number
-            width: 1/2
+            width: 1/6
             default: 16
             after: px
 
   designHeader:
-    width: 1/2
+    width: 1/1
     sections:
       header:
         type: fields
         fields:
           headerHeadline:
-            label: Header Menü
+            label: Header
             type: headline
             numbered: true
-          headerFont:
-            label: Schriftart
-            type: select
-            width: 1/3
-            options:
-              type: query
-              query: site.fontFile.toStructure
-              text: "{{ structureItem.name}}"
-              value: "{{ structureItem.name}}"
-          headerFontSize:
-            label: Schriftgröße
-            type: select
-            width: 1/3
-            options:
-              type: query
-              query: site.fontSize.toStructure
-              text: "{{ structureItem.name}}"
-              value: "{{ structureItem.name}}"
-          headerColor:
-            label: Farbe Text
-            type: select
-            default: primary
-            extends: fields/colors
-            width: 1/3
-          headerColorActive:
-            label: Farbe Text Aktiv
-            type: select
-            default: primary
-            extends: fields/colors
-            width: 1/3
-          headerBackground:
-            label: Farbe Hintergrund
-            type: select
-            default: secondary
-            extends: fields/colors
-            width: 1/3
-          headerBackgroundActive:
-            label: Farbe Hintergrund Aktiv
-            type: select
-            default: secondary
-            extends: fields/colors
-            width: 1/3
+          headerLogo:
+            type: entity
+            label: Logo
+            icon: file-image
+            toggle: true
+            fields:
+              logoFile:
+                label: Datei
+                type: files
+                help: Erlaubtes Format - SVG
+                query: site.files.filterBy('template', 'svg')
+                uploads:
+                  template: svg
+                multiple: false
+                width: 2/6
+              logoAlign:
+                label: Ausrichtung
+                type: select
+                default: left
+                options:
+                  left: Links
+                  center: Zentriert
+                width: 1/6
+              logoGap:
+                type: gap
+                width: 3/6
+              logoMobile:
+                label: Breite 📱
+                type: number
+                default: 200
+                after: px
+                width: 1/6
+              logoMobileActive:
+                label: Breite Aktiv 📱
+                type: number
+                default: 100
+                after: px
+                width: 1/6
+              logoDesktop:
+                label: Breite 🖥️
+                type: number
+                default: 400
+                after: px
+                width: 1/6
+              logoDesktopActive:
+                label: Breite Aktiv 🖥️
+                type: number
+                default: 200
+                after: px
+                width: 1/6
+          headerMenu:
+            type: entity
+            label: Menü
+            icon: dots
+            toggle: true
+            fields:
+              headerFont:
+                label: Schriftart
+                type: select
+                width: 1/6
+                options:
+                  type: query
+                  query: site.fontFile.toStructure
+                  text: "{{ structureItem.name}}"
+                  value: "{{ structureItem.name}}"
+              headerFontSize:
+                label: Schriftgröße
+                type: select
+                width: 1/6
+                options:
+                  type: query
+                  query: site.fontSize.toStructure
+                  text: "{{ structureItem.name}}"
+                  value: "{{ structureItem.name}}"
+              headerColor:
+                label: Farbe Text
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/6
+              headerColorActive:
+                label: Farbe Text Aktiv
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/6
+              headerBackground:
+                label: Farbe Hintergrund
+                type: select
+                default: secondary
+                extends: fields/colors
+                width: 1/6
+              headerBackgroundActive:
+                label: Farbe Hintergrund Aktiv
+                type: select
+                default: secondary
+                extends: fields/colors
+                width: 1/6
+          headerHamburger:
+            type: entity
+            label: Hamburger
+            icon: menu
+            toggle: true
+            fields:
+              hamburgerFont:
+                label: Schriftart
+                type: select
+                width: 1/6
+                options:
+                  type: query
+                  query: site.fontFile.toStructure
+                  text: "{{ structureItem.name}}"
+                  value: "{{ structureItem.name}}"
+              hamburgerFontSize:
+                label: Schriftgröße
+                type: select
+                width: 1/6
+                options:
+                  type: query
+                  query: site.fontSize.toStructure
+                  text: "{{ structureItem.name}}"
+                  value: "{{ structureItem.name}}"
+              hamburgerFontColor:
+                label: Farbe Text
+                type: select
+                width: 1/6
+                default: primary
+                extends: fields/colors
+              hamburgerMenuColor:
+                label: Farbe Menu
+                type: select
+                width: 1/6
+                default: primary
+                extends: fields/colors
+              hamburgerMenuColorActive:
+                label: Farbe Menu Aktiv
+                type: select
+                width: 1/6
+                default: primary
+                extends: fields/colors
+              hamburgerOverlay:
+                label: Farbe Overlay
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/6
 
-  designHamburger:
-    width: 1/2
-    sections:
-      hamburger:
-        type: fields
-        fields:
-          hamburgerHeadline:
-            label: Hamburger Menü
-            type: headline
-            numbered: true
-          hamburgerFont:
-            label: Schriftart
-            type: select
-            width: 1/3
-            options:
-              type: query
-              query: site.fontFile.toStructure
-              text: "{{ structureItem.name}}"
-              value: "{{ structureItem.name}}"
-          hamburgerFontSize:
-            label: Schriftgröße
-            type: select
-            width: 1/3
-            options:
-              type: query
-              query: site.fontSize.toStructure
-              text: "{{ structureItem.name}}"
-              value: "{{ structureItem.name}}"
-          hamburgerFontColor:
-            label: Farbe Text
-            type: select
-            width: 1/3
-            default: primary
-            extends: fields/colors
-          hamburgerMenuColor:
-            label: Farbe Menu
-            type: select
-            width: 1/3
-            default: primary
-            extends: fields/colors
-          hamburgerMenuColorActive:
-            label: Farbe Menu Aktiv
-            type: select
-            width: 1/3
-            default: primary
-            extends: fields/colors
-          hamburgerOverlay:
-            label: Farbe Overlay
-            type: select
-            default: primary
-            extends: fields/colors
-            width: 1/3
-  designLogo:
-    width: 1/1
-    sections:
-      logo:
-        type: fields
-        fields:
-          logoHeadline:
-            label: Header Logo
-            type: headline
-            numbered: true
-          logoFile:
-            label: Datei
-            type: files
-            help: Erlaubtes Format - SVG
-            query: site.files.filterBy('template', 'svg')
-            uploads:
-              template: svg
-            multiple: false
-            width: 1/6
-          logoAlign:
-            label: Ausrichtung
-            type: select
-            default: left
-            options:
-              left: Links
-              center: Zentriert
-            width: 1/6
-          logoMobile:
-            label: Breite 📱
-            type: number
-            default: 200
-            after: px
-            width: 1/6
-          logoMobileActive:
-            label: Breite Aktiv 📱
-            type: number
-            default: 100
-            after: px
-            width: 1/6
-          logoDesktop:
-            label: Breite 🖥️
-            type: number
-            default: 400
-            after: px
-            width: 1/6
-          logoDesktopActive:
-            label: Breite Aktiv 🖥️
-            type: number
-            default: 200
-            after: px
-            width: 1/6
   designButton:
     width: 1/1
     sections:
@@ -253,65 +254,74 @@ columns:
             label: Button
             type: headline
             numbered: true
-          buttonFont:
-            extends: fields/fontFile
-            required: false
-            width: 1/6
-          buttonFontSize:
-            extends: fields/fontSize
-          buttonBorderRadius:
-            label: Rand Rundung
-            type: number
-            default: 0
-            after: px
-            width: 1/6
-          buttonBorderWidth:
-            label: Rand Strichstärke
-            type: number
-            default: 0
-            after: px
-            width: 1/6
-          buttonPadding:
-            label: Abstand
-            type: number
-            width: 1/6
-            after: px
-          buttonGap:
-            type: gap
-            width: 1/6
-          buttonBackgroundColor:
-            label: Farbe Hintergrund
-            type: select
-            default: primary
-            extends: fields/colors
-            width: 1/6
-          buttonBackgroundColorActive:
-            label: Farbe Hintergrund Hover
-            type: select
-            default: primary
-            extends: fields/colors
-            width: 1/6
-          buttonTextColor:
-            label: Farbe Text
-            type: select
-            default: secondary
-            extends: fields/colors
-            width: 1/6
-          buttonTextColorActive:
-            label: Farbe Text Hover
-            type: select
-            default: secondary
-            extends: fields/colors
-            width: 1/6
-          buttonBorderColor:
-            label: Rand Farbe
-            type: select
-            default: primary
-            extends: fields/colors
-            width: 1/6
-          buttonBorderColorActive:
-            label: Rand Farbe Hover
-            type: select
-            default: primary
-            extends: fields/colors
-            width: 1/6
+          buttonSettings:
+            type: entity
+            label: Einstellungen
+            icon: cog
+            toggle: true
+            fields:
+              buttonFont:
+                extends: fields/fontFile
+                required: false
+                width: 1/6
+              buttonFontSize:
+                extends: fields/fontSize
+              buttonBorderRadius:
+                label: Rand Rundung
+                type: number
+                default: 0
+                after: px
+                width: 1/6
+              buttonBorderWidth:
+                label: Rand Strichstärke
+                type: number
+                default: 0
+                after: px
+                width: 1/6
+              buttonPadding:
+                label: Abstand
+                type: number
+                width: 1/6
+                after: px
+          buttonColors:
+            type: entity
+            label: Farben
+            icon: palette
+            toggle: true
+            fields:
+              buttonBackgroundColor:
+                label: Farbe Hintergrund
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/6
+              buttonBackgroundColorActive:
+                label: Farbe Hintergrund Hover
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/6
+              buttonTextColor:
+                label: Farbe Text
+                type: select
+                default: secondary
+                extends: fields/colors
+                width: 1/6
+              buttonTextColorActive:
+                label: Farbe Text Hover
+                type: select
+                default: secondary
+                extends: fields/colors
+                width: 1/6
+              buttonBorderColor:
+                label: Rand Farbe
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/6
+              buttonBorderColorActive:
+                label: Rand Farbe Hover
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/6

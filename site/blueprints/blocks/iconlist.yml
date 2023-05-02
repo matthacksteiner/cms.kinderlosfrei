@@ -43,13 +43,13 @@ tabs:
         width: 1/3
         after: px
       iconGap:
-        label: Icon Abstand Vertikal
+        label: Icon Abstand Vertikal ⬆️⬇️
         type: number
         width: 1/3
         default: 16
         after: px
       iconListGap:
-        label: Listen Abstand Horizontal
+        label: Listen Abstand Horizontal ⬅️➡️
         type: number
         width: 1/3
         default: 16
