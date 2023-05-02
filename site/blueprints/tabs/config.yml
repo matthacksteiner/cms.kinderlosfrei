@@ -37,11 +37,11 @@ fields:
     numbered: false
   backgroundAlignVertical:
     width: 1/4
-    label: Vertikal
+    label: Vertikal ⬆️⬇️
     extends: fields/align
   backgroundAlignHorizontal:
     width: 1/4
-    label: Horizontal
+    label: Horizontal ➡️⬅️
     extends: fields/align
   backgroundHeight:
     label: Höhe

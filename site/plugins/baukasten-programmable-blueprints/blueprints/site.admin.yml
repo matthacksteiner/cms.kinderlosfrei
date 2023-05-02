@@ -11,7 +11,7 @@ tabs:
           contentMain:
             headline: Seiten / optional
             type: pages
-            layout: cardlets
+            layout: list
             template:
               - default
       sidebar:
@@ -19,7 +19,7 @@ tabs:
         sections:
           contentHome:
             type: pages
-            layout: cardlets
+            layout: list
             label: Startseite / notwendig
             template:
               - home

@@ -1,0 +1,30 @@
+title: Site
+
+columns:
+  main:
+    width: 1/2
+    sections:
+      contentMain:
+        headline: Seiten / optional
+        type: pages
+        layout: list
+        template:
+          - default
+  sidebar:
+    width: 1/2
+    sections:
+      contentHome:
+        type: pages
+        layout: list
+        label: Startseite / notwendig
+        template:
+          - home
+          - error
+        image: icon
+        status: unlisted
+      # sidebarDeploy:
+      #   type: fields
+      #   fields:
+      #     deploy:
+      #       type: webhook
+      #       label: Deploy on Netlify
