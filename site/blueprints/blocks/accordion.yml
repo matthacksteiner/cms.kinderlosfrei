@@ -15,7 +15,7 @@ tabs:
             inline: true
             marks: false
             icon: title
-            placeholder: Hier kommt der Titel rein…
+            placeholder: Hier kommt der Titel rein.
           text:
             label: Text
             extends: fields/writer
