@@ -12,7 +12,8 @@ return [
 	'error' => 'z-error',
 	'frontendUrl' => 'www.foo.com',
 	'panel' => [
-		'css' => 'assets/css/baukasten-panel.css'
+		'css' => 'assets/css/baukasten-panel.css',
+		'favicon' => 'assets/img/baukasten-favicon.ico',
 	],
 	'routes' => [
 		[
@@ -41,24 +42,5 @@ return [
 		'siteTitleAsHomePageTitle' => true,
 		'separator' => ' | ',
 	],
-	'bnomei.janitor.jobs' => [
-		'downloadBackup' => function (Kirby\Cms\Page $page = null, string $data = null) {
-			$dir = realpath(kirby()->roots()->accounts() . '/../') . '/backups';
-
-			$files = Dir::files($dir, null, true);
-			$fileDownload = end($files);
-
-			foreach ($files as $f) {
-				if ($f != $fileDownload) {
-					F::remove($f);
-				}
-			}
-
-			return [
-				'status' => 200,
-				'download' => F::uri($fileDownload),
-			];
-		},
-	]
 
 ];

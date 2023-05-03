@@ -18,3 +18,12 @@
 	background-size: contain;
 	clear: right;
 }
+
+/* Add your own custom css here */
+.k-login-view form::before {
+	content: url("../img/baukasten-logo.svg");
+}
+
+.k-login-fields {
+	margin-top: 2rem;
+}
