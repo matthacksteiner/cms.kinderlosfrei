@@ -225,6 +225,20 @@ return function ($site, $page, $kirby) {
 
 	// ---------- settings ----------
 
+	// favicon
+	$siteFavicon = $site->faviconFiles()->toEntity();
+	$favicon = null;
+	if ($siteFavicon) {
+		$favicon = [
+			"svgSrc" => $siteFavicon->faviconFileSvg()->toFile() ? (string) $siteFavicon->faviconFileSvg()->toFile()->url() : null,
+			"icoSrc" => $siteFavicon->faviconFileIco()->toFile() ? (string) $siteFavicon->faviconFileIco()->toFile()->url() : null,
+			"png192Src" => $siteFavicon->faviconFilePng1()->toFile() ? (string) $siteFavicon->faviconFilePng1()->toFile()->url() : null,
+			"png512Src" => $siteFavicon->faviconFilePng2()->toFile() ? (string) $siteFavicon->faviconFilePng2()->toFile()->url() : null,
+			"pngAppleSrc" => $siteFavicon->faviconFilePng3()->toFile() ? (string) $siteFavicon->faviconFilePng3()->toFile()->url() : null,
+		];
+	}
+
+
 	// header menu
 	$header = [];
 	foreach ($site->navHeader()->toStructure() as $headerItem) {
@@ -303,6 +317,9 @@ return function ($site, $page, $kirby) {
 			'global' => [
 				'siteTitle' => (string) $site->title(),
 				"meta" => getMeta($site, $page, $kirby),
+
+				"favicon" => $favicon,
+
 				"navHeader" => $header,
 				"navHamburger" => $hambuger,
 				"company" => (string) $site->addressCompany(),

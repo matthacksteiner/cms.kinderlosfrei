@@ -1,0 +1,11 @@
+Title: PNG Bild
+accept: image/png
+
+fields:
+  alt:
+    type: text
+    label: Alternativ Text
+    width: 2/3
+  focus:
+    label: Fokus
+    type: focus

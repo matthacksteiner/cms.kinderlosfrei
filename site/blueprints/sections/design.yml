@@ -1,6 +1,6 @@
 columns:
   designColors:
-    width: 1/1
+    width: 1/2
     sections:
       colors:
         type: fields
@@ -41,7 +41,7 @@ columns:
             default: white
             extends: fields/colors
   designGrid:
-    width: 1/1
+    width: 1/2
     sections:
       grid:
         type: fields
@@ -53,40 +53,120 @@ columns:
           gridGapMobile:
             label: Abstand 📱
             type: number
-            width: 1/6
+            width: 1/3
             default: 20
             after: px
           gridMarginMobile:
             label: Rand 📱
             type: number
-            width: 1/6
+            width: 1/3
             default: 20
             after: px
           gridGapDesktop:
             label: Abstand 🖥️
             type: number
-            width: 1/6
+            width: 1/3
             default: 40
             after: px
           gridMarginDesktop:
             label: Rand 🖥️
             type: number
-            width: 1/6
+            width: 1/3
             default: 40
             after: px
           gridBlockMobile:
             label: Abstand Blöcke 📱
             type: number
-            width: 1/6
+            width: 1/3
             default: 16
             after: px
           gridBlockDesktop:
             label: Abstand Blöcke 🖥️
             type: number
-            width: 1/6
+            width: 1/3
             default: 16
             after: px
 
+  designFavicon:
+    width: 1/1
+    sections:
+      favicon:
+        type: fields
+        fields:
+          faviconHeadline:
+            label: Favicon
+            type: headline
+            numbered: true
+          faviconFiles:
+            type: entity
+            label: Dateien
+            icon: file
+            toggle: true
+            fields:
+              faviconFileSvg:
+                label: SVG Datei
+                type: files
+                help: Erlaubtes Format - SVG
+                query: site.files.filterBy('template', 'svg')
+                uploads:
+                  template: svg
+                multiple: false
+                width: 1/3
+              faviconFileIco:
+                label: ICO Datei
+                type: files
+                help: Erlaubtes Format - ICO
+                query: site.files.filterBy('extension', 'ico')
+                uploads:
+                  template: ico
+                multiple: false
+                width: 1/3
+              faviconFileGap:
+                type: gap
+                width: 1/3
+              faviconFilePng1:
+                label: PNG Datei 192x192
+                type: files
+                help: Erlaubtes Format - PNG
+                query: site.files.filterBy('template', 'png')
+                maxheight: 192
+                maxwidth: 192
+                minheight: 192
+                minwidth: 192
+                uploads:
+                  template: png
+                multiple: false
+                width: 1/3
+              faviconFilePng2:
+                label: PNG Datei 512x512
+                type: files
+                help: Erlaubtes Format - PNG
+                maxheight: 512
+                maxwidth: 512
+                minheight: 512
+                minwidth: 512
+                query: site.files.filterBy('template', 'png')
+                uploads:
+                  template: png
+                multiple: false
+                width: 1/3
+              faviconFilePng3:
+                label: PNG Datei 180x180 Apple Touch Icon
+                type: files
+                help: Erlaubtes Format - PNG
+                maxheight: 180
+                maxwidth: 180
+                minheight: 180
+                minwidth: 180
+                query: site.files.filterBy('template', 'png')
+                uploads:
+                  template: png
+                multiple: false
+                width: 1/3
+              faviconInfo:
+                label: Info
+                type: info
+                text: Die Dateien können auf https://realfavicongenerator.net/ generiert werden.
   designHeader:
     width: 1/1
     sections:

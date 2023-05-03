@@ -17,3 +17,4 @@ site/plugins/*
 !site/plugins/baukasten-blocks-preview/
 !site/plugins/baukasten-field-methods/
 !site/plugins/baukasten-programmable-blueprints/
+!site/plugins/baukasten-mime/
