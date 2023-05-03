@@ -3,7 +3,10 @@
 .run
 .vscode/sftp.json
 
-/content
+content/*
+content/site.txt
+content/error/error.txt
+content/home/home.txt
 /storage/cache
 /storage/sessions
 /storage/accounts
