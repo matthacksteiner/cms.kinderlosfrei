@@ -11,6 +11,22 @@ return [
 	'locale' => 'de_AT.utf-8',
 	'error' => 'z-error',
 	'frontendUrl' => 'www.foo.com',
+	'pju.webhook-field.hooks' => [
+		'netlify_deploy' => [
+			'url' => '###',
+			'callback' => function ($status) {
+				if ($status === 'error') {
+					error_log('There was an error with the production webhook');
+				}
+			}
+		]
+	],
+	'pju.webhook-field.labels' => [
+		'success' => [
+			'name' => 'Webhook %hookName% Erfolgreich',
+			'cta'  => 'Nochmals versuchen?'
+		]
+	],
 	'panel' => [
 		'css' => 'assets/css/baukasten-panel.css',
 		'favicon' => 'assets/img/baukasten-favicon.ico',

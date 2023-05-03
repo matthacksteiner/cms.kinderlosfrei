@@ -1,30 +1,54 @@
 title: Site
 
-columns:
-  main:
-    width: 1/2
-    sections:
-      contentMain:
-        headline: Seiten / optional
-        type: pages
-        layout: list
-        template:
-          - default
-  sidebar:
-    width: 1/2
-    sections:
-      contentHome:
-        type: pages
-        layout: list
-        label: Startseite / notwendig
-        template:
-          - home
-          - error
-        image: icon
-        status: unlisted
-      # sidebarDeploy:
-      #   type: fields
-      #   fields:
-      #     deploy:
-      #       type: webhook
-      #       label: Deploy on Netlify
+tabs:
+  pages:
+    label: Dashboard
+    icon: dashboard
+    columns:
+      main:
+        width: 2/3
+        sections:
+          contentMainDrafts:
+            headline: Entwürfe
+            type: pages
+            status: drafts
+            layout: list
+            size: small
+            templates:
+              - default
+          contentMain:
+            headline: Veröffentlicht
+            type: pages
+            sortable: false
+            status: published
+            layout: cardlets
+            size: small
+            image: icon
+            templates:
+              - home
+              - default
+            create:
+              - default
+      sidebar:
+        width: 1/3
+        sections:
+          contentMainSpecial:
+            headline: Error Seite
+            type: pages
+            layout: list
+            status: unlisted
+            size: small
+            image: icon
+            create: false
+            templates:
+              - error
+          deploy:
+            type: fields
+            fields:
+              deploy:
+                type: webhook
+                label: Deploy on Netlify
+              deployInfo:
+                label: false
+                type: info
+                text: Dieser Button deployt die Änderungen auf den Webserver und macht diese somit sichtbar.

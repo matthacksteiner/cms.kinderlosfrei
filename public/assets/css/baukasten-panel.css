@@ -19,6 +19,14 @@
 	clear: right;
 }
 
+.k-items[data-layout="cards"] .k-item-figure .k-item-icon {
+	--size: 64px;
+}
+
+.k-items[data-layout="cardlets"] .k-item-figure .k-item-icon {
+	--size: 48px;
+}
+
 /* Add your own custom css here */
 .k-login-view form::before {
 	content: url("../img/baukasten-logo.svg");
