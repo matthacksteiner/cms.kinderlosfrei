@@ -1,1 +1,237 @@
 Title: Site Title
+
+----
+
+Navheader: 
+
+----
+
+Navhambuger: 
+
+----
+
+Layoutfooter: 
+
+----
+
+Fontfile: 
+
+----
+
+Fontsize: 
+
+----
+
+Headlines:
+
+h1color: black
+h1align: left
+h2color: black
+h2align: left
+h3color: black
+h3align: left
+h4color: black
+h4align: left
+h5color: black
+h5align: left
+h6color: black
+h6align: left
+
+----
+
+Colorbackground: white
+
+----
+
+Gridgapmobile: 20
+
+----
+
+Gridmarginmobile: 20
+
+----
+
+Gridgapdesktop: 40
+
+----
+
+Gridmargindesktop: 40
+
+----
+
+Gridblockmobile: 16
+
+----
+
+Gridblockdesktop: 16
+
+----
+
+Headerlogo:
+
+logoalign: left
+logomobile: 200
+logomobileactive: 100
+logodesktop: 400
+logodesktopactive: 200
+
+----
+
+Headermenu:
+
+headercolor: primary
+headercoloractive: black
+headerbackground: transparent
+headerbackgroundactive: white
+
+----
+
+Headerhamburger:
+
+hamburgerfontcolor: white
+hamburgermenucolor: white
+hamburgermenucoloractive: black
+hamburgeroverlay: primary
+
+----
+
+Buttonsettings: buttonpadding: 10
+
+----
+
+Buttoncolors:
+
+buttonbackgroundcolor: primary
+buttonbackgroundcoloractive: secondary
+buttontextcolor: white
+buttontextcoloractive: black
+buttonbordercolor: secondary
+buttonbordercoloractive: primary
+
+----
+
+Meta-title: 
+
+----
+
+Meta-description: 
+
+----
+
+Meta-canonical-url: 
+
+----
+
+Meta-author: 
+
+----
+
+Meta-image: 
+
+----
+
+Meta-phone-number: 
+
+----
+
+Og-title: 
+
+----
+
+Og-description: 
+
+----
+
+Og-image: 
+
+----
+
+Og-site-name: 
+
+----
+
+Og-url: 
+
+----
+
+Og-audio: 
+
+----
+
+Og-video: 
+
+----
+
+Og-determiner: 
+
+----
+
+Og-type: 
+
+----
+
+Og-type-article-published-time: 
+
+----
+
+Og-type-article-modified-time: 
+
+----
+
+Og-type-article-expiration-time: 
+
+----
+
+Og-type-article-author: 
+
+----
+
+Og-type-article-section: 
+
+----
+
+Og-type-article-tag: 
+
+----
+
+Twitter-title: 
+
+----
+
+Twitter-description: 
+
+----
+
+Twitter-image: 
+
+----
+
+Twitter-card-type: 
+
+----
+
+Twitter-site: 
+
+----
+
+Twitter-creator: 
+
+----
+
+Robots-noindex: 
+
+----
+
+Robots-nofollow: 
+
+----
+
+Robots-noarchive: 
+
+----
+
+Robots-noimageindex: 
+
+----
+
+Robots-nosnippet: 
