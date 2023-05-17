@@ -86,73 +86,49 @@ columns:
             fields:
               h1font:
                 extends: fields/fontFile
-                label: h1 Schriftart
+                label: H1 Schriftart
+                width: 1/6
               h1size:
                 extends: fields/fontSize
-                label: h1 Größe
-              h1color:
-                extends: fields/fontColor
-                label: h1 Schriftfarbe
-              h1align:
-                extends: fields/fontAlign
-                label: h1 Ausricht.
+                width: 1/6
+                label: H1 Größe
               h2font:
                 extends: fields/fontFile
-                label: h2 Schriftart
+                label: H2 Schriftart
+                width: 1/6
               h2size:
                 extends: fields/fontSize
-                label: h2 Größe
-              h2color:
-                extends: fields/fontColor
-                label: h2 Schriftfarbe
-              h2align:
-                extends: fields/fontAlign
-                label: h2 Ausricht.
+                label: H2 Größe
+                width: 1/6
               h3font:
                 extends: fields/fontFile
-                label: h3 Schriftart
+                label: H3 Schriftart
+                width: 1/6
               h3size:
                 extends: fields/fontSize
-                label: h3 Größe
-              h3color:
-                extends: fields/fontColor
-                label: h3 Schriftfarbe
-              h3align:
-                extends: fields/fontAlign
-                label: h3 Ausricht.
+                label: H3 Größe
+                width: 1/6
               h4font:
                 extends: fields/fontFile
-                label: h4 Schriftart
+                label: H4 Schriftart
+                width: 1/6
               h4size:
                 extends: fields/fontSize
-                label: h4 Größe
-              h4color:
-                extends: fields/fontColor
-                label: h4 Schriftfarbe
-              h4align:
-                extends: fields/fontAlign
-                label: h4 Ausricht.
+                label: H4 Größe
+                width: 1/6
               h5font:
                 extends: fields/fontFile
-                label: h5 Schriftart
+                label: H5 Schriftart
+                width: 1/6
               h5size:
                 extends: fields/fontSize
-                label: h5 Größe
-              h5color:
-                extends: fields/fontColor
-                label: h5 Schriftfarbe
-              h5align:
-                extends: fields/fontAlign
-                label: h5 Ausricht.
+                label: H5 Größe
+                width: 1/6
               h6font:
                 extends: fields/fontFile
-                label: h6 Schriftart
+                label: H6 Schriftart
+                width: 1/6
               h6size:
                 extends: fields/fontSize
-                label: h6 Größe
-              h6color:
-                extends: fields/fontColor
-                label: h6 Schriftfarbe
-              h6align:
-                extends: fields/fontAlign
-                label: h6 Ausricht.
+                label: H6 Größe
+                width: 1/6
