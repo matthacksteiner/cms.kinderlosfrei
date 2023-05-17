@@ -19,32 +19,6 @@ tabs:
   settings:
     label: Einstellungen
     fields:
-      controlsHeadline:
-        label: Darstellung
-        type: headline
-        numbered: false
-      controls:
-        label: Optionen
-        type: checkboxes
-        width: 1/3
-        options:
-          full: Vollbild
-          arrow: Pfeil
-      arrowColor:
-        label: Pfeil Farbe
-        type: select
-        width: 1/3
-        default: black
-        extends: fields/colors
-      arrowSize:
-        label: Pfeil Größe
-        type: select
-        width: 1/3
-        default: 1
-        options:
-          1: Klein
-          2: Mittel
-          3: Groß
       toggle:
         label: Link?
         type: toggle

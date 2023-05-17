@@ -52,6 +52,37 @@ fields:
       full: Vollbild
       half: Halber Bildschirm
       auto: Automatisch
+  backgroundGap:
+    type: gap
+    width: 1/4
+  backgroundArrow:
+    label: Pfeil
+    type: toggle
+    width: 1/4
+    default: false
+    options:
+      true: Anzeigen
+    when:
+      backgroundHeight: full
+  backgroundArrowColor:
+    label: Pfeil Farbe
+    type: select
+    width: 1/4
+    default: black
+    extends: fields/colors
+    when:
+      backgroundHeight: full
+  backgroundArrowSize:
+    label: Pfeil Größe
+    type: select
+    width: 1/4
+    default: 1
+    options:
+      1: Klein
+      2: Mittel
+      3: Groß
+    when:
+      backgroundHeight: full
   spacingHeadline:
     type: headline
     label: Abstände

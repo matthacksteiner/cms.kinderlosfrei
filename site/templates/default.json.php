@@ -30,6 +30,7 @@ function getlayoutArray(\Kirby\Cms\Layout $layout)
     }
 
     $columns[] = $columnArray;
+    $backgroundArrow = $layout->backgroundArrow()->toBool(false);
   }
 
   return [
@@ -41,6 +42,9 @@ function getlayoutArray(\Kirby\Cms\Layout $layout)
     "backgroundContainerColor" => $layout->backgroundContainerColor()->value(),
     "backgroundAlignVertical" => $layout->backgroundAlignVertical()->value(),
     "backgroundAlignHorizontal" => $layout->backgroundAlignHorizontal()->value(),
+    "backgroundArrow" => $backgroundArrow,
+    "backgroundArrowColor" => $layout->backgroundArrowColor()->value(),
+    "backgroundArrowSize" => $layout->backgroundArrowSize()->value(),
     "spacingMobileTop" => $layout->spacingMobileTop()->value(),
     "spacingMobileBottom" => $layout->spacingMobileBottom()->value(),
     "spacingDesktopTop" => $layout->spacingDesktopTop()->value(),
