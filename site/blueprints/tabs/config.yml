@@ -37,7 +37,11 @@ fields:
     numbered: false
   backgroundAlignVertical:
     width: 1/4
-    label: Vertikal ⬆️⬇️
+    label: Vert. Container ⬆️⬇️
+    extends: fields/align
+  backgroundAlignItemsVertical:
+    width: 1/4
+    label: Vert. Blöcke ⬆️⬇️
     extends: fields/align
   backgroundAlignHorizontal:
     width: 1/4
@@ -52,9 +56,6 @@ fields:
       full: Vollbild
       half: Halber Bildschirm
       auto: Automatisch
-  backgroundGap:
-    type: gap
-    width: 1/4
   backgroundArrow:
     label: Pfeil
     type: toggle

@@ -41,6 +41,7 @@ function getlayoutArray(\Kirby\Cms\Layout $layout)
     "backgroundColor" => $layout->backgroundColor()->value(),
     "backgroundContainerColor" => $layout->backgroundContainerColor()->value(),
     "backgroundAlignVertical" => $layout->backgroundAlignVertical()->value(),
+    "backgroundAlignItemsVertical" => $layout->backgroundAlignItemsVertical()->value(),
     "backgroundAlignHorizontal" => $layout->backgroundAlignHorizontal()->value(),
     "backgroundArrow" => $backgroundArrow,
     "backgroundArrowColor" => $layout->backgroundArrowColor()->value(),
