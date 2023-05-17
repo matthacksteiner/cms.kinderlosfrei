@@ -49,7 +49,7 @@ tabs:
         default: 16
         after: px
       iconListGap:
-        label: Listen Abstand Horizontal ⬅️➡️
+        label: Listen Abstand Hori. ⬅️➡️
         type: number
         width: 1/3
         default: 16
