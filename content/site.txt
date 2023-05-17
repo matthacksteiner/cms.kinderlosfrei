@@ -39,6 +39,14 @@ h6align: left
 
 ----
 
+Colorblack: #000000
+
+----
+
+Colorwhite: #ffffff
+
+----
+
 Colorbackground: white
 
 ----
