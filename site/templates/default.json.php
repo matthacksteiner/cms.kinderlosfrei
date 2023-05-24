@@ -194,6 +194,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
           $icon = [
             'url' => $file->url(),
             'alt' => (string)$file->alt(),
+            'source' => file_get_contents($file->root()),
           ];
         }
 
