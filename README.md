@@ -6,6 +6,7 @@
 - In HTML Verzeichnis auf dem Server wechseln `cd /var/www/virtual/fifth/html`
 - Klonen von Repository in Verzeichnis
 - `composer install` via ssh auf dem Server ausführen
+- Document Root auf `/public` setzen
 
 ### Falls eigener Server
 
