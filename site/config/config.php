@@ -13,7 +13,7 @@ return [
 	'frontendUrl' => 'www.foo.com',
 	'pju.webhook-field.hooks' => [
 		'netlify_deploy' => [
-			'url' => 'https://api.netlify.com/build_hooks/6489d44a8b3ccb038ca6a77d',
+			'url' => '###',
 			'callback' => function ($status) {
 				if ($status === 'error') {
 					error_log('There was an error with the production webhook');
