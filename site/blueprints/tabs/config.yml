@@ -15,10 +15,13 @@ fields:
     label: Breite
     type: toggles
     default: container
-    width: 2/4
+    width: 1/4
     options:
       container: Container
-      w-full: Volle Breite
+      w-full: Vollbild
+  backgroundPadding:
+    extends: fields/padding
+    width: 1/4
   backgroundContainerColor:
     label: Farbe Container
     type: select
