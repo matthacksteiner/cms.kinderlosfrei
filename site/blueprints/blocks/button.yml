@@ -19,3 +19,6 @@ tabs:
         type: info
         text: |
           Die Darstellung aller Button wird im **Tab** Design festgelegt.
+      buttonAlign:
+        extends: fields/align
+        width: 1/4
