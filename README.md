@@ -28,3 +28,26 @@
   1. 'Deploy Succeeded' mit `https://cms.domain.de/webhook/netlify_deploy/success` als URL
   2. 'Deploy failed' mit `https://cms.domain.de/webhook/netlify_deploy/error` als URL
 - Auf SSH Server unter site/config/config.php die Netlify die URL zum Hook eintragen
+
+## Requirements
+
+### Server
+
+- Apache 2 or nginx
+- URL rewriting
+
+### PHP
+
+- PHP 8.0, 8.1 or 8.2 (PHP 8.1 is recommended)
+- Either the gd extension or ImageMagick (see below)
+- ctype extension
+- curl extension
+- dom extension
+- filter extension
+- hash extension
+- iconv extension
+- json extension
+- libxml extension
+- mbstring extension
+- openssl extension
+- SimpleXML extension
