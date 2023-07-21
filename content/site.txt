@@ -1,4 +1,4 @@
-Title: Site Title
+Title: Baukasten
 
 ----
 
@@ -18,12 +18,61 @@ Fontfile:
 
 ----
 
-Fontsize: 
+Fontsize:
+
+- 
+  name: base
+  sizemobile: 16
+  lineheightmobile: 24
+  sizedesktop: 16
+  lineheightdesktop: 24
+- 
+  name: H1
+  sizemobile: 32
+  lineheightmobile: 40
+  sizedesktop: 48
+  lineheightdesktop: 56
+- 
+  name: H2
+  sizemobile: 28
+  lineheightmobile: 36
+  sizedesktop: 36
+  lineheightdesktop: 44
+- 
+  name: H3
+  sizemobile: 24
+  lineheightmobile: 32
+  sizedesktop: 30
+  lineheightdesktop: 38
+- 
+  name: H4
+  sizemobile: 20
+  lineheightmobile: 28
+  sizedesktop: 24
+  lineheightdesktop: 32
+- 
+  name: H5
+  sizemobile: 18
+  lineheightmobile: 24
+  sizedesktop: 20
+  lineheightdesktop: 28
+- 
+  name: H6
+  sizemobile: 16
+  lineheightmobile: 20
+  sizedesktop: 16
+  lineheightdesktop: 24
 
 ----
 
 Headlines:
 
+h1size: H1
+h2size: H2
+h3size: H3
+h4size: H4
+h5size: H5
+h6size: H6
 h1color: black
 h1align: left
 h2color: black
@@ -36,6 +85,18 @@ h5color: black
 h5align: left
 h6color: black
 h6align: left
+
+----
+
+Colorprimary: #46b13e
+
+----
+
+Colorsecondary: #348ada
+
+----
+
+Colortertiary: #da3434
 
 ----
 
@@ -87,6 +148,7 @@ logodesktopactive: 200
 
 Headermenu:
 
+headerfontsize: H4
 headercolor: primary
 headercoloractive: black
 headerbackground: transparent
@@ -96,6 +158,7 @@ headerbackgroundactive: white
 
 Headerhamburger:
 
+hamburgerfontsize: H4
 hamburgerfontcolor: white
 hamburgermenucolor: white
 hamburgermenucoloractive: black
@@ -103,7 +166,11 @@ hamburgeroverlay: primary
 
 ----
 
-Buttonsettings: buttonpadding: 10
+Buttonsettings:
+
+buttonfontsize: base
+buttonborderwidth: 1
+buttonpadding: 10
 
 ----
 
