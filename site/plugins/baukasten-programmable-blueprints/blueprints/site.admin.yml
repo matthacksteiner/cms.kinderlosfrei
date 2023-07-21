@@ -64,4 +64,4 @@ tabs:
     label: Design
     icon: brush
     extends: sections/design
-  seotab: seo
+  meta: tabs/meta/site

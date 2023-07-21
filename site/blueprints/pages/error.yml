@@ -11,4 +11,4 @@ options:
 tabs:
   content: tabs/blocks
   media: tabs/media
-  seotab: seo
+  meta: tabs/meta/site
