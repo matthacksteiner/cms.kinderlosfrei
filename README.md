@@ -29,7 +29,11 @@
   2. 'Deploy failed' mit `https://cms.domain.de/webhook/netlify_deploy/error` als URL
 - Auf SSH Server unter site/config/config.php die Netlify die URL zum Hook eintragen
 
-## Requirements
+## Requirements for Headless Kirby CMS
+
+### General
+
+working cms subdomain including correct DNS settings - for example: cms.domain.com
 
 ### Server
 
