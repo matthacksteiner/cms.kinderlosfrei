@@ -185,11 +185,59 @@ buttonbordercoloractive: primary
 
 ----
 
-Meta-title: 
+Meta-description: Die globale Beschreibung wird als Standard für alle Unterseiten verwendet, die keine eigene Beschreibung haben.
 
 ----
 
-Meta-description: 
+Meta-title-separator: 
+
+----
+
+Meta-website-owner: 
+
+----
+
+Meta-org-name: 
+
+----
+
+Meta-org-logo: 
+
+----
+
+Meta-person: 
+
+----
+
+Og-site-name: 
+
+----
+
+Og-image: 
+
+----
+
+Robots-index: 
+
+----
+
+Robots-follow: 
+
+----
+
+Robots-archive: 
+
+----
+
+Robots-imageindex: 
+
+----
+
+Robots-snippet: 
+
+----
+
+Meta-title: 
 
 ----
 
@@ -214,14 +262,6 @@ Og-title:
 ----
 
 Og-description: 
-
-----
-
-Og-image: 
-
-----
-
-Og-site-name: 
 
 ----
 

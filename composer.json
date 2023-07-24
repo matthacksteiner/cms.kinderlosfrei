@@ -1,20 +1,20 @@
 {
-  "name": "getkirby/weitweit",
-  "description": "weitweit Kirby Dev Kit",
-  "require": {
-    "php": ">=8.1",
-    "getkirby/cms": "^3.7",
-    "flokosiol/focus": "^3.0",
-    "oblik/kirby-link-field": "^4.0",
-    "diesdasdigital/kirby-meta-knight": "^1.2",
-    "medienbaecker/autoresize": "^2.1",
-    "hananils/kirby-colors": "^1.7",
-    "pju/kirby-webhook-field": "^1.1",
-    "oblik/kirby-entity-field": "^2.0"
-  },
-  "config": {
-    "allow-plugins": {
-      "getkirby/composer-installer": true
-    }
-  }
+	"name": "getkirby/weitweit",
+	"description": "weitweit Kirby Dev Kit",
+	"require": {
+		"php": ">=8.1",
+		"getkirby/cms": "^3.7",
+		"flokosiol/focus": "^3.0",
+		"oblik/kirby-link-field": "^4.0",
+		"medienbaecker/autoresize": "^2.1",
+		"fabianmichael/kirby-meta": "^0.4.1@beta",
+		"hananils/kirby-colors": "^1.7",
+		"pju/kirby-webhook-field": "^1.1",
+		"oblik/kirby-entity-field": "^2.0"
+	},
+	"config": {
+		"allow-plugins": {
+			"getkirby/composer-installer": true
+		}
+	}
 }

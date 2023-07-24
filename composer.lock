@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d03ebd00146774c64b37525cfe1c4d60",
+    "content-hash": "4bb6b131abcad94a7c456e99f4b8f53a",
     "packages": [
         {
             "name": "claviska/simpleimage",
@@ -141,46 +141,66 @@
             "time": "2022-04-01T19:23:25+00:00"
         },
         {
-            "name": "diesdasdigital/kirby-meta-knight",
-            "version": "1.2.2",
+            "name": "fabianmichael/kirby-meta",
+            "version": "0.4.1-beta",
             "source": {
                 "type": "git",
-                "url": "https://github.com/diesdasdigital/kirby-meta-knight.git",
-                "reference": "9c3da53a3abee5ffdd95c1363d679e9395794715"
+                "url": "https://github.com/fabianmichael/kirby-meta.git",
+                "reference": "4a2e51ff59aaa8bb5d263440cf3782e08438b7da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/diesdasdigital/kirby-meta-knight/zipball/9c3da53a3abee5ffdd95c1363d679e9395794715",
-                "reference": "9c3da53a3abee5ffdd95c1363d679e9395794715",
+                "url": "https://api.github.com/repos/fabianmichael/kirby-meta/zipball/4a2e51ff59aaa8bb5d263440cf3782e08438b7da",
+                "reference": "4a2e51ff59aaa8bb5d263440cf3782e08438b7da",
                 "shasum": ""
             },
             "require": {
-                "getkirby/composer-installer": "^1.1"
+                "getkirby/composer-installer": "^1.2",
+                "php": ">=8.0.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.8"
             },
             "type": "kirby-plugin",
+            "extra": {
+                "installer-name": "meta"
+            },
             "autoload": {
                 "psr-4": {
-                    "diesdasdigital\\kirby-meta-knight\\": "src/models/"
+                    "FabianMichael\\Meta\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD-3-Clause"
+                "MIT"
             ],
             "authors": [
                 {
-                    "name": "Jonathan Muth",
-                    "email": "jonathan@diesdas.digital",
-                    "homepage": "https://diesdas.digital",
-                    "role": "Developer"
+                    "name": "Fabian Michael",
+                    "email": "hallo@fabianmichael.de"
                 }
             ],
-            "description": "Meta Knight – SEO for Kirby",
+            "description": "Your all-in-one powerhouse for any SEO and metadata needs imaginable.",
+            "keywords": [
+                "kirby3",
+                "kirby3-cms",
+                "kirby3-plugin",
+                "meta",
+                "metadata",
+                "panel",
+                "seo"
+            ],
             "support": {
-                "issues": "https://github.com/diesdasdigital/kirby-meta-knight/issues",
-                "source": "https://github.com/diesdasdigital/kirby-meta-knight/tree/1.2.2"
+                "issues": "https://github.com/fabianmichael/kirby-meta/issues",
+                "source": "https://github.com/fabianmichael/kirby-meta/tree/0.4.1-beta"
             },
-            "time": "2021-11-16T12:41:33+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/fabianmichael",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-04-24T12:39:28+00:00"
         },
         {
             "name": "filp/whoops",
@@ -1465,7 +1485,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "fabianmichael/kirby-meta": 10
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
