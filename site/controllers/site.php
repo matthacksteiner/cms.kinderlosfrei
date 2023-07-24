@@ -111,9 +111,8 @@ return function ($site, $page, $kirby) {
 	return [
 		'json' => [
 			'global' => [
-				'siteTitle' => (string) $site->title(),
 				"meta" => getMeta($site, $page, $kirby),
-
+				'siteTitle' => (string) $site->title(),
 				"favicon" => $favicon,
 
 				"navHeader" => $header,
@@ -181,6 +180,7 @@ return function ($site, $page, $kirby) {
 				"buttonBorderColorActive" => (string) $site->buttonColors()->toEntity()->buttonBorderColorActive(),
 
 			],
+
 			'intendedTemplate' => $page->intendedTemplate()->name(),
 			'title' => (string) $page->title(),
 		]
