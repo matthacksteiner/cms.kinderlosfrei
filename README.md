@@ -1,10 +1,21 @@
 # cms.baukasten
 
+Template: https://github.com/matthacksteiner/cms.baukasten
+
+## Update von Template Origin
+
+`git remote add template https://github.com/matthacksteiner/cms.baukasten`
+
+`git fetch --all`
+
+`git merge template/main --allow-unrelated-histories`
+
 ## 1. Installation Kirby
 
 - Neues Repo von Termplate erstellen https://github.com/matthacksteiner/cms.baukasten
 - In HTML Verzeichnis auf dem Server wechseln `cd /var/www/virtual/fifth/html`
 - Klonen von Repository in Verzeichnis
+- default content aus dem neuen Repo entfernen `git rm -r --cached content`
 - `composer install` via ssh auf dem Server ausführen
 - Document Root auf `/public` setzen
 
