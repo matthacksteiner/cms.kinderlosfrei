@@ -142,16 +142,16 @@
         },
         {
             "name": "fabianmichael/kirby-meta",
-            "version": "0.4.1-beta",
+            "version": "0.4.2-beta",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabianmichael/kirby-meta.git",
-                "reference": "4a2e51ff59aaa8bb5d263440cf3782e08438b7da"
+                "reference": "0a9422f708bbec364cc56dc81d84deb7fc30ae44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabianmichael/kirby-meta/zipball/4a2e51ff59aaa8bb5d263440cf3782e08438b7da",
-                "reference": "4a2e51ff59aaa8bb5d263440cf3782e08438b7da",
+                "url": "https://api.github.com/repos/fabianmichael/kirby-meta/zipball/0a9422f708bbec364cc56dc81d84deb7fc30ae44",
+                "reference": "0a9422f708bbec364cc56dc81d84deb7fc30ae44",
                 "shasum": ""
             },
             "require": {
@@ -192,7 +192,7 @@
             ],
             "support": {
                 "issues": "https://github.com/fabianmichael/kirby-meta/issues",
-                "source": "https://github.com/fabianmichael/kirby-meta/tree/0.4.1-beta"
+                "source": "https://github.com/fabianmichael/kirby-meta/tree/0.4.2-beta"
             },
             "funding": [
                 {
@@ -200,7 +200,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-24T12:39:28+00:00"
+            "time": "2023-07-25T07:30:57+00:00"
         },
         {
             "name": "filp/whoops",
@@ -321,16 +321,16 @@
         },
         {
             "name": "getkirby/cms",
-            "version": "3.9.5",
+            "version": "3.9.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getkirby/kirby.git",
-                "reference": "6b5dda600472b59a3a779f7e6b8e9e130cc414a1"
+                "reference": "ee2669e6dd091399fd7981381e1bd8cbd94d90a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getkirby/kirby/zipball/6b5dda600472b59a3a779f7e6b8e9e130cc414a1",
-                "reference": "6b5dda600472b59a3a779f7e6b8e9e130cc414a1",
+                "url": "https://api.github.com/repos/getkirby/kirby/zipball/ee2669e6dd091399fd7981381e1bd8cbd94d90a6",
+                "reference": "ee2669e6dd091399fd7981381e1bd8cbd94d90a6",
                 "shasum": ""
             },
             "require": {
@@ -418,7 +418,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2023-06-07T12:10:15+00:00"
+            "time": "2023-07-31T10:54:06+00:00"
         },
         {
             "name": "getkirby/composer-installer",
