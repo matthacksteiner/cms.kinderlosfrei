@@ -152,12 +152,14 @@ function getBlockArray(\Kirby\Cms\Block $block)
       $images = [];
 
       foreach ($block->images()->toFiles() as $file) {
-        $image = $file->focusCrop(1840);
+        $image = $file;
         $images[] = [
           'url' => $image->url(),
           'width' => $image->width(),
           'height' => $image->height(),
           'alt' => (string)$image->alt(),
+          'focusX' => json_decode($file->focusPercentageX()),
+          'focusY' => json_decode($file->focusPercentageY()),
         ];
       }
       $blockArray['content']['images'] = $images;
