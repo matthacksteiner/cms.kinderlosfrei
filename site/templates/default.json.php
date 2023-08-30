@@ -102,12 +102,15 @@ function getBlockArray(\Kirby\Cms\Block $block)
 
       $image = null;
       if ($file1 = $block->image()->toFile()) {
-        $image = $file1->focusCrop(1840);
+        $image = $file1;
 
         $image = [
           'url' => $image->url(),
           'width' => $image->width(),
           'height' => $image->height(),
+          'alt' => (string)$image->alt(),
+          'focusX' => json_decode($file1->focusPercentageX()),
+          'focusY' => json_decode($file1->focusPercentageY()),
         ];
       }
 
