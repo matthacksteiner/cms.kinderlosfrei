@@ -1,6 +1,6 @@
 {
-	"name": "getkirby/weitweit",
-	"description": "weitweit Kirby Dev Kit",
+	"name": "getkirby/baukasten",
+	"description": "baukasten Kirby Dev Kit",
 	"require": {
 		"php": ">=8.1",
 		"getkirby/cms": "^3.7",
