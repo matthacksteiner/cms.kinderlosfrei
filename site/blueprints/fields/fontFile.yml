@@ -1,6 +1,6 @@
 label: Schriftart
 type: select
-width: 2/6
+width: 1/6
 options:
   type: query
   query: site.fontFile.toStructure

@@ -1,8 +1,10 @@
 label: Ausrichtung
 type: select
 default: left
-width: 1/6
+width: 2/6
 options:
   left: Links
   center: Zentriert
   right: Rechts
+  leftCenter: Links zentriert
+  rightCenter: Rechts zentriert
