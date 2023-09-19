@@ -8,11 +8,12 @@ columns:
           fontFile:
             label: Schrift Dateien
             type: structure
-            help: Die Schriftdateien müssen im Format WOFF und WOFF2 vorliegen. Sie können auf https://transfonter.org/ mit den default Einstellungen generiert werden.
+            help: Die Schriftdateien müssen im Format WOFF und WOFF2 vorliegen. Sie können auf https://transfonter.org/ mit den default Einstellungen generiert werden. Die Werte "sans" und "serif" sind nicht erlaubt.
             width: 1/2
             fields:
               name:
                 label: Name
+                pattern: "^(?!.*(?:serif|sans))[a-zA-Z0-9]+$"
                 type: text
                 width: 1/1
                 required: true
