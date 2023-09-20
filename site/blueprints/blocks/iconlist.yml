@@ -20,7 +20,9 @@ tabs:
             placeholder: Hier kommt der Titel rein…
           url:
             label: Url
-            type: url
+            type: text
+            icon: url
+            placeholder: "https://, mailto: oder tel:"
           icon:
             label: Icon
             type: files
