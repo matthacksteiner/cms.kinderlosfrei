@@ -65,6 +65,7 @@ return function ($site, $page, $kirby) {
 		$logoFile = [
 			"src" => (string) $site->headerLogo()->toEntity()->logoFile()->toFile()->url(),
 			"alt" => (string) $site->headerLogo()->toEntity()->logoFile()->toFile()->alt()->or($site->title() . " Logo"),
+			'source' => file_get_contents($site->headerLogo()->toEntity()->logoFile()->toFile()->root()),
 		];
 	}
 
