@@ -33,3 +33,4 @@ tabs:
         linkTypes:
           - page
           - url
+          - file
