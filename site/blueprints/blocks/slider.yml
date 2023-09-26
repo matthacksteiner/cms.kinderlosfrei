@@ -50,22 +50,31 @@ tabs:
       color:
         label: Farbe
         type: select
-        width: 1/3
+        width: 1/4
         default: black
         extends: fields/colors
       time:
         label: Timing
         type: number
-        width: 1/3
+        width: 1/4
         default: 5000
         after: ms
-      view:
-        label: Anzahl der Bilder pro Slide
+      viewMobile:
+        label: Anzahl der Bilder 📱
         type: number
-        width: 1/3
+        width: 1/4
         default: 1
         min: 1
         max: 10
+        placeholder: 1
+      viewDesktop:
+        label: Anzahl der Bilder 🖥️
+        type: number
+        width: 1/4
+        default: 1
+        min: 1
+        max: 10
+        placeholder: 1
       textHeadline:
         label: Text
         type: headline
