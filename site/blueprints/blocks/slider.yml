@@ -59,6 +59,10 @@ tabs:
         width: 1/4
         default: 5000
         after: ms
+      gap:
+        label: Abstand
+        type: gap
+        width: 2/4
       viewMobile:
         label: Anzahl der Bilder 📱
         type: number
@@ -75,6 +79,22 @@ tabs:
         min: 1
         max: 10
         placeholder: 1
+      viewPaddingMobile:
+        label: Zwischenabstand 📱
+        type: number
+        width: 1/4
+        default: 0
+        min: 0
+        placeholder: 0
+        after: px
+      viewPaddingDesktop:
+        label: Zwischenabstand 🖥️
+        type: number
+        width: 1/4
+        default: 0
+        min: 0
+        placeholder: 0
+        after: px
       textHeadline:
         label: Text
         type: headline
