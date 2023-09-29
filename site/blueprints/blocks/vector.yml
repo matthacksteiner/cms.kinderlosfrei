@@ -19,6 +19,24 @@ tabs:
   settings:
     label: Einstellungen
     fields:
+      sizeHeadline:
+        label: Größe
+        type: headline
+        numbered: false
+      widthMobile:
+        label: Größe 📱
+        extends: fields/width
+      widthDesktop:
+        label: Größe 🖥️
+        extends: fields/width
+      widthAlign:
+        label: Ausrichtung
+        extends: fields/align
+        width: 1/4
+      linkHeadline:
+        label: Link
+        type: headline
+        numbered: false
       toggle:
         label: Link?
         type: toggle

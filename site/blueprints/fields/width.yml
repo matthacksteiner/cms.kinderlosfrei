@@ -1,0 +1,17 @@
+type: select
+options:
+  - value: "20"
+    text: 20%
+  - value: "33"
+    text: 33%
+  - value: "50"
+    text: 50%
+  - value: "66"
+    text: 66%
+  - value: "75"
+    text: 75%
+  - value: "100"
+    text: 100%
+default: "100"
+after: %
+width: 1/4
