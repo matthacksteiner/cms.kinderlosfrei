@@ -140,6 +140,7 @@ return function ($site, $page, $kirby) {
 				"fontSize" => $fontSize,
 				"headlines" => $headlines,
 
+				"headerActive" => $site->headerActive()->toBool(),
 				"headerFont" => (string) $site->headerMenu()->toEntity()->headerFont(),
 				"headerFontSize" => (string) $site->headerMenu()->toEntity()->headerFontSize(),
 				"headerColor" => (string) $site->headerMenu()->toEntity()->headerColor(),

@@ -172,11 +172,18 @@ columns:
             label: Header
             type: headline
             numbered: true
+          headerActive:
+            label: Header anzeigen
+            type: toggle
+            default: true
+            width: 1/6
           headerLogo:
             type: entity
             label: Logo
             icon: file-image
             toggle: true
+            when:
+              headerActive: true
             fields:
               logoFile:
                 label: Datei
@@ -227,6 +234,8 @@ columns:
             label: Menü
             icon: dots
             toggle: true
+            when:
+              headerActive: true
             fields:
               headerFont:
                 label: Schriftart
@@ -275,6 +284,8 @@ columns:
             label: Hamburger
             icon: menu
             toggle: true
+            when:
+              headerActive: true
             fields:
               hamburgerFont:
                 label: Schriftart
