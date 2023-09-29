@@ -14,7 +14,7 @@ tabs:
         image:
           back: black
         uploads:
-          template: image
+          template: pixel
         help: "Bild anklicken um den Focus zu setzen."
   settings:
     label: Einstellungen

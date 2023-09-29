@@ -1,5 +1,5 @@
 Title: Bild
-accept: image/jpeg, image/png, image/webp, image/svg+xml
+accept: image/jpeg, image/png, image/webp
 
 fields:
   alt:

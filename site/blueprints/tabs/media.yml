@@ -5,7 +5,7 @@ sections:
     headline: Bilder
     type: files
     layout: cards
-    template: image
+    template: pixel
     query: page.images
   vector:
     headline: Vektorgrafiken
