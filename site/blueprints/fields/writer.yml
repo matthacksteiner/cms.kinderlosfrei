@@ -4,5 +4,6 @@ type: writer
 marks:
   - bold
   - italic
+  - underline
   - link
   - email
