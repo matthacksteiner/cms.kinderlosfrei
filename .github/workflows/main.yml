@@ -1,5 +1,5 @@
 # Warning: deletes all files on uberspace which are not in repo, use without --delete if unsure
-name: DEPLOY2UBERSPACE
+name: Deploy2uberspace
 on:
   push:
     branches:
