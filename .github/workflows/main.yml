@@ -1,0 +1,33 @@
+# Warning: deletes all files on uberspace which are not in repo, use without --delete if unsure
+name: DEPLOY2UBERSPACE
+on:
+  push:
+    branches:
+      - main
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Rsync Deployments Action
+        uses: Burnett01/rsync-deployments@6.0.0
+        with:
+          switches: -avzr --dry-run --exclude="content" --exclude=".vscode" --exclude=".git" --exclude=".github" --exclude=".env" --exclude="node_modules" --exclude="media" --exclude="stats" --exclude="vendor" --exclude="kirby" --exclude="storage" --exclude="sass" --exclude=".DS_Store"
+          remote_path: /home/${{ secrets.UBERSPACE_USER }}/html/cms.baukasten.matthiashacksteiner.net/
+          remote_host: ${{ secrets.UBERSPACE_HOST }}
+          remote_user: ${{ secrets.UBERSPACE_USER }}
+          remote_key: ${{ secrets.DEPLOY_KEY_PRIVATE }}
+  composer:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: sync
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.UBERSPACE_HOST }}
+          username: ${{ secrets.UBERSPACE_USER }}
+          key: ${{ secrets.DEPLOY_KEY_PRIVATE }}
+          script: |
+            cd /home/${{ secrets.UBERSPACE_USER }}/html/cms.baukasten.matthiashacksteiner.net/
+            composer install --no-interaction
