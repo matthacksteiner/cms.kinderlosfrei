@@ -30,4 +30,5 @@ jobs:
           key: ${{ secrets.DEPLOY_KEY_PRIVATE }}
           script: |
             cd /home/${{ secrets.UBERSPACE_USER }}/html/${{ secrets.UBERSPACE_PATH }}/
-            composer install --no-interaction
+            rm -rf vendor
+            composer install --no-interaction --prefer-dist --optimize-autoloader
