@@ -35,6 +35,8 @@ Template: https://github.com/matthacksteiner/cms.baukasten
    4. `UBERSPACE_PATH` mit dem Pfad zum Verzeichnis auf dem Server
 3. Auf dem Server den öffentlichen Key in die Datei `~/.ssh/authorized_keys` eintragen - Wert aus neuerKeyFuerGithub.pub
 
+source: https://matthias-andrasch.eu/2021/tutorial-webseite-mittels-github-actions-deployment-zu-uberspace-uebertragen-rsync/
+
 ## 2. Installation Astro
 
 - Neues Repo von Template erstellen https://github.com/matthacksteiner/baukasten
