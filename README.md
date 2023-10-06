@@ -25,6 +25,16 @@ Template: https://github.com/matthacksteiner/cms.baukasten
 2. Domain erstellen `uberspace web domain add domain.de` und `uberspace web domain add www.domain.de`
 3. Symlink erstellen `cd /var/www/virtual/fifth` + `ln -s html/domain.de/public domain.de` + `ln -s html/domain.de/public www.domain.de`
 
+### Github Actions für automatisches Deployment
+
+1. Auf lokalen Rechner den ssh key erzeugen `ssh-keygen -f neuerKeyFuerGithub -t ed25519 -a 100` - Passwort leer lassen.
+2. Im neuen Repo unter Settings -> Secrets and variables für Actions 4 Secrets anlegen:
+   1. `UBERSPACE_HOST` mit dem Hostnamen des Servers
+   2. `UBERSPACE_USER` mit dem Benutzernamen des Servers
+   3. `DEPLOY_KEY_PRIVATE` mit dem privaten SSH Key (Inhalt der Datei neuerKeyFuerGithub - ohne .pub)
+   4. `UBERSPACE_PATH` mit dem Pfad zum Verzeichnis auf dem Server
+3. Auf dem Server den öffentlichen Key in die Datei `~/.ssh/authorized_keys` eintragen - Wert aus neuerKeyFuerGithub.pub
+
 ## 2. Installation Astro
 
 - Neues Repo von Template erstellen https://github.com/matthacksteiner/baukasten
