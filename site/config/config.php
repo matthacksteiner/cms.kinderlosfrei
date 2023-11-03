@@ -43,6 +43,7 @@ return [
 					$index[] = [
 						"uri" => $page->uri(),
 						"intendedTemplate" => $page->intendedTemplate()->name(),
+						"language" => "en",
 					];
 				}
 

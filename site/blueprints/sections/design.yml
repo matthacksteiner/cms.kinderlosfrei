@@ -9,30 +9,37 @@ columns:
             label: Farben
             type: headline
             numbered: true
+            translate: false
           colorPrimary:
             type: colors
             label: Primäre Farbe
             width: 1/3
+            translate: false
           colorSecondary:
             type: colors
             label: Sekundäre Farbe
             width: 1/3
+            translate: false
           colorTertiary:
             type: colors
             label: Teritäre Farbe
             width: 1/3
+            translate: false
           colorBlack:
             type: colors
             label: Schwarz
             width: 1/3
+            translate: false
           colorWhite:
             type: colors
             label: Weiß
             width: 1/3
+            translate: false
           colorBackground:
             label: Hintergrundfarbe
             type: select
             width: 1/3
+            translate: false
             default: white
             extends: fields/colors
   designGrid:
@@ -45,42 +52,49 @@ columns:
             label: Grid
             type: headline
             numbered: true
+            translate: false
           gridGapMobile:
             label: Abstand 📱
             type: number
             width: 1/3
             placeholder: 20
             after: px
+            translate: false
           gridMarginMobile:
             label: Rand 📱
             type: number
             width: 1/3
             placeholder: 20
             after: px
+            translate: false
           gridGapDesktop:
             label: Abstand 🖥️
             type: number
             width: 1/3
             placeholder: 40
             after: px
+            translate: false
           gridMarginDesktop:
             label: Rand 🖥️
             type: number
             width: 1/3
             placeholder: 40
             after: px
+            translate: false
           gridBlockMobile:
             label: Abstand Blöcke 📱
             type: number
             width: 1/3
             placeholder: 16
             after: px
+            translate: false
           gridBlockDesktop:
             label: Abstand Blöcke 🖥️
             type: number
             width: 1/3
             placeholder: 16
             after: px
+            translate: false
 
   designFavicon:
     width: 1/1
@@ -92,6 +106,7 @@ columns:
             label: Favicon
             type: headline
             numbered: true
+            translate: false
           faviconFiles:
             type: entity
             label: Dateien
@@ -107,6 +122,7 @@ columns:
                   template: svg
                 multiple: false
                 width: 1/3
+                translate: false
               faviconFileIco:
                 label: ICO Datei
                 type: files
@@ -116,6 +132,7 @@ columns:
                   template: ico
                 multiple: false
                 width: 1/3
+                translate: false
               faviconFileGap:
                 type: gap
                 width: 1/3
@@ -132,6 +149,7 @@ columns:
                   template: png
                 multiple: false
                 width: 1/3
+                translate: false
               faviconFilePng2:
                 label: PNG Datei 512x512
                 type: files
@@ -145,6 +163,7 @@ columns:
                   template: png
                 multiple: false
                 width: 1/3
+                translate: false
               faviconFilePng3:
                 label: PNG Datei 180x180 Apple Touch Icon
                 type: files
@@ -158,6 +177,7 @@ columns:
                   template: png
                 multiple: false
                 width: 1/3
+                translate: false
               faviconInfo:
                 label: Info
                 type: info
@@ -172,11 +192,13 @@ columns:
             label: Header
             type: headline
             numbered: true
+            translate: false
           headerActive:
             label: Header anzeigen
             type: toggle
             default: true
             width: 1/6
+            translate: false
           headerLogo:
             type: entity
             label: Logo
@@ -194,6 +216,7 @@ columns:
                   template: svg
                 multiple: false
                 width: 2/6
+                translate: false
               logoAlign:
                 label: Ausrichtung
                 type: select
@@ -202,6 +225,7 @@ columns:
                   left: Links
                   center: Zentriert
                 width: 1/6
+                translate: false
               logoGap:
                 type: gap
                 width: 3/6
@@ -211,24 +235,28 @@ columns:
                 placeholder: 200
                 after: px
                 width: 1/6
+                translate: false
               logoMobileActive:
                 label: Breite Aktiv 📱
                 type: number
                 placeholder: 100
                 after: px
                 width: 1/6
+                translate: false
               logoDesktop:
                 label: Breite 🖥️
                 type: number
                 placeholder: 400
                 after: px
                 width: 1/6
+                translate: false
               logoDesktopActive:
                 label: Breite Aktiv 🖥️
                 type: number
                 placeholder: 200
                 after: px
                 width: 1/6
+                translate: false
           headerMenu:
             type: entity
             label: Menü
@@ -241,6 +269,7 @@ columns:
                 label: Schriftart
                 type: select
                 width: 1/6
+                translate: false
                 options:
                   type: query
                   query: site.fontFile.toStructure
@@ -250,6 +279,7 @@ columns:
                 label: Schriftgröße
                 type: select
                 width: 1/6
+                translate: false
                 options:
                   type: query
                   query: site.fontSize.toStructure
@@ -261,24 +291,28 @@ columns:
                 default: primary
                 extends: fields/colors
                 width: 1/6
+                translate: false
               headerColorActive:
                 label: Farbe Text Aktiv
                 type: select
                 default: primary
                 extends: fields/colors
                 width: 1/6
+                translate: false
               headerBackground:
                 label: Farbe Hintergrund
                 type: select
                 default: secondary
                 extends: fields/colors
                 width: 1/6
+                translate: false
               headerBackgroundActive:
                 label: Farbe Hintergrund Aktiv
                 type: select
                 default: secondary
                 extends: fields/colors
                 width: 1/6
+                translate: false
           headerHamburger:
             type: entity
             label: Hamburger
@@ -291,6 +325,7 @@ columns:
                 label: Schriftart
                 type: select
                 width: 1/6
+                translate: false
                 options:
                   type: query
                   query: site.fontFile.toStructure
@@ -300,6 +335,7 @@ columns:
                 label: Schriftgröße
                 type: select
                 width: 1/6
+                translate: false
                 options:
                   type: query
                   query: site.fontSize.toStructure
@@ -309,18 +345,21 @@ columns:
                 label: Farbe Text
                 type: select
                 width: 1/6
+                translate: false
                 default: primary
                 extends: fields/colors
               hamburgerMenuColor:
                 label: Farbe Menu
                 type: select
                 width: 1/6
+                translate: false
                 default: primary
                 extends: fields/colors
               hamburgerMenuColorActive:
                 label: Farbe Menu Aktiv
                 type: select
                 width: 1/6
+                translate: false
                 default: primary
                 extends: fields/colors
               hamburgerOverlay:
@@ -329,6 +368,7 @@ columns:
                 default: primary
                 extends: fields/colors
                 width: 1/6
+                translate: false
 
   designButton:
     width: 1/1
@@ -350,26 +390,31 @@ columns:
                 extends: fields/fontFile
                 required: false
                 width: 1/6
+                translate: false
               buttonFontSize:
                 extends: fields/fontSize
+                translate: false
               buttonBorderRadius:
                 label: Rand Rundung
                 type: number
                 placeholder: 0
                 after: px
                 width: 1/6
+                translate: false
               buttonBorderWidth:
                 label: Rand Strichstärke
                 type: number
                 placeholder: 0
                 after: px
                 width: 1/6
+                translate: false
               buttonPadding:
                 label: Abstand
                 type: number
                 placeholder: 10
                 width: 1/6
                 after: px
+                translate: false
           buttonColors:
             type: entity
             label: Farben
@@ -382,33 +427,39 @@ columns:
                 default: primary
                 extends: fields/colors
                 width: 1/6
+                translate: false
               buttonBackgroundColorActive:
                 label: Farbe Hintergrund Hover
                 type: select
                 default: primary
                 extends: fields/colors
                 width: 1/6
+                translate: false
               buttonTextColor:
                 label: Farbe Text
                 type: select
                 default: secondary
                 extends: fields/colors
                 width: 1/6
+                translate: false
               buttonTextColorActive:
                 label: Farbe Text Hover
                 type: select
                 default: secondary
                 extends: fields/colors
                 width: 1/6
+                translate: false
               buttonBorderColor:
                 label: Rand Farbe
                 type: select
                 default: primary
                 extends: fields/colors
                 width: 1/6
+                translate: false
               buttonBorderColorActive:
                 label: Rand Farbe Hover
                 type: select
                 default: primary
                 extends: fields/colors
                 width: 1/6
+                translate: false
