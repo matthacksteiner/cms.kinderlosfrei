@@ -157,15 +157,6 @@ return [
 
 					"navHeader" => $header,
 					"navHamburger" => $hambuger,
-					"company" => (string) $site->addressCompany(),
-					"street" => (string) $site->street(),
-					"zip" => (string) $site->zip(),
-					"city" => (string) $site->city(),
-					"country" => (string) $site->country(),
-					"phone" => (string) $site->phone(),
-					"email" => (string) $site->email(),
-					"register" => (string) $site->addressRegister(),
-					"court" => (string) $site->addressCourt(),
 
 					"colorPrimary" => (string) $site->colorPrimary(),
 					"colorSecondary" => (string) $site->colorSecondary(),
