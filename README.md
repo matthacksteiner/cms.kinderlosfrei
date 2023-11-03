@@ -47,6 +47,7 @@ source: https://matthias-andrasch.eu/2021/tutorial-webseite-mittels-github-actio
 ## 3. Hooks anlegen
 
 - Auf Netlify der Production Site unter Site Settings -> Build & Deploy -> Build Hooks einen neuen Hook erstellen.
+- Den Hook in der Datei `site/config/config.php` eintragen.
 - Unter settings/deploys#deploy-notifications zwei neue Outgoing webhooks erstellen:
   1. 'Deploy Succeeded' mit `https://cms.domain.de/webhook/netlify_deploy/success` als URL
   2. 'Deploy failed' mit `https://cms.domain.de/webhook/netlify_deploy/error` als URL
