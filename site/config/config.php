@@ -57,15 +57,25 @@ return [
 				$site = site();
 				$kirby = kirby();
 				// languages
-				$languages = [];
+				$translations = [];
+				$defaultLang = $kirby->defaultLanguage();
 				foreach ($kirby->languages() as $language) {
-					$languages[] = [
-						"code" => $language->code(),
-						"name" => $language->name(),
-						"url" => $language->url(),
-						"active" => $language->code() == $kirby->language()->code(),
-					];
+					if ($language->code() != $defaultLang->code()) {
+						$translations[] = [
+							"code" => $language->code(),
+							"name" => $language->name(),
+							"url" => $language->url(),
+							"active" => $language->code() == $kirby->language()->code(),
+						];
+					}
 				}
+				$defaultLang = [
+					"code" => $defaultLang->code(),
+					"name" => $defaultLang->name(),
+					"url" => $defaultLang->url(),
+					"active" => $defaultLang->code() == $kirby->language()->code(),
+				];
+
 
 				// favicon
 				$siteFavicon = $site->faviconFiles()->toEntity();
@@ -152,8 +162,9 @@ return [
 
 				return response::json([
 					'siteTitle' => (string) $site->title(),
+					"defaultLang" => $defaultLang,
+					"translations" => $translations,
 					"favicon" => $favicon,
-					"languages" => $languages,
 
 					"navHeader" => $header,
 					"navHamburger" => $hambuger,
