@@ -152,9 +152,11 @@ return [
 
 				return response::json([
 					'siteTitle' => (string) $site->title(),
+					"siteUrl" => (string) $site->url(),
 					"favicon" => $favicon,
 					"languages" => $languages,
 
+					"frontendUrl" => (string) $site->frontendUrl(),
 					"navHeader" => $header,
 					"navHamburger" => $hambuger,
 
