@@ -9,7 +9,7 @@ return [
 	'panel.install' => true,
 	'date.handler' => 'strftime',
 	'locale' => 'de_AT.utf-8',
-	'languages' => false,
+	'languages' => true,
 	'error' => 'z-error',
 	'frontendUrl' => 'www.foo.com',
 	'pju.webhook-field.hooks' => [
@@ -56,6 +56,7 @@ return [
 			'action' => function () {
 				$site = site();
 				$kirby = kirby();
+
 				// languages
 				$translations = [];
 				$defaultLang = $kirby->defaultLanguage();
@@ -68,6 +69,15 @@ return [
 							"active" => $language->code() == $kirby->language()->code(),
 						];
 					}
+				}
+				$allLang = [];
+				foreach ($kirby->languages() as $language) {
+					$allLang[] = [
+						"code" => $language->code(),
+						"name" => $language->name(),
+						"url" => $language->url(),
+						"active" => $language->code() == $kirby->language()->code(),
+					];
 				}
 				$defaultLang = [
 					"code" => $defaultLang->code(),
@@ -110,7 +120,6 @@ return [
 
 
 				// ---------- design ----------
-
 				// header
 				$logoFile = [];
 				if ($site->headerLogo()->toEntity()->logoFile()->isNotEmpty()) {
@@ -164,6 +173,7 @@ return [
 					'siteTitle' => (string) $site->title(),
 					"defaultLang" => $defaultLang,
 					"translations" => $translations,
+					"allLang" => $allLang,
 					"favicon" => $favicon,
 
 					"navHeader" => $header,
