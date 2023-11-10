@@ -27,7 +27,7 @@ return function ($site, $page, $kirby) {
 			"meta" => getMeta($site, $page, $kirby),
 			'intendedTemplate' => $page->intendedTemplate()->name(),
 			'title' => (string)$page->title(),
-			'language' => (string)kirby()->languageCode(),
+			'lang' => (string)kirby()->languageCode(),
 		]
 	];
 };

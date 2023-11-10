@@ -10,6 +10,7 @@ columns:
             type: structure
             help: Die Schriftdateien müssen im Format WOFF und WOFF2 vorliegen. Sie können auf https://transfonter.org/ mit den default Einstellungen generiert werden. Die Werte "sans" und "serif" sind nicht erlaubt.
             width: 1/2
+            translate: false
             fields:
               name:
                 label: Name
@@ -40,6 +41,7 @@ columns:
           fontSize:
             label: Schriftgrößen
             type: structure
+            translate: false
             width: 1/2
             fields:
               name:
@@ -89,47 +91,59 @@ columns:
                 extends: fields/fontFile
                 label: H1 Schriftart
                 width: 1/6
+                translate: false
               h1size:
                 extends: fields/fontSize
                 width: 1/6
                 label: H1 Größe
+                translate: false
               h2font:
                 extends: fields/fontFile
                 label: H2 Schriftart
                 width: 1/6
+                translate: false
               h2size:
                 extends: fields/fontSize
                 label: H2 Größe
                 width: 1/6
+                translate: false
               h3font:
                 extends: fields/fontFile
                 label: H3 Schriftart
                 width: 1/6
+                translate: false
               h3size:
                 extends: fields/fontSize
                 label: H3 Größe
                 width: 1/6
+                translate: false
               h4font:
                 extends: fields/fontFile
                 label: H4 Schriftart
                 width: 1/6
+                translate: false
               h4size:
                 extends: fields/fontSize
                 label: H4 Größe
                 width: 1/6
+                translate: false
               h5font:
                 extends: fields/fontFile
                 label: H5 Schriftart
                 width: 1/6
+                translate: false
               h5size:
                 extends: fields/fontSize
                 label: H5 Größe
                 width: 1/6
+                translate: false
               h6font:
                 extends: fields/fontFile
                 label: H6 Schriftart
                 width: 1/6
+                translate: false
               h6size:
                 extends: fields/fontSize
                 label: H6 Größe
                 width: 1/6
+                translate: false

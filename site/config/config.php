@@ -9,7 +9,7 @@ return [
 	'panel.install' => true,
 	'date.handler' => 'strftime',
 	'locale' => 'de_AT.utf-8',
-	'languages' => false,
+	'languages' => true,
 	'error' => 'z-error',
 	'frontendUrl' => 'www.foo.com',
 	'pju.webhook-field.hooks' => [
@@ -56,16 +56,36 @@ return [
 			'action' => function () {
 				$site = site();
 				$kirby = kirby();
+
 				// languages
-				$languages = [];
+				$translations = [];
+				$defaultLang = $kirby->defaultLanguage();
 				foreach ($kirby->languages() as $language) {
-					$languages[] = [
+					if ($language->code() != $defaultLang->code()) {
+						$translations[] = [
+							"code" => $language->code(),
+							"name" => $language->name(),
+							"url" => $language->url(),
+							"active" => $language->code() == $kirby->language()->code(),
+						];
+					}
+				}
+				$allLang = [];
+				foreach ($kirby->languages() as $language) {
+					$allLang[] = [
 						"code" => $language->code(),
 						"name" => $language->name(),
 						"url" => $language->url(),
 						"active" => $language->code() == $kirby->language()->code(),
 					];
 				}
+				$defaultLang = [
+					"code" => $defaultLang->code(),
+					"name" => $defaultLang->name(),
+					"url" => $defaultLang->url(),
+					"active" => $defaultLang->code() == $kirby->language()->code(),
+				];
+
 
 				// favicon
 				$siteFavicon = $site->faviconFiles()->toEntity();
@@ -100,7 +120,6 @@ return [
 
 
 				// ---------- design ----------
-
 				// header
 				$logoFile = [];
 				if ($site->headerLogo()->toEntity()->logoFile()->isNotEmpty()) {
@@ -151,10 +170,12 @@ return [
 				}
 
 				return response::json([
-					'siteTitle' => (string) $site->title(),
 					"siteUrl" => (string) $site->url(),
+					'siteTitle' => (string) $site->title(),
+					"defaultLang" => $defaultLang,
+					"translations" => $translations,
+					"allLang" => $allLang,
 					"favicon" => $favicon,
-					"languages" => $languages,
 
 					"frontendUrl" => (string) $site->frontendUrl(),
 					"navHeader" => $header,
