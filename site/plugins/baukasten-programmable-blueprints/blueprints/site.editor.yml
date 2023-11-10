@@ -52,7 +52,7 @@ tabs:
                 required: false
                 translate: false
                 help: >
-                  Die URL der Webseite. Diese wird für alle OG Tags und Links verwendet. Konfiguration üner die deutschen Seite.
+                  Die URL der Webseite. Diese wird für alle OG Tags und Links verwendet. Konfiguration über die deutschen Seite.
           deploy:
             type: fields
             fields:
