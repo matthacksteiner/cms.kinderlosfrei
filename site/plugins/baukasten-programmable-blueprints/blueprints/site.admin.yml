@@ -50,6 +50,7 @@ tabs:
                 placeholder: https://baukasten.netlify.app
                 type: url
                 required: false
+                translate: false
                 help: >
                   Die URL der Webseite. Diese wird für alle OG Tags und Links verwendet.
           deploy:
