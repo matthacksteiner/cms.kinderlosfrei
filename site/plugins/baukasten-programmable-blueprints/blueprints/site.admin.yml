@@ -42,12 +42,22 @@ tabs:
             create: false
             templates:
               - error
+          frontend:
+            type: fields
+            fields:
+              frontendURL:
+                label: Frontend URL
+                placeholder: https://baukasten.netlify.app
+                type: url
+                required: false
+                help: >
+                  Die URL der Webseite. Diese wird für alle OG Tags und Links verwendet.
           deploy:
             type: fields
             fields:
               deploy:
                 type: webhook
-                label: Deploy on Netlify
+                label: Deploy
               deployInfo:
                 label: false
                 type: info

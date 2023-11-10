@@ -1,20 +1,4 @@
 columns:
-  settingsURL:
-    width: 1/1
-    sections:
-      frontend:
-        type: fields
-        fields:
-          frontendHeadline:
-            label: Frontend
-            type: headline
-            numbered: false
-          frontendURL:
-            label: Frontend URL
-            type: url
-            required: false
-            placeholder: https://baukasten.netlify.app
-
   settingsNav:
     width: 1/1
     sections:
