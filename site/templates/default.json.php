@@ -213,12 +213,20 @@ function getBlockArray(\Kirby\Cms\Block $block)
     case "video":
       $blockArray['content'] = $block->toArray()['content'];
       $video = null;
+      $thumb = null;
       if ($file1 = $block->file()->toFile()) {
         $video = [
           'url' => $file1->url(),
           'alt' => (string)$file1->alt(),
         ];
       }
+      if ($file2 = $block->thumbnail()->toFile()) {
+        $thumb = [
+          'url' => $file2->url(),
+          'alt' => (string)$file2->alt(),
+        ];
+      }
+      $blockArray['content']['thumbnail'] = $thumb;
       $blockArray['content']['file'] = $video;
       break;
 
