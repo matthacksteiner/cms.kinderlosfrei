@@ -11,7 +11,6 @@ return [
 	'locale' => 'de_AT.utf-8',
 	'languages' => true,
 	'error' => 'z-error',
-	'frontendUrl' => 'www.foo.com',
 	'pju.webhook-field.hooks' => [
 		'netlify_deploy' => [
 			'url' => 'https://api.netlify.com/build_hooks/65142ee2a2de9b24080dcc95',
