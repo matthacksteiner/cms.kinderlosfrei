@@ -1,0 +1,360 @@
+Title: Baukasten
+
+----
+
+Frontendurl: 
+
+----
+
+Navheader: 
+
+----
+
+Navhambuger: 
+
+----
+
+Layoutfooter: 
+
+----
+
+Fontfile: 
+
+----
+
+Fontsize:
+
+- 
+  name: base
+  sizemobile: 16
+  lineheightmobile: 24
+  sizedesktop: 16
+  lineheightdesktop: 24
+- 
+  name: H1
+  sizemobile: 32
+  lineheightmobile: 40
+  sizedesktop: 48
+  lineheightdesktop: 56
+- 
+  name: H2
+  sizemobile: 28
+  lineheightmobile: 36
+  sizedesktop: 36
+  lineheightdesktop: 44
+- 
+  name: H3
+  sizemobile: 24
+  lineheightmobile: 32
+  sizedesktop: 30
+  lineheightdesktop: 38
+- 
+  name: H4
+  sizemobile: 20
+  lineheightmobile: 28
+  sizedesktop: 24
+  lineheightdesktop: 32
+- 
+  name: H5
+  sizemobile: 18
+  lineheightmobile: 24
+  sizedesktop: 20
+  lineheightdesktop: 28
+- 
+  name: H6
+  sizemobile: 16
+  lineheightmobile: 20
+  sizedesktop: 16
+  lineheightdesktop: 24
+
+----
+
+Headlines:
+
+h1size: H1
+h2size: H2
+h3size: H3
+h4size: H4
+h5size: H5
+h6size: H6
+h1color: black
+h1align: left
+h2color: black
+h2align: left
+h3color: black
+h3align: left
+h4color: black
+h4align: left
+h5color: black
+h5align: left
+h6color: black
+h6align: left
+
+----
+
+Colorprimary: #45ec68
+
+----
+
+Colorsecondary: #4b0082
+
+----
+
+Colortertiary: #da3434
+
+----
+
+Colorblack: #000000
+
+----
+
+Colorwhite: #ffffff
+
+----
+
+Colorbackground: white
+
+----
+
+Gridgapmobile: 20
+
+----
+
+Gridmarginmobile: 20
+
+----
+
+Gridgapdesktop: 40
+
+----
+
+Gridmargindesktop: 40
+
+----
+
+Gridblockmobile: 16
+
+----
+
+Gridblockdesktop: 16
+
+----
+
+Headeractive: true
+
+----
+
+Headerlogo:
+
+logoalign: left
+logomobile: 200
+logomobileactive: 100
+logodesktop: 400
+logodesktopactive: 200
+
+----
+
+Headermenu:
+
+headerfontsize: H4
+headercolor: primary
+headercoloractive: black
+headerbackground: transparent
+headerbackgroundactive: white
+
+----
+
+Headerhamburger:
+
+hamburgerfontsize: H4
+hamburgerfontcolor: white
+hamburgermenucolor: black
+hamburgermenucoloractive: black
+hamburgeroverlay: primary
+
+----
+
+Buttonsettings:
+
+buttonfontsize: base
+buttonborderwidth: 1
+buttonpadding: 10
+
+----
+
+Buttoncolors:
+
+buttonbackgroundcolor: secondary
+buttonbackgroundcoloractive: primary
+buttontextcolor: primary
+buttontextcoloractive: black
+buttonbordercolor: secondary
+buttonbordercoloractive: secondary
+
+----
+
+Meta-description: Die globale Beschreibung wird als Standard für alle Unterseiten verwendet, die keine eigene Beschreibung haben.
+
+----
+
+Meta-title-separator: 
+
+----
+
+Meta-website-owner: 
+
+----
+
+Meta-org-name: 
+
+----
+
+Meta-org-logo: 
+
+----
+
+Meta-person: 
+
+----
+
+Og-site-name: 
+
+----
+
+Og-image: 
+
+----
+
+Robots-index: 
+
+----
+
+Robots-follow: 
+
+----
+
+Robots-archive: 
+
+----
+
+Robots-imageindex: 
+
+----
+
+Robots-snippet: 
+
+----
+
+Meta-title: 
+
+----
+
+Meta-canonical-url: 
+
+----
+
+Meta-author: 
+
+----
+
+Meta-image: 
+
+----
+
+Meta-phone-number: 
+
+----
+
+Og-title: 
+
+----
+
+Og-description: 
+
+----
+
+Og-url: 
+
+----
+
+Og-audio: 
+
+----
+
+Og-video: 
+
+----
+
+Og-determiner: 
+
+----
+
+Og-type: 
+
+----
+
+Og-type-article-published-time: 
+
+----
+
+Og-type-article-modified-time: 
+
+----
+
+Og-type-article-expiration-time: 
+
+----
+
+Og-type-article-author: 
+
+----
+
+Og-type-article-section: 
+
+----
+
+Og-type-article-tag: 
+
+----
+
+Twitter-title: 
+
+----
+
+Twitter-description: 
+
+----
+
+Twitter-image: 
+
+----
+
+Twitter-card-type: 
+
+----
+
+Twitter-site: 
+
+----
+
+Twitter-creator: 
+
+----
+
+Robots-noindex: 
+
+----
+
+Robots-nofollow: 
+
+----
+
+Robots-noarchive: 
+
+----
+
+Robots-noimageindex: 
+
+----
+
+Robots-nosnippet: 
