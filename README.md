@@ -29,7 +29,7 @@ Template: https://github.com/matthacksteiner/cms.baukasten
 
 1. Auf lokalen Rechner den ssh key erzeugen `ssh-keygen -f neuerKeyFuerGithub -t ed25519 -a 100` - Passwort leer lassen.
 2. Im neuen Repo unter Settings -> Secrets and variables für Actions 4 Secrets anlegen:
-   1. `UBERSPACE_HOST` mit dem Hostnamen des Servers (z.B. laterna.uberspace.de)
+   1. `UBERSPACE_HOST` mit dem Hostnamen des Servers (z.B. lactera.uberspace.de)
    2. `UBERSPACE_USER` mit dem Benutzernamen des Servers (z.B. fifth)
    3. `DEPLOY_KEY_PRIVATE` mit dem privaten SSH Key (Inhalt der Datei neuerKeyFuerGithub - ohne .pub)
    4. `UBERSPACE_PATH` mit dem Pfad zum Verzeichnis auf dem Server (z.B. cms.baukasten.matthiashacksteiner.net)
