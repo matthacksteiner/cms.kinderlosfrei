@@ -68,7 +68,7 @@ tabs:
         type: checkboxes
         label: Optionen
         width: 1/1
-        columns: 4
+        columns: 5
         default:
           - autoplay
           - loop
@@ -78,6 +78,7 @@ tabs:
           loop: Loop
           muted: Stumm
           controls: Steuerung
+          full: Vollbild
         help: "Auotplay deaktiviert den Ton bei der Wiedergabe."
       textHeadline:
         label: Text
