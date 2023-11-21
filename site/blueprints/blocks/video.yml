@@ -79,3 +79,55 @@ tabs:
           muted: Stumm
           controls: Steuerung
         help: "Auotplay deaktiviert den Ton bei der Wiedergabe."
+      textHeadline:
+        label: Text
+        type: headline
+        numbered: false
+      toggle:
+        label: Text?
+        type: toggle
+        default: false
+        width: 1/6
+      level:
+        label: field.blocks.heading.level
+        type: select
+        empty: false
+        default: "h2"
+        width: 1/6
+        options:
+          - h1
+          - h2
+          - h3
+          - h4
+          - h5
+          - h6
+        when:
+          toggle: true
+      caption:
+        label: Title
+        type: text
+        width: 4/6
+        when:
+          toggle: true
+      captionOptions:
+        label: Text Optionen
+        extends: groups/textGroup
+        fields:
+          textFont:
+            extends: fields/fontFile
+            when:
+              toggle: true
+          textSize:
+            extends: fields/fontSize
+            when:
+              toggle: true
+          textColor:
+            extends: fields/fontColor
+            when:
+              toggle: true
+          textAlign:
+            extends: fields/fontAlign
+            fields:
+              default: center
+            when:
+              toggle: true
