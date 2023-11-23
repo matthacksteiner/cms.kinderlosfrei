@@ -10,7 +10,8 @@
 		"fabianmichael/kirby-meta": "^0.4.1@beta",
 		"hananils/kirby-colors": "^1.7",
 		"pju/kirby-webhook-field": "^1.1",
-		"oblik/kirby-entity-field": "^2.0"
+		"oblik/kirby-entity-field": "^2.0",
+		"microman/kirby-column-blocks": "^1.0"
 	},
 	"config": {
 		"allow-plugins": {

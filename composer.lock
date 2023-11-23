@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a838a8f65355e0bab1bfdc73f1ee1102",
+    "content-hash": "970b84d09564a6c71a58bde56ee15368",
     "packages": [
         {
             "name": "claviska/simpleimage",
@@ -731,6 +731,41 @@
                 "source": "https://github.com/michelf/php-smartypants/tree/1.8.1"
             },
             "time": "2016-12-13T01:01:17+00:00"
+        },
+        {
+            "name": "microman/kirby-column-blocks",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/youngcut/kirby-column-blocks.git",
+                "reference": "6bbbdebf6c252feb32c4874257503ac5ec4e10a2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/youngcut/kirby-column-blocks/zipball/6bbbdebf6c252feb32c4874257503ac5ec4e10a2",
+                "reference": "6bbbdebf6c252feb32c4874257503ac5ec4e10a2",
+                "shasum": ""
+            },
+            "require": {
+                "getkirby/composer-installer": "^1.2"
+            },
+            "type": "kirby-plugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roman Gsponer",
+                    "email": "mail@microman.ch"
+                }
+            ],
+            "description": "Use columns in block fields based on the layout field.",
+            "support": {
+                "issues": "https://github.com/youngcut/kirby-column-blocks/issues",
+                "source": "https://github.com/youngcut/kirby-column-blocks/tree/1.0.2"
+            },
+            "time": "2023-01-28T21:24:44+00:00"
         },
         {
             "name": "oblik/kirby-entity-field",
