@@ -134,6 +134,49 @@ function getBlockArray(\Kirby\Cms\Block $block)
       }
       break;
 
+    case 'grid':
+      $grids = [];
+      foreach ($block->grid()->toLayouts() as $layout) {
+        $columns = [];
+
+        foreach ($layout->columns() as $column) {
+          $columnArray = [
+            "id" => $column->id(),
+            "width" => $column->width(),
+            "span" => $column->span(),
+            "blocks" => []
+          ];
+
+          $blocks = $column->blocks();
+
+          foreach ($blocks as $block) {
+            $blockData = getBlockArray($block);
+
+            if (!$blockData) {
+              continue;
+            }
+
+            $columnArray['blocks'][] = $blockData;
+          }
+
+          $columns[] = $columnArray;
+        }
+
+        $grids[] = [
+          "id" => $layout->id(),
+          "type" => 'grid',
+          "content" => [
+            "grids" => [
+              "id" => $layout->id(),
+              "columns" => $columns,
+            ]
+          ],
+        ];
+      }
+
+      return $grids;
+
+      break;
     case 'image':
       $blockArray['content'] = $block->toArray()['content'];
 
