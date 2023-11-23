@@ -2,7 +2,6 @@
 .idea
 .run
 .vscode/sftp.json
-composer.lock
 
 /content
 
