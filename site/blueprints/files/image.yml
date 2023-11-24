@@ -63,6 +63,11 @@ tabs:
               default: center
             when:
               toggle: true
+          captionAlign:
+            extends: fields/captionAlign
+            when:
+              toggle: true
+
       controls:
         label: Optionen
         type: checkboxes

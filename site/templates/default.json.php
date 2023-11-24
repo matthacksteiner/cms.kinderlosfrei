@@ -251,6 +251,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
           'filetextcolor' => $file->textcolor()->value(),
           'filetextalign' => $file->textalign()->value(),
           'fileoverlay' => $file->controls()->value(),
+          'captionalign' => $file->captionalign()->value(),
         ];
       }
       $blockArray['content']['images'] = $images;

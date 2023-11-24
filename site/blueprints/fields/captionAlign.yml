@@ -1,0 +1,7 @@
+label: Ausrichtung Untertitel
+type: select
+default: center
+width: 2/6
+options:
+  center: Zentriert
+  bottom: Unten
