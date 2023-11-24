@@ -11,7 +11,8 @@
 		"hananils/kirby-colors": "^1.7",
 		"pju/kirby-webhook-field": "^1.1",
 		"oblik/kirby-entity-field": "^2.0",
-		"microman/kirby-column-blocks": "^1.0"
+		"microman/kirby-column-blocks": "^1.0",
+		"microman/kirby-grid-blocks": "^1.0"
 	},
 	"config": {
 		"allow-plugins": {

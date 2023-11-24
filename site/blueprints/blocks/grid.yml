@@ -1,0 +1,50 @@
+name: Grid
+icon: grid
+fields:
+  title:
+    type: text
+  grid:
+    type: layout
+    when:
+      - false
+    layouts:
+      - "1/1"
+      - "1/2, 1/2"
+      - "1/3, 1/3, 1/3"
+      - "1/4, 1/4, 1/4, 1/4"
+    fieldsets:
+      text:
+        label: Text
+        type: group
+        fieldsets:
+          title: blocks/heading
+          text: blocks/text
+      media:
+        label: Medien
+        type: group
+        fieldsets:
+          image:
+            extends: blocks/image
+          slider:
+            extends: blocks/slider
+            name: Slider
+          vector:
+            extends: blocks/vector
+            name: Vektor
+          video:
+            extends: blocks/video
+      elements:
+        label: Elemente
+        type: group
+        fieldsets:
+          button: blocks/button
+          accordion: blocks/accordion
+          iconlist: blocks/iconlist
+          menu: blocks/menu
+      tools:
+        label: Werkzeuge
+        type: group
+        open: true
+        fieldsets:
+          divider: blocks/divider
+          line: blocks/line
