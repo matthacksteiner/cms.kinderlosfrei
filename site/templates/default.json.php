@@ -135,7 +135,8 @@ function getBlockArray(\Kirby\Cms\Block $block)
       break;
 
     case 'grid':
-      $grids = [];
+      $allGrids = [];
+
       foreach ($block->grid()->toLayouts() as $layout) {
         $columns = [];
 
@@ -162,19 +163,21 @@ function getBlockArray(\Kirby\Cms\Block $block)
           $columns[] = $columnArray;
         }
 
-        $grids[] = [
+        $allGrids[] = [
           "id" => $layout->id(),
-          "type" => 'grid',
-          "content" => [
-            "grids" => [
-              "id" => $layout->id(),
-              "columns" => $columns,
-            ]
-          ],
+          "columns" => $columns,
         ];
       }
 
-      return $grids;
+      $output = [
+        "id" => $block->id(),
+        "type" => 'grid',
+        "content" => [
+          "grid" => $allGrids,
+        ],
+      ];
+
+      return $output;
 
       break;
     case 'image':
