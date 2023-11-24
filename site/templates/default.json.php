@@ -243,6 +243,14 @@ function getBlockArray(\Kirby\Cms\Block $block)
           'alt' => (string)$image->alt(),
           'focusX' => json_decode($file->focusPercentageX()),
           'focusY' => json_decode($file->focusPercentageY()),
+          'filetoggle' => $file->toggle()->toBool(false),
+          'filelevel' => $file->level()->value(),
+          'filecaption' => $file->caption()->value(),
+          'filetextfont' => $file->textfont()->value(),
+          'filetextsize' => $file->textsize()->value(),
+          'filetextcolor' => $file->textcolor()->value(),
+          'filetextalign' => $file->textalign()->value(),
+          'fileoverlay' => $file->controls()->value(),
         ];
       }
       $blockArray['content']['images'] = $images;

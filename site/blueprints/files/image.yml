@@ -1,11 +1,74 @@
 Title: Bild
 accept: image/jpeg, image/png, image/webp, image/svg+xml
 
-fields:
-  alt:
-    type: text
-    label: Alternativ Text
-    width: 2/3
-  focus:
-    label: Fokus
-    type: focus
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      alt:
+        type: text
+        label: Alternativ Text
+        width: 2/3
+      focus:
+        label: Fokus
+        type: focus
+  settings:
+    label: Einstellungen
+    fields:
+      toggle:
+        label: Text?
+        type: toggle
+        default: false
+        width: 1/6
+      level:
+        label: field.blocks.heading.level
+        type: select
+        empty: false
+        default: "h2"
+        width: 1/6
+        options:
+          - h1
+          - h2
+          - h3
+          - h4
+          - h5
+          - h6
+        when:
+          toggle: true
+      caption:
+        label: Title
+        type: text
+        width: 4/6
+        when:
+          toggle: true
+      captionOptions:
+        label: Text Optionen
+        extends: groups/textGroup
+        fields:
+          textFont:
+            extends: fields/fontFile
+            when:
+              toggle: true
+          textSize:
+            extends: fields/fontSize
+            when:
+              toggle: true
+          textColor:
+            extends: fields/fontColor
+            when:
+              toggle: true
+          textAlign:
+            extends: fields/fontAlign
+            fields:
+              default: center
+            when:
+              toggle: true
+      controls:
+        label: Optionen
+        type: checkboxes
+        width: 1/4
+        when:
+          toggle: true
+        columns: 1
+        options:
+          overlay: Overlay
