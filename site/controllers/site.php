@@ -4,21 +4,52 @@ use Kirby\Toolkit\Config;
 
 function getMeta($site, $page, $kirby)
 {
-	$meta = $page->meta();
+    $pageMeta = $page->meta();
+	$owner = $site->meta_website_owner()->toString();
+    $ownerId = url('/#owner');
 
-	$json = [
-		"title" => (string)$meta->title()->html(),
-		"description" => $meta->description()->isNotEmpty() ? (string)$meta->description()->html() : null,
-		"robots" => $meta->robots(),
-		"canonical" => $meta->canonicalUrl(),
-		"social" => [],
-	];
+    $json = [
+        "title" => (string)$pageMeta->title()->html(),
+        "description" => $pageMeta->description()->isNotEmpty() ? (string)$pageMeta->description()->html() : null,
+        "robots" => $pageMeta->robots(),
+        "canonical" => $pageMeta->canonicalUrl(),
+        "separators" => (string)$site->meta_title_separator(),
+        "social" => [],
+    ];
 
-	foreach ($meta->social() as $tag) {
-		$json["social"][$tag["property"]] = $tag["content"];
-	}
+    foreach ($pageMeta->social() as $tag) {
+        $json["social"][$tag["property"]] = $tag["content"];
+    }
 
-	return $json;
+    if ($owner === 'org') {
+        $org = [
+            '@type' => 'Organization',
+            '@id'   => $ownerId,
+            'name'  => $site->meta_org_name()->toString(),
+            'url'   => $site->url(),
+        ];
+
+        if ($logo = $site->meta_org_logo()->toFile()) {
+            $org['logo'] = $logo->url();
+        }
+
+        $json['org'] = $org;
+    } elseif ($owner === 'person' && ($user = $site->meta_person()->toUser())) {
+        $person = [
+            '@type' => 'Person',
+            '@id'   => $ownerId,
+            'name' => $user->name()->toString(),
+            'email' => $user->email(),
+        ];
+
+        if ($avatar = $user->avatar()) {
+            $person['image'] = $avatar->url();
+        }
+
+        $json['person'] = $person;
+    }
+
+    return $json;
 }
 
 return function ($site, $page, $kirby) {
