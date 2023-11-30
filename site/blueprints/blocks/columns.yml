@@ -51,3 +51,4 @@ fields:
         fieldsets:
           divider: blocks/divider
           line: blocks/line
+          grid: blocks/grid
