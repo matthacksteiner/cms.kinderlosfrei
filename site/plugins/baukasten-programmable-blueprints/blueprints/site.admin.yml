@@ -40,8 +40,11 @@ tabs:
             size: small
             image: icon
             create: false
+            help: >
+              Konfiguration über die deutschen Seite.
             templates:
               - error
+
           frontend:
             type: fields
             fields:

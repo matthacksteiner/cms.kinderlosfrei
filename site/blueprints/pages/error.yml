@@ -9,6 +9,12 @@ options:
   listed: false
 
 tabs:
-  content: tabs/blocks
+  content:
+    extends: tabs/blocks
+    fields:
+      layout:
+        translate: false
+        help: >
+          Konfiguration über die deutschen Seite.
   media: tabs/media
   meta: tabs/meta/site

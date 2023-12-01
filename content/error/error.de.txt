@@ -1,136 +1,176 @@
-Title: Error DE
+Title: Error
 
 ----
 
-Layout: [{"attrs":{"anchor":"","backgroundcontainer":"container","backgroundcontainercolor":"transparent","backgroundcolor":"transparent","backgroundalignvertical":"normal","backgroundalignhorizontal":"normal","backgroundheight":"auto","spacingmobiletop":"0","spacingmobilebottom":"0","spacingdesktoptop":"0","spacingdesktopbottom":"0"},"columns":[{"blocks":[{"content":{"text":"<p>Oooopss. Leider konnte diese Seite nicht gefunden werden....</p>","controls":"","arrowcolor":"black","arrowsize":"","textfont":"","textsize":"","textcolor":"black","textalign":"left"},"id":"22a7e0e6-a21f-4d71-bf3e-e939e6ea24ce","isHidden":false,"type":"text"}],"id":"14b41525-dc61-4076-ae73-01781aacbb57","width":"1/1"}],"id":"5f5a90f7-35f6-48df-8123-8a6ecb501601"}]
+Layout: [{"attrs":{"anchor":"","backgroundcontainer":"container","backgroundpadding":"","backgroundcontainercolor":"transparent","backgroundcolor":"transparent","backgroundalignvertical":"normal","backgroundalignitemsvertical":"","backgroundalignhorizontal":"normal","backgroundheight":"auto","backgroundarrow":"false","backgroundarrowcolor":"","backgroundarrowsize":"","spacingmobiletop":"0","spacingmobilebottom":"0","spacingdesktoptop":"0","spacingdesktopbottom":"0"},"columns":[{"blocks":[{"content":{"text":"<p>Oooopss. Leider konnte diese Seite nicht gefunden werden....</p><p>Sorry. not heere</p>","textfont":"","textsize":"","textcolor":"black","textalign":"left"},"id":"22a7e0e6-a21f-4d71-bf3e-e939e6ea24ce","isHidden":false,"type":"text"}],"id":"14b41525-dc61-4076-ae73-01781aacbb57","width":"1/1"}],"id":"5f5a90f7-35f6-48df-8123-8a6ecb501601"}]
 
 ----
 
-Meta-title:
+Meta-description: 
 
 ----
 
-Meta-description:
+Meta-title-separator: 
 
 ----
 
-Meta-canonical-url:
+Meta-website-owner: 
 
 ----
 
-Meta-author:
+Meta-org-name: 
 
 ----
 
-Meta-image:
+Meta-org-logo: 
 
 ----
 
-Meta-phone-number:
+Meta-person: 
 
 ----
 
-Og-title:
+Og-site-name: 
 
 ----
 
-Og-description:
+Og-image: 
 
 ----
 
-Og-image:
+Robots-index: 
 
 ----
 
-Og-site-name:
+Robots-follow: 
 
 ----
 
-Og-url:
+Robots-archive: 
 
 ----
 
-Og-audio:
+Robots-imageindex: 
 
 ----
 
-Og-video:
+Robots-snippet: 
 
 ----
 
-Og-determiner:
+Meta-title: 
 
 ----
 
-Og-type:
+Meta-canonical-url: 
 
 ----
 
-Og-type-article-published-time:
+Meta-author: 
 
 ----
 
-Og-type-article-modified-time:
+Meta-image: 
 
 ----
 
-Og-type-article-expiration-time:
+Meta-phone-number: 
 
 ----
 
-Og-type-article-author:
+Og-title: 
 
 ----
 
-Og-type-article-section:
+Og-description: 
 
 ----
 
-Og-type-article-tag:
+Og-url: 
 
 ----
 
-Twitter-title:
+Og-audio: 
 
 ----
 
-Twitter-description:
+Og-video: 
 
 ----
 
-Twitter-image:
+Og-determiner: 
 
 ----
 
-Twitter-card-type:
+Og-type: 
 
 ----
 
-Twitter-site:
+Og-type-article-published-time: 
 
 ----
 
-Twitter-creator:
+Og-type-article-modified-time: 
 
 ----
 
-Robots-noindex:
+Og-type-article-expiration-time: 
 
 ----
 
-Robots-nofollow:
+Og-type-article-author: 
 
 ----
 
-Robots-noarchive:
+Og-type-article-section: 
 
 ----
 
-Robots-noimageindex:
+Og-type-article-tag: 
 
 ----
 
-Robots-nosnippet:
+Twitter-title: 
+
+----
+
+Twitter-description: 
+
+----
+
+Twitter-image: 
+
+----
+
+Twitter-card-type: 
+
+----
+
+Twitter-site: 
+
+----
+
+Twitter-creator: 
+
+----
+
+Robots-noindex: 
+
+----
+
+Robots-nofollow: 
+
+----
+
+Robots-noarchive: 
+
+----
+
+Robots-noimageindex: 
+
+----
+
+Robots-nosnippet: 
 
 ----
 
