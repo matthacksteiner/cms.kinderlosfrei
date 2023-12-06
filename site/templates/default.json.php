@@ -187,13 +187,33 @@ function getBlockArray(\Kirby\Cms\Block $block)
       if ($file1 = $block->image()->toFile()) {
         $image = $file1;
 
+        $ratioMobile = explode('/', $block->ratioMobile()->value());
+        $ratio = explode('/', $block->ratio()->value());
+
+        $calculateHeight = function ($width, $ratio) {
+          return isset($ratio[1]) ? round(($width / $ratio[0]) * $ratio[1]) : $width;
+        };
+
+        $generateSrcset = function ($widths, $ratio) use ($image, $calculateHeight) {
+          $srcset = [];
+          foreach ($widths as $width) {
+            $srcset["{$width}w"] = [
+              'width' => $width,
+              'height' => $calculateHeight($width, $ratio),
+              'format' => 'webp',
+              'quality' => 80,
+            ];
+          }
+          return $image->focusSrcset($srcset);
+        };
+
         $image = [
           'url' => $image->url(),
+          'srcsetMobile' => $generateSrcset([335, 670], $ratioMobile),
+          'srcset' => $generateSrcset([430, 900], $ratio),
           'width' => $image->width(),
           'height' => $image->height(),
           'alt' => (string)$image->alt(),
-          'focusX' => json_decode($file1->focusPercentageX()),
-          'focusY' => json_decode($file1->focusPercentageY()),
           'filetoggle' => $file1->toggle()->toBool(false),
           'filelevel' => $file1->level()->value(),
           'filecaption' => $file1->caption()->value(),
@@ -245,13 +265,34 @@ function getBlockArray(\Kirby\Cms\Block $block)
 
       foreach ($block->images()->toFiles() as $file) {
         $image = $file;
+
+        $ratioMobile = explode('/', $block->ratioMobile()->value());
+        $ratio = explode('/', $block->ratio()->value());
+
+        $calculateHeight = function ($width, $ratio) {
+          return isset($ratio[1]) ? round(($width / $ratio[0]) * $ratio[1]) : $width;
+        };
+
+        $generateSrcset = function ($widths, $ratio) use ($image, $calculateHeight) {
+          $srcset = [];
+          foreach ($widths as $width) {
+            $srcset["{$width}w"] = [
+              'width' => $width,
+              'height' => $calculateHeight($width, $ratio),
+              'format' => 'webp',
+              'quality' => 80,
+            ];
+          }
+          return $image->focusSrcset($srcset);
+        };
+
         $images[] = [
           'url' => $image->url(),
+          'srcsetMobile' => $generateSrcset([335, 670], $ratioMobile),
+          'srcset' => $generateSrcset([430, 900], $ratio),
           'width' => $image->width(),
           'height' => $image->height(),
           'alt' => (string)$image->alt(),
-          'focusX' => json_decode($file->focusPercentageX()),
-          'focusY' => json_decode($file->focusPercentageY()),
           'filetoggle' => $file->toggle()->toBool(false),
           'filelevel' => $file->level()->value(),
           'filecaption' => $file->caption()->value(),
