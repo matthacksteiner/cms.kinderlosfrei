@@ -209,8 +209,8 @@ function getBlockArray(\Kirby\Cms\Block $block)
 
         $image = [
           'url' => $image->url(),
-          'srcsetMobile' => $generateSrcset([335, 670], $ratioMobile),
-          'srcset' => $generateSrcset([430, 900], $ratio),
+          'srcsetMobile' => $generateSrcset([335, 670, 1005, 1340], $ratioMobile),
+          'srcset' => $generateSrcset([430, 900, 1340, 1840], $ratio),
           'width' => $image->width(),
           'height' => $image->height(),
           'alt' => (string)$image->alt(),
@@ -288,8 +288,8 @@ function getBlockArray(\Kirby\Cms\Block $block)
 
         $images[] = [
           'url' => $image->url(),
-          'srcsetMobile' => $generateSrcset([335, 670], $ratioMobile),
-          'srcset' => $generateSrcset([430, 900], $ratio),
+          'srcsetMobile' => $generateSrcset([335, 670, 1005, 1340], $ratioMobile),
+          'srcset' => $generateSrcset([430, 900, 1340, 1840], $ratio),
           'width' => $image->width(),
           'height' => $image->height(),
           'alt' => (string)$image->alt(),
