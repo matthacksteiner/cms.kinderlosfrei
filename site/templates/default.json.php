@@ -194,7 +194,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
           return isset($ratio[1]) ? round(($width / $ratio[0]) * $ratio[1]) : $width;
         };
 
-        $generateSrcset = function ($widths, $ratio) use ($image, $calculateHeight) {
+        $generateSrcsetAvif = function ($widths, $ratio) use ($image, $calculateHeight) {
           $srcset = [];
           foreach ($widths as $width) {
             $srcset["{$width}w"] = [
@@ -206,11 +206,25 @@ function getBlockArray(\Kirby\Cms\Block $block)
           }
           return $image->focusSrcset($srcset);
         };
+        $generateSrcsetWebp = function ($widths, $ratio) use ($image, $calculateHeight) {
+          $srcset = [];
+          foreach ($widths as $width) {
+            $srcset["{$width}w"] = [
+              'width' => $width,
+              'height' => $calculateHeight($width, $ratio),
+              'format' => 'webp',
+              'quality' => 80,
+            ];
+          }
+          return $image->focusSrcset($srcset);
+        };
 
         $image = [
           'url' => $image->url(),
-          'srcsetMobile' => $generateSrcset([375, 750, 1125, 1500], $ratioMobile),
-          'srcset' => $generateSrcset([430, 900, 1340, 1840], $ratio),
+          'srcsetMobileAvif' => $generateSrcsetAvif([375, 750, 1125, 1500], $ratioMobile),
+          'srcsetAvif' => $generateSrcsetAvif([430, 900, 1340, 1840], $ratio),
+          'srcsetMobileWebp' => $generateSrcsetWebp([375, 750, 1125, 1500], $ratioMobile),
+          'srcsetWebp' => $generateSrcsetWebp([430, 900, 1340, 1840], $ratio),
           'width' => $image->width(),
           'height' => $image->height(),
           'alt' => (string)$image->alt(),
@@ -273,7 +287,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
           return isset($ratio[1]) ? round(($width / $ratio[0]) * $ratio[1]) : $width;
         };
 
-        $generateSrcset = function ($widths, $ratio) use ($image, $calculateHeight) {
+        $generateSrcsetAvif = function ($widths, $ratio) use ($image, $calculateHeight) {
           $srcset = [];
           foreach ($widths as $width) {
             $srcset["{$width}w"] = [
@@ -286,10 +300,25 @@ function getBlockArray(\Kirby\Cms\Block $block)
           return $image->focusSrcset($srcset);
         };
 
+        $generateSrcsetWebp = function ($widths, $ratio) use ($image, $calculateHeight) {
+          $srcset = [];
+          foreach ($widths as $width) {
+            $srcset["{$width}w"] = [
+              'width' => $width,
+              'height' => $calculateHeight($width, $ratio),
+              'format' => 'webp',
+              'quality' => 80,
+            ];
+          }
+          return $image->focusSrcset($srcset);
+        };
+
         $images[] = [
           'url' => $image->url(),
-          'srcsetMobile' => $generateSrcset([375, 750, 1125, 1500], $ratioMobile),
-          'srcset' => $generateSrcset([430, 900, 1340, 1840], $ratio),
+          'srcsetMobileAvif' => $generateSrcsetAvif([375, 750, 1125, 1500], $ratioMobile),
+          'srcsetAvif' => $generateSrcsetAvif([430, 900, 1340, 1840], $ratio),
+          'srcsetMobileWebp' => $generateSrcsetWebp([375, 750, 1125, 1500], $ratioMobile),
+          'srcsetWebp' => $generateSrcsetWebp([430, 900, 1340, 1840], $ratio),
           'width' => $image->width(),
           'height' => $image->height(),
           'alt' => (string)$image->alt(),

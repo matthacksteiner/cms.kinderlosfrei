@@ -50,18 +50,24 @@ Navhambuger:
 
 ----
 
-Layoutfooter: [{"attrs":{"anchor":"","backgroundcontainer":"container","backgroundpadding":"both","backgroundcontainercolor":"","backgroundcolor":"black","backgroundalignvertical":"normal","backgroundalignitemsvertical":"normal","backgroundalignhorizontal":"normal","backgroundheight":"auto","backgroundarrow":"false","backgroundarrowcolor":"black","backgroundarrowsize":"","spacingmobiletop":"40","spacingmobilebottom":"40","spacingdesktoptop":"80","spacingdesktopbottom":"80"},"columns":[{"blocks":[{"content":{"text":"Adresse","level":"h2","titlefont":"font1","titlesize":"H3","titlecolor":"white","titlealign":"left"},"id":"ddb195d3-b58c-4a6f-a977-c49658329ae8","isHidden":false,"type":"title"},{"content":{"text":"<p>Acmestreet 123<br>123 Downtown</p>","textfont":"font1","textsize":"base","textcolor":"white","textalign":"left"},"id":"c31178a3-3577-4826-bb68-c5a88a80f92d","isHidden":false,"type":"text"}],"id":"9c3e921b-83dc-4e7d-8ba0-07a28f6421f8","width":"1/3"},{"blocks":[{"content":{"text":"Finde uns","level":"h2","titlefont":"font1","titlesize":"H3","titlecolor":"white","titlealign":"left"},"id":"77e20bbf-ff8d-4e97-bb64-3181b263caac","isHidden":false,"type":"title"}],"id":"cb9b59f2-c9af-4caa-b19c-9cea07771d2d","width":"1/3"},{"blocks":[{"content":{"text":"Menu","level":"h2","titlefont":"font1","titlesize":"H3","titlecolor":"white","titlealign":"left"},"id":"9bc0ded5-1eec-46e8-b256-20b958f55d39","isHidden":false,"type":"title"},{"content":{"nav":[{"link":{"type":"page","value":"impressum"}}],"listgap":16,"textfont":"","textsize":"","textcolor":"white","textalign":"left"},"id":"25a786d9-1b99-4d3d-b8d4-f4c00f85e889","isHidden":false,"type":"menu"}],"id":"e770fb1f-855a-4678-ba53-05cd56410aa7","width":"1/3"}],"id":"156f716c-3002-4773-b7c0-75b92767dafb"}]
+Layoutfooter: [{"attrs":{"anchor":"","backgroundcontainer":"container","backgroundpadding":"both","backgroundcontainercolor":"","backgroundcolor":"black","backgroundalignvertical":"normal","backgroundalignitemsvertical":"normal","backgroundalignhorizontal":"normal","backgroundheight":"auto","backgroundarrow":"false","backgroundarrowcolor":"black","backgroundarrowsize":"","spacingmobiletop":"40","spacingmobilebottom":"40","spacingdesktoptop":"80","spacingdesktopbottom":"80"},"columns":[{"blocks":[{"content":{"text":"Adresse","level":"h2","titlefont":"black","titlesize":"H3","titlecolor":"white","titlealign":"left"},"id":"ddb195d3-b58c-4a6f-a977-c49658329ae8","isHidden":false,"type":"title"},{"content":{"text":"<p>Acmestreet 123<br>123 Downtown</p>","textfont":"regular","textsize":"base","textcolor":"white","textalign":"left"},"id":"c31178a3-3577-4826-bb68-c5a88a80f92d","isHidden":false,"type":"text"}],"id":"9c3e921b-83dc-4e7d-8ba0-07a28f6421f8","width":"1/3"},{"blocks":[{"content":{"text":"Finde uns","level":"h2","titlefont":"black","titlesize":"H3","titlecolor":"white","titlealign":"left"},"id":"77e20bbf-ff8d-4e97-bb64-3181b263caac","isHidden":false,"type":"title"}],"id":"cb9b59f2-c9af-4caa-b19c-9cea07771d2d","width":"1/3"},{"blocks":[{"content":{"text":"Menu","level":"h2","titlefont":"black","titlesize":"H3","titlecolor":"white","titlealign":"left"},"id":"9bc0ded5-1eec-46e8-b256-20b958f55d39","isHidden":false,"type":"title"},{"content":{"nav":[{"link":{"type":"page","value":"impressum"}}],"listgap":16,"textfont":"regular","textsize":"base","textcolor":"white","textalign":"left"},"id":"25a786d9-1b99-4d3d-b8d4-f4c00f85e889","isHidden":false,"type":"menu"}],"id":"e770fb1f-855a-4678-ba53-05cd56410aa7","width":"1/3"}],"id":"156f716c-3002-4773-b7c0-75b92767dafb"}]
 
 ----
 
 Fontfile:
 
 - 
-  name: font1
+  name: regular
   file1:
-    - file://Oz4wFf8l1laFL0Fx
+    - file://yQnBDJ7FuXPY7woH
   file2:
-    - file://O1qjd8RwyOfnEtRo
+    - file://rbkm7korTOkidnOP
+- 
+  name: black
+  file1:
+    - file://zqgNFF9AOmF9i34N
+  file2:
+    - file://qnr7ratLpaTmzzB3
 
 ----
 
@@ -109,22 +115,22 @@ Fontsize:
   lineheightmobile: 20
   sizedesktop: 16
   lineheightdesktop: 24
+- 
+  name: hero
+  sizemobile: 48
+  lineheightmobile: 56
+  sizedesktop: 196
+  lineheightdesktop: 220
 
 ----
 
 Headlines:
 
-h1font: font1
 h1size: H1
-h2font: font1
 h2size: H2
-h3font: font1
 h3size: H3
-h4font: font1
 h4size: H4
-h5font: font1
 h5size: H5
-h6font: font1
 h6size: H6
 h1color: black
 h1align: left
@@ -141,15 +147,15 @@ h6align: left
 
 ----
 
-Colorprimary: #45ec68
+Colorprimary: #f5d019
 
 ----
 
-Colorsecondary: #4b0082
+Colorsecondary: #50281b
 
 ----
 
-Colortertiary: #da3434
+Colortertiary: #445444
 
 ----
 
@@ -189,13 +195,6 @@ Gridblockdesktop: 16
 
 ----
 
-Faviconfiles:
-
-faviconfilesvg:
-  - file://020xjuNYC1i32ISk
-
-----
-
 Headeractive: true
 
 ----
@@ -212,9 +211,9 @@ logodesktopactive: 200
 
 Headermenu:
 
-headerfont: font1
+headerfont: black
 headerfontsize: H4
-headercolor: primary
+headercolor: white
 headercoloractive: black
 headerbackground: transparent
 headerbackgroundactive: white
@@ -223,7 +222,7 @@ headerbackgroundactive: white
 
 Headerhamburger:
 
-hamburgerfont: font1
+hamburgerfont: black
 hamburgerfontsize: H4
 hamburgerfontcolor: white
 hamburgermenucolor: black
@@ -234,7 +233,7 @@ hamburgeroverlay: primary
 
 Buttonsettings:
 
-buttonfont: font1
+buttonfont: black
 buttonfontsize: base
 buttonborderwidth: 1
 buttonpadding: 10
