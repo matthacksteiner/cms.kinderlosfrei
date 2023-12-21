@@ -200,7 +200,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
             $srcset["{$width}w"] = [
               'width' => $width,
               'height' => $calculateHeight($width, $ratio),
-              'format' => 'webp',
+              'format' => 'avif',
               'quality' => 80,
             ];
           }
@@ -279,7 +279,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
             $srcset["{$width}w"] = [
               'width' => $width,
               'height' => $calculateHeight($width, $ratio),
-              'format' => 'webp',
+              'format' => 'avif',
               'quality' => 80,
             ];
           }
