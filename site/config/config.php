@@ -8,6 +8,7 @@ return [
 	'debug' => true,
 	'panel.install' => true,
 	'date.handler' => 'strftime',
+	'thumbs.driver' => 'imagick',
 	'locale' => 'de_AT.utf-8',
 	'languages' => true,
 	'error' => 'z-error',
