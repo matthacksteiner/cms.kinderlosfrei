@@ -187,47 +187,13 @@ function getBlockArray(\Kirby\Cms\Block $block)
       if ($file1 = $block->image()->toFile()) {
         $image = $file1;
 
-        $ratioMobile = explode('/', $block->ratioMobile()->value());
-        $ratio = explode('/', $block->ratio()->value());
-
-        $calculateHeight = function ($width, $ratio) {
-          return isset($ratio[1]) ? round(($width / $ratio[0]) * $ratio[1]) : $width;
-        };
-
-        $generateSrcsetAvif = function ($widths, $ratio) use ($image, $calculateHeight) {
-          $srcset = [];
-          foreach ($widths as $width) {
-            $srcset["{$width}w"] = [
-              'width' => $width,
-              'height' => $calculateHeight($width, $ratio),
-              'format' => 'avif',
-              'quality' => 80,
-            ];
-          }
-          return $image->focusSrcset($srcset);
-        };
-        $generateSrcsetWebp = function ($widths, $ratio) use ($image, $calculateHeight) {
-          $srcset = [];
-          foreach ($widths as $width) {
-            $srcset["{$width}w"] = [
-              'width' => $width,
-              'height' => $calculateHeight($width, $ratio),
-              'format' => 'webp',
-              'quality' => 80,
-            ];
-          }
-          return $image->focusSrcset($srcset);
-        };
-
         $image = [
           'url' => $image->url(),
-          'srcsetMobileAvif' => $generateSrcsetAvif([375, 750, 1125, 1500], $ratioMobile),
-          'srcsetAvif' => $generateSrcsetAvif([430, 900, 1340, 1840], $ratio),
-          'srcsetMobileWebp' => $generateSrcsetWebp([375, 750, 1125, 1500], $ratioMobile),
-          'srcsetWebp' => $generateSrcsetWebp([430, 900, 1340, 1840], $ratio),
           'width' => $image->width(),
-          'height' => $calculateHeight($image->width(), $ratio),
+          'height' => $image->height(),
           'alt' => (string)$image->alt(),
+          'focusX' => json_decode($file1->focusPercentageX()),
+          'focusY' => json_decode($file1->focusPercentageY()),
           'filetoggle' => $file1->toggle()->toBool(false),
           'filelevel' => $file1->level()->value(),
           'filecaption' => $file1->caption()->value(),
@@ -262,6 +228,18 @@ function getBlockArray(\Kirby\Cms\Block $block)
 
       break;
 
+    case "menu":
+      $blockArray['content'] = $block->toArray()['content'];
+      foreach ($block->nav()->toStructure() as $key => $item) {
+        $link = [];
+        if ($item->link()->isNotEmpty()) {
+          $link = getLinkArray($item->link());
+        }
+        $blockArray['content']['nav'][$key]["link"] = $link;
+      }
+
+      break;
+
     case 'button':
       $blockArray['content'] = $block->toArray()['content'];
 
@@ -279,49 +257,13 @@ function getBlockArray(\Kirby\Cms\Block $block)
 
       foreach ($block->images()->toFiles() as $file) {
         $image = $file;
-
-        $ratioMobile = explode('/', $block->ratioMobile()->value());
-        $ratio = explode('/', $block->ratio()->value());
-
-        $calculateHeight = function ($width, $ratio) {
-          return isset($ratio[1]) ? round(($width / $ratio[0]) * $ratio[1]) : $width;
-        };
-
-        $generateSrcsetAvif = function ($widths, $ratio) use ($image, $calculateHeight) {
-          $srcset = [];
-          foreach ($widths as $width) {
-            $srcset["{$width}w"] = [
-              'width' => $width,
-              'height' => $calculateHeight($width, $ratio),
-              'format' => 'avif',
-              'quality' => 80,
-            ];
-          }
-          return $image->focusSrcset($srcset);
-        };
-
-        $generateSrcsetWebp = function ($widths, $ratio) use ($image, $calculateHeight) {
-          $srcset = [];
-          foreach ($widths as $width) {
-            $srcset["{$width}w"] = [
-              'width' => $width,
-              'height' => $calculateHeight($width, $ratio),
-              'format' => 'webp',
-              'quality' => 80,
-            ];
-          }
-          return $image->focusSrcset($srcset);
-        };
-
         $images[] = [
           'url' => $image->url(),
-          'srcsetMobileAvif' => $generateSrcsetAvif([375, 750, 1125, 1500], $ratioMobile),
-          'srcsetAvif' => $generateSrcsetAvif([430, 900, 1340, 1840], $ratio),
-          'srcsetMobileWebp' => $generateSrcsetWebp([375, 750, 1125, 1500], $ratioMobile),
-          'srcsetWebp' => $generateSrcsetWebp([430, 900, 1340, 1840], $ratio),
           'width' => $image->width(),
-          'height' => $calculateHeight($image->width(), $ratio),
+          'height' => $image->height(),
           'alt' => (string)$image->alt(),
+          'focusX' => json_decode($file->focusPercentageX()),
+          'focusY' => json_decode($file->focusPercentageY()),
           'filetoggle' => $file->toggle()->toBool(false),
           'filelevel' => $file->level()->value(),
           'filecaption' => $file->caption()->value(),
@@ -337,6 +279,48 @@ function getBlockArray(\Kirby\Cms\Block $block)
       $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
       break;
 
+    case 'text':
+      $blockArray['content'] = $block->toArray()['content'];
+      $blockArray['content']['text'] = (string)$block->text();
+      break;
+
+    case "vector":
+      $blockArray['content'] = $block->toArray()['content'];
+      $image = null;
+      if ($file1 = $block->image()->toFile()) {
+        $image = [
+          'url' => $file1->url(),
+          'alt' => (string)$file1->alt(),
+        ];
+      }
+
+      $linkexternal = [];
+      if ($block->linkexternal()->isNotEmpty()) {
+        $linkexternal = getLinkArray($block->linkexternal());
+      }
+
+      $blockArray['content']['image'] = $image;
+      $blockArray['content']['linkexternal'] = $linkexternal;
+      $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
+      break;
+
+    case "iconlist":
+      $blockArray['content'] = $block->toArray()['content'];
+
+      foreach ($block->list()->toStructure() as $key => $item) {
+        $icon = null;
+        if ($file = $item->icon()->toFile()) {
+          $icon = [
+            'url' => $file->url(),
+            'alt' => (string)$file->alt(),
+            'source' => file_get_contents($file->root()),
+          ];
+        }
+
+        $blockArray['content']['list'][$key]["icon"] = $icon;
+      }
+
+      break;
     case 'text':
       $blockArray['content'] = $block->toArray()['content'];
       $blockArray['content']['text'] = (string)$block->text();
