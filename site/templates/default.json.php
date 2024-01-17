@@ -189,6 +189,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
 
         $image = [
           'url' => $image->url(),
+          'urlFocus' => $image->focusCrop($image->width(), $image->height())->url(),
           'width' => $image->width(),
           'height' => $image->height(),
           'alt' => (string)$image->alt(),
