@@ -187,10 +187,19 @@ function getBlockArray(\Kirby\Cms\Block $block)
       if ($file1 = $block->image()->toFile()) {
         $image = $file1;
 
+
+        $ratioMobile = explode('/', $block->ratioMobile()->value());
+        $ratio = explode('/', $block->ratio()->value());
+
+        $calculateHeight = function ($width, $ratio) {
+          return isset($ratio[1]) ? round(($width / $ratio[0]) * $ratio[1]) : $width;
+        };
+
+
         $image = [
           'url' => $image->url(),
-          'aspectRatio' => $image->ratio(),
-          'urlFocus' => $image->focusCrop($image->width(), $image->height(), ['quality' => 99])->url(),
+          'urlFocus' => $image->focusCrop($image->width(), $calculateHeight($image->width(), $ratio), ['quality' => 99])->url(),
+          'urlFocusMobile' => $image->focusCrop($image->width(), $calculateHeight($image->width(), $ratioMobile), ['quality' => 99])->url(),
           'width' => $image->width(),
           'height' => $image->height(),
           'alt' => (string)$image->alt(),
