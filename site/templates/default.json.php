@@ -227,6 +227,44 @@ function getBlockArray(\Kirby\Cms\Block $block)
       $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
       break;
 
+    case 'slider':
+      $blockArray['content'] = $block->toArray()['content'];
+      $images = [];
+
+      foreach ($block->images()->toFiles() as $file) {
+        $image = $file;
+
+        $ratioMobile = explode('/', $block->ratioMobile()->value());
+        $ratio = explode('/', $block->ratio()->value());
+
+        $calculateHeight = function ($width, $ratio) {
+          return isset($ratio[1]) ? round(($width / $ratio[0]) * $ratio[1]) : $width;
+        };
+
+        $images[] = [
+          'url' => $image->url(),
+          'urlFocus' => $image->focusCrop($image->width(), $calculateHeight($image->width(), $ratio), ['quality' => 99])->url(),
+          'urlFocusMobile' => $image->focusCrop($image->width(), $calculateHeight($image->width(), $ratioMobile), ['quality' => 99])->url(),
+          'width' => $image->width(),
+          'height' => $image->height(),
+          'alt' => (string)$image->alt(),
+          'focusX' => json_decode($file->focusPercentageX()),
+          'focusY' => json_decode($file->focusPercentageY()),
+          'filetoggle' => $file->toggle()->toBool(false),
+          'filelevel' => $file->level()->value(),
+          'filecaption' => $file->caption()->value(),
+          'filetextfont' => $file->textfont()->value(),
+          'filetextsize' => $file->textsize()->value(),
+          'filetextcolor' => $file->textcolor()->value(),
+          'filetextalign' => $file->textalign()->value(),
+          'fileoverlay' => $file->controls()->value(),
+          'captionalign' => $file->captionalign()->value(),
+        ];
+      }
+      $blockArray['content']['images'] = $images;
+      $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
+      break;
+
     case "menu":
       $blockArray['content'] = $block->toArray()['content'];
       foreach ($block->nav()->toStructure() as $key => $item) {
@@ -262,33 +300,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
 
       break;
 
-    case 'slider':
-      $blockArray['content'] = $block->toArray()['content'];
-      $images = [];
 
-      foreach ($block->images()->toFiles() as $file) {
-        $image = $file;
-        $images[] = [
-          'url' => $image->url(),
-          'width' => $image->width(),
-          'height' => $image->height(),
-          'alt' => (string)$image->alt(),
-          'focusX' => json_decode($file->focusPercentageX()),
-          'focusY' => json_decode($file->focusPercentageY()),
-          'filetoggle' => $file->toggle()->toBool(false),
-          'filelevel' => $file->level()->value(),
-          'filecaption' => $file->caption()->value(),
-          'filetextfont' => $file->textfont()->value(),
-          'filetextsize' => $file->textsize()->value(),
-          'filetextcolor' => $file->textcolor()->value(),
-          'filetextalign' => $file->textalign()->value(),
-          'fileoverlay' => $file->controls()->value(),
-          'captionalign' => $file->captionalign()->value(),
-        ];
-      }
-      $blockArray['content']['images'] = $images;
-      $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
-      break;
 
     case 'text':
       $blockArray['content'] = $block->toArray()['content'];
