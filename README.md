@@ -59,7 +59,7 @@ source: https://matthias-andrasch.eu/2021/tutorial-webseite-mittels-github-actio
 
 ### General
 
-working cms subdomain including correct DNS settings - for example: cms.domain.com
+working cms subdomain including correct DNS settings and SSL certificat - for example: cms.domain.com
 
 ### Server
 
@@ -68,8 +68,8 @@ working cms subdomain including correct DNS settings - for example: cms.domain.c
 
 ### PHP
 
-- PHP 8.0, 8.1 or 8.2 (PHP 8.1 is recommended)
-- Either the gd extension or ImageMagick (see below)
+- PHP 8.1, 8.2 or 8.3 (PHP 8.2 is recommended)
+- Either the gd extension or ImageMagick
 - ctype extension
 - curl extension
 - dom extension
