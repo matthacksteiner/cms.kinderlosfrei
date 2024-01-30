@@ -57,6 +57,12 @@ source: https://matthias-andrasch.eu/2021/tutorial-webseite-mittels-github-actio
 
 ## Requirements for Headless Kirby CMS
 
+### Accounts
+
+- ftp or sftp
+- hosting login
+- ssh (if available)
+
 ### Subdomain
 
 working cms subdomain including correct DNS settings and SSL certificat - for example: cms.domain.com
