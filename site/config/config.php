@@ -168,6 +168,12 @@ return [
 					$headlines[$tag] = $headline;
 				}
 
+				// Analytics
+				$searchConsoleCode = null;
+				if ($site->searchConsoleToggle()->toBool(false)) {
+					$searchConsoleCode = (string) $site->searchConsoleCode();
+				}
+
 				return response::json([
 					"siteUrl" => (string) $site->url(),
 					'siteTitle' => (string) $site->title(),
@@ -233,6 +239,8 @@ return [
 					"buttonBorderColor"	=> (string) $site->buttonColors()->toEntity()->buttonBorderColor(),
 					"buttonBorderColorActive" => (string) $site->buttonColors()->toEntity()->buttonBorderColorActive(),
 
+					"searchConsoleToggle" => $site->searchConsoleToggle()->toBool(false),
+					"searchConsoleCode" => $searchConsoleCode,
 				]);
 			}
 		]

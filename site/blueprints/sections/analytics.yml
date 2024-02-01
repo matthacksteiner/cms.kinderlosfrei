@@ -1,0 +1,32 @@
+columns:
+  analyticsSearchConsole:
+    width: 1/2
+    sections:
+      searchConsole:
+        type: fields
+        fields:
+          searchConsoleHeadline:
+            label: Analytics
+            type: headline
+            numbered: false
+          searchConsoleToggle:
+            width: 1/1
+            type: toggle
+            label: Google Search Console
+            text: >
+              Aktivieren
+            default: false
+            translate: false
+            help: >
+              Aktiviert die Google Search Console.  Konfiguration über die deutschen Seite.
+          searchConsoleCode:
+            width: 1/1
+            type: text
+            label: Google Search Console Code
+            help: >
+              Der Wert von <b>content</b> im HTML-TAG
+            required: true
+            translate: false
+            placeholder: "xJ_w_cDXrbjHU4wBU6nFUNDqD_ST_9GkbQb8NMIv-cY"
+            when:
+              searchConsoleToggle: true

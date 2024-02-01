@@ -79,3 +79,7 @@ tabs:
     icon: brush
     extends: sections/design
   meta: tabs/meta/site
+  analytics:
+    label: Analytics
+    icon: chart
+    extends: sections/analytics
