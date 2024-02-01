@@ -7,6 +7,12 @@ fields:
     label: ID
     type: text
     help: "Wird für die Navigation benötigt."
+    width: 1/2
+  classes:
+    label: CSS Klassen
+    type: text
+    help: "Zusätzliche CSS-Klassen. Durch ein Leerzeichen trennen."
+    width: 1/2
   backgroundHeadline:
     type: headline
     label: Container
