@@ -1,6 +1,6 @@
 type: select
 placeholder: false
-default: Original
+default: original
 width: 1/2
 required: true
 options:
