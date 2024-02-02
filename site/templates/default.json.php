@@ -188,14 +188,12 @@ function getBlockArray(\Kirby\Cms\Block $block)
       if ($file1 = $block->image()->toFile()) {
         $image = $file1;
 
-
         $ratioMobile = explode('/', $block->ratioMobile()->value());
         $ratio = explode('/', $block->ratio()->value());
 
         $calculateHeight = function ($width, $ratio) {
           return isset($ratio[1]) ? round(($width / $ratio[0]) * $ratio[1]) : $width;
         };
-
 
         $image = [
           'url' => $image->url(),

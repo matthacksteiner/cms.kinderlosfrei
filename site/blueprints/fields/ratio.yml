@@ -1,9 +1,10 @@
 type: select
 placeholder: false
-default: 1/1
+default: Original
 width: 1/2
 required: true
 options:
+  original: "Original"
   1/1: "1:1"
   2/3: "2:3"
   3/2: "3:2"
