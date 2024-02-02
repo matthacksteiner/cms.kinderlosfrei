@@ -52,3 +52,4 @@ fieldsets:
       line: blocks/line
       columns: blocks/columns
       grid: blocks/grid
+      code: blocks/code

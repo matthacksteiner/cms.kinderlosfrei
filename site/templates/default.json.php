@@ -278,18 +278,6 @@ function getBlockArray(\Kirby\Cms\Block $block)
 
       break;
 
-    case "menu":
-      $blockArray['content'] = $block->toArray()['content'];
-      foreach ($block->nav()->toStructure() as $key => $item) {
-        $link = [];
-        if ($item->link()->isNotEmpty()) {
-          $link = getLinkArray($item->link());
-        }
-        $blockArray['content']['nav'][$key]["link"] = $link;
-      }
-
-      break;
-
     case 'button':
       $blockArray['content'] = $block->toArray()['content'];
 
@@ -345,6 +333,12 @@ function getBlockArray(\Kirby\Cms\Block $block)
       }
 
       break;
+
+    case 'code':
+      $blockArray['content'] = $block->toArray()['content'];
+      $blockArray['content']['code'] = (string)$block->code();
+      break;
+
     case 'text':
       $blockArray['content'] = $block->toArray()['content'];
       $blockArray['content']['text'] = (string)$block->text();
