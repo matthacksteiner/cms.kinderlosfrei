@@ -52,3 +52,4 @@ fields:
           divider: blocks/divider
           line: blocks/line
           grid: blocks/grid
+          code: blocks/code
