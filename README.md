@@ -74,7 +74,7 @@ working cms subdomain including correct DNS settings and SSL certificat - for ex
 
 ### PHP
 
-- PHP 8.1, 8.2 or 8.3 (PHP 8.2 is recommended)
+- PHP 8.1, 8.2 or 8.3 (PHP 8.2 is recommended) - PHP 7.4 is not supported
 - Either the gd extension or ImageMagick
 - ctype extension
 - curl extension
