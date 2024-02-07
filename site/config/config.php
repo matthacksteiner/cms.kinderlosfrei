@@ -65,6 +65,7 @@ return [
 							"code" => $language->code(),
 							"name" => $language->name(),
 							"url" => $language->url(),
+							"locale" => $language->locale(LC_ALL),
 							"active" => $language->code() == $kirby->language()->code(),
 						];
 					}
@@ -75,6 +76,7 @@ return [
 						"code" => $language->code(),
 						"name" => $language->name(),
 						"url" => $language->url(),
+						"locale" => $language->locale(LC_ALL),
 						"active" => $language->code() == $kirby->language()->code(),
 					];
 				}
@@ -82,6 +84,7 @@ return [
 					"code" => $defaultLang->code(),
 					"name" => $defaultLang->name(),
 					"url" => $defaultLang->url(),
+					"locale" => $language->locale(LC_ALL),
 					"active" => $defaultLang->code() == $kirby->language()->code(),
 				];
 
