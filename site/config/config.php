@@ -84,7 +84,7 @@ return [
 					"code" => $defaultLang->code(),
 					"name" => $defaultLang->name(),
 					"url" => $defaultLang->url(),
-					"locale" => $language->locale(LC_ALL),
+					"locale" => $defaultLang->locale(LC_ALL),
 					"active" => $defaultLang->code() == $kirby->language()->code(),
 				];
 
