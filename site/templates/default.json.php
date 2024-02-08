@@ -173,7 +173,6 @@ function getBlockArray(\Kirby\Cms\Block $block)
       $output = [
         "id" => $block->id(),
         "type" => 'grid',
-        "title" => $block->title()->value(),
         "content" => [
           "grid" => $allGrids,
         ],
