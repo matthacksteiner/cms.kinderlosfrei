@@ -177,6 +177,11 @@ return [
 					$searchConsoleCode = (string) $site->searchConsoleCode();
 				}
 
+				$googleAnalyticsCode = null;
+				if ($site->googleAnalyticsToggle()->toBool(false)) {
+					$googleAnalyticsCode = (string) $site->googleAnalyticsCode();
+				}
+
 				return response::json([
 					"siteUrl" => (string) $site->url(),
 					'siteTitle' => (string) $site->title(),
@@ -244,6 +249,8 @@ return [
 
 					"searchConsoleToggle" => $site->searchConsoleToggle()->toBool(false),
 					"searchConsoleCode" => $searchConsoleCode,
+					"googleAnalyticsToggle" => $site->googleAnalyticsToggle()->toBool(false),
+					"googleAnalyticsCode" => $googleAnalyticsCode,
 				]);
 			}
 		]

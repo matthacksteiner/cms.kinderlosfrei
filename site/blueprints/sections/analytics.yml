@@ -5,20 +5,14 @@ columns:
       searchConsole:
         type: fields
         fields:
-          searchConsoleHeadline:
-            label: Analytics
-            type: headline
-            numbered: false
           searchConsoleToggle:
-            width: 1/1
+            width: 1/3
             type: toggle
             label: Google Search Console
             text: >
               Aktivieren
             default: false
             translate: false
-            help: >
-              Aktiviert die Google Search Console.  Konfiguration über die deutschen Seite.
           searchConsoleCode:
             width: 1/1
             type: text
@@ -30,3 +24,28 @@ columns:
             placeholder: "xJ_w_cDXrbjHU4wBU6nFUNDqD_ST_9GkbQb8NMIv-cY"
             when:
               searchConsoleToggle: true
+  analyticsGoogleAnalytics:
+    width: 1/2
+    sections:
+      googleAnalytics:
+        type: fields
+        fields:
+          googleAnalyticsToggle:
+            width: 1/3
+            type: toggle
+            label: Google Analytics
+            text: >
+              Aktivieren
+            default: false
+            translate: false
+          googleAnalyticsCode:
+            width: 1/1
+            type: text
+            label: Google Analytics ID
+            help: >
+              ID am Ende des Google Analytics Script
+            required: true
+            translate: false
+            placeholder: "G-224EMLTRPD"
+            when:
+              googleAnalyticsToggle: true
