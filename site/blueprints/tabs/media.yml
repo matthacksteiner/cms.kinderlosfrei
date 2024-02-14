@@ -4,8 +4,14 @@ sections:
   files:
     headline: Bilder
     type: files
-    layout: cards
+    layout: cardlets
     template: pixel
+    query: page.images
+  filesSlider:
+    headline: Bilder Slider
+    type: files
+    layout: cardlets
+    template: image
     query: page.images
   vector:
     headline: Vektorgrafiken
