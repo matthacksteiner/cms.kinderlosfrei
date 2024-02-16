@@ -11,7 +11,6 @@ return [
 	'locale' => 'de_AT.utf-8',
 	'languages' => true,
 	'error' => 'z-error',
-	'fabianmichael.meta.sitemap.exclude' => ['error'],
 	'pju.webhook-field.hooks' => [
 		'netlify_deploy' => [
 			'url' => 'https://api.netlify.com/build_hooks/65142ee2a2de9b24080dcc95',
@@ -42,7 +41,6 @@ return [
 				foreach (site()->index() as $page) {
 					$index[] = [
 						"uri" => $page->uri(),
-						"id" => $page->id(),
 						"intendedTemplate" => $page->intendedTemplate()->name(),
 					];
 				}
@@ -185,6 +183,7 @@ return [
 				}
 
 				return response::json([
+					"kirbyUrl" => (string) $kirby->url('index'),
 					"siteUrl" => (string) $site->url(),
 					'siteTitle' => (string) $site->title(),
 					"defaultLang" => $defaultLang,
