@@ -7,7 +7,7 @@ return [
     'locale' => [
         'LC_ALL' => 'en_US'
     ],
-    'name' => 'Englisch',
+    'name' => 'englisch',
     'translations' => [
 
     ],
