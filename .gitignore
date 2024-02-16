@@ -19,3 +19,4 @@ site/plugins/*
 !site/plugins/baukasten-field-methods/
 !site/plugins/baukasten-programmable-blueprints/
 !site/plugins/baukasten-mime/
+!site/plugins/baukasten-sitemap/
