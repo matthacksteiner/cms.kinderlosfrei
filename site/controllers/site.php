@@ -5,12 +5,12 @@ use Kirby\Toolkit\Config;
 function getMeta($site, $page, $kirby)
 {
     $pageMeta = $page->meta();
-	$owner = $site->meta_website_owner()->toString();
+    $owner = $site->meta_website_owner()->toString();
     $ownerId = url('/#owner');
 
     $json = [
-        "title" => (string)$pageMeta->title()->html(),
-        "description" => $pageMeta->description()->isNotEmpty() ? (string)$pageMeta->description()->html() : null,
+        "title" => (string)$pageMeta->title(),
+        "description" => $pageMeta->description()->isNotEmpty() ? (string)$pageMeta->description() : null,
         "robots" => $pageMeta->robots(),
         "canonical" => $pageMeta->canonicalUrl(),
         "separators" => (string)$site->meta_title_separator(),
@@ -53,12 +53,12 @@ function getMeta($site, $page, $kirby)
 }
 
 return function ($site, $page, $kirby) {
-	return [
-		'json' => [
-			"meta" => getMeta($site, $page, $kirby),
-			'intendedTemplate' => $page->intendedTemplate()->name(),
-			'title' => (string)$page->title(),
-			'lang' => (string)kirby()->languageCode(),
-		]
-	];
+    return [
+        'json' => [
+            "meta" => getMeta($site, $page, $kirby),
+            'intendedTemplate' => $page->intendedTemplate()->name(),
+            'title' => (string)$page->title(),
+            'lang' => (string)kirby()->languageCode(),
+        ]
+    ];
 };
