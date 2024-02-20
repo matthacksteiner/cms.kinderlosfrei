@@ -342,26 +342,6 @@ function getBlockArray(\Kirby\Cms\Block $block)
       $blockArray['content']['text'] = (string)$block->text();
       break;
 
-    case "vector":
-      $blockArray['content'] = $block->toArray()['content'];
-      $image = null;
-      if ($file1 = $block->image()->toFile()) {
-        $image = [
-          'url' => $file1->url(),
-          'alt' => (string)$file1->alt(),
-        ];
-      }
-
-      $linkexternal = [];
-      if ($block->linkexternal()->isNotEmpty()) {
-        $linkexternal = getLinkArray($block->linkexternal());
-      }
-
-      $blockArray['content']['image'] = $image;
-      $blockArray['content']['linkexternal'] = $linkexternal;
-      $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
-      break;
-
     case "iconlist":
       $blockArray['content'] = $block->toArray()['content'];
 
