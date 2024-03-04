@@ -135,10 +135,15 @@ return [
 				//font files
 				$font = [];
 				foreach ($site->fontFile()->toStructure() as $fontItem) {
+					$fontData1 = file_get_contents($fontItem->file1()->toFile()->root());
+					$fontData2 = file_get_contents($fontItem->file2()->toFile()->root());
+
 					$font[] = [
 						"name" => (string)$fontItem->name(),
 						"url1" => (string)$fontItem->file1()->toFile()->url(),
 						"url2" => (string)$fontItem->file2()->toFile()->url(),
+						"base64Data1" => base64_encode($fontData1),
+						"base64Data2" => base64_encode($fontData2),
 					];
 				}
 				$font = count($font) > 0 ? $font : null;
