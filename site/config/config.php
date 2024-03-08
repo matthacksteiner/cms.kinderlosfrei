@@ -113,7 +113,7 @@ return [
 
 				// hamburger menu
 				$hamburger = [];
-				foreach ($site->navhamburger()->toStructure() as $hamburgerItem) {
+				foreach ($site->navHambuger()->toStructure() as $hamburgerItem) {
 					$linkArrayHamburger = $hamburgerItem->link()->getLinkArray();
 					$hamburger[] = $linkArrayHamburger;
 				}
@@ -135,7 +135,7 @@ return [
 				// cta button
 				$logoCta = [];
 				if ($site->headerLogo()->toEntity()->logoCta()->isNotEmpty()) {
-					$logoCta = $site->headerLogo()->toEntity()->logoCta()->toLinkArray();
+					$logoCta = getLinkArray($site->headerLogo()->toEntity()->logoCta());
 				}
 
 
