@@ -226,9 +226,26 @@ columns:
                   center: Zentriert
                 width: 1/6
                 translate: false
+              logoCta:
+                label: CTA Button
+                type: link
+                width: 3/6
+                pages:
+                  query: site.index.filterBy('intendedTemplate', 'in', ['default', 'home'])
+                linkTypes:
+                  - page
+                  - url
+                settings:
+                  text:
+                    required: true
+                translate: false
+                when:
+                  logoAlign: center
               logoGap:
                 type: gap
                 width: 3/6
+                when:
+                  logoAlign: left
               logoMobile:
                 label: Breite 📱
                 type: number

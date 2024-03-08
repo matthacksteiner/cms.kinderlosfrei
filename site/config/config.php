@@ -111,13 +111,13 @@ return [
 				}
 				$header = count($header) > 0 ? $header : null;
 
-				// hambuger menu
-				$hambuger = [];
-				foreach ($site->navhambuger()->toStructure() as $hambugerItem) {
-					$linkArrayHamburger = $hambugerItem->link()->getLinkArray();
-					$hambuger[] = $linkArrayHamburger;
+				// hamburger menu
+				$hamburger = [];
+				foreach ($site->navHambuger()->toStructure() as $hamburgerItem) {
+					$linkArrayHamburger = $hamburgerItem->link()->getLinkArray();
+					$hamburger[] = $linkArrayHamburger;
 				}
-				$hambuger = count($hambuger) > 0 ? $hambuger : null;
+				$hamburger = count($hamburger) > 0 ? $hamburger : null;
 
 
 
@@ -131,6 +131,15 @@ return [
 						'source' => file_get_contents($site->headerLogo()->toEntity()->logoFile()->toFile()->root()),
 					];
 				}
+
+				// cta button
+				$logoCta = [];
+				if ($site->headerLogo()->toEntity()->logoCta()->isNotEmpty()) {
+					$logoCta = getLinkArray($site->headerLogo()->toEntity()->logoCta());
+				}
+
+
+
 
 				//font files
 				$font = [];
@@ -198,7 +207,7 @@ return [
 
 					"frontendUrl" => (string) $site->frontendUrl(),
 					"navHeader" => $header,
-					"navHamburger" => $hambuger,
+					"navHamburger" => $hamburger,
 
 					"colorPrimary" => (string) $site->colorPrimary(),
 					"colorSecondary" => (string) $site->colorSecondary(),
@@ -229,6 +238,7 @@ return [
 
 					"logoFile" => $logoFile,
 					"logoAlign" => (string) $site->headerLogo()->toEntity()->logoAlign(),
+					"logoCta" => $logoCta,
 					"logoDesktop" => (string) $site->headerLogo()->toEntity()->logoDesktop(),
 					"logoMobile" => (string) $site->headerLogo()->toEntity()->logoMobile(),
 					"logoDesktopActive" => (string) $site->headerLogo()->toEntity()->logoDesktopActive(),
