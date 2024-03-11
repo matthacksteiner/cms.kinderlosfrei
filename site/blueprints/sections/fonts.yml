@@ -38,11 +38,14 @@ columns:
                 uploads:
                   template: woff2
                 width: 1/2
+      fontSizes:
+        type: fields
+        fields:
           fontSize:
             label: Schriftgrößen
             type: structure
             translate: false
-            width: 1/2
+            width: 1/1
             fields:
               name:
                 label: Name
@@ -55,29 +58,63 @@ columns:
                 required: true
                 after: px
               sizeMobile:
-                label: Größe Mobile
+                label: Größe 📱
                 type: number
                 width: 1/2
                 required: true
                 after: px
               lineHeightMobile:
-                label: Zeilenhöhe Mobile
+                label: Zeilenhöhe 📱
                 type: number
                 width: 1/2
                 required: true
                 after: px
               sizeDesktop:
-                label: Größe Desktop
+                label: Größe 💻
                 type: number
                 width: 1/2
                 required: true
                 after: px
               lineHeightDesktop:
-                label: Zeilenhöhe Desktop
+                label: Zeilenhöhe 💻
                 type: number
                 width: 1/2
                 required: true
                 after: px
+              letterSpacingDesktop:
+                label: Buchstabenabstand 💻
+                type: number
+                width: 1/2
+                default: 0
+                after: px
+              letterSpacingMobile:
+                label: Buchstabenabstand 📱
+                type: number
+                width: 1/2
+                default: 0
+                after: px
+              transform:
+                label: Transformation
+                type: select
+                width: 1/2
+                default: none
+                options:
+                  none: Keine
+                  uppercase: Großbuchstaben
+                  lowercase: Kleinbuchstaben
+                  capitalize: Erster Buchstabe groß
+              decoration:
+                label: Dekoration
+                type: select
+                width: 1/2
+                default: none
+                options:
+                  none: Keine
+                  underline: Unterstrichen
+                  line-through: Durchgestrichen
+                  overline: Überstrichen
+                  overline underline: Überstrichen und Unterstrichen
+
       fontHeadlines:
         type: fields
         fields:
