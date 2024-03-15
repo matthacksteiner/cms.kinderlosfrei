@@ -31,6 +31,10 @@ return [
 		'css' => 'assets/css/baukasten-panel.css',
 		'favicon' => 'assets/img/baukasten-favicon.ico',
 	],
+	'thumbs' => [
+		'quality'   => 99,
+		'format'    => 'webp',
+	],
 	'routes' => [
 		[
 			'pattern' => 'index.json',
@@ -90,7 +94,7 @@ return [
 
 
 				// favicon
-				$siteFavicon = $site->faviconFiles()->toEntity();
+				$siteFavicon = $site->faviconFiles()->toObject();
 				$favicon = null;
 				if ($siteFavicon) {
 					$favicon = [
@@ -124,18 +128,18 @@ return [
 				// ---------- design ----------
 				// header
 				$logoFile = [];
-				if ($site->headerLogo()->toEntity()->logoFile()->isNotEmpty()) {
+				if ($site->headerLogo()->toObject()->logoFile()->isNotEmpty()) {
 					$logoFile = [
-						"src" => (string) $site->headerLogo()->toEntity()->logoFile()->toFile()->url(),
-						"alt" => (string) $site->headerLogo()->toEntity()->logoFile()->toFile()->alt()->or($site->title() . " Logo"),
-						'source' => file_get_contents($site->headerLogo()->toEntity()->logoFile()->toFile()->root()),
+						"src" => (string) $site->headerLogo()->toObject()->logoFile()->toFile()->url(),
+						"alt" => (string) $site->headerLogo()->toObject()->logoFile()->toFile()->alt()->or($site->title() . " Logo"),
+						'source' => file_get_contents($site->headerLogo()->toObject()->logoFile()->toFile()->root()),
 					];
 				}
 
 				// cta button
 				$logoCta = [];
-				if ($site->headerLogo()->toEntity()->logoCta()->isNotEmpty()) {
-					$logoCta = getLinkArray($site->headerLogo()->toEntity()->logoCta());
+				if ($site->headerLogo()->toObject()->logoCta()->isNotEmpty()) {
+					$logoCta = getLinkArray($site->headerLogo()->toObject()->logoCta());
 				}
 
 
@@ -182,8 +186,8 @@ return [
 					$sizeKey = "{$tag}size";
 
 					$headline = [
-						"font" => (string) $site->headlines()->toEntity()->$fontKey(),
-						"size" => (string) $site->headlines()->toEntity()->$sizeKey(),
+						"font" => (string) $site->headlines()->toObject()->$fontKey(),
+						"size" => (string) $site->headlines()->toObject()->$sizeKey(),
 					];
 
 					$headlines[$tag] = $headline;
@@ -226,27 +230,27 @@ return [
 					"headlines" => $headlines,
 
 					"headerActive" => $site->headerActive()->toBool(),
-					"headerFont" => (string) $site->headerMenu()->toEntity()->headerFont(),
-					"headerFontSize" => (string) $site->headerMenu()->toEntity()->headerFontSize(),
-					"headerColor" => (string) $site->headerMenu()->toEntity()->headerColor(),
-					"headerColorActive" => (string) $site->headerMenu()->toEntity()->headerColorActive(),
-					"headerBackground" => (string) $site->headerMenu()->toEntity()->headerBackground(),
-					"headerBackgroundActive" => (string) $site->headerMenu()->toEntity()->headerBackgroundActive(),
+					"headerFont" => (string) $site->headerMenu()->toObject()->headerFont(),
+					"headerFontSize" => (string) $site->headerMenu()->toObject()->headerFontSize(),
+					"headerColor" => (string) $site->headerMenu()->toObject()->headerColor(),
+					"headerColorActive" => (string) $site->headerMenu()->toObject()->headerColorActive(),
+					"headerBackground" => (string) $site->headerMenu()->toObject()->headerBackground(),
+					"headerBackgroundActive" => (string) $site->headerMenu()->toObject()->headerBackgroundActive(),
 
-					"hamburgerFont" => (string) $site->headerHamburger()->toEntity()->hamburgerFont(),
-					"hamburgerFontSize" => (string) $site->headerHamburger()->toEntity()->hamburgerFontSize(),
-					"hamburgerFontColor" => (string) $site->headerHamburger()->toEntity()->hamburgerFontColor(),
-					"hamburgerMenuColor" => (string) $site->headerHamburger()->toEntity()->hamburgerMenuColor(),
-					"hamburgerMenuColorActive" => (string) $site->headerHamburger()->toEntity()->hamburgerMenuColorActive(),
-					"hamburgerOverlay" => (string) $site->headerHamburger()->toEntity()->hamburgerOverlay(),
+					"hamburgerFont" => (string) $site->headerHamburger()->toObject()->hamburgerFont(),
+					"hamburgerFontSize" => (string) $site->headerHamburger()->toObject()->hamburgerFontSize(),
+					"hamburgerFontColor" => (string) $site->headerHamburger()->toObject()->hamburgerFontColor(),
+					"hamburgerMenuColor" => (string) $site->headerHamburger()->toObject()->hamburgerMenuColor(),
+					"hamburgerMenuColorActive" => (string) $site->headerHamburger()->toObject()->hamburgerMenuColorActive(),
+					"hamburgerOverlay" => (string) $site->headerHamburger()->toObject()->hamburgerOverlay(),
 
 					"logoFile" => $logoFile,
-					"logoAlign" => (string) $site->headerLogo()->toEntity()->logoAlign(),
+					"logoAlign" => (string) $site->headerLogo()->toObject()->logoAlign(),
 					"logoCta" => $logoCta,
-					"logoDesktop" => (string) $site->headerLogo()->toEntity()->logoDesktop(),
-					"logoMobile" => (string) $site->headerLogo()->toEntity()->logoMobile(),
-					"logoDesktopActive" => (string) $site->headerLogo()->toEntity()->logoDesktopActive(),
-					"logoMobileActive" => (string) $site->headerLogo()->toEntity()->logoMobileActive(),
+					"logoDesktop" => (string) $site->headerLogo()->toObject()->logoDesktop(),
+					"logoMobile" => (string) $site->headerLogo()->toObject()->logoMobile(),
+					"logoDesktopActive" => (string) $site->headerLogo()->toObject()->logoDesktopActive(),
+					"logoMobileActive" => (string) $site->headerLogo()->toObject()->logoMobileActive(),
 
 					"gridGapMobile" => (string) $site->gridGapMobile(),
 					"gridMarginMobile" => (string) $site->gridMarginMobile(),
@@ -255,17 +259,17 @@ return [
 					"gridBlockMobile" => (string) $site->gridBlockMobile(),
 					"gridBlockDesktop" => (string) $site->gridBlockDesktop(),
 
-					"buttonFont" => (string) $site->buttonSettings()->toEntity()->buttonFont(),
-					"buttonFontSize" => (string) $site->buttonSettings()->toEntity()->buttonFontSize(),
-					"buttonBorderRadius" => (string) $site->buttonSettings()->toEntity()->buttonBorderRadius(),
-					"buttonBorderWidth" => (string) $site->buttonSettings()->toEntity()->buttonBorderWidth(),
-					"buttonPadding" => (string) $site->buttonSettings()->toEntity()->buttonPadding(),
-					"buttonBackgroundColor" => (string) $site->buttonColors()->toEntity()->buttonBackgroundColor(),
-					"buttonBackgroundColorActive" => (string) $site->buttonColors()->toEntity()->buttonBackgroundColorActive(),
-					"buttonTextColor" => (string) $site->buttonColors()->toEntity()->buttonTextColor(),
-					"buttonTextColorActive" => (string) $site->buttonColors()->toEntity()->buttonTextColorActive(),
-					"buttonBorderColor"	=> (string) $site->buttonColors()->toEntity()->buttonBorderColor(),
-					"buttonBorderColorActive" => (string) $site->buttonColors()->toEntity()->buttonBorderColorActive(),
+					"buttonFont" => (string) $site->buttonSettings()->toObject()->buttonFont(),
+					"buttonFontSize" => (string) $site->buttonSettings()->toObject()->buttonFontSize(),
+					"buttonBorderRadius" => (string) $site->buttonSettings()->toObject()->buttonBorderRadius(),
+					"buttonBorderWidth" => (string) $site->buttonSettings()->toObject()->buttonBorderWidth(),
+					"buttonPadding" => (string) $site->buttonSettings()->toObject()->buttonPadding(),
+					"buttonBackgroundColor" => (string) $site->buttonColors()->toObject()->buttonBackgroundColor(),
+					"buttonBackgroundColorActive" => (string) $site->buttonColors()->toObject()->buttonBackgroundColorActive(),
+					"buttonTextColor" => (string) $site->buttonColors()->toObject()->buttonTextColor(),
+					"buttonTextColorActive" => (string) $site->buttonColors()->toObject()->buttonTextColorActive(),
+					"buttonBorderColor"	=> (string) $site->buttonColors()->toObject()->buttonBorderColor(),
+					"buttonBorderColorActive" => (string) $site->buttonColors()->toObject()->buttonBorderColorActive(),
 
 					"searchConsoleToggle" => $site->searchConsoleToggle()->toBool(false),
 					"searchConsoleCode" => $searchConsoleCode,

@@ -119,7 +119,7 @@ columns:
         type: fields
         fields:
           headlines:
-            type: entity
+            type: object
             label: Überschriften für Textfelder
             icon: title
             toggle: true

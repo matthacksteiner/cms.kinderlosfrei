@@ -2,7 +2,7 @@
 
 use Kirby\Cms\App as Kirby;
 
-Kirby::plugin('cookbook/programmable-blueprints', [
+Kirby::plugin('baukasten/programmable-blueprints', [
     'blueprints' => [
         'site' => function () {
             if (($user = kirby()->user()) && $user->isAdmin()) {

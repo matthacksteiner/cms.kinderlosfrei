@@ -6,6 +6,3 @@ fields:
     type: text
     label: Alternativ Text
     width: 2/3
-  focus:
-    label: Fokus
-    type: focus
