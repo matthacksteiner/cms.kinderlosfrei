@@ -23,7 +23,7 @@ jobs:
     needs: sync
     steps:
       - name: executing remote ssh commands using password
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@1.0.3
         with:
           host: ${{ secrets.UBERSPACE_HOST }}
           username: ${{ secrets.UBERSPACE_USER }}
