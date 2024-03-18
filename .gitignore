@@ -13,6 +13,7 @@
 /public/media
 /public/assets/dist
 /kirby
+site/languages
 
 site/plugins/*
 !site/plugins/baukasten-blocks-preview/
