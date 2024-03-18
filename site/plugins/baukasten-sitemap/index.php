@@ -12,14 +12,22 @@ Kirby::plugin('baukasten/sitemap', [
             $site = $kirby->site();
             $cmsUrl = $kirby->url('index');
             $frontendUrl = rtrim($site->frontendUrl(), '/');
+            $allLanguages = $kirby->languages();
+            $defaultLanguage = $kirby->defaultLanguage();
 
             if ($frontendUrl) {
                 foreach ($root->getElementsByTagName('url') as $url) {
                     foreach ($url->getElementsByTagName('loc') as $loc) {
                         $loc->nodeValue = Str::replace($loc->nodeValue, $cmsUrl, $frontendUrl);
+                        if (count($allLanguages) === 1) {
+                            $loc->nodeValue = Str::replace($loc->nodeValue, '/' . $defaultLanguage->code(), '');
+                        }
                     }
                     foreach ($url->getElementsByTagName('xhtml:link') as $xhtml) {
                         $xhtml->setAttribute('href', Str::replace($xhtml->getAttribute('href'), $cmsUrl, $frontendUrl));
+                        if (count($allLanguages) === 1) {
+                            $xhtml->setAttribute('href', Str::replace($xhtml->getAttribute('href'), '/' . $defaultLanguage->code(), ''));
+                        }
                     }
                 }
             }
