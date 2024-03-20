@@ -59,10 +59,18 @@ tabs:
         width: 1/4
         default: 5000
         after: ms
+      effect:
+        label: Effekt
+        type: select
+        width: 1/4
+        default: slide
+        options:
+          slide: Slide
+          fade: Fade
       gap:
         label: Abstand
         type: gap
-        width: 2/4
+        width: 1/4
       viewMobile:
         label: Anzahl der Bilder 📱
         type: number
