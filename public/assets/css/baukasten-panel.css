@@ -35,3 +35,9 @@
 .k-login-fields {
 	margin-top: 2rem;
 }
+
+/* Webhook K4 fix */
+.pju-webhook--btn {
+	display: flex;
+	padding: 1.75em 1.5em 1.875em;
+}
