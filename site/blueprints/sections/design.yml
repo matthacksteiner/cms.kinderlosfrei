@@ -11,27 +11,27 @@ columns:
             numbered: true
             translate: false
           colorPrimary:
-            type: colors
+            type: color
             label: Primäre Farbe
             width: 1/3
             translate: false
           colorSecondary:
-            type: colors
+            type: color
             label: Sekundäre Farbe
             width: 1/3
             translate: false
           colorTertiary:
-            type: colors
+            type: color
             label: Teritäre Farbe
             width: 1/3
             translate: false
           colorBlack:
-            type: colors
+            type: color
             label: Schwarz
             width: 1/3
             translate: false
           colorWhite:
-            type: colors
+            type: color
             label: Weiß
             width: 1/3
             translate: false
@@ -108,7 +108,7 @@ columns:
             numbered: true
             translate: false
           faviconFiles:
-            type: entity
+            type: object
             label: Dateien
             icon: file
             toggle: true
@@ -199,11 +199,15 @@ columns:
             default: true
             width: 1/6
             translate: false
+          headerGap:
+            type: gap
+            width: 5/6
           headerLogo:
-            type: entity
+            type: object
             label: Logo
             icon: file-image
             toggle: true
+            width: 1/3
             when:
               headerActive: true
             fields:
@@ -215,7 +219,7 @@ columns:
                 uploads:
                   template: svg
                 multiple: false
-                width: 2/6
+                width: 4/6
                 translate: false
               logoAlign:
                 label: Ausrichtung
@@ -224,12 +228,40 @@ columns:
                 options:
                   left: Links
                   center: Zentriert
-                width: 1/6
+                width: 2/6
+                translate: false
+              logoMobile:
+                label: Breite 📱
+                type: number
+                placeholder: 200
+                after: px
+                width: 1/4
+                translate: false
+              logoMobileActive:
+                label: Breite Aktiv 📱
+                type: number
+                placeholder: 100
+                after: px
+                width: 1/4
+                translate: false
+              logoDesktop:
+                label: Breite 🖥️
+                type: number
+                placeholder: 400
+                after: px
+                width: 1/4
+                translate: false
+              logoDesktopActive:
+                label: Breite Aktiv 🖥️
+                type: number
+                placeholder: 200
+                after: px
+                width: 1/4
                 translate: false
               logoCta:
                 label: CTA Button
                 type: link
-                width: 3/6
+                width: 1/1
                 pages:
                   query: site.index.filterBy('intendedTemplate', 'in', ['default', 'home'])
                 linkTypes:
@@ -241,43 +273,11 @@ columns:
                 translate: false
                 when:
                   logoAlign: center
-              logoGap:
-                type: gap
-                width: 3/6
-                when:
-                  logoAlign: left
-              logoMobile:
-                label: Breite 📱
-                type: number
-                placeholder: 200
-                after: px
-                width: 1/6
-                translate: false
-              logoMobileActive:
-                label: Breite Aktiv 📱
-                type: number
-                placeholder: 100
-                after: px
-                width: 1/6
-                translate: false
-              logoDesktop:
-                label: Breite 🖥️
-                type: number
-                placeholder: 400
-                after: px
-                width: 1/6
-                translate: false
-              logoDesktopActive:
-                label: Breite Aktiv 🖥️
-                type: number
-                placeholder: 200
-                after: px
-                width: 1/6
-                translate: false
           headerMenu:
-            type: entity
+            type: object
             label: Menü
             icon: dots
+            width: 1/3
             toggle: true
             when:
               headerActive: true
@@ -331,9 +331,10 @@ columns:
                 width: 1/6
                 translate: false
           headerHamburger:
-            type: entity
+            type: object
             label: Hamburger
             icon: menu
+            width: 1/3
             toggle: true
             when:
               headerActive: true
@@ -398,9 +399,10 @@ columns:
             type: headline
             numbered: true
           buttonSettings:
-            type: entity
+            type: object
             label: Einstellungen
             icon: cog
+            width: 1/2
             toggle: true
             fields:
               buttonFont:
@@ -433,9 +435,10 @@ columns:
                 after: px
                 translate: false
           buttonColors:
-            type: entity
+            type: object
             label: Farben
             icon: palette
+            width: 1/2
             toggle: true
             fields:
               buttonBackgroundColor:

@@ -197,8 +197,8 @@ function getBlockArray(\Kirby\Cms\Block $block)
 
         $image = [
           'url' => $image->url(),
-          'urlFocus' => $image->focusCrop($image->width(), $calculateHeight($image->width(), $ratio), ['quality' => 99])->url(),
-          'urlFocusMobile' => $image->focusCrop($image->width(), $calculateHeight($image->width(), $ratioMobile), ['quality' => 99])->url(),
+          'urlFocus' => $image->crop($image->width(), $calculateHeight($image->width(), $ratio))->url(),
+          'urlFocusMobile' => $image->crop($image->width(), $calculateHeight($image->width(), $ratioMobile))->url(),
           'width' => $image->width(),
           'height' => $image->height(),
           'alt' => (string)$image->alt(),
@@ -242,8 +242,8 @@ function getBlockArray(\Kirby\Cms\Block $block)
 
         $images[] = [
           'url' => $image->url(),
-          'urlFocus' => $image->focusCrop($image->width(), $calculateHeight($image->width(), $ratio), ['quality' => 99])->url(),
-          'urlFocusMobile' => $image->focusCrop($image->width(), $calculateHeight($image->width(), $ratioMobile), ['quality' => 99])->url(),
+          'urlFocus' => $image->crop($image->width(), $calculateHeight($image->width(), $ratio))->url(),
+          'urlFocusMobile' => $image->crop($image->width(), $calculateHeight($image->width(), $ratioMobile))->url(),
           'width' => $image->width(),
           'height' => $image->height(),
           'alt' => (string)$image->alt(),

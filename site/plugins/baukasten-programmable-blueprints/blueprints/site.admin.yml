@@ -22,8 +22,9 @@ tabs:
             sortable: false
             status: published
             layout: cardlets
-            size: small
+            size: medium
             image: icon
+            cover: true
             templates:
               - home
               - default
