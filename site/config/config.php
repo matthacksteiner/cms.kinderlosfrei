@@ -211,6 +211,7 @@ return [
 					'siteTitle' => (string) $site->title(),
 					"defaultLang" => $defaultLang,
 					"translations" => $translations,
+					"prefixDefaultLocale" => option('prefixDefaultLocale'),
 					"allLang" => $allLang,
 					"favicon" => $favicon,
 
