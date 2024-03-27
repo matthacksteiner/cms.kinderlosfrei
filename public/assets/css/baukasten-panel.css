@@ -5,6 +5,7 @@
 
 .k-tabs {
 	background-color: var(--color-gray-300);
+	gap: 2rem;
 }
 
 .k-header::before {

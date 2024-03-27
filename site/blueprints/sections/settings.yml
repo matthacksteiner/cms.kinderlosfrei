@@ -19,7 +19,7 @@ columns:
                 label: Link
                 required: true
                 pages:
-                  query: site.index.filterBy('intendedTemplate', 'in', ['default', 'home'])
+                  query: site.index.filterBy('intendedTemplate', 'in', ['default', 'home', 'section'])
                 linkTypes:
                   - page
                   - url

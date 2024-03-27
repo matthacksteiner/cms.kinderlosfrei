@@ -16,6 +16,7 @@ tabs:
             size: small
             templates:
               - default
+              - section
           contentMain:
             headline: Veröffentlicht
             type: pages
@@ -27,8 +28,10 @@ tabs:
             templates:
               - home
               - default
+              - section
             create:
               - default
+              - section
       sidebar:
         width: 1/3
         sections:

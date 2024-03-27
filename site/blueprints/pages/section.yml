@@ -1,0 +1,32 @@
+title: Sektion
+icon: box
+
+options:
+  delete: false
+  url: false
+  duplicate: false
+
+columns:
+  - width: 3/3
+    sections:
+      contentMainDrafts:
+        headline: Entwürfe
+        type: pages
+        status: drafts
+        layout: list
+        size: small
+        templates:
+          - default
+      contentMain:
+        headline: Veröffentlicht
+        type: pages
+        sortable: false
+        status: published
+        layout: cardlets
+        size: medium
+        image: icon
+        cover: true
+        templates:
+          - default
+        create:
+          - default
