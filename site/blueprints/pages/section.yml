@@ -16,7 +16,7 @@ columns:
         layout: list
         size: small
         templates:
-          - default
+          - item
       contentMain:
         headline: Veröffentlicht
         type: pages
@@ -27,6 +27,6 @@ columns:
         image: icon
         cover: true
         templates:
-          - default
+          - item
         create:
-          - default
+          - item

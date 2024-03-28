@@ -5,6 +5,34 @@
 
 use Kirby\Cms\Page;
 
+function getChildren(\Kirby\Cms\Page $page)
+{
+  $children = [];
+  foreach ($page->children() as $child) {
+    $children[] = [
+      "id" => $child->id(),
+      "uri" => $child->uri(),
+      "intendedTemplate" => $child->intendedTemplate()->name(),
+    ];
+  }
+
+  return [
+    "id" => $page->id(),
+    "uri" => $page->uri(),
+    "intendedTemplate" => $page->intendedTemplate()->name(),
+  ];
+}
+
+if ($page->children()->isNotEmpty()) {
+  $json['children'] = [];
+
+  foreach ($page->children() as $child) {
+    $childrenData = getChildren($child);
+  }
+
+  $json['children'] = $childrenData;
+}
+
 if (method_exists($page, 'getJsonData')) {
   $content = $page->content()->toArray();
   $unsetFields = [
