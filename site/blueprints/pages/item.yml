@@ -19,5 +19,10 @@ tabs:
             help: "Dieses Bild dient als Anzeigebild in der Übersicht."
             uploads:
               template: pixel
+          description:
+            label: Beschreibung
+            type: text
+            help: "Wird in der Übersicht angezeigt."
+
   media: tabs/media
   meta: tabs/meta/site

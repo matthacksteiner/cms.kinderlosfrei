@@ -5,76 +5,98 @@
 
 use Kirby\Cms\Page;
 
-function getChildren(\Kirby\Cms\Page $page)
+function getItems(\Kirby\Cms\Page $page)
 {
-  $children = [];
-  foreach ($page->children() as $child) {
-    $children[] = [
-      "id" => $child->id(),
-      "uri" => $child->uri(),
-      "intendedTemplate" => $child->intendedTemplate()->name(),
+  $items = [];
+  foreach ($page->children() as $item) {
+    $image = $item->thumbnail()->toFile();
+    $ratioMobile = explode('/', $page->ratioMobile()->value());
+    $ratio = explode('/', $page->ratio()->value());
+
+    $calculateHeight = function ($width, $ratio) {
+      return isset($ratio[1]) ? round(($width / $ratio[0]) * $ratio[1]) : $width;
+    };
+
+    $items[] = [
+      'title' => (string) $item->title(),
+      "uri" => $item->uri(),
+      "description" => (string) $item->description()->escape(),
+      'thumbnail' => [
+        'url' => $image->url(),
+        'urlFocus' => $image->crop($image->width(), $calculateHeight($image->width(), $ratio))->url(),
+        'urlFocusMobile' => $image->crop($image->width(), $calculateHeight($image->width(), $ratioMobile))->url(),
+        'width' => $image->width(),
+        'height' => $image->height(),
+        'alt' => (string) $image->alt(),
+        'orientation' => $image->orientation(),
+      ],
     ];
   }
 
-  return [
-    "id" => $page->id(),
-    "uri" => $page->uri(),
-    "intendedTemplate" => $page->intendedTemplate()->name(),
-  ];
+  return $items;
 }
 
 if ($page->children()->isNotEmpty()) {
-  $json['children'] = [];
-
-  foreach ($page->children() as $child) {
-    $childrenData = getChildren($child);
-  }
-
-  $json['children'] = $childrenData;
+  $json['items'] = getItems($page);
 }
 
-if (method_exists($page, 'getJsonData')) {
-  $content = $page->content()->toArray();
-  $unsetFields = [
-    'title',
-    'meta_title',
-    'meta_description',
-    'meta_canonical_url',
-    'meta_author',
-    'meta_image',
-    'meta_phone_number',
-    'og_title',
-    'og_description',
-    'og_image',
-    'og_site_name',
-    'og_url',
-    'og_audio',
-    'og_video',
-    'og_determiner',
-    'og_type',
-    'og_type_article_published_time',
-    'og_type_article_modified_time',
-    'og_type_article_expiration_time',
-    'og_type_article_author',
-    'og_type_article_section',
-    'og_type_article_tag',
-    'twitter_title',
-    'twitter_description',
-    'twitter_image',
-    'twitter_card_type',
-    'twitter_site',
-    'twitter_creator',
-    'robots_noindex',
-    'robots_nofollow',
-    'robots_noarchive',
-    'robots_noimageindex',
-    'robots_nosnippet',
-    'blocks'
+function getSettings(\Kirby\Cms\Page $page)
+{
+  return [
+    'ratio' => $page->ratio()->value(),
+    'ratioMobile' => $page->ratioMobile()->value(),
+    'spanMobile' => $page->spanMobile()->value(),
+    'span' => $page->span()->value(),
+    'title' => $page->titleSettings()->textfont()->value(),
   ];
-
-  foreach ($unsetFields as $key) {
-    unset($content[$key]);
-  }
 }
+
+$json['settings'] = getSettings($page);
+
+
+
+// if (method_exists($page, 'getJsonData')) {
+//   $content = $page->content()->toArray();
+//   $unsetFields = [
+//     'title',
+//     'meta_title',
+//     'meta_description',
+//     'meta_canonical_url',
+//     'meta_author',
+//     'meta_image',
+//     'meta_phone_number',
+//     'og_title',
+//     'og_description',
+//     'og_image',
+//     'og_site_name',
+//     'og_url',
+//     'og_audio',
+//     'og_video',
+//     'og_determiner',
+//     'og_type',
+//     'og_type_article_published_time',
+//     'og_type_article_modified_time',
+//     'og_type_article_expiration_time',
+//     'og_type_article_author',
+//     'og_type_article_section',
+//     'og_type_article_tag',
+//     'twitter_title',
+//     'twitter_description',
+//     'twitter_image',
+//     'twitter_card_type',
+//     'twitter_site',
+//     'twitter_creator',
+//     'robots_noindex',
+//     'robots_nofollow',
+//     'robots_noarchive',
+//     'robots_noimageindex',
+//     'robots_nosnippet',
+//     'blocks',
+//   ];
+
+//   foreach ($unsetFields as $key) {
+//     unset($content[$key]);
+//   }
+// }
 
 echo json_encode($json);

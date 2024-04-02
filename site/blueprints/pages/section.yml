@@ -6,11 +6,13 @@ options:
   url: false
   duplicate: false
 
-columns:
-  - width: 3/3
+tabs:
+  content:
+    label: Inhalt
+    icon: text
     sections:
       contentMainDrafts:
-        headline: Entwürfe
+        label: Entwürfe
         type: pages
         status: drafts
         layout: list
@@ -18,7 +20,7 @@ columns:
         templates:
           - item
       contentMain:
-        headline: Veröffentlicht
+        label: Veröffentlicht
         type: pages
         sortable: false
         status: published
@@ -30,3 +32,47 @@ columns:
           - item
         create:
           - item
+
+  settings:
+    label: Einstellungen
+    icon: cog
+    fields:
+      titleHeadline:
+        label: Titel
+        type: headline
+        numbered: false
+      titleSettings:
+        label: Titel Einstellungen
+        extends: groups/titleGroup
+        fields:
+          titleGap: false
+          titleAlign: false
+      textHeadline:
+        label: Text
+        type: headline
+        numbered: false
+      textSettings:
+        label: Text Einstellungen
+        extends: groups/textGroup
+      displayHeadline:
+        label: Darstellung
+        type: headline
+        numbered: false
+      ratioMobile:
+        extends: fields/ratio
+        label: Seitenverhältnis 📱
+        width: 1/4
+        required: false
+      ratio:
+        extends: fields/ratio
+        label: Seitenverhältnis 🖥️
+        width: 1/4
+        required: false
+      spanMobile:
+        label: Spanne 📱
+        extends: fields/span
+        width: 1/4
+      span:
+        label: Spanne 🖥️
+        extends: fields/span
+        width: 1/4
