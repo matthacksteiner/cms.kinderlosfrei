@@ -48,24 +48,24 @@ function getSettings(\Kirby\Cms\Page $page)
     'spanMobile' => $page->spanMobile()->value(),
     'span' => $page->span()->value(),
     'main' => [
-      'level' => $page->mainLevel()->value(),
-      'font' => $page->mainFont()->value(),
-      'size' => $page->mainSize()->value(),
-      'color' => $page->mainColor()->value(),
-      'align' => $page->mainAlign()->value(),
+      'level' => $page->fontMain()->toObject()->mainlevel()->value(),
+      'font' => $page->fontMain()->toObject()->mainfont()->value(),
+      'size' => $page->fontMain()->toObject()->mainsize()->value(),
+      'color' => $page->fontMain()->toObject()->maincolor()->value(),
+      'align' => $page->fontMain()->toObject()->mainalign()->value(),
     ],
     'title' => [
-      'level' => $page->level()->value(),
-      'font' => $page->titleFont()->value(),
-      'size' => $page->titleSize()->value(),
-      'color' => $page->titleColor()->value(),
-      'align' => $page->titleAlign()->value(),
+      'level' => $page->fontTitle()->toObject()->level()->value(),
+      'font' => $page->fontTitle()->toObject()->titleFont()->value(),
+      'size' => $page->fontTitle()->toObject()->titleSize()->value(),
+      'color' => $page->fontTitle()->toObject()->titleColor()->value(),
+      'align' => $page->fontTitle()->toObject()->titleAlign()->value(),
     ],
     'text' => [
-      'font' => $page->textFont()->value(),
-      'size' => $page->textSize()->value(),
-      'color' => $page->textColor()->value(),
-      'align' => $page->textAlign()->value(),
+      'font' => $page->fontText()->toObject()->textFont()->value(),
+      'size' => $page->fontText()->toObject()->textSize()->value(),
+      'color' => $page->fontText()->toObject()->textColor()->value(),
+      'align' => $page->fontText()->toObject()->textAlign()->value(),
     ]
   ];
 }
