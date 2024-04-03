@@ -174,11 +174,11 @@ tabs:
                 text: 6 Spalten
               - value: "12"
                 text: 12 Spalten
-          spacingMobile:
+          gapMobile:
             label: Abstand Elemente 📱
             extends: fields/spacing
             width: 1/2
-          spacing:
+          gap:
             label: Abstand Elemente 🖥️
             extends: fields/spacing
             width: 1/2
