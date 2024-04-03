@@ -2,16 +2,3 @@ type: select
 placeholder: false
 default: "6"
 width: 1/2
-options:
-  - value: "1"
-    text: 1 Spalte
-  - value: "2"
-    text: 2 Spalten
-  - value: "3"
-    text: 3 Spalten
-  - value: "4"
-    text: 4 Spalten
-  - value: "6"
-    text: 6 Spalten
-  - value: "12"
-    text: 12 Spalten
