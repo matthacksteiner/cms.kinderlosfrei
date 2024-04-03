@@ -24,10 +24,13 @@ tabs:
         type: pages
         sortable: false
         status: published
-        layout: cardlets
+        layout: cards
         size: medium
-        image: icon
-        cover: true
+        image:
+          query: page.thumbnail.toFile
+          ratio: 3/2
+          cover: true
+        info: "{{ page.description }}"
         templates:
           - item
         create:
