@@ -43,16 +43,22 @@ if ($page->children()->isNotEmpty()) {
 function getSettings(\Kirby\Cms\Page $page)
 {
   return [
-    'ratio' => $page->ratio()->value(),
-    'ratioMobile' => $page->ratioMobile()->value(),
-    'spanMobile' => $page->spanMobile()->value(),
-    'span' => $page->span()->value(),
+    'ratio' => $page->displayRatio()->toObject()->ratio()->value(),
+    'ratioMobile' => $page->displayRatio()->toObject()->ratioMobile()->value(),
+    'grid' => [
+      'spacing' => $page->displayGrid()->toObject()->spacing()->value(),
+      'spacingMobile' => $page->displayGrid()->toObject()->spacingMobile()->value(),
+      'span' => $page->displayGrid()->toObject()->span()->value(),
+      'spanMobile' => $page->displayGrid()->toObject()->spanMobile()->value(),
+    ],
     'main' => [
       'level' => $page->fontMain()->toObject()->mainlevel()->value(),
       'font' => $page->fontMain()->toObject()->mainfont()->value(),
       'size' => $page->fontMain()->toObject()->mainsize()->value(),
       'color' => $page->fontMain()->toObject()->maincolor()->value(),
       'align' => $page->fontMain()->toObject()->mainalign()->value(),
+      'spacing' => $page->fontMain()->toObject()->mainSpacing()->value(),
+      'spacingMobile' => $page->fontMain()->toObject()->mainSpacingMobile()->value(),
     ],
     'title' => [
       'level' => $page->fontTitle()->toObject()->level()->value(),

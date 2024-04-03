@@ -14,7 +14,7 @@ tabs:
       - width: 1/4
         fields:
           thumbnail:
-            label: Vorschaubild
+            label: Cover
             type: files
             help: "Dieses Bild dient als Anzeigebild in der Übersicht."
             uploads:

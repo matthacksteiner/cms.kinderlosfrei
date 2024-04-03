@@ -57,7 +57,7 @@ tabs:
         type: headline
         numbered: false
       thumbnail:
-        label: Vorschaubild
+        label: Cover
         type: files
         help: "Wird nur angezeigt, wenn Autoplay deaktiviert ist. Das Bild sollte die gleiche Größe wie das Video haben."
         uploads:
