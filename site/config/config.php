@@ -47,6 +47,8 @@ return [
 					$index[] = [
 						"uri" => $page->uri(),
 						"intendedTemplate" => $page->intendedTemplate()->name(),
+						"parent" => $page->intendedTemplate()->name() == 'item' ? $page->parent()->uri() : null,
+
 					];
 				}
 
