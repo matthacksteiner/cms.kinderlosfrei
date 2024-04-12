@@ -21,6 +21,7 @@ function getItems(\Kirby\Cms\Page $page)
       'title' => (string) $item->title(),
       "uri" => $item->uri(),
       "description" => (string) $item->description()->escape(),
+      "parent" => strtolower((string) $page->title()),
       'thumbnail' => [
         'url' => $image->url(),
         'urlFocus' => $image->crop($image->width(), $calculateHeight($image->width(), $ratio))->url(),
