@@ -47,6 +47,7 @@ function getSettings(\Kirby\Cms\Page $page)
     'ratio' => $page->displayRatio()->toObject()->ratio()->value() ?: '16/9',
     'ratioMobile' => $page->displayRatio()->toObject()->ratioMobile()->value() ?: '16/9',
     'grid' => [
+      'elements' => $page->displayElements()->toObject()->elements()->value() ?: '10',
       'gap' => $page->displayGrid()->toObject()->gap()->value() ?: '16',
       'gapMobile' => $page->displayGrid()->toObject()->gapMobile()->value() ?: '16',
       'span' => $page->displayGrid()->toObject()->span()->value() ?: '6',
