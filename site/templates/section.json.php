@@ -8,15 +8,15 @@ use Kirby\Cms\Page;
 function getItems(\Kirby\Cms\Page $page)
 {
   $items = [];
+
   foreach ($page->children() as $item) {
     $image = $item->thumbnail()->toFile();
-    $ratioMobile = explode('/', $page->ratioMobile()->value());
-    $ratio = explode('/', $page->ratio()->value());
+    $ratioMobile = explode('/', $page->displayratio()->toObject()->ratioMobile()->value());
+    $ratio = explode('/', $page->displayratio()->toObject()->ratio()->value());
 
     $calculateHeight = function ($width, $ratio) {
       return isset($ratio[1]) ? round(($width / $ratio[0]) * $ratio[1]) : $width;
     };
-
     $items[] = [
       'title' => (string) $item->title(),
       "uri" => $item->uri(),
@@ -44,16 +44,16 @@ if ($page->children()->isNotEmpty()) {
 function getSettings(\Kirby\Cms\Page $page)
 {
   return [
-    'ratio' => $page->displayRatio()->toObject()->ratio()->value(),
-    'ratioMobile' => $page->displayRatio()->toObject()->ratioMobile()->value(),
+    'ratio' => $page->displayRatio()->toObject()->ratio()->value() ?: '16/9',
+    'ratioMobile' => $page->displayRatio()->toObject()->ratioMobile()->value() ?: '16/9',
     'grid' => [
-      'gap' => $page->displayGrid()->toObject()->gap()->value(),
-      'gapMobile' => $page->displayGrid()->toObject()->gapMobile()->value(),
-      'span' => $page->displayGrid()->toObject()->span()->value(),
-      'spanMobile' => $page->displayGrid()->toObject()->spanMobile()->value(),
+      'gap' => $page->displayGrid()->toObject()->gap()->value() ?: '16',
+      'gapMobile' => $page->displayGrid()->toObject()->gapMobile()->value() ?: '16',
+      'span' => $page->displayGrid()->toObject()->span()->value() ?: '6',
+      'spanMobile' => $page->displayGrid()->toObject()->spanMobile()->value() ?: '6',
     ],
     'main' => [
-      'level' => $page->fontMain()->toObject()->mainlevel()->value(),
+      'level' => $page->fontMain()->toObject()->mainlevel()->value() ?: 'h2',
       'font' => $page->fontMain()->toObject()->mainfont()->value(),
       'size' => $page->fontMain()->toObject()->mainsize()->value(),
       'color' => $page->fontMain()->toObject()->maincolor()->value(),
@@ -62,7 +62,7 @@ function getSettings(\Kirby\Cms\Page $page)
       'spacingMobile' => $page->fontMain()->toObject()->mainSpacingMobile()->value(),
     ],
     'title' => [
-      'level' => $page->fontTitle()->toObject()->level()->value(),
+      'level' => $page->fontTitle()->toObject()->level()->value() ?: 'h2',
       'font' => $page->fontTitle()->toObject()->titleFont()->value(),
       'size' => $page->fontTitle()->toObject()->titleSize()->value(),
       'color' => $page->fontTitle()->toObject()->titleColor()->value(),
