@@ -11,8 +11,9 @@ function getItems(\Kirby\Cms\Page $page)
 
   foreach ($page->children() as $item) {
     $image = $item->thumbnail()->toFile();
-    $ratioMobile = explode('/', $page->displayratio()->toObject()->ratioMobile()->value());
-    $ratio = explode('/', $page->displayratio()->toObject()->ratio()->value());
+
+    $ratioMobile = explode('/', $page->displayratio()->toObject()->ratioMobile()->value() ?: '16/9');
+    $ratio = explode('/', $page->displayratio()->toObject()->ratio()->value() ?: '16/9');
 
     $calculateHeight = function ($width, $ratio) {
       return isset($ratio[1]) ? round(($width / $ratio[0]) * $ratio[1]) : $width;
@@ -59,8 +60,8 @@ function getSettings(\Kirby\Cms\Page $page)
       'size' => $page->fontMain()->toObject()->mainsize()->value(),
       'color' => $page->fontMain()->toObject()->maincolor()->value(),
       'align' => $page->fontMain()->toObject()->mainalign()->value(),
-      'spacing' => $page->fontMain()->toObject()->mainSpacing()->value(),
-      'spacingMobile' => $page->fontMain()->toObject()->mainSpacingMobile()->value(),
+      'spacing' => $page->fontMain()->toObject()->mainSpacing()->value() ?: '0',
+      'spacingMobile' => $page->fontMain()->toObject()->mainSpacingMobile()->value() ?: '0',
     ],
     'title' => [
       'level' => $page->fontTitle()->toObject()->level()->value() ?: 'h2',
