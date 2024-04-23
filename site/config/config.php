@@ -282,6 +282,8 @@ return [
 					"paginationPadding" => (string) $site->paginationSettings()->toObject()->paginationPadding(),
 					"paginationMargin" => (string) $site->paginationSettings()->toObject()->paginationMargin(),
 					"paginationElements" => (string) $site->paginationSettings()->toObject()->paginationElements(),
+					"paginationTop" => (string) $site->paginationSettings()->toObject()->paginationTop(),
+					"paginationBottom" => (string) $site->paginationSettings()->toObject()->paginationBottom(),
 					"paginationBackgroundColor" => (string) $site->paginationColors()->toObject()->paginationBackgroundColor(),
 					"paginationBackgroundColorHover" => (string) $site->paginationColors()->toObject()->paginationBackgroundColorHover(),
 					"paginationBackgroundColorActive" => (string) $site->paginationColors()->toObject()->paginationBackgroundColorActive(),

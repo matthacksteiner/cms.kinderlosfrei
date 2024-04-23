@@ -571,6 +571,23 @@ columns:
                   - value: 30
                     text: 30
                   - value: 40
+              paginationGap2:
+                type: gap
+                width: 1/3
+              paginationTop:
+                label: Abstand oben
+                type: number
+                placeholder: 20
+                width: 1/3
+                after: px
+                translate: false
+              paginationBottom:
+                label: Abstand unten
+                type: number
+                placeholder: 20
+                width: 1/3
+                after: px
+                translate: false
           paginationColors:
             type: object
             label: Farben
@@ -578,30 +595,6 @@ columns:
             width: 1/2
             toggle: true
             fields:
-              paginationBackgroundColorHeadline:
-                label: Farbe Hintergrund
-                type: headline
-              paginationBackgroundColor:
-                label: Farbe
-                type: select
-                default: primary
-                extends: fields/colors
-                width: 1/3
-                translate: false
-              paginationBackgroundColorHover:
-                label: Farbe Hover
-                type: select
-                default: primary
-                extends: fields/colors
-                width: 1/3
-                translate: false
-              paginationBackgroundColorActive:
-                label: Farbe Aktiv
-                type: select
-                default: primary
-                extends: fields/colors
-                width: 1/3
-                translate: false
               paginationTextColorHeadline:
                 label: Farbe Text
                 type: headline
@@ -623,6 +616,30 @@ columns:
                 label: Farbe Aktiv
                 type: select
                 default: secondary
+                extends: fields/colors
+                width: 1/3
+                translate: false
+              paginationBackgroundColorHeadline:
+                label: Farbe Hintergrund
+                type: headline
+              paginationBackgroundColor:
+                label: Farbe
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/3
+                translate: false
+              paginationBackgroundColorHover:
+                label: Farbe Hover
+                type: select
+                default: primary
+                extends: fields/colors
+                width: 1/3
+                translate: false
+              paginationBackgroundColorActive:
+                label: Farbe Aktiv
+                type: select
+                default: primary
                 extends: fields/colors
                 width: 1/3
                 translate: false
