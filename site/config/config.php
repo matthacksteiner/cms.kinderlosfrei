@@ -175,8 +175,8 @@ return [
 						"lineHeightDesktop" => (string)$fontSizeItem->lineHeightDesktop(),
 						"letterSpacingDesktop" => (string)$fontSizeItem->letterSpacingDesktop(),
 						"letterSpacingMobile" => (string)$fontSizeItem->letterSpacingMobile(),
-						"transform" => (string)$fontSizeItem->transform(),
-						"decoration" => (string)$fontSizeItem->decoration(),
+						"transform" => (string)$fontSizeItem->transform() ?: 'none',
+						"decoration" => (string)$fontSizeItem->decoration() ?: 'none',
 					];
 				}
 
