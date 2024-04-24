@@ -1,11 +1,6 @@
 title: Sektion
 icon: box
 
-options:
-  delete: false
-  url: false
-  duplicate: false
-
 tabs:
   content:
     label: Inhalt
