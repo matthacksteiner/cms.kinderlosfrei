@@ -10,7 +10,7 @@ return [
 	'date.handler' => 'strftime',
 	'locale' => 'de_AT.utf-8',
 	'languages' => true,
-	'prefixDefaultLocale' => true,
+	'prefixDefaultLocale' => false,
 	'error' => 'z-error',
 	'pju.webhook-field.hooks' => [
 		'netlify_deploy' => [
