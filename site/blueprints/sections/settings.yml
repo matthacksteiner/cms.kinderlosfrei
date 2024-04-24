@@ -19,7 +19,7 @@ columns:
                 label: Link
                 required: true
                 pages:
-                  query: site.index.filterBy('intendedTemplate', 'in', ['default', 'home'])
+                  query: site.index.filterBy('intendedTemplate', 'not in', ['error'])
                 linkTypes:
                   - page
                   - url
@@ -36,7 +36,7 @@ columns:
                 label: Link
                 required: true
                 pages:
-                  query: site.index.filterBy('intendedTemplate', 'in', ['default', 'home'])
+                  query: site.index.filterBy('intendedTemplate', 'not in', ['error'])
                 linkTypes:
                   - page
                   - url

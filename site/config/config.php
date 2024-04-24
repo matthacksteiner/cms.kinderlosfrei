@@ -10,7 +10,7 @@ return [
 	'date.handler' => 'strftime',
 	'locale' => 'de_AT.utf-8',
 	'languages' => true,
-	'prefixDefaultLocale' => false,
+	'prefixDefaultLocale' => true,
 	'error' => 'z-error',
 	'pju.webhook-field.hooks' => [
 		'netlify_deploy' => [
@@ -47,6 +47,8 @@ return [
 					$index[] = [
 						"uri" => $page->uri(),
 						"intendedTemplate" => $page->intendedTemplate()->name(),
+						"parent" => $page->intendedTemplate()->name() == 'item' ? $page->parent()->uri() : null,
+
 					];
 				}
 
@@ -272,6 +274,25 @@ return [
 					"buttonTextColorActive" => (string) $site->buttonColors()->toObject()->buttonTextColorActive(),
 					"buttonBorderColor"	=> (string) $site->buttonColors()->toObject()->buttonBorderColor(),
 					"buttonBorderColorActive" => (string) $site->buttonColors()->toObject()->buttonBorderColorActive(),
+
+					"paginationFont" => (string) $site->paginationSettings()->toObject()->paginationFont(),
+					"paginationFontSize" => (string) $site->paginationSettings()->toObject()->paginationFontSize(),
+					"paginationBorderRadius" => (string) $site->paginationSettings()->toObject()->paginationBorderRadius(),
+					"paginationBorderWidth" => (string) $site->paginationSettings()->toObject()->paginationBorderWidth(),
+					"paginationPadding" => (string) $site->paginationSettings()->toObject()->paginationPadding(),
+					"paginationMargin" => (string) $site->paginationSettings()->toObject()->paginationMargin(),
+					"paginationElements" => (string) $site->paginationSettings()->toObject()->paginationElements(),
+					"paginationTop" => (string) $site->paginationSettings()->toObject()->paginationTop(),
+					"paginationBottom" => (string) $site->paginationSettings()->toObject()->paginationBottom(),
+					"paginationBackgroundColor" => (string) $site->paginationColors()->toObject()->paginationBackgroundColor(),
+					"paginationBackgroundColorHover" => (string) $site->paginationColors()->toObject()->paginationBackgroundColorHover(),
+					"paginationBackgroundColorActive" => (string) $site->paginationColors()->toObject()->paginationBackgroundColorActive(),
+					"paginationTextColor" => (string) $site->paginationColors()->toObject()->paginationTextColor(),
+					"paginationTextColorHover" => (string) $site->paginationColors()->toObject()->paginationTextColorHover(),
+					"paginationTextColorActive" => (string) $site->paginationColors()->toObject()->paginationTextColorActive(),
+					"paginationBorderColor"	=> (string) $site->paginationColors()->toObject()->paginationBorderColor(),
+					"paginationBorderColorHover" => (string) $site->paginationColors()->toObject()->paginationBorderColorHover(),
+					"paginationBorderColorActive" => (string) $site->paginationColors()->toObject()->paginationBorderColorActive(),
 
 					"searchConsoleToggle" => $site->searchConsoleToggle()->toBool(false),
 					"searchConsoleCode" => $searchConsoleCode,

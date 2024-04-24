@@ -5,6 +5,7 @@
 
 .k-tabs {
 	background-color: var(--color-gray-300);
+	gap: 2rem;
 }
 
 .k-header::before {
@@ -19,12 +20,12 @@
 	clear: right;
 }
 
-.k-items[data-layout="cards"] .k-item-figure .k-item-icon {
-	--size: 64px;
+.k-items[data-layout="cards"] .k-item-image .k-icon {
+	--icon-size: 64px;
 }
 
-.k-items[data-layout="cardlets"] .k-item-figure .k-item-icon {
-	--size: 48px;
+.k-items[data-layout="cardlets"] .k-item-image .k-icon {
+	--icon-size: 48px;
 }
 
 /* Add your own custom css here */
