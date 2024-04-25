@@ -40,7 +40,7 @@ source: https://matthias-andrasch.eu/2021/tutorial-webseite-mittels-github-actio
 ## 2. Installation Astro
 
 - Neues Repo von Template erstellen https://github.com/matthacksteiner/baukasten
-- Auf Netlify zwei neue Seiten erstellen: `npm run build:preview` und einmal mit `npm run build:production` als Build Command
+- Auf Netlify eine neue Seite erstellen: `npm run build` als Build Command
 - Unter show advanced zwei Environment Variables setzen:
   `KIRBY_URL` : `https://baukasten.matthiashacksteiner.net`
   `NETLIFY_URL` : `https://baukasten.netlify.app`
