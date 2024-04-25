@@ -30,6 +30,8 @@ options:
     text: 160px
   - value: "192"
     text: 192px
+  - value: "256"
+    text: 256px
 default: "0"
 after: px
 width: 1/4
