@@ -12,6 +12,8 @@ options:
     text: 75%
   - value: "100"
     text: 100%
+  - value: auto
+    text: Automatisch
 default: "100"
 after: %
 width: 1/4
