@@ -30,6 +30,10 @@ tabs:
           - item
         create:
           - item
+  blocksPre:
+    label: Blöcke
+    icon: grid-top
+    extends: tabs/blocks
 
   settings:
     label: Einstellungen

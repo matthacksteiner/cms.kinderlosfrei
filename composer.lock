@@ -649,6 +649,7 @@
                     "type": "custom"
                 }
             ],
+            "abandoned": true,
             "time": "2022-05-16T05:50:59+00:00"
         },
         {
