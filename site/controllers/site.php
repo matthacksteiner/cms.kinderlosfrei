@@ -57,6 +57,7 @@ return function ($site, $page, $kirby) {
         'json' => [
             "meta" => getMeta($site, $page, $kirby),
             'intendedTemplate' => $page->intendedTemplate()->name(),
+            'uid' => (string)$page->uid(),
             'title' => (string)$page->title(),
             'lang' => (string)kirby()->languageCode(),
         ]
