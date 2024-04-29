@@ -54,15 +54,6 @@ function getSettings(\Kirby\Cms\Page $page)
       'span' => $page->displayGrid()->toObject()->span()->value() ?: '6',
       'spanMobile' => $page->displayGrid()->toObject()->spanMobile()->value() ?: '6',
     ],
-    'main' => [
-      'level' => $page->fontMain()->toObject()->mainlevel()->value() ?: 'h2',
-      'font' => $page->fontMain()->toObject()->mainfont()->value(),
-      'size' => $page->fontMain()->toObject()->mainsize()->value(),
-      'color' => $page->fontMain()->toObject()->maincolor()->value(),
-      'align' => $page->fontMain()->toObject()->mainalign()->value(),
-      'spacing' => $page->fontMain()->toObject()->mainSpacing()->value() ?: '0',
-      'spacingMobile' => $page->fontMain()->toObject()->mainSpacingMobile()->value() ?: '0',
-    ],
     'title' => [
       'level' => $page->fontTitle()->toObject()->level()->value() ?: 'h2',
       'font' => $page->fontTitle()->toObject()->titleFont()->value(),

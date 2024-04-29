@@ -43,90 +43,10 @@ tabs:
         label: Schriften
         type: headline
         numbered: false
-      fontMain:
-        type: object
-        label: Überschrift
-        width: 1/3
-        fields:
-          mainLevel:
-            label: Ebene
-            type: select
-            empty: false
-            default: "h2"
-            width: 1/6
-            required: true
-            options:
-              - h1
-              - h2
-              - h3
-              - h4
-              - h5
-              - h6
-          mainFont:
-            label: Schriftart
-            type: select
-            width: 1/6
-            options:
-              type: query
-              query: site.fontFile.toStructure
-              text: "{{ structureItem.name}}"
-              value: "{{ structureItem.name}}"
-          mainSize:
-            label: Textgröße
-            type: select
-            width: 1/6
-            options:
-              type: query
-              query: site.fontSize.toStructure
-              text: "{{ structureItem.name}}"
-              value: "{{ structureItem.name}}"
-          mainColor:
-            label: Textfarbe
-            type: select
-            default: black
-            width: 2/6
-            extends: fields/colors
-          mainAlign:
-            label: Ausrichtung
-            type: select
-            default: left
-            width: 1/6
-            options:
-              left: Links
-              center: Zentriert
-              right: Rechts
-              leftCenter: Links zentriert
-              rightCenter: Rechts zentriert
-          mainSpacing:
-            type: object
-            label: Abstände 🖥️
-            width: 1/2
-            fields:
-              mainSpacingTop:
-                label: oben 🖥️
-                extends: fields/spacing
-                width: 1/2
-              mainSpacingBottom:
-                label: unten 🖥️
-                extends: fields/spacing
-                width: 1/2
-          mainSpacingMobile:
-            type: object
-            label: Abstände 📱
-            width: 1/2
-            fields:
-              mainSpacingMobileTop:
-                label: oben 📱
-                extends: fields/spacing
-                width: 1/2
-              mainSpacingMobileBottom:
-                label: unten 📱
-                extends: fields/spacing
-                width: 1/2
       fontTitle:
         type: object
         label: Titel
-        width: 1/3
+        width: 1/2
         fields:
           titleSettings:
             label: Titel Einstellungen
@@ -134,7 +54,7 @@ tabs:
       fontText:
         type: object
         label: Text
-        width: 1/3
+        width: 1/2
         fields:
           textSettings:
             label: Text Einstellungen
