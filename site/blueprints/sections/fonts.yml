@@ -60,43 +60,57 @@ columns:
               sizeMobile:
                 label: Größe 📱
                 type: number
-                width: 1/2
+                width: 1/3
                 required: true
                 after: px
               lineHeightMobile:
-                label: Zeilenhöhe 📱
+                label: Zeilenabstand 📱
                 type: number
-                width: 1/2
+                width: 1/3
                 required: true
-                after: px
-              sizeDesktop:
-                label: Größe 💻
-                type: number
-                width: 1/2
-                required: true
-                after: px
-              lineHeightDesktop:
-                label: Zeilenhöhe 💻
-                type: number
-                width: 1/2
-                required: true
-                after: px
-              letterSpacingDesktop:
-                label: Buchstabenabstand 💻
-                type: number
-                width: 1/2
-                default: 0
                 after: px
               letterSpacingMobile:
-                label: Buchstabenabstand 📱
+                label: Laufweite 📱
                 type: number
-                width: 1/2
+                width: 1/3
+                default: 0
+                after: px
+              sizeDesktop:
+                label: Größe 💻 < 1920px
+                type: number
+                width: 1/3
+                after: px
+              lineHeightDesktop:
+                label: Zeilenabstand 💻 < 1920px
+                type: number
+                width: 1/3
+                after: px
+              letterSpacingDesktop:
+                label: Laufweite 💻 < 1920px
+                type: number
+                width: 1/3
+                default: 0
+                after: px
+              sizeDesktopXl:
+                label: Größe 💻 > 1920px
+                type: number
+                width: 1/3
+                after: px
+              lineHeightDesktopXl:
+                label: Zeilenabstand 💻 > 1920px
+                type: number
+                width: 1/3
+                after: px
+              letterSpacingDesktopXl:
+                label: Laufweite 💻 > 1920px
+                type: number
+                width: 1/3
                 default: 0
                 after: px
               transform:
                 label: Transformation
                 type: select
-                width: 1/2
+                width: 1/3
                 default: none
                 options:
                   none: Keine
@@ -106,7 +120,7 @@ columns:
               decoration:
                 label: Dekoration
                 type: select
-                width: 1/2
+                width: 1/3
                 default: none
                 options:
                   none: Keine
