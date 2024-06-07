@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6fb4cdd6ae8b141786b87ac098b198d4",
+    "content-hash": "5e3059b1da275c2a328eaaaf6eb87219",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -604,53 +604,6 @@
                 "source": "https://github.com/thephpleague/color-extractor/tree/0.4.0"
             },
             "time": "2022-09-24T15:57:16+00:00"
-        },
-        {
-            "name": "medienbaecker/autoresize",
-            "version": "2.1.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/medienbaecker/kirby-autoresize.git",
-                "reference": "aced13014a4d11469cce42d5f968c26e0dc93c0a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/medienbaecker/kirby-autoresize/zipball/aced13014a4d11469cce42d5f968c26e0dc93c0a",
-                "reference": "aced13014a4d11469cce42d5f968c26e0dc93c0a",
-                "shasum": ""
-            },
-            "require": {
-                "getkirby/composer-installer": "^1.1"
-            },
-            "type": "kirby-plugin",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Thomas Günther",
-                    "email": "mail@medienbaecker.com",
-                    "homepage": "https://www.medienbaecker.com"
-                }
-            ],
-            "description": "Kirby Autoresize Plugin",
-            "support": {
-                "issues": "https://github.com/medienbaecker/kirby-autoresize/issues",
-                "source": "https://github.com/medienbaecker/kirby-autoresize/tree/2.1.4"
-            },
-            "funding": [
-                {
-                    "url": "https://a.paddle.com/v2/click/1129/36156?link=1170",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://www.paypal.me/medienbaecker/10",
-                    "type": "custom"
-                }
-            ],
-            "abandoned": true,
-            "time": "2022-05-16T05:50:59+00:00"
         },
         {
             "name": "michelf/php-smartypants",

@@ -309,7 +309,4 @@ return [
 		]
 
 	],
-	'medienbaecker.autoresize.maxWidth' => 3840,
-	'medienbaecker.autoresize.maxHeight' => 3840,
-	'medienbaecker.autoresize.quality' => 99,
 ];

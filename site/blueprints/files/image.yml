@@ -1,5 +1,8 @@
 Title: Bild
 accept: image/jpeg, image/png, image/webp, image/svg+xml
+create:
+  width: 2560
+  height: 2560
 
 tabs:
   content:
