@@ -204,15 +204,16 @@ function getBlockArray(\Kirby\Cms\Block $block)
           'alt' => (string)$image->alt(),
           'focusX' => json_decode($file1->focusPercentageX()),
           'focusY' => json_decode($file1->focusPercentageY()),
-          'filetoggle' => $file1->toggle()->toBool(false),
-          'filelevel' => $file1->level()->value(),
-          'filecaption' => $file1->caption()->value(),
-          'filetextfont' => $file1->textfont()->value(),
-          'filetextsize' => $file1->textsize()->value(),
-          'filetextcolor' => $file1->textcolor()->value(),
-          'filetextalign' => $file1->textalign()->value(),
-          'fileoverlay' => $file1->controls()->value(),
-          'captionalign' => $file1->captionalign()->value(),
+          'captiontoggle' => $file1->captiontoggle()->toBool(false),
+          'captiontitle' => $file1->captionobject()->toObject()->captiontitle()->value(),
+          'captiontextfont' => $file1->captionobject()->toObject()->textfont()->value(),
+          'captiontextsize' => $file1->captionobject()->toObject()->textsize()->value(),
+          'captiontextcolor' => $file1->captionobject()->toObject()->textColor()->value(),
+          'captiontextalign' => $file1->captionobject()->toObject()->textalign()->value(),
+          'captionoverlay' => $file1->captionobject()->toObject()->captionoverlay()->value(),
+          'captionalign' => $file1->captionobject()->toObject()->captionalign()->value(),
+          'linktoggle' => $file1->linktoggle()->toBool(false),
+          'linkexternal' => getLinkArray($file1->linkexternal()),
         ];
       }
 
@@ -222,8 +223,6 @@ function getBlockArray(\Kirby\Cms\Block $block)
       }
 
       $blockArray['content']['image'] = $image;
-      $blockArray['content']['linkexternal'] = $linkexternal;
-      $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
       break;
 
     case 'slider':
@@ -249,19 +248,26 @@ function getBlockArray(\Kirby\Cms\Block $block)
           'alt' => (string)$image->alt(),
           'focusX' => json_decode($file->focusPercentageX()),
           'focusY' => json_decode($file->focusPercentageY()),
-          'filetoggle' => $file->toggle()->toBool(false),
-          'filelevel' => $file->level()->value(),
-          'filecaption' => $file->caption()->value(),
-          'filetextfont' => $file->textfont()->value(),
-          'filetextsize' => $file->textsize()->value(),
-          'filetextcolor' => $file->textcolor()->value(),
-          'filetextalign' => $file->textalign()->value(),
-          'fileoverlay' => $file->controls()->value(),
-          'captionalign' => $file->captionalign()->value(),
+          'toggle' => $file->toggle()->toBool(false),
+          'captiontoggle' => $file->captiontoggle()->toBool(false),
+          'captiontitle' => $file->captionobject()->toObject()->captiontitle()->value(),
+          'captiontextfont' => $file->captionobject()->toObject()->textfont()->value(),
+          'captiontextsize' => $file->captionobject()->toObject()->textsize()->value(),
+          'captiontextcolor' => $file->captionobject()->toObject()->textColor()->value(),
+          'captiontextalign' => $file->captionobject()->toObject()->textalign()->value(),
+          'captionoverlay' => $file->captionobject()->toObject()->captionoverlay()->value(),
+          'captionalign' => $file->captionobject()->toObject()->captionalign()->value(),
+          'linktoggle' => $file->linktoggle()->toBool(false),
+          'linkexternal' => getLinkArray($file->linkexternal()),
         ];
       }
+
+      $linkexternal = [];
+      if ($block->linkexternal()->isNotEmpty()) {
+        $linkexternal = getLinkArray($block->linkexternal());
+      }
       $blockArray['content']['images'] = $images;
-      $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
+
       break;
 
     case "menu":

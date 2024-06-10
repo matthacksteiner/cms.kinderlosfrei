@@ -15,7 +15,7 @@ tabs:
           back: black
         uploads:
           template: pixel
-        help: "Bild anklicken um den Focus zu setzen."
+        help: "Für weitere Optionen (Fokus, Link und Beschriftung) das Bild anklicken."
   settings:
     label: Einstellungen
     fields:
@@ -29,21 +29,3 @@ tabs:
       ratio:
         extends: fields/ratio
         label: Seitenverhältnis 🖥️
-      linkHeadline:
-        label: Link
-        type: headline
-        numbered: false
-      toggle:
-        label: Link?
-        type: toggle
-        default: false
-        width: 1/6
-      linkExternal:
-        type: link
-        label: false
-        width: 5/6
-        when:
-          toggle: true
-        linkTypes:
-          - page
-          - url
