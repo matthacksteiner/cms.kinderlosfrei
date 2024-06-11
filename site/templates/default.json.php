@@ -267,6 +267,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
         $linkexternal = getLinkArray($block->linkexternal());
       }
       $blockArray['content']['images'] = $images;
+      $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
 
       break;
 
