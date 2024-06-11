@@ -210,7 +210,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
           'captiontextsize' => $file1->captionobject()->toObject()->textsize()->value(),
           'captiontextcolor' => $file1->captionobject()->toObject()->textColor()->value(),
           'captiontextalign' => $file1->captionobject()->toObject()->textalign()->value(),
-          'captionoverlay' => $file1->captionobject()->toObject()->captionoverlay()->value(),
+          'captionoverlay' => $file1->captionobject()->toObject()->captionControls()->options()->value(),
           'captionalign' => $file1->captionobject()->toObject()->captionalign()->value(),
           'linktoggle' => $file1->linktoggle()->toBool(false),
           'linkexternal' => getLinkArray($file1->linkexternal()),
