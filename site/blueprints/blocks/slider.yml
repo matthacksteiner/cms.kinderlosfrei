@@ -16,6 +16,7 @@ tabs:
           template: image
         image:
           ratio: 1/1
+        help: "Für weitere Optionen (Fokus, Link und Beschriftung) das Bild anklicken."
   settings:
     label: Einstellungen
     fields:
