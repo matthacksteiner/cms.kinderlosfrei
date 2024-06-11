@@ -14,66 +14,56 @@ tabs:
         width: 2/3
   settings:
     label: Einstellungen
-    fields:
-      toggle:
-        label: Text?
-        type: toggle
-        default: false
-        width: 1/6
-      level:
-        label: field.blocks.heading.level
-        type: select
-        empty: false
-        default: "h2"
-        width: 1/6
-        options:
-          - h1
-          - h2
-          - h3
-          - h4
-          - h5
-          - h6
-        when:
-          toggle: true
-      caption:
-        label: Title
-        type: text
-        width: 4/6
-        when:
-          toggle: true
-      captionOptions:
-        label: Text Optionen
-        extends: groups/textGroup
+    columns:
+      - width: 1/2
         fields:
-          textFont:
-            extends: fields/fontFile
+          captionToggle:
+            label: Beschriftung?
+            type: toggle
+            default: false
+            width: 1/3
+          captionGap:
+            type: gap
+            width: 2/3
+          captionObject:
+            type: object
+            label: Beschriftung Optionen
+            icon: palette
             when:
-              toggle: true
-          textSize:
-            extends: fields/fontSize
-            when:
-              toggle: true
-          textColor:
-            extends: fields/fontColor
-            when:
-              toggle: true
-          textAlign:
-            extends: fields/fontAlign
+              captionToggle: true
             fields:
-              default: center
+              captionTitle:
+                label: Title
+                type: text
+                width: 4/6
+              captionOptions:
+                label: Text Optionen
+                extends: groups/textGroup
+              captionAlign:
+                extends: fields/captionAlign
+              captionControls:
+                label: Optionen
+                type: checkboxes
+                width: 1/4
+                columns: 1
+                options:
+                  overlay: Overlay
+      - width: 1/2
+        fields:
+          linkToggle:
+            label: Link?
+            type: toggle
+            default: false
+            width: 1/3
+          linkGap:
+            type: gap
+            width: 2/3
+          linkExternal:
+            type: link
+            label: false
+            width: 1/1
             when:
-              toggle: true
-          captionAlign:
-            extends: fields/captionAlign
-            when:
-              toggle: true
-
-      controls:
-        label: Optionen
-        type: checkboxes
-        width: 1/4
-        when:
-          toggle: true
-        columns: 1
-        options:
-          overlay: Overlay
+              linkToggle: true
+            linkTypes:
+              - page
+              - url
