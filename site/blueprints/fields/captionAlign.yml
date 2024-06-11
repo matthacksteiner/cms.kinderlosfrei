@@ -1,6 +1,6 @@
 label: Ausrichtung Untertitel
 type: select
-default: center
+default: bottom
 width: 2/6
 options:
   center: Zentriert
