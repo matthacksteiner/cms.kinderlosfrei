@@ -137,6 +137,7 @@ columns:
             label: Überschriften für Textfelder
             icon: title
             toggle: true
+            translate: false
             fields:
               h1font:
                 extends: fields/fontFile
