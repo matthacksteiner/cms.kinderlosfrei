@@ -31,7 +31,7 @@ Template: https://github.com/matthacksteiner/cms.baukasten
 2. Im neuen Repo unter Settings -> Secrets and variables für Actions 4 Secrets anlegen:
    1. `UBERSPACE_HOST` mit dem Hostnamen des Servers (z.B. lactera.uberspace.de)
    2. `UBERSPACE_USER` mit dem Benutzernamen des Servers (z.B. fifth)
-   3. `DEPLOY_KEY_PRIVATE` mit dem privaten SSH Key (Inhalt der Datei neuerKeyFuerGithub - ohne .pub)
+   3. `DEPLOY_KEY_PRIVATE` mit dem privaten SSH Key (Inhalt der Datei neuerKeyFuerGithub - ohne .pub inklusive BEGIN OPENSSH PRIVATE KEY / END OPENSSH PRIVATE KEY)
    4. `UBERSPACE_PATH` mit dem Pfad zum Verzeichnis auf dem Server (z.B. cms.baukasten.matthiashacksteiner.net)
 3. Auf dem Server den öffentlichen Key in die Datei `~/.ssh/authorized_keys` eintragen - Wert aus neuerKeyFuerGithub.pub
 
