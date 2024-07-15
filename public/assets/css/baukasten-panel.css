@@ -28,13 +28,22 @@
 	--icon-size: 48px;
 }
 
-/* Add your own custom css here */
 .k-login-view form::before {
 	content: url("../img/baukasten-logo.svg");
 }
 
 .k-login-fields {
 	margin-top: 2rem;
+}
+
+.k-layout-selector-option:after {
+	content: attr(value);
+	font-size: 12px;
+	font-weight: bold;
+	display: block;
+	color: #313740;
+	position: relative;
+	top: -50%;
 }
 
 /* Webhook K4 fix */
