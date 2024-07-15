@@ -13,12 +13,12 @@ tabs:
         label: Alternativ Text
         width: 1/3
         help: Alternativer Text für Benutzer mit eingeschränkter Sehkraft und bei Ladefehler.
-      id:
+      identifier:
         type: text
         label: ID
         width: 1/3
         help: ID für CSS
-      class:
+      classes:
         type: text
         label: CSS Klasse
         width: 1/3

@@ -202,6 +202,8 @@ function getBlockArray(\Kirby\Cms\Block $block)
           'width' => $image->width(),
           'height' => $image->height(),
           'alt' => (string)$image->alt(),
+          'identifier' => $image->identifier()->value(),
+          'classes' => $image->classes()->value(),
           'focusX' => json_decode($file1->focusPercentageX()),
           'focusY' => json_decode($file1->focusPercentageY()),
           'captiontoggle' => $file1->captiontoggle()->toBool(false),
@@ -246,6 +248,8 @@ function getBlockArray(\Kirby\Cms\Block $block)
           'width' => $image->width(),
           'height' => $image->height(),
           'alt' => (string)$image->alt(),
+          'identifier' => $image->identifier()->value(),
+          'classes' => $image->classes()->value(),
           'focusX' => json_decode($file->focusPercentageX()),
           'focusY' => json_decode($file->focusPercentageY()),
           'toggle' => $file->toggle()->toBool(false),
@@ -308,6 +312,8 @@ function getBlockArray(\Kirby\Cms\Block $block)
         $image = [
           'url' => $file1->url(),
           'alt' => (string)$file1->alt(),
+          'identifier' => $file1->identifier()->value(),
+          'classes' => $file1->classes()->value(),
           'width' => $file1->width(),
           'height' => $file1->height(),
         ];
@@ -378,6 +384,8 @@ function getBlockArray(\Kirby\Cms\Block $block)
         $video = [
           'url' => $file1->url(),
           'alt' => (string)$file1->alt(),
+          'identifier' => $file1->identifier()->value(),
+          'classes' => $file1->classes()->value(),
         ];
       }
       if ($file2 = $block->thumbnail()->toFile()) {
