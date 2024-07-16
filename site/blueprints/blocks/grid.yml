@@ -15,6 +15,7 @@ fields:
         fieldsets:
           title: blocks/heading
           text: blocks/text
+          quote: blocks/quote
       media:
         label: Medien
         type: group

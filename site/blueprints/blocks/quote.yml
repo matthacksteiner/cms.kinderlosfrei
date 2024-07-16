@@ -1,0 +1,84 @@
+name: field.blocks.quote.name
+icon: quote
+wysiwyg: false
+preview: false
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      quotestructure:
+        label: Zitat
+        type: structure
+        fields:
+          text:
+            label: field.blocks.quote.text.label
+            placeholder: field.blocks.quote.text.placeholder
+            extends: fields/writer
+            inline: true
+            marks: false
+            icon: quote
+          citation:
+            label: field.blocks.quote.citation.label
+            placeholder: field.blocks.quote.citation.placeholder
+            extends: fields/writer
+            inline: true
+            marks: false
+            icon: user
+
+  settings:
+    label: Einstellungen
+    fields:
+      textHeadline:
+        label: Text
+        type: headline
+        numbered: false
+      textSettings:
+        label: Text Einstellungen
+        extends: groups/textGroup
+      citationHeadline:
+        label: Quelle
+        type: headline
+        numbered: false
+      citationSettings:
+        label: Titel Einstellungen
+        extends: groups/titleGroup
+        fields:
+          level: false
+          titleGap: false
+      sliderHeadline:
+        label: Slider
+        type: headline
+        numbered: false
+      controls:
+        label: Optionen
+        type: checkboxes
+        width: 1/1
+        columns: 3
+        default:
+          - arrows
+          - dots
+        options:
+          arrows: Navigation
+          dots: Punkte
+          autoplay: Autoplay
+      color:
+        label: Farbe
+        type: select
+        width: 1/4
+        default: black
+        extends: fields/colors
+      time:
+        label: Timing
+        type: number
+        width: 1/4
+        default: 5000
+        after: ms
+      effect:
+        label: Effekt
+        type: select
+        width: 1/4
+        default: slide
+        options:
+          slide: Slide
+          fade: Fade
