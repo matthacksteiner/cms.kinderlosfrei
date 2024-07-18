@@ -36,3 +36,20 @@ details summary .k-writer {
 .k-iconlist details > summary:first-of-type {
 	list-style: inside "#️⃣";
 }
+
+.author {
+	font-weight: bold;
+}
+.quote-item {
+	margin-bottom: 1em;
+	border-bottom: #000 1px solid;
+}
+
+.quote-item::before {
+	content: "“";
+	position: absolute;
+	left: 0;
+	top: 0;
+	font-size: 4em;
+	color: #ccc;
+}

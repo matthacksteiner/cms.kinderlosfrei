@@ -22,7 +22,7 @@ fields:
         fieldsets:
           title: blocks/heading
           text: blocks/text
-          quote: blocks/quote
+          quoteSlider: blocks/quoteSlider
       media:
         label: Medien
         type: group

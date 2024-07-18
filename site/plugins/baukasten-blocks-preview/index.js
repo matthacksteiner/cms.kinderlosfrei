@@ -42,6 +42,48 @@ panel.plugin("baukasten-blocks-preview/preview", {
 			  </div>
 			`,
 		},
+		quoteSlider: {
+			computed: {
+				items() {
+					return this.content.acc || { marks: true };
+				},
+			},
+			methods: {
+				updateItem(content, index, fieldName, value) {
+					content.acc[index][fieldName] = value;
+					this.$emit("update", {
+						...this.content,
+						...content,
+					});
+				},
+			},
+			template: `
+				<div>
+					<div v-if="items.length">
+						<div v-for="(item, index) in items" :key="index" class="quote-item">
+							<k-writer
+								class="label"
+								ref="text"
+								:nodes="false"
+								:marks="false"
+								:value="item.text"
+								@input="updateItem(content, index, 'text', $event)"
+							/>
+							<k-writer
+								ref="author"
+								:inline="true"
+								:marks="false"
+								:value="item.author"
+								class="author"
+								@input="updateItem(content, index, 'author', $event)"
+							/>
+						</div>
+					</div>
+					<div v-else>Noch keine Zitate vorhanden.</div>
+				</div>
+			`,
+		},
+
 		iconlist: {
 			computed: {
 				items() {
