@@ -42,3 +42,32 @@ tabs:
         fields:
           level: false
           titleGap: false
+      sliderHeadline:
+        label: Slider
+        type: headline
+        numbered: false
+      controls:
+        label: Optionen
+        type: checkboxes
+        width: 1/1
+        columns: 4
+        default:
+          - arrows
+          - dots
+        options:
+          autoplay: Autoplay
+          arrows: Navigation
+          dots: Punkte
+          line: Linie
+      color:
+        label: Farbe
+        type: select
+        width: 1/4
+        default: black
+        extends: fields/colors
+      time:
+        label: Timing
+        type: number
+        width: 1/4
+        default: 5000
+        after: ms
