@@ -50,7 +50,7 @@ tabs:
         label: Optionen
         type: checkboxes
         width: 1/1
-        columns: 4
+        columns: 3
         default:
           - arrows
           - dots
@@ -58,7 +58,6 @@ tabs:
           autoplay: Autoplay
           arrows: Navigation
           dots: Punkte
-          line: Linie
       color:
         label: Farbe
         type: select

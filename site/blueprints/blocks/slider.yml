@@ -43,6 +43,7 @@ tabs:
           - arrows
           - dots
         options:
+          autoplay: Autoplay
           arrows: Navigation
           dots: Punkte
           line: Linie
