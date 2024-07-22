@@ -59,7 +59,7 @@ tabs:
       iconDirection:
         label: Ausrichtung
         type: select
-        default: row
+        default: Spalte
         width: 1/4
         options:
           - Reihe
