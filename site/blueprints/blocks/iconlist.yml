@@ -42,20 +42,28 @@ tabs:
         label: Icons
         type: number
         default: 40
-        width: 1/3
+        width: 1/4
         after: px
       iconGap:
         label: Icon Abstand Vertikal ⬆️⬇️
         type: number
-        width: 1/3
+        width: 1/4
         default: 16
         after: px
       iconListGap:
         label: Listen Abstand Hori. ⬅️➡️
         type: number
-        width: 1/3
+        width: 1/4
         default: 16
         after: px
+      iconDirection:
+        label: Ausrichtung
+        type: select
+        default: row
+        width: 1/4
+        options:
+          - Reihe
+          - Spalte
       textHeadline:
         label: Text
         type: headline
