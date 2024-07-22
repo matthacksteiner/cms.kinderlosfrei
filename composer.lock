@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5e3059b1da275c2a328eaaaf6eb87219",
+    "content-hash": "a53cece1725b62148bad64e017c37221",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -731,16 +731,16 @@
         },
         {
             "name": "oblik/kirby-link-field",
-            "version": "6.0.1",
+            "version": "6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OblikStudio/kirby-link-field.git",
-                "reference": "9e645a3436a46578457289f3b881a95df1038eed"
+                "reference": "e2d1273bb02d1df5f6768092fb499661d3814b6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OblikStudio/kirby-link-field/zipball/9e645a3436a46578457289f3b881a95df1038eed",
-                "reference": "9e645a3436a46578457289f3b881a95df1038eed",
+                "url": "https://api.github.com/repos/OblikStudio/kirby-link-field/zipball/e2d1273bb02d1df5f6768092fb499661d3814b6c",
+                "reference": "e2d1273bb02d1df5f6768092fb499661d3814b6c",
                 "shasum": ""
             },
             "require": {
@@ -785,7 +785,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-07-16T05:05:19+00:00"
+            "time": "2024-02-04T08:02:55+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
