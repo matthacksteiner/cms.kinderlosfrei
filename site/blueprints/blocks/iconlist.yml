@@ -59,11 +59,11 @@ tabs:
       iconDirection:
         label: Ausrichtung
         type: select
-        default: Spalte
+        default: Vertikal
         width: 1/4
         options:
-          - Reihe
-          - Spalte
+          - Vertikal
+          - Horizontal
       textHeadline:
         label: Text
         type: headline
