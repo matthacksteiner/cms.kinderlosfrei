@@ -5,7 +5,7 @@ use Kirby\Filesystem\F;
 use Kirby\Http\Response;
 
 return [
-	// 'debug' => true,
+	'debug' => true,
 	'auth' => [
 		'methods' => ['password', 'password-reset']
 	],

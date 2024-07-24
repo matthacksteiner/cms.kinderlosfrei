@@ -1,0 +1,15 @@
+type: object
+required: true
+fields:
+  link:
+    type: link
+    label: Link
+    width: 1/2
+  linkText:
+    type: text
+    label: Text
+  target:
+    type: toggle
+    text: Open in new window?
+  classnames:
+    type: text
