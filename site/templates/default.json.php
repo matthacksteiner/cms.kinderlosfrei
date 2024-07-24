@@ -98,312 +98,311 @@ function getBlockArray(\Kirby\Cms\Block $block)
 
   switch ($block->type()) {
 
-    case 'columns':
-      $layout = $block->layout()->toLayouts()->first();
+      // case 'columns':
+      //   $layout = $block->layout()->toLayouts()->first();
 
-      if ($layout !== null) {
-        foreach ($layout->columns() as $column) {
-          $columnArray = [
-            "id" => $column->id(),
-            "width" => $column->width(),
-            "span" => $column->span(),
-            "blocks" => []
-          ];
+      //   if ($layout !== null) {
+      //     foreach ($layout->columns() as $column) {
+      //       $columnArray = [
+      //         "id" => $column->id(),
+      //         "width" => $column->width(),
+      //         "span" => $column->span(),
+      //         "blocks" => []
+      //       ];
 
-          $blocks = $column->blocks();
+      //       $blocks = $column->blocks();
 
-          foreach ($blocks as $block) {
-            $blockData = getBlockArray($block);
+      //       foreach ($blocks as $block) {
+      //         $blockData = getBlockArray($block);
 
-            if (!$blockData) {
-              continue;
-            }
+      //         if (!$blockData) {
+      //           continue;
+      //         }
 
-            $columnArray['blocks'][] = $blockData;
-          }
+      //         $columnArray['blocks'][] = $blockData;
+      //       }
 
-          $columns[] = $columnArray;
-        }
-        return [
-          "id" => $layout->id(),
-          "type" => 'columns',
-          "content" => [
-            "columns" => $columns,
-          ],
+      //       $columns[] = $columnArray;
+      //     }
+      //     return [
+      //       "id" => $layout->id(),
+      //       "type" => 'columns',
+      //       "content" => [
+      //         "columns" => $columns,
+      //       ],
 
-        ];
-      }
-      break;
+      //     ];
+      //   }
+      //   break;
 
-    case 'grid':
-      $allGrids = [];
-      $title = $block->title()->value();
+      // case 'grid':
+      //   $allGrids = [];
+      //   $title = $block->title()->value();
 
-      foreach ($block->grid()->toLayouts() as $layout) {
-        $columns = [];
+      //   foreach ($block->grid()->toLayouts() as $layout) {
+      //     $columns = [];
 
-        foreach ($layout->columns() as $column) {
-          $columnArray = [
-            "id" => $column->id(),
-            "width" => $column->width(),
-            "span" => $column->span(),
-            "blocks" => []
-          ];
+      //     foreach ($layout->columns() as $column) {
+      //       $columnArray = [
+      //         "id" => $column->id(),
+      //         "width" => $column->width(),
+      //         "span" => $column->span(),
+      //         "blocks" => []
+      //       ];
 
-          $blocks = $column->blocks();
+      //       $blocks = $column->blocks();
 
-          foreach ($blocks as $block) {
-            $blockData = getBlockArray($block);
+      //       foreach ($blocks as $block) {
+      //         $blockData = getBlockArray($block);
 
-            if (!$blockData) {
-              continue;
-            }
+      //         if (!$blockData) {
+      //           continue;
+      //         }
 
-            $columnArray['blocks'][] = $blockData;
-          }
+      //         $columnArray['blocks'][] = $blockData;
+      //       }
 
-          $columns[] = $columnArray;
-        }
+      //       $columns[] = $columnArray;
+      //     }
 
-        $allGrids[] = [
-          "id" => $layout->id(),
-          "columns" => $columns,
-        ];
-      }
+      //     $allGrids[] = [
+      //       "id" => $layout->id(),
+      //       "columns" => $columns,
+      //     ];
+      //   }
 
-      $output = [
-        "id" => $block->id(),
-        "type" => 'grid',
-        "content" => [
-          "title" => $title,
-          "grid" => $allGrids,
-        ],
-      ];
+      //   $output = [
+      //     "id" => $block->id(),
+      //     "type" => 'grid',
+      //     "content" => [
+      //       "title" => $title,
+      //       "grid" => $allGrids,
+      //     ],
+      //   ];
 
-      return $output;
+      //   return $output;
 
-      break;
-    case 'image':
-      $blockArray['content'] = $block->toArray()['content'];
+      //   break;
+      // case 'image':
+      //   $blockArray['content'] = $block->toArray()['content'];
 
-      $image = null;
-      if ($file1 = $block->image()->toFile()) {
-        $image = $file1;
+      //   $image = null;
+      //   if ($file1 = $block->image()->toFile()) {
+      //     $image = $file1;
 
-        $ratioMobile = explode('/', $block->ratioMobile()->value());
-        $ratio = explode('/', $block->ratio()->value());
+      //     $ratioMobile = explode('/', $block->ratioMobile()->value());
+      //     $ratio = explode('/', $block->ratio()->value());
 
-        $calculateHeight = function ($width, $ratio) {
-          return isset($ratio[1]) ? round(($width / $ratio[0]) * $ratio[1]) : $width;
-        };
+      //     $calculateHeight = function ($width, $ratio) {
+      //       return isset($ratio[1]) ? round(($width / $ratio[0]) * $ratio[1]) : $width;
+      //     };
 
-        $image = [
-          'url' => $image->url(),
-          'urlFocus' => $image->crop($image->width(), $calculateHeight($image->width(), $ratio))->url(),
-          'urlFocusMobile' => $image->crop($image->width(), $calculateHeight($image->width(), $ratioMobile))->url(),
-          'width' => $image->width(),
-          'height' => $image->height(),
-          'alt' => (string)$image->alt(),
-          'identifier' => $image->identifier()->value(),
-          'classes' => $image->classes()->value(),
-          'focusX' => json_decode($file1->focusPercentageX()),
-          'focusY' => json_decode($file1->focusPercentageY()),
-          'captiontoggle' => $file1->captiontoggle()->toBool(false),
-          'captiontitle' => $file1->captionobject()->toObject()->captiontitle()->value(),
-          'captiontextfont' => $file1->captionobject()->toObject()->textfont()->value(),
-          'captiontextsize' => $file1->captionobject()->toObject()->textsize()->value(),
-          'captiontextcolor' => $file1->captionobject()->toObject()->textColor()->value(),
-          'captiontextalign' => $file1->captionobject()->toObject()->textalign()->value(),
-          'captionoverlay' => $file1->captionobject()->toObject()->captionControls()->options()->value(),
-          'captionalign' => $file1->captionobject()->toObject()->captionalign()->value(),
-          'linktoggle' => $file1->linktoggle()->toBool(false),
-          'linkexternal' => getLinkArray($file1->linkexternal()),
-        ];
-      }
+      //     $image = [
+      //       'url' => $image->url(),
+      //       'urlFocus' => $image->crop($image->width(), $calculateHeight($image->width(), $ratio))->url(),
+      //       'urlFocusMobile' => $image->crop($image->width(), $calculateHeight($image->width(), $ratioMobile))->url(),
+      //       'width' => $image->width(),
+      //       'height' => $image->height(),
+      //       'alt' => (string)$image->alt(),
+      //       'identifier' => $image->identifier()->value(),
+      //       'classes' => $image->classes()->value(),
+      //       'focusX' => json_decode($file1->focusPercentageX()),
+      //       'focusY' => json_decode($file1->focusPercentageY()),
+      //       'captiontoggle' => $file1->captiontoggle()->toBool(false),
+      //       'captiontitle' => $file1->captionobject()->toObject()->captiontitle()->value(),
+      //       'captiontextfont' => $file1->captionobject()->toObject()->textfont()->value(),
+      //       'captiontextsize' => $file1->captionobject()->toObject()->textsize()->value(),
+      //       'captiontextcolor' => $file1->captionobject()->toObject()->textColor()->value(),
+      //       'captiontextalign' => $file1->captionobject()->toObject()->textalign()->value(),
+      //       'captionoverlay' => $file1->captionobject()->toObject()->captionControls()->options()->value(),
+      //       'captionalign' => $file1->captionobject()->toObject()->captionalign()->value(),
+      //       'linktoggle' => $file1->linktoggle()->toBool(false),
+      //       'linkexternal' => getLinkArray($file1->linkexternal()),
+      //     ];
+      //   }
 
-      $linkexternal = [];
-      if ($block->linkexternal()->isNotEmpty()) {
-        $linkexternal = getLinkArray($block->linkexternal());
-      }
+      //   $linkexternal = [];
+      //   if ($block->linkexternal()->isNotEmpty()) {
+      //     $linkexternal = getLinkArray($block->linkexternal());
+      //   }
 
-      $blockArray['content']['image'] = $image;
-      break;
+      //   $blockArray['content']['image'] = $image;
+      //   break;
 
-    case 'slider':
-      $blockArray['content'] = $block->toArray()['content'];
-      $images = [];
+      // case 'slider':
+      //   $blockArray['content'] = $block->toArray()['content'];
+      //   $images = [];
 
-      foreach ($block->images()->toFiles() as $file) {
-        $image = $file;
+      //   foreach ($block->images()->toFiles() as $file) {
+      //     $image = $file;
 
-        $ratioMobile = explode('/', $block->ratioMobile()->value());
-        $ratio = explode('/', $block->ratio()->value());
+      //     $ratioMobile = explode('/', $block->ratioMobile()->value());
+      //     $ratio = explode('/', $block->ratio()->value());
 
-        $calculateHeight = function ($width, $ratio) {
-          return isset($ratio[1]) ? round(($width / $ratio[0]) * $ratio[1]) : $width;
-        };
+      //     $calculateHeight = function ($width, $ratio) {
+      //       return isset($ratio[1]) ? round(($width / $ratio[0]) * $ratio[1]) : $width;
+      //     };
 
-        $images[] = [
-          'url' => $image->url(),
-          'urlFocus' => $image->crop($image->width(), $calculateHeight($image->width(), $ratio))->url(),
-          'urlFocusMobile' => $image->crop($image->width(), $calculateHeight($image->width(), $ratioMobile))->url(),
-          'width' => $image->width(),
-          'height' => $image->height(),
-          'alt' => (string)$image->alt(),
-          'identifier' => $image->identifier()->value(),
-          'classes' => $image->classes()->value(),
-          'focusX' => json_decode($file->focusPercentageX()),
-          'focusY' => json_decode($file->focusPercentageY()),
-          'toggle' => $file->toggle()->toBool(false),
-          'captiontoggle' => $file->captiontoggle()->toBool(false),
-          'captiontitle' => $file->captionobject()->toObject()->captiontitle()->value(),
-          'captiontextfont' => $file->captionobject()->toObject()->textfont()->value(),
-          'captiontextsize' => $file->captionobject()->toObject()->textsize()->value(),
-          'captiontextcolor' => $file->captionobject()->toObject()->textColor()->value(),
-          'captiontextalign' => $file->captionobject()->toObject()->textalign()->value(),
-          'captionoverlay' => $file->captionobject()->toObject()->captionoverlay()->value(),
-          'captionalign' => $file->captionobject()->toObject()->captionalign()->value(),
-          'linktoggle' => $file->linktoggle()->toBool(false),
-          'linkexternal' => getLinkArray($file->linkexternal()),
-        ];
-      }
+      //     $images[] = [
+      //       'url' => $image->url(),
+      //       'urlFocus' => $image->crop($image->width(), $calculateHeight($image->width(), $ratio))->url(),
+      //       'urlFocusMobile' => $image->crop($image->width(), $calculateHeight($image->width(), $ratioMobile))->url(),
+      //       'width' => $image->width(),
+      //       'height' => $image->height(),
+      //       'alt' => (string)$image->alt(),
+      //       'identifier' => $image->identifier()->value(),
+      //       'classes' => $image->classes()->value(),
+      //       'focusX' => json_decode($file->focusPercentageX()),
+      //       'focusY' => json_decode($file->focusPercentageY()),
+      //       'toggle' => $file->toggle()->toBool(false),
+      //       'captiontoggle' => $file->captiontoggle()->toBool(false),
+      //       'captiontitle' => $file->captionobject()->toObject()->captiontitle()->value(),
+      //       'captiontextfont' => $file->captionobject()->toObject()->textfont()->value(),
+      //       'captiontextsize' => $file->captionobject()->toObject()->textsize()->value(),
+      //       'captiontextcolor' => $file->captionobject()->toObject()->textColor()->value(),
+      //       'captiontextalign' => $file->captionobject()->toObject()->textalign()->value(),
+      //       'captionoverlay' => $file->captionobject()->toObject()->captionoverlay()->value(),
+      //       'captionalign' => $file->captionobject()->toObject()->captionalign()->value(),
+      //       'linktoggle' => $file->linktoggle()->toBool(false),
+      //       'linkexternal' => getLinkArray($file->linkexternal()),
+      //     ];
+      //   }
 
-      $linkexternal = [];
-      if ($block->linkexternal()->isNotEmpty()) {
-        $linkexternal = getLinkArray($block->linkexternal());
-      }
-      $blockArray['content']['images'] = $images;
-      $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
+      //   $linkexternal = [];
+      //   if ($block->linkexternal()->isNotEmpty()) {
+      //     $linkexternal = getLinkArray($block->linkexternal());
+      //   }
+      //   $blockArray['content']['images'] = $images;
+      //   $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
 
-      break;
+      //   break;
 
-    case "menu":
-      $blockArray['content'] = $block->toArray()['content'];
-      foreach ($block->nav()->toStructure() as $key => $item) {
-        $link = [];
-        if ($item->link()->isNotEmpty()) {
-          $link = getLinkArray($item->link());
-        }
-        $blockArray['content']['nav'][$key]["link"] = $link;
-      }
+      // case "menu":
+      //   $blockArray['content'] = $block->toArray()['content'];
+      //   foreach ($block->nav()->toStructure() as $key => $item) {
+      //     $link = [];
+      //     if ($item->link()->isNotEmpty()) {
+      //       $link = getLinkArray($item->link());
+      //     }
+      //     $blockArray['content']['nav'][$key]["link"] = $link;
+      //   }
 
-      break;
+      //   break;
 
     case 'button':
       $blockArray['content'] = $block->toArray()['content'];
 
-      $link = [];
-      if ($block->link()->isNotEmpty()) {
-        $link = getLinkArray($block->link());
-        $blockArray['content']['link'] = $link;
+      $linkobject = [];
+      if ($block->linkobject()->isNotEmpty()) {
+        $linkobject = getLinkArray($block->linkobject());
+        $blockArray['content']['linkobject'] = $linkobject;
       }
 
       break;
 
 
+      // case 'text':
+      //   $blockArray['content'] = $block->toArray()['content'];
+      //   $blockArray['content']['text'] = (string)$block->text();
+      //   break;
 
-    case 'text':
-      $blockArray['content'] = $block->toArray()['content'];
-      $blockArray['content']['text'] = (string)$block->text();
-      break;
+      // case "vector":
+      //   $blockArray['content'] = $block->toArray()['content'];
+      //   $image = null;
+      //   if ($file1 = $block->image()->toFile()) {
+      //     $image = [
+      //       'url' => $file1->url(),
+      //       'alt' => (string)$file1->alt(),
+      //       'identifier' => $file1->identifier()->value(),
+      //       'classes' => $file1->classes()->value(),
+      //       'width' => $file1->width(),
+      //       'height' => $file1->height(),
+      //     ];
+      //   }
 
-    case "vector":
-      $blockArray['content'] = $block->toArray()['content'];
-      $image = null;
-      if ($file1 = $block->image()->toFile()) {
-        $image = [
-          'url' => $file1->url(),
-          'alt' => (string)$file1->alt(),
-          'identifier' => $file1->identifier()->value(),
-          'classes' => $file1->classes()->value(),
-          'width' => $file1->width(),
-          'height' => $file1->height(),
-        ];
-      }
+      //   $linkexternal = [];
+      //   if ($block->linkexternal()->isNotEmpty()) {
+      //     $linkexternal = getLinkArray($block->linkexternal());
+      //   }
 
-      $linkexternal = [];
-      if ($block->linkexternal()->isNotEmpty()) {
-        $linkexternal = getLinkArray($block->linkexternal());
-      }
+      //   $blockArray['content']['image'] = $image;
+      //   $blockArray['content']['linkexternal'] = $linkexternal;
+      //   $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
+      //   break;
 
-      $blockArray['content']['image'] = $image;
-      $blockArray['content']['linkexternal'] = $linkexternal;
-      $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
-      break;
+      // case "iconlist":
+      //   $blockArray['content'] = $block->toArray()['content'];
 
-    case "iconlist":
-      $blockArray['content'] = $block->toArray()['content'];
+      //   foreach ($block->list()->toStructure() as $key => $item) {
+      //     $icon = null;
+      //     if ($file = $item->icon()->toFile()) {
+      //       $icon = [
+      //         'url' => $file->url(),
+      //         'alt' => (string)$file->alt(),
+      //         'source' => file_get_contents($file->root()),
+      //       ];
+      //     }
 
-      foreach ($block->list()->toStructure() as $key => $item) {
-        $icon = null;
-        if ($file = $item->icon()->toFile()) {
-          $icon = [
-            'url' => $file->url(),
-            'alt' => (string)$file->alt(),
-            'source' => file_get_contents($file->root()),
-          ];
-        }
+      //     $blockArray['content']['list'][$key]["icon"] = $icon;
+      //   }
 
-        $blockArray['content']['list'][$key]["icon"] = $icon;
-      }
+      //   break;
 
-      break;
+      // case 'code':
+      //   $blockArray['content'] = $block->toArray()['content'];
+      //   $blockArray['content']['code'] = (string)$block->code();
+      //   break;
 
-    case 'code':
-      $blockArray['content'] = $block->toArray()['content'];
-      $blockArray['content']['code'] = (string)$block->code();
-      break;
+      // case 'text':
+      //   $blockArray['content'] = $block->toArray()['content'];
+      //   $blockArray['content']['text'] = (string)$block->text();
+      //   break;
 
-    case 'text':
-      $blockArray['content'] = $block->toArray()['content'];
-      $blockArray['content']['text'] = (string)$block->text();
-      break;
+      // case "iconlist":
+      //   $blockArray['content'] = $block->toArray()['content'];
 
-    case "iconlist":
-      $blockArray['content'] = $block->toArray()['content'];
+      //   foreach ($block->list()->toStructure() as $key => $item) {
+      //     $icon = null;
+      //     if ($file = $item->icon()->toFile()) {
+      //       $icon = [
+      //         'url' => $file->url(),
+      //         'alt' => (string)$file->alt(),
+      //         'source' => file_get_contents($file->root()),
+      //       ];
+      //     }
 
-      foreach ($block->list()->toStructure() as $key => $item) {
-        $icon = null;
-        if ($file = $item->icon()->toFile()) {
-          $icon = [
-            'url' => $file->url(),
-            'alt' => (string)$file->alt(),
-            'source' => file_get_contents($file->root()),
-          ];
-        }
+      //     $blockArray['content']['list'][$key]["icon"] = $icon;
+      //   }
 
-        $blockArray['content']['list'][$key]["icon"] = $icon;
-      }
-
-      break;
-
-
-    case "video":
-      $blockArray['content'] = $block->toArray()['content'];
-      $video = null;
-      $thumb = null;
-      if ($file1 = $block->file()->toFile()) {
-        $video = [
-          'url' => $file1->url(),
-          'alt' => (string)$file1->alt(),
-          'identifier' => $file1->identifier()->value(),
-          'classes' => $file1->classes()->value(),
-        ];
-      }
-      if ($file2 = $block->thumbnail()->toFile()) {
-        $thumb = [
-          'url' => $file2->url(),
-          'alt' => (string)$file2->alt(),
-        ];
-      }
-      $blockArray['content']['thumbnail'] = $thumb;
-      $blockArray['content']['file'] = $video;
-      break;
+      //   break;
 
 
-    default:
-      $blockArray['content'] = $block->toArray()['content'];
-      break;
+      // case "video":
+      //   $blockArray['content'] = $block->toArray()['content'];
+      //   $video = null;
+      //   $thumb = null;
+      //   if ($file1 = $block->file()->toFile()) {
+      //     $video = [
+      //       'url' => $file1->url(),
+      //       'alt' => (string)$file1->alt(),
+      //       'identifier' => $file1->identifier()->value(),
+      //       'classes' => $file1->classes()->value(),
+      //     ];
+      //   }
+      //   if ($file2 = $block->thumbnail()->toFile()) {
+      //     $thumb = [
+      //       'url' => $file2->url(),
+      //       'alt' => (string)$file2->alt(),
+      //     ];
+      //   }
+      //   $blockArray['content']['thumbnail'] = $thumb;
+      //   $blockArray['content']['file'] = $video;
+      //   break;
+
+
+      // default:
+      //   $blockArray['content'] = $block->toArray()['content'];
+      //   break;
   }
 
   return $blockArray;

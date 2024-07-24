@@ -1,6 +1,7 @@
 <?php
 
 use Kirby\Toolkit\Str;
+use Kirby\Content\Field;
 
 Kirby::plugin("baukasten/field-methods", [
 	"fieldMethods" => [
@@ -10,30 +11,60 @@ Kirby::plugin("baukasten/field-methods", [
 	],
 ]);
 
-function getLinkArray($field): ?array
+function getLinkArray($field, $title = true): ?array
 {
-	$linkObject = $field->toLinkObject();
-	if (!$linkObject) {
+	if ($field->isEmpty()) {
 		return null;
 	}
 
-	$title = $linkObject->text() ? (string) $linkObject->text() : null;
-	if ($title === null && $linkObject->page()) {
-		$title = (string) $linkObject->page()->title();
+	$link = $field->toObject();
+	if (!$link) {
+		return null;
 	}
 
-	$linkArray = [
-		"href" => $linkObject->page() ? null : $linkObject->href(),
-		"title" => $title,
-		"type" => $linkObject->type(),
-		"uri" => $linkObject->page() ? (string) $linkObject->page()->uri() . ($linkObject->file() ? (string) $linkObject->page()->uri() : '') : null,
-		"popup" => (bool) $linkObject->popup(),
-		"hash" => $linkObject->hash(),
+	$linkValue = ltrim($link->link()->value(), '#');
+	$linkType = getLinkType($link->link());
+
+	$title = $title ? ($link->title() ?: null) : null;
+
+	return [
+		'href' => $linkType === 'url' ? $linkValue : null,
+		'title' => $link->linkText()->value() ?: $linkValue,
+		'popup' => $link->target()->toBool(),
+		'hash' => $linkType === 'anchor' ? $linkValue : null,
+		'type' => $linkType,
+		'uri' => in_array($linkType, ['page', 'file']) ? $linkValue : null,
 	];
+}
 
-	if ($linkArray['uri'] === 'home') {
-		$linkArray['uri'] = '/';
+function getLinkType(Field $field): string
+{
+	$val = $field->value();
+	if (empty($val)) return 'custom';
+
+	if (Str::match($val, '/^(http|https):\/\//')) {
+		return 'url';
 	}
 
-	return $linkArray;
+	if (Str::startsWith($val, 'page://') || Str::startsWith($val, '/@/page/')) {
+		return 'page';
+	}
+
+	if (Str::startsWith($val, 'file://') || Str::startsWith($val, '/@/file/')) {
+		return 'file';
+	}
+
+	if (Str::startsWith($val, 'tel:')) {
+		return 'tel';
+	}
+
+	if (Str::startsWith($val, 'mailto:')) {
+		return 'email';
+	}
+
+	if (Str::startsWith($val, '#')) {
+		return 'anchor';
+	}
+
+	return 'custom';
 }

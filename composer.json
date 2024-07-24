@@ -7,8 +7,7 @@
 		"fabianmichael/kirby-meta": "^0.4.1@beta",
 		"pju/kirby-webhook-field": "^1.1",
 		"microman/kirby-column-blocks": "^1.0",
-		"microman/kirby-grid-blocks": "^1.0",
-		"oblik/kirby-link-field": "6.0"
+		"microman/kirby-grid-blocks": "^1.0"
 	},
 	"config": {
 		"allow-plugins": {
