@@ -122,12 +122,12 @@ return [
 				$header = count($header) > 0 ? $header : null;
 
 				// hamburger menu
-				$hamburger = [];
-				foreach ($site->navHambuger()->toStructure() as $hamburgerItem) {
-					$linkArrayHamburger = $hamburgerItem->link()->getLinkArray();
-					$hamburger[] = $linkArrayHamburger;
-				}
-				$hamburger = count($hamburger) > 0 ? $hamburger : null;
+				// $hamburger = [];
+				// foreach ($site->navHambuger()->toStructure() as $hamburgerItem) {
+				// 	$linkArrayHamburger = $hamburgerItem->link()->getLinkArray();
+				// 	$hamburger[] = $linkArrayHamburger;
+				// }
+				// $hamburger = count($hamburger) > 0 ? $hamburger : null;
 
 
 
@@ -143,10 +143,10 @@ return [
 				}
 
 				// cta button
-				$logoCta = [];
-				if ($site->headerLogo()->toObject()->logoCta()->isNotEmpty()) {
-					$logoCta = getLinkArray($site->headerLogo()->toObject()->logoCta());
-				}
+				// $logoCta = [];
+				// if ($site->headerLogo()->toObject()->logoCta()->isNotEmpty()) {
+				// 	$logoCta = getLinkArray($site->headerLogo()->toObject()->logoCta());
+				// }
 
 
 
@@ -225,7 +225,7 @@ return [
 
 					"frontendUrl" => (string) $site->frontendUrl(),
 					"navHeader" => $header,
-					"navHamburger" => $hamburger,
+					// "navHamburger" => $hamburger,
 
 					"colorPrimary" => (string) $site->colorPrimary(),
 					"colorSecondary" => (string) $site->colorSecondary(),
@@ -256,7 +256,7 @@ return [
 
 					"logoFile" => $logoFile,
 					"logoAlign" => (string) $site->headerLogo()->toObject()->logoAlign(),
-					"logoCta" => $logoCta,
+					// "logoCta" => $logoCta,
 					"logoDesktop" => (string) $site->headerLogo()->toObject()->logoDesktop(),
 					"logoMobile" => (string) $site->headerLogo()->toObject()->logoMobile(),
 					"logoDesktopActive" => (string) $site->headerLogo()->toObject()->logoDesktopActive(),

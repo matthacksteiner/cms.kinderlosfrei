@@ -16,16 +16,21 @@ columns:
             fields:
               link:
                 type: link
-                label: Link
-                required: true
-                pages:
-                  query: site.index.filterBy('intendedTemplate', 'not in', ['error'])
-                linkTypes:
+                options:
                   - page
                   - url
-                settings:
-                  text:
-                    required: true
+              # link:
+              #   type: link
+              #   label: Link
+              #   required: true
+              #   pages:
+              #     query: site.index.filterBy('intendedTemplate', 'not in', ['error'])
+              #   linkTypes:
+              #     - page
+              #     - url
+              #   settings:
+              #     text:
+              #       required: true
           navHambuger:
             width: 1/2
             type: structure
