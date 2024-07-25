@@ -35,6 +35,7 @@ function getLinkArray($field, $title = true): ?array
 		'hash' => $linkType === 'anchor' ? $linkValue : null,
 		'type' => $linkType,
 		'uri' => $uri,
+		'classes' => $link->classnames()->value(),
 	];
 }
 

@@ -19,6 +19,7 @@ columns:
                 options:
                   - page
                   - url
+                  - anchor
               # link:
               #   type: link
               #   label: Link

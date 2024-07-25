@@ -116,10 +116,21 @@ return [
 				// header menu
 				$header = [];
 				foreach ($site->navHeader()->toStructure() as $headerItem) {
-					$linkArrayHeader = $headerItem->link()->value();
-					$header[] = $linkArrayHeader;
+					$link = $headerItem;
+					$linkValue = preg_replace('/^(#|tel:)/', '', $link->link()->value());
+					$linkType = getLinkType($headerItem->link());
+					$linkUri = ($headerItem->link()->toPage()?->uri());
+					$linkHref = ($headerItem->link()->toUrl());
+
+					$header[] = [
+						"uri" => $linkUri,
+						"href" => $linkHref,
+						"type" => $linkType,
+						'hash' => $linkType === 'anchor' ? $linkValue : null,
+					];
 				}
 				$header = count($header) > 0 ? $header : null;
+
 
 				// hamburger menu
 				// $hamburger = [];
