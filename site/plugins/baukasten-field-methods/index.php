@@ -7,9 +7,30 @@ Kirby::plugin("baukasten/field-methods", [
 	"fieldMethods" => [
 		"getLinkArray" => function ($field, $title = true) {
 			return getLinkArray($field, $title);
-		}
+		},
+		"getNavArray" => function ($field) {
+			return getNavArray($field);
+		},
 	],
 ]);
+
+
+function getNavArray($link)
+{
+	$linkValue = preg_replace('/^(#|tel:)/', '', $link->link()->value());
+	$linkType = getLinkType($link->link());
+	$uri = determineUri($linkType, $link->link());
+	$linkHref = ($link->link()->toUrl());
+
+	return [
+		'href' => in_array($linkType, ['url', 'tel', 'email']) ? $linkValue : null,
+		'popup' => $link->target()->toBool(),
+		'hash' => $linkType === 'anchor' ? $linkValue : null,
+		'type' => $linkType,
+		'uri' => $uri,
+		'classes' => $link->classnames()->value(),
+	];
+}
 
 function getLinkArray($field, $title = true): ?array
 {
