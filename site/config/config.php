@@ -116,7 +116,7 @@ return [
 				// header menu
 				$header = [];
 				foreach ($site->navHeader()->toStructure() as $headerItem) {
-					$linkArrayHeader = $headerItem->link()->getLinkArray();
+					$linkArrayHeader = $headerItem->link()->value();
 					$header[] = $linkArrayHeader;
 				}
 				$header = count($header) > 0 ? $header : null;

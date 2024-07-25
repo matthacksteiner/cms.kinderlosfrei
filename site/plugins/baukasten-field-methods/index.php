@@ -22,18 +22,19 @@ function getLinkArray($field, $title = true): ?array
 		return null;
 	}
 
-	$linkValue = ltrim($link->link()->value(), '#');
+	$linkValue = preg_replace('/^(#|tel:)/', '', $link->link()->value());
 	$linkType = getLinkType($link->link());
 
 	$title = $title ? ($link->title() ?: null) : null;
+	$uri = determineUri($linkType, $link->link());
 
 	return [
-		'href' => $linkType === 'url' ? $linkValue : null,
+		'href' => in_array($linkType, ['url', 'tel', 'email']) ? $linkValue : null,
 		'title' => $link->linkText()->value() ?: $linkValue,
 		'popup' => $link->target()->toBool(),
 		'hash' => $linkType === 'anchor' ? $linkValue : null,
 		'type' => $linkType,
-		'uri' => in_array($linkType, ['page', 'file']) ? $linkValue : null,
+		'uri' => $uri,
 	];
 }
 
@@ -67,4 +68,28 @@ function getLinkType(Field $field): string
 	}
 
 	return 'custom';
+}
+
+function determineUri($linkType, $linkField)
+{
+	$uri = null;
+	$currentPageUri = site()->page()->uri();
+
+	switch ($linkType) {
+		case 'page':
+			$uri = $linkField->toPage()?->uri();
+			break;
+		case 'file':
+			$uri = $linkField->toUrl();
+			break;
+		case 'anchor':
+			$uri = $currentPageUri;
+			break;
+	}
+
+	if ($uri === 'home') {
+		$uri = '/';
+	}
+
+	return $uri;
 }
