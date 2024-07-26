@@ -15,14 +15,11 @@ fields:
   linkText:
     type: text
     label: Text
-    width: 1/2
+    width: 2/6
   target:
     label: Neues Fenster?
     type: toggle
     width: 1/6
-  tagetGap:
-    type: gap
-    width: 5/6
   anchorToggle:
     type: toggle
     label: Anker Link?
@@ -37,4 +34,5 @@ fields:
       - anchor
 
   classnames:
+    label: CSS Klassen
     type: text
