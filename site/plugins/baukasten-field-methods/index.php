@@ -14,24 +14,6 @@ Kirby::plugin("baukasten/field-methods", [
 	],
 ]);
 
-
-// function getNavArray($link)
-// {
-// 	$linkValue = preg_replace('/^(#|tel:)/', '', $link->link()->value());
-// 	$linkType = getLinkType($link->link());
-// 	$uri = determineUri($linkType, $link->link());
-
-// 	return [
-// 		'href' => in_array($linkType, ['url', 'tel', 'email']) ? $linkValue : null,
-// 		'title' => $link->linkText()->value() ?: $linkValue,
-// 		'popup' => $link->target()->toBool(),
-// 		'hash' => $linkType === 'anchor' ? $linkValue : null,
-// 		'type' => $linkType,
-// 		'uri' => $uri,
-// 		'classes' => $link->classnames()->value(),
-// 	];
-// }
-
 function getLinkArray($field, $title = true): ?array
 {
 	if ($field->isEmpty()) {
@@ -47,6 +29,8 @@ function getLinkArray($field, $title = true): ?array
 	$linkType = getLinkType($link->link());
 
 	$title = $title ? ($link->title() ?: null) : null;
+	$titlePage = $link->link()->toPage()?->title();
+	// $link
 	$uri = determineUri($linkType, $link->link());
 
 	$anchorToggle = $link->anchorToggle()->toBool();
