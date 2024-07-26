@@ -1,15 +1,40 @@
 type: object
+label: Link Objekt
 required: true
 fields:
   link:
     type: link
     label: Link
+    options:
+      - page
+      - url
+      - file
+      - email
+      - tel
     width: 1/2
   linkText:
     type: text
     label: Text
+    width: 1/2
   target:
+    label: Neues Fenster?
     type: toggle
-    text: Open in new window?
+    width: 1/6
+  tagetGap:
+    type: gap
+    width: 5/6
+  anchorToggle:
+    type: toggle
+    label: Anker Link?
+    width: 1/6
+  anchor:
+    type: link
+    label: Anker
+    width: 5/6
+    when:
+      anchorToggle: true
+    options:
+      - anchor
+
   classnames:
     type: text

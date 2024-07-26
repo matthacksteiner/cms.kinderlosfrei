@@ -14,12 +14,13 @@ columns:
             type: structure
             label: Header
             fields:
-              link:
-                type: link
-                options:
-                  - page
-                  - url
-                  - anchor
+              linkObject:
+                extends: fields/linkField
+                fields:
+                  link:
+                    options:
+                      - page
+                      - url
 
           navHambuger:
             width: 1/2

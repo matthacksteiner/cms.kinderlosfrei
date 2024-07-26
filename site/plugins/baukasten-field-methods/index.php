@@ -15,22 +15,22 @@ Kirby::plugin("baukasten/field-methods", [
 ]);
 
 
-function getNavArray($link)
-{
-	$linkValue = preg_replace('/^(#|tel:)/', '', $link->link()->value());
-	$linkType = getLinkType($link->link());
-	$uri = determineUri($linkType, $link->link());
-	$linkHref = ($link->link()->toUrl());
+// function getNavArray($link)
+// {
+// 	$linkValue = preg_replace('/^(#|tel:)/', '', $link->link()->value());
+// 	$linkType = getLinkType($link->link());
+// 	$uri = determineUri($linkType, $link->link());
 
-	return [
-		'href' => in_array($linkType, ['url', 'tel', 'email']) ? $linkValue : null,
-		'popup' => $link->target()->toBool(),
-		'hash' => $linkType === 'anchor' ? $linkValue : null,
-		'type' => $linkType,
-		'uri' => $uri,
-		'classes' => $link->classnames()->value(),
-	];
-}
+// 	return [
+// 		'href' => in_array($linkType, ['url', 'tel', 'email']) ? $linkValue : null,
+// 		'title' => $link->linkText()->value() ?: $linkValue,
+// 		'popup' => $link->target()->toBool(),
+// 		'hash' => $linkType === 'anchor' ? $linkValue : null,
+// 		'type' => $linkType,
+// 		'uri' => $uri,
+// 		'classes' => $link->classnames()->value(),
+// 	];
+// }
 
 function getLinkArray($field, $title = true): ?array
 {
@@ -43,17 +43,21 @@ function getLinkArray($field, $title = true): ?array
 		return null;
 	}
 
-	$linkValue = preg_replace('/^(#|tel:)/', '', $link->link()->value());
+	$linkValue = preg_replace('/^(tel:)/', '', $link->link()->value());
 	$linkType = getLinkType($link->link());
 
 	$title = $title ? ($link->title() ?: null) : null;
 	$uri = determineUri($linkType, $link->link());
 
+	$anchorToggle = $link->anchorToggle()->toBool();
+	$anchor = preg_replace('/^(#)/', '', $link->anchor());
+
 	return [
 		'href' => in_array($linkType, ['url', 'tel', 'email']) ? $linkValue : null,
 		'title' => $link->linkText()->value() ?: $linkValue,
 		'popup' => $link->target()->toBool(),
-		'hash' => $linkType === 'anchor' ? $linkValue : null,
+		'hash' => $anchorToggle ? $anchor : null,
+		'hash' => $anchor,
 		'type' => $linkType,
 		'uri' => $uri,
 		'classes' => $link->classnames()->value(),
@@ -95,7 +99,6 @@ function getLinkType(Field $field): string
 function determineUri($linkType, $linkField)
 {
 	$uri = null;
-	$currentPageUri = site()->page()->uri();
 
 	switch ($linkType) {
 		case 'page':
@@ -103,9 +106,6 @@ function determineUri($linkType, $linkField)
 			break;
 		case 'file':
 			$uri = $linkField->toUrl();
-			break;
-		case 'anchor':
-			$uri = $currentPageUri;
 			break;
 	}
 

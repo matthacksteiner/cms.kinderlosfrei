@@ -116,18 +116,15 @@ return [
 				// header menu
 				$header = [];
 				foreach ($site->navHeader()->toStructure() as $headerItem) {
-					$link = $headerItem;
-					$linkArray = getNavArray($link);
-					$header[] = $linkArray;
+					$header[] = getLinkArray($headerItem->linkobject());
 				}
 				$header = count($header) > 0 ? $header : null;
+
 
 				// hamburger menu
 				$hamburger = [];
 				foreach ($site->navHambuger()->toStructure() as $hamburgerItem) {
-					$link = $hamburgerItem;
-					$linkArray = getNavArray($link);
-					$hamburger[] = $linkArray;
+					$hamburger[] = getLinkArray($hamburgerItem->linkobject());
 				}
 				$hamburger = count($hamburger) > 0 ? $hamburger : null;
 
