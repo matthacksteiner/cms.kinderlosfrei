@@ -27,12 +27,13 @@ columns:
             type: structure
             label: Hamburger
             fields:
-              link:
-                type: link
-                options:
-                  - page
-                  - url
-                  - anchor
+              linkObject:
+                extends: fields/linkField
+                fields:
+                  link:
+                    options:
+                      - page
+                      - url
 
           line1:
             width: 1/1
