@@ -70,11 +70,6 @@ tabs:
             type: gap
             width: 2/3
           linkExternal:
-            type: link
-            label: false
-            width: 1/1
+            extends: fields/linkField
             when:
               linkToggle: true
-            linkTypes:
-              - page
-              - url

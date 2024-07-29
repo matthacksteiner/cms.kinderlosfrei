@@ -43,12 +43,8 @@ tabs:
         default: false
         width: 1/6
       linkExternal:
-        type: link
+        extends: fields/linkField
         label: false
         width: 5/6
         when:
           toggle: true
-        linkTypes:
-          - page
-          - url
-          - file

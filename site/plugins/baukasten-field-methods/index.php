@@ -5,13 +5,13 @@ use Kirby\Content\Field;
 
 Kirby::plugin("baukasten/field-methods", [
 	"fieldMethods" => [
-		"getLinkArray" => function ($field, $title = true) {
+		"getLinkArray" => function ($field) {
 			return getLinkArray($field, $title);
 		},
 	],
 ]);
 
-function getLinkArray($field, $title = true): ?array
+function getLinkArray($field): ?array
 {
 	if ($field->isEmpty()) {
 		return null;

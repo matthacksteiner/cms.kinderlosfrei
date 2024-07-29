@@ -5,6 +5,7 @@ fields:
   link:
     type: link
     label: Link
+    required: true
     options:
       - page
       - url
