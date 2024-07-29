@@ -221,6 +221,32 @@ function getBlockArray(\Kirby\Cms\Block $block)
         ];
       }
 
+      $blockArray['content']['image'] = $image;
+      break;
+
+    case "vector":
+      $blockArray['content'] = $block->toArray()['content'];
+      $image = null;
+      if ($file1 = $block->image()->toFile()) {
+        $image = [
+          'url' => $file1->url(),
+          'alt' => (string)$file1->alt(),
+          'identifier' => $file1->identifier()->value(),
+          'classes' => $file1->classes()->value(),
+          'width' => $file1->width(),
+          'height' => $file1->height(),
+          'captiontoggle' => $file1->captiontoggle()->toBool(false),
+          'captiontitle' => $file1->captionobject()->toObject()->captiontitle()->value(),
+          'captiontextfont' => $file1->captionobject()->toObject()->textfont()->value(),
+          'captiontextsize' => $file1->captionobject()->toObject()->textsize()->value(),
+          'captiontextcolor' => $file1->captionobject()->toObject()->textColor()->value(),
+          'captiontextalign' => $file1->captionobject()->toObject()->textalign()->value(),
+          'captionoverlay' => $file1->captionobject()->toObject()->captionControls()->options()->value(),
+          'captionalign' => $file1->captionobject()->toObject()->captionalign()->value(),
+          'linktoggle' => $file1->linktoggle()->toBool(false),
+          'linkexternal' => getLinkArray($file1->linkexternal()),
+        ];
+      }
 
       $blockArray['content']['image'] = $image;
       break;
@@ -297,29 +323,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
       $blockArray['content']['text'] = (string)$block->text();
       break;
 
-    case "vector":
-      $blockArray['content'] = $block->toArray()['content'];
-      $image = null;
-      if ($file1 = $block->image()->toFile()) {
-        $image = [
-          'url' => $file1->url(),
-          'alt' => (string)$file1->alt(),
-          'identifier' => $file1->identifier()->value(),
-          'classes' => $file1->classes()->value(),
-          'width' => $file1->width(),
-          'height' => $file1->height(),
-        ];
-      }
 
-      $linkexternal = [];
-      if ($block->linkexternal()->isNotEmpty()) {
-        $linkexternal = getLinkArray($block->linkexternal());
-      }
-
-      $blockArray['content']['image'] = $image;
-      $blockArray['content']['linkexternal'] = $linkexternal;
-      $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
-      break;
 
     case "iconlist":
       $blockArray['content'] = $block->toArray()['content'];

@@ -71,5 +71,8 @@ tabs:
             width: 2/3
           linkExternal:
             extends: fields/linkField
-            when:
-              linkToggle: true
+            fields:
+              link:
+                options:
+                  - page
+                  - url

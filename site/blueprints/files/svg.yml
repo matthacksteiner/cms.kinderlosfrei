@@ -1,19 +1,43 @@
 Title: SVG
 accept: image/svg+xml
 
-fields:
-  alt:
-    type: text
-    label: Alternativ Text
-    width: 1/3
-    help: Alternativer Text für Benutzer mit eingeschränkter Sehkraft und bei Ladefehler.
-  identifier:
-    type: text
-    label: ID
-    width: 1/3
-    help: ID für CSS
-  classes:
-    type: text
-    label: CSS Klasse
-    width: 1/3
-    help: Zusätzliche CSS-Klassen. Durch ein Leerzeichen trennen.
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      alt:
+        type: text
+        label: Alternativ Text
+        width: 1/3
+        help: Alternativer Text für Benutzer mit eingeschränkter Sehkraft und bei Ladefehler.
+      identifier:
+        type: text
+        label: ID
+        width: 1/3
+        help: ID für CSS
+      classes:
+        type: text
+        label: CSS Klasse
+        width: 1/3
+        help: Zusätzliche CSS-Klassen. Durch ein Leerzeichen trennen.
+  settings:
+    label: Einstellungen
+    columns:
+      - width: 1/2
+        fields:
+          linkToggle:
+            label: Link?
+            type: toggle
+            default: false
+            width: 1/3
+          linkGap:
+            type: gap
+            width: 2/3
+          linkExternal:
+            extends: fields/linkField
+            fields:
+              link:
+                options:
+                  - page
+                  - url
+                  - file

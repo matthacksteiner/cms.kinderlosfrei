@@ -13,7 +13,7 @@ tabs:
         multiple: true
         layout: list
         uploads:
-          template: image
+          template: slider
         image:
           ratio: 1/1
         help: "Für weitere Optionen (Fokus, Link und Beschriftung) das Bild anklicken."
