@@ -33,22 +33,3 @@ tabs:
         label: Ausrichtung
         extends: fields/align
         width: 1/4
-      linkHeadline:
-        label: Link
-        type: headline
-        numbered: false
-      toggle:
-        label: Link?
-        type: toggle
-        default: false
-        width: 1/6
-      linkExternal:
-        type: link
-        label: false
-        width: 5/6
-        when:
-          toggle: true
-        linkTypes:
-          - page
-          - url
-          - file

@@ -5,12 +5,9 @@ tabs:
   content:
     label: Inhalt
     fields:
-      link:
-        type: link
-        label: Link
-        required: true
-        files:
-          query: page.files.filterBy('template', 'docs')
+      linkObject:
+        extends: fields/linkField
+
   settings:
     label: Einstellungen
     fields:

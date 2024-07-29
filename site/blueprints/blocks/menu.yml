@@ -10,18 +10,12 @@ tabs:
         label: Footer
         type: structure
         fields:
-          link:
-            type: link
-            label: Link
-            required: true
-            pages:
-              query: site.index.filterBy('intendedTemplate', 'not in', ['error'])
-            linkTypes:
-              - page
-              - url
-            settings:
-              text:
+          linkObject:
+            extends: fields/linkField
+            fields:
+              linkText:
                 required: true
+
   settings:
     label: Einstellungen
     fields:

@@ -14,35 +14,27 @@ columns:
             type: structure
             label: Header
             fields:
-              link:
-                type: link
-                label: Link
-                required: true
-                pages:
-                  query: site.index.filterBy('intendedTemplate', 'not in', ['error'])
-                linkTypes:
-                  - page
-                  - url
-                settings:
-                  text:
-                    required: true
+              linkObject:
+                extends: fields/linkField
+                fields:
+                  link:
+                    options:
+                      - page
+                      - url
+
           navHambuger:
             width: 1/2
             type: structure
             label: Hamburger
             fields:
-              link:
-                type: link
-                label: Link
-                required: true
-                pages:
-                  query: site.index.filterBy('intendedTemplate', 'not in', ['error'])
-                linkTypes:
-                  - page
-                  - url
-                settings:
-                  text:
-                    required: true
+              linkObject:
+                extends: fields/linkField
+                fields:
+                  link:
+                    options:
+                      - page
+                      - url
+
           line1:
             width: 1/1
             type: line

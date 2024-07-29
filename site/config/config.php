@@ -5,7 +5,7 @@ use Kirby\Filesystem\F;
 use Kirby\Http\Response;
 
 return [
-	// 'debug' => true,
+	'debug' => true,
 	'auth' => [
 		'methods' => ['password', 'password-reset']
 	],
@@ -116,16 +116,15 @@ return [
 				// header menu
 				$header = [];
 				foreach ($site->navHeader()->toStructure() as $headerItem) {
-					$linkArrayHeader = $headerItem->link()->getLinkArray();
-					$header[] = $linkArrayHeader;
+					$header[] = getLinkArray($headerItem->linkobject());
 				}
 				$header = count($header) > 0 ? $header : null;
+
 
 				// hamburger menu
 				$hamburger = [];
 				foreach ($site->navHambuger()->toStructure() as $hamburgerItem) {
-					$linkArrayHamburger = $hamburgerItem->link()->getLinkArray();
-					$hamburger[] = $linkArrayHamburger;
+					$hamburger[] = getLinkArray($hamburgerItem->linkobject());
 				}
 				$hamburger = count($hamburger) > 0 ? $hamburger : null;
 
