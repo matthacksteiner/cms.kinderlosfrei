@@ -8,9 +8,6 @@ Kirby::plugin("baukasten/field-methods", [
 		"getLinkArray" => function ($field, $title = true) {
 			return getLinkArray($field, $title);
 		},
-		"getNavArray" => function ($field) {
-			return getNavArray($field);
-		},
 	],
 ]);
 
@@ -25,23 +22,21 @@ function getLinkArray($field, $title = true): ?array
 		return null;
 	}
 
-	$linkValue = preg_replace('/^(tel:)/', '', $link->link()->value());
+	$linkValue = stripPrefix($link->link()->value(), 'tel:');
 	$linkType = getLinkType($link->link());
 
-	$title = $title ? ($link->title() ?: null) : null;
-	$titlePage = $link->link()->toPage()?->title();
-	// $link
+	$titlePage = $link->link()->toPage()?->title()->value();
+
 	$uri = determineUri($linkType, $link->link());
 
 	$anchorToggle = $link->anchorToggle()->toBool();
-	$anchor = preg_replace('/^(#)/', '', $link->anchor());
+	$anchor = stripPrefix($link->anchor(), '#');
 
 	return [
 		'href' => in_array($linkType, ['url', 'tel', 'email']) ? $linkValue : null,
-		'title' => $link->linkText()->value() ?: $linkValue,
+		'title' => getTitle($linkType, $link, $linkValue, $titlePage),
 		'popup' => $link->target()->toBool(),
 		'hash' => $anchorToggle ? $anchor : null,
-		'hash' => $anchor,
 		'type' => $linkType,
 		'uri' => $uri,
 		'classes' => $link->classnames()->value(),
@@ -98,4 +93,23 @@ function determineUri($linkType, $linkField)
 	}
 
 	return $uri;
+}
+
+function stripPrefix($string, $prefix)
+{
+	return preg_replace('/^(' . preg_quote($prefix, '/') . ')/', '', $string);
+}
+
+function getTitle($linkType, $link, $linkValue, $titlePage)
+{
+	$linkText = $link->linkText()->value();
+
+	switch ($linkType) {
+		case 'url':
+			return $linkText ?: $linkValue;
+		case 'page':
+			return $linkText ?: $titlePage;
+		default:
+			return $linkText ?: $titlePage;
+	}
 }
