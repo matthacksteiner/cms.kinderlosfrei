@@ -97,6 +97,10 @@ function determineUri($linkType, $linkField)
 
 function stripPrefix($string, $prefix)
 {
+	if (is_null($string) || is_null($prefix)) {
+		return $string;
+	}
+
 	return preg_replace('/^(' . preg_quote($prefix, '/') . ')/', '', $string);
 }
 

@@ -6,12 +6,12 @@ fields:
   anchor:
     label: ID
     type: text
-    help: "Wird für die Navigation benötigt."
+    help: "Anchor ID."
     width: 1/3
   classes:
     label: CSS Klassen
     type: text
-    help: "Zusätzliche CSS-Klassen. Durch ein Leerzeichen trennen."
+    help: "Mit Leerzeichen trennen."
     width: 1/3
   attributes:
     type: structure
@@ -28,6 +28,7 @@ fields:
         width: 1/2
         help: Boolean oder String
     width: 1/3
+    help: "Erweiterte Attribute."
   backgroundHeadline:
     type: headline
     label: Container

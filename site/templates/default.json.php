@@ -70,38 +70,21 @@ if ($page->layout()->isNotEmpty()) {
       continue;
     }
 
-    // Adjusting the attributes structure and converting "true" to boolean
-    $newAttributes = [];
-    foreach ($layoutData['attributes'] as $attribute) {
-      $value = $attribute['value'];
-      // Convert string "true" to boolean true
-      if ($value === "true") {
-        $value = true;
+    if (isset($layoutData['attributes'])) {
+      $newAttributes = [];
+      foreach ($layoutData['attributes'] as $attribute) {
+        $value = $attribute['value'];
+        if ($value === "true") {
+          $value = true;
+        }
+        $newAttributes[$attribute['attribute']] = $value;
       }
-      // Add attribute directly to the new array
-      $newAttributes[$attribute['attribute']] = $value;
+      $layoutData['attributes'] = $newAttributes;
     }
-    $layoutData['attributes'] = $newAttributes;
 
-    // Append the adjusted layout data to the JSON
     $json["layouts"][] = $layoutData;
   }
 }
-
-
-
-// if (isset($blockArray['content']['metadata']['attributes'])) {
-//   $metadataAttributes = $blockArray['content']['metadata']['attributes'];
-//   $attributes = [];
-//   foreach ($metadataAttributes as $attr) {
-//     $key = $attr['attribute'];
-//     $value = $attr['value'] === 'true' ? true : $attr['value'];
-//     $attributes[$key] = $value;
-//   }
-//   $blockArray['content']['metadata']['attributes'] = $attributes;
-// }
-
-
 
 if ($site->layoutFooter()->isNotEmpty()) {
   $json["layoutFooter"] = [];
@@ -394,7 +377,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
       break;
   }
 
-  // Extract metadata attributes for all cases
+  // Extract metadata attributes
   if (isset($blockArray['content']['metadata']['attributes'])) {
     $metadataAttributes = $blockArray['content']['metadata']['attributes'];
     $attributes = [];
