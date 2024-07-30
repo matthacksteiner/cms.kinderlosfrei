@@ -70,3 +70,4 @@ tabs:
         width: 1/4
         default: 5000
         after: ms
+      meta: fields/metadata

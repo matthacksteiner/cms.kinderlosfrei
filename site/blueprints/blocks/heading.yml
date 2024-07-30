@@ -19,3 +19,4 @@ tabs:
     label: Einstellungen
     fields:
       titleGroup: groups/titleGroup
+      meta: fields/metadata

@@ -71,3 +71,4 @@ tabs:
       textSettings:
         label: Text Einstellungen
         extends: groups/textGroup
+      meta: fields/metadata

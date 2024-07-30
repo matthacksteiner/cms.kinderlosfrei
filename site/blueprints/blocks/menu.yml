@@ -37,3 +37,4 @@ tabs:
         type: headline
         numbered: false
       textGroup: groups/textGroup
+      meta: fields/metadata

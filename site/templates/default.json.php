@@ -87,7 +87,6 @@ if ($site->layoutFooter()->isNotEmpty()) {
   }
 }
 
-
 function getBlockArray(\Kirby\Cms\Block $block)
 {
   $blockArray = [
@@ -124,13 +123,8 @@ function getBlockArray(\Kirby\Cms\Block $block)
 
           $columns[] = $columnArray;
         }
-        return [
-          "id" => $layout->id(),
-          "type" => 'columns',
-          "content" => [
-            "columns" => $columns,
-          ],
-
+        $blockArray['content'] = [
+          "columns" => $columns,
         ];
       }
       break;
@@ -171,18 +165,13 @@ function getBlockArray(\Kirby\Cms\Block $block)
         ];
       }
 
-      $output = [
-        "id" => $block->id(),
-        "type" => 'grid',
-        "content" => [
-          "title" => $title,
-          "grid" => $allGrids,
-        ],
+      $blockArray['content'] = [
+        "title" => $title,
+        "grid" => $allGrids,
       ];
 
-      return $output;
-
       break;
+
     case 'image':
       $blockArray['content'] = $block->toArray()['content'];
 
@@ -323,8 +312,6 @@ function getBlockArray(\Kirby\Cms\Block $block)
       $blockArray['content']['text'] = (string)$block->text();
       break;
 
-
-
     case "iconlist":
       $blockArray['content'] = $block->toArray()['content'];
 
@@ -348,31 +335,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
       $blockArray['content']['code'] = (string)$block->code();
       break;
 
-    case 'text':
-      $blockArray['content'] = $block->toArray()['content'];
-      $blockArray['content']['text'] = (string)$block->text();
-      break;
-
-    case "iconlist":
-      $blockArray['content'] = $block->toArray()['content'];
-
-      foreach ($block->list()->toStructure() as $key => $item) {
-        $icon = null;
-        if ($file = $item->icon()->toFile()) {
-          $icon = [
-            'url' => $file->url(),
-            'alt' => (string)$file->alt(),
-            'source' => file_get_contents($file->root()),
-          ];
-        }
-
-        $blockArray['content']['list'][$key]["icon"] = $icon;
-      }
-
-      break;
-
-
-    case "video":
+    case 'video':
       $blockArray['content'] = $block->toArray()['content'];
       $video = null;
       $thumb = null;
@@ -394,10 +357,21 @@ function getBlockArray(\Kirby\Cms\Block $block)
       $blockArray['content']['file'] = $video;
       break;
 
-
     default:
       $blockArray['content'] = $block->toArray()['content'];
       break;
+  }
+
+  // Extract metadata attributes for all cases
+  if (isset($blockArray['content']['metadata']['attributes'])) {
+    $metadataAttributes = $blockArray['content']['metadata']['attributes'];
+    $attributes = [];
+    foreach ($metadataAttributes as $attr) {
+      $key = $attr['attribute'];
+      $value = $attr['value'] === 'true' ? true : $attr['value'];
+      $attributes[$key] = $value;
+    }
+    $blockArray['content']['metadata']['attributes'] = $attributes;
   }
 
   return $blockArray;

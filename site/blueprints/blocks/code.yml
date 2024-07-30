@@ -12,3 +12,4 @@ tabs:
         size: large
         buttons: false
         placeholder: "<h1>Hello World</h1>"
+      meta: fields/metadata

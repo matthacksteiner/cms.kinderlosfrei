@@ -29,3 +29,4 @@ tabs:
         extends: fields/borderWidth
       borderColor:
         extends: fields/borderColor
+      meta: fields/metadata

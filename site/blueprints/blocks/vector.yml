@@ -33,3 +33,4 @@ tabs:
         label: Ausrichtung
         extends: fields/align
         width: 1/4
+      meta: fields/metadata

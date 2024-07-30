@@ -29,3 +29,4 @@ tabs:
       ratio:
         extends: fields/ratio
         label: Seitenverhältnis 🖥️
+      meta: fields/metadata

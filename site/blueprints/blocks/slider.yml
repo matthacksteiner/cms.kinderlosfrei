@@ -158,3 +158,4 @@ tabs:
               default: center
             when:
               toggle: true
+      meta: fields/metadata
