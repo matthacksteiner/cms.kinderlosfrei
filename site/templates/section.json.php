@@ -18,12 +18,10 @@ function getItems(\Kirby\Cms\Page $page)
     $calculateHeight = function ($width, $ratio) {
       return isset($ratio[1]) ? round(($width / $ratio[0]) * $ratio[1]) : $width;
     };
-    $items[] = [
-      'title' => (string) $item->title(),
-      "uri" => $item->uri(),
-      "description" => (string) $item->description()->escape(),
-      "parent" => strtolower((string) $page->title()),
-      'thumbnail' => [
+
+    $thumbnail = [];
+    if ($image) {
+      $thumbnail = [
         'url' => $image->url(),
         'urlFocus' => $image->crop($image->width(), $calculateHeight($image->width(), $ratio))->url(),
         'urlFocusMobile' => $image->crop($image->width(), $calculateHeight($image->width(), $ratioMobile))->url(),
@@ -31,12 +29,21 @@ function getItems(\Kirby\Cms\Page $page)
         'height' => $image->height(),
         'alt' => (string) $image->alt(),
         'orientation' => $image->orientation(),
-      ],
+      ];
+    }
+
+    $items[] = [
+      'title' => (string) $item->title(),
+      "uri" => $item->uri(),
+      "description" => (string) $item->description()->escape(),
+      "parent" => strtolower((string) $page->title()),
+      'thumbnail' => $thumbnail,
     ];
   }
 
   return $items;
 }
+
 
 if ($page->children()->isNotEmpty()) {
   $json['items'] = getItems($page);
