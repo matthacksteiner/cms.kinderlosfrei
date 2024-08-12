@@ -31,9 +31,21 @@ tabs:
         create:
           - item
   blocksPre:
-    label: Blöcke
+    label: Pre Blöcke
     icon: grid-top
-    extends: tabs/blocks
+    fields:
+      layoutPre:
+        label: Blöcke vor dem Inhalt
+        extends: fields/layout
+        settings: tabs/config
+  blocksPost:
+    label: Post Blöcke
+    icon: grid-bottom
+    fields:
+      layoutPost:
+        label: Blöcke nach dem Inhalt
+        extends: fields/layout
+        settings: tabs/config
 
   settings:
     label: Einstellungen
