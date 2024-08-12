@@ -81,7 +81,7 @@ $json['settings'] = getSettings($page);
 if ($page->layoutPre()->isNotEmpty()) {
   $json["layoutPre"] = [];
 
-  foreach ($page->layout()->toLayouts() as $layout) {
+  foreach ($page->layoutPre()->toLayouts() as $layout) {
     $layoutData = getLayoutArray($layout);
 
     if (!$layoutData) {
@@ -107,7 +107,7 @@ if ($page->layoutPre()->isNotEmpty()) {
 if ($page->layoutPost()->isNotEmpty()) {
   $json["layoutPost"] = [];
 
-  foreach ($page->layout()->toLayouts() as $layout) {
+  foreach ($page->layoutPost()->toLayouts() as $layout) {
     $layoutData = getLayoutArray($layout);
 
     if (!$layoutData) {
