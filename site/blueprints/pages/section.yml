@@ -17,7 +17,7 @@ tabs:
       contentMain:
         label: Veröffentlicht
         type: pages
-        sortable: false
+        sortable: true
         status: published
         layout: cards
         size: medium
