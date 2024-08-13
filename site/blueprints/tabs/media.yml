@@ -11,7 +11,7 @@ sections:
     headline: Bilder Slider
     type: files
     layout: cardlets
-    template: image
+    template: slider
     query: page.images
   vector:
     headline: Vektorgrafiken
