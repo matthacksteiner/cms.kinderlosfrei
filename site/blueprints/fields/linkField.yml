@@ -1,6 +1,5 @@
 type: object
 label: Link Objekt
-required: true
 fields:
   link:
     type: link
