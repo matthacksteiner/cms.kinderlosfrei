@@ -138,6 +138,8 @@ return [
 						"src" => (string) $site->headerLogo()->toObject()->logoFile()->toFile()->url(),
 						"alt" => (string) $site->headerLogo()->toObject()->logoFile()->toFile()->alt()->or($site->title() . " Logo"),
 						'source' => file_get_contents($site->headerLogo()->toObject()->logoFile()->toFile()->root()),
+						"width" => $site->headerLogo()->toObject()->logoFile()->toFile()->width(),
+						"height" => $site->headerLogo()->toObject()->logoFile()->toFile()->height(),
 					];
 				}
 
