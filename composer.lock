@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4c3212d73eee8d6446c042ac94c782b5",
+    "content-hash": "c64c29cf15ff58acd3ce645106f1c334",
     "packages": [
         {
             "name": "bnomei/kirby3-janitor",
@@ -294,16 +294,16 @@
         },
         {
             "name": "fabianmichael/kirby-meta",
-            "version": "0.4.2-beta",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabianmichael/kirby-meta.git",
-                "reference": "0a9422f708bbec364cc56dc81d84deb7fc30ae44"
+                "reference": "be187e7c689473cfb2b03332c3b769ed1b3ae300"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabianmichael/kirby-meta/zipball/0a9422f708bbec364cc56dc81d84deb7fc30ae44",
-                "reference": "0a9422f708bbec364cc56dc81d84deb7fc30ae44",
+                "url": "https://api.github.com/repos/fabianmichael/kirby-meta/zipball/be187e7c689473cfb2b03332c3b769ed1b3ae300",
+                "reference": "be187e7c689473cfb2b03332c3b769ed1b3ae300",
                 "shasum": ""
             },
             "require": {
@@ -333,6 +333,7 @@
                 }
             ],
             "description": "Your all-in-one powerhouse for any SEO and metadata needs imaginable.",
+            "homepage": "https://github.com/fabianmichael/kirby-meta",
             "keywords": [
                 "kirby3",
                 "kirby3-cms",
@@ -344,7 +345,7 @@
             ],
             "support": {
                 "issues": "https://github.com/fabianmichael/kirby-meta/issues",
-                "source": "https://github.com/fabianmichael/kirby-meta/tree/0.4.2-beta"
+                "source": "https://github.com/fabianmichael/kirby-meta/tree/1.0.2"
             },
             "funding": [
                 {
@@ -352,7 +353,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-25T07:30:57+00:00"
+            "time": "2024-01-19T12:53:45+00:00"
         },
         {
             "name": "filp/whoops",
@@ -2278,9 +2279,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "fabianmichael/kirby-meta": 10
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
