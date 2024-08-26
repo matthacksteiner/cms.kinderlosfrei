@@ -8,6 +8,7 @@
 /storage/cache
 /storage/sessions
 /storage/accounts
+/storage/backups
 /vendor
 /node_modules
 /public/media
