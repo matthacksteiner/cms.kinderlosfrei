@@ -15,6 +15,7 @@ tabs:
         fields:
           thumbnail:
             label: Cover
+            multiple: false
             type: files
             help: "Dieses Bild dient als Anzeigebild in der Übersicht."
             uploads:
