@@ -144,7 +144,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
                 $image = [
                     'url' => $file1->url(),
                     'alt' => (string)$file1->alt(),
-                    'filename' => (string)$image->filename(),
+                    'filename' => (string)$file1->filename(),
                     'identifier' => $file1->identifier()->value(),
                     'classes' => $file1->classes()->value(),
                     'width' => $file1->width(),
