@@ -116,6 +116,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
                     'width' => $image->width(),
                     'height' => $image->height(),
                     'alt' => (string)$image->alt(),
+                    'filename' => (string)$image->filename(),
                     'identifier' => $image->identifier()->value(),
                     'classes' => $image->classes()->value(),
                     'focusX' => json_decode($file1->focusPercentageX()),
@@ -143,6 +144,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
                 $image = [
                     'url' => $file1->url(),
                     'alt' => (string)$file1->alt(),
+                    'filename' => (string)$image->filename(),
                     'identifier' => $file1->identifier()->value(),
                     'classes' => $file1->classes()->value(),
                     'width' => $file1->width(),
@@ -184,6 +186,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
                     'width' => $image->width(),
                     'height' => $image->height(),
                     'alt' => (string)$image->alt(),
+                    'filename' => (string)$image->filename(),
                     'identifier' => $image->identifier()->value(),
                     'classes' => $image->classes()->value(),
                     'focusX' => json_decode($file->focusPercentageX()),
