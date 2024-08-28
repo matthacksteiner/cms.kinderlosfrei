@@ -28,6 +28,7 @@ function getItems(\Kirby\Cms\Page $page)
         'width' => $image->width(),
         'height' => $image->height(),
         'alt' => (string) $image->alt(),
+        'name' => (string)$image->name(),
         'orientation' => $image->orientation(),
       ];
     }
