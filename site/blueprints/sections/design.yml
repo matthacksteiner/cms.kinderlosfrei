@@ -259,16 +259,7 @@ columns:
                 translate: false
               logoCta:
                 label: CTA Button
-                type: link
-                width: 1/1
-                pages:
-                  query: site.index.filterBy('intendedTemplate', 'in', ['default', 'home'])
-                linkTypes:
-                  - page
-                  - url
-                settings:
-                  text:
-                    required: true
+                extends: fields/linkField
                 translate: false
                 when:
                   logoAlign: center
