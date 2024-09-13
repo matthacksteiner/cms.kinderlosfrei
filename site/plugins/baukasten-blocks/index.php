@@ -131,6 +131,14 @@ function getBlockArray(\Kirby\Cms\Block $block)
                     'captionalign' => $file1->captionobject()->toObject()->captionalign()->value(),
                     'linktoggle' => $file1->linktoggle()->toBool(false),
                     'linkexternal' => getLinkArray($file1->linkexternal()),
+                    'copyrighttoggle' => $file1->copyrighttoggle()->toBool(false),
+                    'copyrighttitle' => $file1->copyrightobject()->toObject()->copyrighttitle()->value(),
+                    'copyrighttextfont' => $file1->copyrightobject()->toObject()->textfont()->value(),
+                    'copyrighttextsize' => $file1->copyrightobject()->toObject()->textsize()->value(),
+                    'copyrighttextcolor' => $file1->copyrightobject()->toObject()->textColor()->value(),
+                    'copyrighbackgroundcolor' => $file1->copyrightobject()->toObject()->copyrightBackground()->value(),
+                    'copyrightposition' => $file1->copyrightobject()->toObject()->copyrightposition()->value(),
+
                 ];
             }
 
