@@ -36,7 +36,7 @@
 	margin-top: 2rem;
 }
 
-.k-layout-selector-option:after {
+/* .k-layout-selector-option:after {
 	content: attr(value);
 	font-size: 12px;
 	font-weight: bold;
@@ -44,7 +44,7 @@
 	color: #313740;
 	position: relative;
 	top: -50%;
-}
+} */
 
 /* Webhook K4 fix */
 .pju-webhook--btn {
