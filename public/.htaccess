@@ -86,6 +86,7 @@ AddOutputFilterByType DEFLATE application/x-javascript
   ExpiresByType audio/ogg                 "access plus 1 month"
   ExpiresByType video/mp4                 "access plus 1 month"
   ExpiresByType video/webm                "access plus 1 month"
+  ExpiresByType video/svg                 "access plus 1 month"
 
 # HTC files  (css3pie)
   ExpiresByType text/x-component          "access plus 1 month"
