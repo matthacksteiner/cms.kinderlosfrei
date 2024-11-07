@@ -29,6 +29,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
                         "id" => $column->id(),
                         "width" => $column->width(),
                         "span" => $column->span(),
+                        "nested" => true,
                         "blocks" => []
                     ];
 
@@ -64,6 +65,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
                         "id" => $column->id(),
                         "width" => $column->width(),
                         "span" => $column->span(),
+                        "nested" => true,
                         "blocks" => []
                     ];
 
