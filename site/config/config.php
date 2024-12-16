@@ -93,7 +93,7 @@ return [
 				$defaultLang = [
 					"code" => $defaultLang->code(),
 					"name" => $defaultLang->name(),
-					"url" => $defaultLang->url(),
+					"url" => option('prefixDefaultLocale') ? $defaultLang->url() : str_replace('/' . $defaultLang->code(), '', $defaultLang->url()),
 					"locale" => $defaultLang->locale(LC_ALL),
 					"active" => $defaultLang->code() == $kirby->language()->code(),
 				];
