@@ -20,7 +20,11 @@ tabs:
         label: field.blocks.video.url.label
         type: url
         placeholder: field.blocks.video.url.placeholder
-        help: YouTube (Format https://www.youtube.com/watch?v=vH1poPSIvOk oder https://youtu.be/vH1poPSIvOk) und Vimeo (Format https://vimeo.com/22775048) Links werden unterstützt.
+        help: |
+          Unterstützte Video-Quellen:
+          - YouTube (Format: https://www.youtube.com/watch?v=vH1poPSIvOk oder https://youtu.be/vH1poPSIvOk)
+          - Vimeo (Format: https://vimeo.com/22775048)
+          - Cloudinary (Format: https://res.cloudinary.com/demo/video/upload/v1612345678/sample.mp4)
         when:
           source: remote
       caption: false

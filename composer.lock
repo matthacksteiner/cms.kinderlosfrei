@@ -45,7 +45,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Bruno Meilick",
@@ -131,7 +133,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Christian Riesen",
@@ -142,7 +146,12 @@
 			],
 			"description": "Base32 encoder/decoder according to RFC 4648",
 			"homepage": "https://github.com/ChristianRiesen/base32",
-			"keywords": ["base32", "decode", "encode", "rfc4648"],
+			"keywords": [
+				"base32",
+				"decode",
+				"encode",
+				"rfc4648"
+			],
 			"support": {
 				"issues": "https://github.com/ChristianRiesen/base32/issues",
 				"source": "https://github.com/ChristianRiesen/base32/tree/1.6.0"
@@ -179,7 +188,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Cory LaViska",
@@ -233,7 +244,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Nils Adermann",
@@ -252,7 +265,12 @@
 				}
 			],
 			"description": "Semver library that offers utilities, version constraint parsing and validation.",
-			"keywords": ["semantic", "semver", "validation", "versioning"],
+			"keywords": [
+				"semantic",
+				"semver",
+				"validation",
+				"versioning"
+			],
 			"support": {
 				"irc": "ircs://irc.libera.chat:6697/composer",
 				"issues": "https://github.com/composer/semver/issues",
@@ -305,7 +323,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Fabian Michael",
@@ -374,7 +394,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Filipe Dobreira",
@@ -425,15 +447,22 @@
 				"league/climate": "^3.8.2",
 				"php": "~8.1.0 || ~8.2.0 || ~8.3.0"
 			},
-			"bin": ["bin/kirby"],
+			"bin": [
+				"bin/kirby"
+			],
 			"type": "library",
 			"autoload": {
 				"psr-4": {
-					"Kirby\\": ["src/", "tests/"]
+					"Kirby\\": [
+						"src/",
+						"tests/"
+					]
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Kirby Team",
@@ -443,7 +472,12 @@
 			],
 			"description": "Kirby command line interface",
 			"homepage": "https://getkirby.com",
-			"keywords": ["cli", "cms", "command", "kirby"],
+			"keywords": [
+				"cli",
+				"cms",
+				"command",
+				"kirby"
+			],
 			"support": {
 				"email": "support@getkirby.com",
 				"forum": "https://forum.getkirby.com",
@@ -513,17 +547,26 @@
 			},
 			"type": "kirby-cms",
 			"extra": {
-				"unused": ["symfony/polyfill-intl-idn"]
+				"unused": [
+					"symfony/polyfill-intl-idn"
+				]
 			},
 			"autoload": {
-				"files": ["config/setup.php", "config/helpers.php"],
+				"files": [
+					"config/setup.php",
+					"config/helpers.php"
+				],
 				"psr-4": {
 					"Kirby\\": "src/"
 				},
-				"classmap": ["dependencies/"]
+				"classmap": [
+					"dependencies/"
+				]
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["proprietary"],
+			"license": [
+				"proprietary"
+			],
 			"authors": [
 				{
 					"name": "Kirby Team",
@@ -533,7 +576,11 @@
 			],
 			"description": "The Kirby core",
 			"homepage": "https://getkirby.com",
-			"keywords": ["cms", "core", "kirby"],
+			"keywords": [
+				"cms",
+				"core",
+				"kirby"
+			],
 			"support": {
 				"email": "support@getkirby.com",
 				"forum": "https://forum.getkirby.com",
@@ -578,7 +625,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"description": "Kirby's custom Composer installer for the Kirby CMS and for Kirby plugins",
 			"homepage": "https://getkirby.com",
 			"support": {
@@ -639,13 +688,17 @@
 				}
 			},
 			"autoload": {
-				"files": ["src/functions_include.php"],
+				"files": [
+					"src/functions_include.php"
+				],
 				"psr-4": {
 					"GuzzleHttp\\": "src/"
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Graham Campbell",
@@ -749,7 +802,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Graham Campbell",
@@ -773,7 +828,9 @@
 				}
 			],
 			"description": "Guzzle promises library",
-			"keywords": ["promise"],
+			"keywords": [
+				"promise"
+			],
 			"support": {
 				"issues": "https://github.com/guzzle/promises/issues",
 				"source": "https://github.com/guzzle/promises/tree/2.0.4"
@@ -839,7 +896,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Graham Campbell",
@@ -945,10 +1004,15 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["BSD-3-Clause"],
+			"license": [
+				"BSD-3-Clause"
+			],
 			"description": "Securely and safely escape HTML, HTML attributes, JavaScript, CSS, and URLs",
 			"homepage": "https://laminas.dev",
-			"keywords": ["escaper", "laminas"],
+			"keywords": [
+				"escaper",
+				"laminas"
+			],
 			"support": {
 				"chat": "https://laminas.dev/chat",
 				"docs": "https://docs.laminas.dev/laminas-escaper/",
@@ -1000,7 +1064,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Joe Tannenbaum",
@@ -1016,7 +1082,13 @@
 				}
 			],
 			"description": "PHP's best friend for the terminal. CLImate allows you to easily output colored text, special formats, and more.",
-			"keywords": ["cli", "colors", "command", "php", "terminal"],
+			"keywords": [
+				"cli",
+				"colors",
+				"command",
+				"php",
+				"terminal"
+			],
 			"support": {
 				"issues": "https://github.com/thephpleague/climate/issues",
 				"source": "https://github.com/thephpleague/climate/tree/3.10.0"
@@ -1058,7 +1130,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Mathieu Lechat",
@@ -1069,7 +1143,13 @@
 			],
 			"description": "Extract colors from an image as a human would do.",
 			"homepage": "https://github.com/thephpleague/color-extractor",
-			"keywords": ["color", "extract", "human", "image", "palette"],
+			"keywords": [
+				"color",
+				"extract",
+				"human",
+				"image",
+				"palette"
+			],
 			"support": {
 				"issues": "https://github.com/thephpleague/color-extractor/issues",
 				"source": "https://github.com/thephpleague/color-extractor/tree/0.4.0"
@@ -1100,7 +1180,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["BSD-3-Clause"],
+			"license": [
+				"BSD-3-Clause"
+			],
 			"authors": [
 				{
 					"name": "Michel Fortin",
@@ -1115,7 +1197,13 @@
 			],
 			"description": "PHP SmartyPants",
 			"homepage": "https://michelf.ca/projects/php-smartypants/",
-			"keywords": ["dashes", "quotes", "spaces", "typographer", "typography"],
+			"keywords": [
+				"dashes",
+				"quotes",
+				"spaces",
+				"typographer",
+				"typography"
+			],
 			"support": {
 				"issues": "https://github.com/michelf/php-smartypants/issues",
 				"source": "https://github.com/michelf/php-smartypants/tree/1.8.1"
@@ -1141,7 +1229,9 @@
 			},
 			"type": "kirby-plugin",
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Roman Gsponer",
@@ -1180,7 +1270,9 @@
 			},
 			"type": "kirby-plugin",
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Roman Gsponer",
@@ -1242,7 +1334,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["LGPL-2.1-only"],
+			"license": [
+				"LGPL-2.1-only"
+			],
 			"authors": [
 				{
 					"name": "Marcus Bointon",
@@ -1295,7 +1389,9 @@
 				"installer-name": "webhook-field"
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["GPL-3.0-or-later"],
+			"license": [
+				"GPL-3.0-or-later"
+			],
 			"authors": [
 				{
 					"name": "Philip Jonas Ulrich",
@@ -1339,7 +1435,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "PHP-FIG",
@@ -1348,7 +1446,12 @@
 			],
 			"description": "Common interface for HTTP clients",
 			"homepage": "https://github.com/php-fig/http-client",
-			"keywords": ["http", "http-client", "psr", "psr-18"],
+			"keywords": [
+				"http",
+				"http-client",
+				"psr",
+				"psr-18"
+			],
 			"support": {
 				"source": "https://github.com/php-fig/http-client"
 			},
@@ -1384,7 +1487,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "PHP-FIG",
@@ -1436,7 +1541,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "PHP-FIG",
@@ -1487,7 +1594,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "PHP-FIG",
@@ -1496,7 +1605,11 @@
 			],
 			"description": "Common interface for logging libraries",
 			"homepage": "https://github.com/php-fig/log",
-			"keywords": ["log", "psr", "psr-3"],
+			"keywords": [
+				"log",
+				"psr",
+				"psr-3"
+			],
 			"support": {
 				"source": "https://github.com/php-fig/log/tree/3.0.2"
 			},
@@ -1525,10 +1638,14 @@
 			},
 			"type": "library",
 			"autoload": {
-				"files": ["src/getallheaders.php"]
+				"files": [
+					"src/getallheaders.php"
+				]
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Ralph Khattar",
@@ -1574,7 +1691,9 @@
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Jordi Boggiano",
@@ -1582,7 +1701,13 @@
 				}
 			],
 			"description": "Allows you to prompt for user input on the command line, and optionally hide the characters they type",
-			"keywords": ["cli", "console", "hidden", "input", "prompt"],
+			"keywords": [
+				"cli",
+				"console",
+				"hidden",
+				"input",
+				"prompt"
+			],
 			"support": {
 				"issues": "https://github.com/Seldaek/cli-prompt/issues",
 				"source": "https://github.com/Seldaek/cli-prompt/tree/1.0.4"
@@ -1608,7 +1733,9 @@
 			},
 			"type": "kirby-plugin",
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Sylvain Julé",
@@ -1650,10 +1777,14 @@
 				}
 			},
 			"autoload": {
-				"files": ["function.php"]
+				"files": [
+					"function.php"
+				]
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Nicolas Grekas",
@@ -1710,10 +1841,14 @@
 				"psr-4": {
 					"Symfony\\Component\\Finder\\": ""
 				},
-				"exclude-from-classmap": ["/Tests/"]
+				"exclude-from-classmap": [
+					"/Tests/"
+				]
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Fabien Potencier",
@@ -1771,18 +1906,22 @@
 			"type": "library",
 			"extra": {
 				"thanks": {
-					"name": "symfony/polyfill",
-					"url": "https://github.com/symfony/polyfill"
+					"url": "https://github.com/symfony/polyfill",
+					"name": "symfony/polyfill"
 				}
 			},
 			"autoload": {
-				"files": ["bootstrap.php"],
+				"files": [
+					"bootstrap.php"
+				],
 				"psr-4": {
 					"Symfony\\Polyfill\\Ctype\\": ""
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Gert de Pagter",
@@ -1795,7 +1934,12 @@
 			],
 			"description": "Symfony polyfill for ctype functions",
 			"homepage": "https://symfony.com",
-			"keywords": ["compatibility", "ctype", "polyfill", "portable"],
+			"keywords": [
+				"compatibility",
+				"ctype",
+				"polyfill",
+				"portable"
+			],
 			"support": {
 				"source": "https://github.com/symfony/polyfill-ctype/tree/v1.31.0"
 			},
@@ -1839,18 +1983,22 @@
 			"type": "library",
 			"extra": {
 				"thanks": {
-					"name": "symfony/polyfill",
-					"url": "https://github.com/symfony/polyfill"
+					"url": "https://github.com/symfony/polyfill",
+					"name": "symfony/polyfill"
 				}
 			},
 			"autoload": {
-				"files": ["bootstrap.php"],
+				"files": [
+					"bootstrap.php"
+				],
 				"psr-4": {
 					"Symfony\\Polyfill\\Intl\\Idn\\": ""
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Laurent Bassin",
@@ -1917,19 +2065,25 @@
 			"type": "library",
 			"extra": {
 				"thanks": {
-					"name": "symfony/polyfill",
-					"url": "https://github.com/symfony/polyfill"
+					"url": "https://github.com/symfony/polyfill",
+					"name": "symfony/polyfill"
 				}
 			},
 			"autoload": {
-				"files": ["bootstrap.php"],
+				"files": [
+					"bootstrap.php"
+				],
 				"psr-4": {
 					"Symfony\\Polyfill\\Intl\\Normalizer\\": ""
 				},
-				"classmap": ["Resources/stubs"]
+				"classmap": [
+					"Resources/stubs"
+				]
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Nicolas Grekas",
@@ -1995,18 +2149,22 @@
 			"type": "library",
 			"extra": {
 				"thanks": {
-					"name": "symfony/polyfill",
-					"url": "https://github.com/symfony/polyfill"
+					"url": "https://github.com/symfony/polyfill",
+					"name": "symfony/polyfill"
 				}
 			},
 			"autoload": {
-				"files": ["bootstrap.php"],
+				"files": [
+					"bootstrap.php"
+				],
 				"psr-4": {
 					"Symfony\\Polyfill\\Mbstring\\": ""
 				}
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Nicolas Grekas",
@@ -2019,7 +2177,13 @@
 			],
 			"description": "Symfony polyfill for the Mbstring extension",
 			"homepage": "https://symfony.com",
-			"keywords": ["compatibility", "mbstring", "polyfill", "portable", "shim"],
+			"keywords": [
+				"compatibility",
+				"mbstring",
+				"polyfill",
+				"portable",
+				"shim"
+			],
 			"support": {
 				"source": "https://github.com/symfony/polyfill-mbstring/tree/v1.31.0"
 			},
@@ -2064,16 +2228,22 @@
 			"require-dev": {
 				"symfony/console": "^5.4|^6.0|^7.0"
 			},
-			"bin": ["Resources/bin/yaml-lint"],
+			"bin": [
+				"Resources/bin/yaml-lint"
+			],
 			"type": "library",
 			"autoload": {
 				"psr-4": {
 					"Symfony\\Component\\Yaml\\": ""
 				},
-				"exclude-from-classmap": ["/Tests/"]
+				"exclude-from-classmap": [
+					"/Tests/"
+				]
 			},
 			"notification-url": "https://packagist.org/downloads/",
-			"license": ["MIT"],
+			"license": [
+				"MIT"
+			],
 			"authors": [
 				{
 					"name": "Fabien Potencier",
@@ -2109,12 +2279,12 @@
 	"packages-dev": [],
 	"aliases": [],
 	"minimum-stability": "stable",
-	"stability-flags": [],
+	"stability-flags": {},
 	"prefer-stable": false,
 	"prefer-lowest": false,
 	"platform": {
 		"php": ">=8.1"
 	},
-	"platform-dev": [],
-	"plugin-api-version": "2.3.0"
+	"platform-dev": {},
+	"plugin-api-version": "2.6.0"
 }
