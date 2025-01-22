@@ -1,5 +1,8 @@
 name: Semantic Versioning
 
+permissions:
+  contents: write
+
 on:
   push:
     branches:
@@ -24,10 +27,10 @@ jobs:
         uses: PaulHatch/semantic-version@v5.0.3
         with:
           bump_each_commit: true
-          major_pattern: 'major:'
-          minor_pattern: 'feat:'
-          patch_pattern: 'fix:'
-          version_format: '${major}.${minor}.${patch}'
+          major_pattern: "major:"
+          minor_pattern: "feat:"
+          patch_pattern: "fix:"
+          version_format: "${major}.${minor}.${patch}"
           # Change patterns if needed based on your commit message format
 
       - name: Show new version
