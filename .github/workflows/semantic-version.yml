@@ -29,7 +29,7 @@ jobs:
           bump_each_commit: true
           major_pattern: "major:"
           minor_pattern: "feat:"
-          patch_pattern: "fix:"
+          search_commit_body: true
           version_format: "${major}.${minor}.${patch}"
           # Change patterns if needed based on your commit message format
 
