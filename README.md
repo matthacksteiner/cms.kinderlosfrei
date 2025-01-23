@@ -28,6 +28,10 @@ This project uses semantic versioning for automatic version management. The vers
 
 > **Info:** If no pattern is found, the version is incremented by 0.0.1.
 
+---
+
+# Setup
+
 ## 1. Installation Kirby
 
 - Neues Repo von Termplate erstellen https://github.com/matthacksteiner/cms.baukasten
