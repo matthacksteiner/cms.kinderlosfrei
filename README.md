@@ -16,7 +16,7 @@ use git-bash or WSL on Windows.
 1. `git remote add template https://github.com/matthacksteiner/cms.baukasten`
 2. `git fetch --all`
 3. `git merge template/main --allow-unrelated-histories`
-4. `git ls-remote --tags template | grep -v '{}' | cut -d'/' -f3 | sort -V | tail -n1 | xargs -I {} awk -v ver="{}" '{if ($0 ~ /\*\*Template Release:\*\*/) {print "**Template Release:** " ver} else {print $0}}' README.md > tmp && mv tmp README.md`
+4. run the script `update-template-version.sh` to add the new version to the README.md or manually edit the file.
 
 ## Semantic Versioning
 
