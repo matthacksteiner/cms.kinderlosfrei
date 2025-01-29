@@ -21,6 +21,9 @@ fieldsets:
       vector:
         extends: blocks/vector
         name: Vektor
+      gallery:
+        extends: blocks/gallery
+        name: Gallerie
       video:
         extends: blocks/video
   elements:
