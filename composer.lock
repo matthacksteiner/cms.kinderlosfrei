@@ -4,7 +4,7 @@
 		"Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
 		"This file is @generated automatically"
 	],
-	"content-hash": "c64c29cf15ff58acd3ce645106f1c334",
+	"content-hash": "bfb92f8391aaeef6440b974bd53ed276",
 	"packages": [
 		{
 			"name": "bnomei/kirby3-janitor",
@@ -968,6 +968,61 @@
 			"time": "2024-07-18T11:15:46+00:00"
 		},
 		{
+			"name": "johannschopplich/kirby-deploy-trigger",
+			"version": "1.0.4",
+			"source": {
+				"type": "git",
+				"url": "https://github.com/johannschopplich/kirby-deploy-trigger.git",
+				"reference": "c6b85b49b34490c44660b3e33eb2a5900776b276"
+			},
+			"dist": {
+				"type": "zip",
+				"url": "https://api.github.com/repos/johannschopplich/kirby-deploy-trigger/zipball/c6b85b49b34490c44660b3e33eb2a5900776b276",
+				"reference": "c6b85b49b34490c44660b3e33eb2a5900776b276",
+				"shasum": ""
+			},
+			"require": {
+				"getkirby/composer-installer": "^1"
+			},
+			"require-dev": {
+				"getkirby/cms": "^4",
+				"vlucas/phpdotenv": "^5"
+			},
+			"type": "kirby-plugin",
+			"extra": {
+				"kirby-cms-path": false
+			},
+			"notification-url": "https://packagist.org/downloads/",
+			"license": [
+				"MIT"
+			],
+			"authors": [
+				{
+					"name": "Johann Schopplich",
+					"email": "hello@johannschopplich.com",
+					"homepage": "https://johannschopplich.com"
+				}
+			],
+			"description": "Kirby Panel plugin to trigger deployments on any platform",
+			"homepage": "https://github.com/johannschopplich/kirby-deploy-trigger#readme",
+			"keywords": [
+				"deployment",
+				"kirby",
+				"vercel"
+			],
+			"support": {
+				"issues": "https://github.com/johannschopplich/kirby-deploy-trigger/issues",
+				"source": "https://github.com/johannschopplich/kirby-deploy-trigger/tree/v1.0.4"
+			},
+			"funding": [
+				{
+					"url": "https://kirby.tools",
+					"type": "custom"
+				}
+			],
+			"time": "2025-01-20T20:37:50+00:00"
+		},
+		{
 			"name": "laminas/laminas-escaper",
 			"version": "2.14.0",
 			"source": {
@@ -1366,44 +1421,6 @@
 				}
 			],
 			"time": "2024-10-09T10:07:50+00:00"
-		},
-		{
-			"name": "pju/kirby-webhook-field",
-			"version": "1.1.2",
-			"source": {
-				"type": "git",
-				"url": "https://github.com/pju-/kirby-webhook-field.git",
-				"reference": "637494f80e755402a1455b86f6f5c2e6554dcbdf"
-			},
-			"dist": {
-				"type": "zip",
-				"url": "https://api.github.com/repos/pju-/kirby-webhook-field/zipball/637494f80e755402a1455b86f6f5c2e6554dcbdf",
-				"reference": "637494f80e755402a1455b86f6f5c2e6554dcbdf",
-				"shasum": ""
-			},
-			"require": {
-				"getkirby/composer-installer": "^1.1"
-			},
-			"type": "kirby-plugin",
-			"extra": {
-				"installer-name": "webhook-field"
-			},
-			"notification-url": "https://packagist.org/downloads/",
-			"license": [
-				"GPL-3.0-or-later"
-			],
-			"authors": [
-				{
-					"name": "Philip Jonas Ulrich",
-					"email": "hi@philipjonas.cc"
-				}
-			],
-			"description": "A Kirby 3 plugin providing a field to easily use webhooks, e.g. for deploying your site to services such as Netlify ",
-			"support": {
-				"issues": "https://github.com/pju-/kirby-webhook-field/issues",
-				"source": "https://github.com/pju-/kirby-webhook-field/tree/1.1.2"
-			},
-			"time": "2021-10-21T13:43:14+00:00"
 		},
 		{
 			"name": "psr/http-client",
