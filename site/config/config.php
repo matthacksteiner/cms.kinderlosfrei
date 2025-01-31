@@ -16,24 +16,8 @@ return [
 	'prefixDefaultLocale' => false,
 	'error' => 'z-error',
 	'johannschopplich.deploy-trigger' => [
-		'deployUrl' => 'https://api.netlify.com/build_hooks/65142ee2a2de9b24080dcc95',
+		// 'deployUrl' => 'https://api.netlify.com/build_hooks/65142ee2a2de9b24080dcc95',
 	],
-	// 'pju.webhook-field.hooks' => [
-	// 	'netlify_deploy' => [
-	// 		'url' => 'https://api.netlify.com/build_hooks/65142ee2a2de9b24080dcc95',
-	// 		'callback' => function ($status) {
-	// 			if ($status === 'error') {
-	// 				error_log('There was an error with the production webhook');
-	// 			}
-	// 		}
-	// 	]
-	// ],
-	// 'pju.webhook-field.labels' => [
-	// 	'success' => [
-	// 		'name' => 'Webhook %hookName% Erfolgreich',
-	// 		'cta'  => 'Nochmals versuchen?'
-	// 	]
-	// ],
 	'panel' => [
 		'css' => 'assets/css/baukasten-panel.css',
 		'favicon' => 'assets/img/baukasten-favicon.ico',
