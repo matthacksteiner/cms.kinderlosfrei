@@ -393,7 +393,7 @@ columns:
         type: fields
         fields:
           buttonHeadline:
-            label: Button
+            label: Globale Button Einstellungen
             type: headline
             numbered: true
           buttonSettings:
