@@ -19,4 +19,114 @@ tabs:
       buttonAlign:
         extends: fields/align
         width: 1/4
+      buttonLine:
+        type: line
+      buttonLocal:
+        type: toggle
+        label: Lokale Einstellungen
+        width: 1/4
+        translate: false
+      buttonGap:
+        type: gap
+        width: 3/4
+      buttonSettings:
+        type: object
+        label: Einstellungen
+        icon: cog
+        width: 1/2
+        translate: false
+        when:
+          buttonLocal: true
+        fields:
+          buttonFont:
+            extends: fields/fontFile
+            required: false
+            width: 1/3
+            translate: false
+          buttonFontSize:
+            extends: fields/fontSize
+            translate: false
+            width: 1/3
+          buttonGap:
+            type: gap
+            width: 1/3
+          buttonBorderRadius:
+            label: Rand Rundung
+            type: number
+            placeholder: 0
+            after: px
+            width: 1/3
+            translate: false
+          buttonBorderWidth:
+            label: Rand Strichstärke
+            type: number
+            placeholder: 0
+            after: px
+            width: 1/3
+            translate: false
+          buttonPadding:
+            label: Abstand
+            type: number
+            placeholder: 10
+            width: 1/3
+            after: px
+            translate: false
+      buttonColors:
+        type: object
+        label: Farben
+        icon: palette
+        width: 1/2
+        when:
+          buttonLocal: true
+        toggle: true
+        translate: false
+        fields:
+          buttonBackgroundColor:
+            label: Farbe Hintergrund
+            type: select
+            default: primary
+            extends: fields/colors
+            width: 1/3
+            translate: false
+          buttonBackgroundColorActive:
+            label: Farbe Hintergrund Hover
+            type: select
+            default: primary
+            extends: fields/colors
+            width: 1/3
+            translate: false
+          buttonGapColor1:
+            type: gap
+            width: 1/3
+          buttonTextColor:
+            label: Farbe Text
+            type: select
+            default: secondary
+            extends: fields/colors
+            width: 1/3
+            translate: false
+          buttonTextColorActive:
+            label: Farbe Text Hover
+            type: select
+            default: secondary
+            extends: fields/colors
+            width: 1/3
+            translate: false
+          buttonGapColor2:
+            type: gap
+            width: 1/3
+          buttonBorderColor:
+            label: Rand Farbe
+            type: select
+            default: primary
+            extends: fields/colors
+            width: 1/3
+            translate: false
+          buttonBorderColorActive:
+            label: Rand Farbe Hover
+            type: select
+            default: primary
+            extends: fields/colors
+            width: 1/3
+            translate: false
       meta: fields/metadata

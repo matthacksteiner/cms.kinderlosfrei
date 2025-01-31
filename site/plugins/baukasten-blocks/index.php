@@ -241,8 +241,9 @@ function getBlockArray(\Kirby\Cms\Block $block)
                 $blockArray['content']['linkobject'] = $linkobject;
             }
 
-            break;
+            $blockArray['content']['buttonlocal'] = $block->buttonlocal()->toBool(false);
 
+            break;
         case 'text':
             $blockArray['content'] = $block->toArray()['content'];
             $blockArray['content']['text'] = (string)$block->text();
