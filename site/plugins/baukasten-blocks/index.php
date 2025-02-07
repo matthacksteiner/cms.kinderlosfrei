@@ -245,7 +245,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
 
             break;
 
-        case 'buttonGroup':
+        case 'buttonBar':
             $blockArray['content'] = $block->toArray()['content'];
 
             // Process each button in the structure

@@ -1,4 +1,4 @@
-name: Button Group
+name: Button Leiste
 icon: grid
 
 tabs:
@@ -21,11 +21,11 @@ tabs:
         type: info
         text: |
           Die Darstellung aller Button wird im **Tab** Design festgelegt.
-      buttonAlign:
-        extends: fields/align
-        width: 1/4
+      buttonAdjust:
+        extends: fields/adjust
+        width: 2/4
       buttonLine:
         type: line
       buttonLocal:
-        extends: fields/buttonLocal
+        extends: groups/buttonGroup
       meta: fields/metadata

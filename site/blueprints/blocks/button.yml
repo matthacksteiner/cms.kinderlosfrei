@@ -22,5 +22,5 @@ tabs:
       buttonLine:
         type: line
       buttonLocal:
-        extends: fields/buttonLocal
+        extends: groups/buttonGroup
       meta: fields/metadata

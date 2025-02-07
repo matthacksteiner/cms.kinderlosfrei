@@ -28,7 +28,7 @@ fieldsets:
     type: group
     fieldsets:
       button: blocks/button
-      buttonGroup: blocks/buttonGroup
+      buttonBar: blocks/buttonBar
       accordion: blocks/accordion
       iconlist: blocks/iconlist
       menu: blocks/menu
