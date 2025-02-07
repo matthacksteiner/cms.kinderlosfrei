@@ -244,6 +244,23 @@ function getBlockArray(\Kirby\Cms\Block $block)
             $blockArray['content']['buttonlocal'] = $block->buttonlocal()->toBool(false);
 
             break;
+
+        case 'buttonGroup':
+            $blockArray['content'] = $block->toArray()['content'];
+
+            // Process each button in the structure
+            foreach ($block->buttons()->toStructure() as $key => $button) {
+                $linkobject = [];
+                if ($button->linkObject()->isNotEmpty()) {
+                    $linkobject = getLinkArray($button->linkObject());
+                }
+                $blockArray['content']['buttons'][$key]['linkobject'] = $linkobject;
+            }
+
+            $blockArray['content']['buttonlocal'] = $block->buttonlocal()->toBool(false);
+
+            break;
+
         case 'text':
             $blockArray['content'] = $block->toArray()['content'];
             $blockArray['content']['text'] = (string)$block->text();

@@ -1,12 +1,17 @@
-name: Button
-icon: url
+name: Button Group
+icon: grid
 
 tabs:
   content:
     label: Inhalt
     fields:
-      linkObject:
-        extends: fields/linkField
+      buttons:
+        type: structure
+        label: Buttons
+        empty: Keine Buttons angelegt
+        fields:
+          linkObject:
+            extends: fields/linkField
 
   settings:
     label: Einstellungen
