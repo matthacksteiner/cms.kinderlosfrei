@@ -4,7 +4,7 @@
 		"Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
 		"This file is @generated automatically"
 	],
-	"content-hash": "4e99de6c23d12e975cb0c2a1df269cef",
+	"content-hash": "79c466c0e022c754ca7fcc6edf3f14ed",
 	"packages": [
 		{
 			"name": "bnomei/kirby3-janitor",
@@ -1023,54 +1023,6 @@
 			"time": "2025-01-20T20:37:50+00:00"
 		},
 		{
-			"name": "kornrunner/blurhash",
-			"version": "v1.2.2",
-			"source": {
-				"type": "git",
-				"url": "https://github.com/kornrunner/php-blurhash.git",
-				"reference": "bc8a4596cb0a49874f0158696a382ab3933fefe4"
-			},
-			"dist": {
-				"type": "zip",
-				"url": "https://api.github.com/repos/kornrunner/php-blurhash/zipball/bc8a4596cb0a49874f0158696a382ab3933fefe4",
-				"reference": "bc8a4596cb0a49874f0158696a382ab3933fefe4",
-				"shasum": ""
-			},
-			"require": {
-				"php": "^7.3|^8.0"
-			},
-			"require-dev": {
-				"ext-gd": "*",
-				"ocramius/package-versions": "^1.4|^2.0",
-				"phpstan/phpstan": "^0.12",
-				"phpunit/phpunit": "^9",
-				"vimeo/psalm": "^4.3"
-			},
-			"type": "library",
-			"autoload": {
-				"psr-4": {
-					"kornrunner\\Blurhash\\": "src"
-				}
-			},
-			"notification-url": "https://packagist.org/downloads/",
-			"license": [
-				"MIT"
-			],
-			"authors": [
-				{
-					"name": "Boris Momčilović",
-					"email": "boris.momcilovic@gmail.com"
-				}
-			],
-			"description": "Pure PHP implementation of Blurhash",
-			"homepage": "https://github.com/kornrunner/php-blurhash",
-			"support": {
-				"issues": "https://github.com/kornrunner/php-blurhash/issues",
-				"source": "https://github.com/kornrunner/php-blurhash.git"
-			},
-			"time": "2022-07-13T19:38:39+00:00"
-		},
-		{
 			"name": "laminas/laminas-escaper",
 			"version": "2.15.0",
 			"source": {
@@ -1780,6 +1732,54 @@
 			"time": "2020-12-15T21:32:01+00:00"
 		},
 		{
+			"name": "srwiez/thumbhash",
+			"version": "v1.3.0",
+			"source": {
+				"type": "git",
+				"url": "https://github.com/SRWieZ/thumbhash.git",
+				"reference": "3983c6f1aec32d8a037cc66175c0550f12c3f9e2"
+			},
+			"dist": {
+				"type": "zip",
+				"url": "https://api.github.com/repos/SRWieZ/thumbhash/zipball/3983c6f1aec32d8a037cc66175c0550f12c3f9e2",
+				"reference": "3983c6f1aec32d8a037cc66175c0550f12c3f9e2",
+				"shasum": ""
+			},
+			"require": {
+				"php": "^7.3 || ^8.0"
+			},
+			"require-dev": {
+				"ext-gd": "*",
+				"ext-imagick": "*",
+				"pestphp/pest": "^1.0"
+			},
+			"type": "library",
+			"autoload": {
+				"files": [
+					"src/helpers.php"
+				],
+				"psr-4": {
+					"Thumbhash\\": "src/"
+				}
+			},
+			"notification-url": "https://packagist.org/downloads/",
+			"license": [
+				"MIT"
+			],
+			"authors": [
+				{
+					"name": "Eser DENIZ",
+					"email": "srwiez@gmail.com"
+				}
+			],
+			"description": "A brief description of your package",
+			"support": {
+				"issues": "https://github.com/SRWieZ/thumbhash/issues",
+				"source": "https://github.com/SRWieZ/thumbhash/tree/v1.3.0"
+			},
+			"time": "2024-10-16T06:10:12+00:00"
+		},
+		{
 			"name": "sylvainjule/backups",
 			"version": "1.0.5",
 			"source": {
@@ -2339,6 +2339,61 @@
 				}
 			],
 			"time": "2025-01-07T09:44:41+00:00"
+		},
+		{
+			"name": "tobimori/kirby-thumbhash",
+			"version": "1.1.1",
+			"source": {
+				"type": "git",
+				"url": "https://github.com/tobimori/kirby-thumbhash.git",
+				"reference": "9cd6c2d93f171a8cd484a686d267ff8adbb2b9fe"
+			},
+			"dist": {
+				"type": "zip",
+				"url": "https://api.github.com/repos/tobimori/kirby-thumbhash/zipball/9cd6c2d93f171a8cd484a686d267ff8adbb2b9fe",
+				"reference": "9cd6c2d93f171a8cd484a686d267ff8adbb2b9fe",
+				"shasum": ""
+			},
+			"require": {
+				"getkirby/composer-installer": "^1.2",
+				"php": ">=8.0.0",
+				"srwiez/thumbhash": "^1.1"
+			},
+			"require-dev": {
+				"getkirby/cms": "^3.8"
+			},
+			"type": "kirby-plugin",
+			"extra": {
+				"kirby-cms-path": false
+			},
+			"autoload": {
+				"psr-4": {
+					"tobimori\\": "classes/"
+				}
+			},
+			"notification-url": "https://packagist.org/downloads/",
+			"license": [
+				"MIT"
+			],
+			"authors": [
+				{
+					"name": "Tobias Möritz",
+					"email": "tobias@moeritz.io"
+				}
+			],
+			"description": "Kirby Image placeholders with the smarter ThumbHash integration",
+			"homepage": "https://github.com/tobimori/kirby-thumbhash#readme",
+			"support": {
+				"issues": "https://github.com/tobimori/kirby-thumbhash/issues",
+				"source": "https://github.com/tobimori/kirby-thumbhash/tree/1.1.1"
+			},
+			"funding": [
+				{
+					"url": "https://github.com/tobimori",
+					"type": "github"
+				}
+			],
+			"time": "2024-04-12T16:48:19+00:00"
 		}
 	],
 	"packages-dev": [],
