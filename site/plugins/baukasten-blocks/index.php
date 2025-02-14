@@ -1,5 +1,7 @@
 <?php
 
+use Kirby\Cms\App as Kirby;
+
 Kirby::plugin('baukasten-blocks/baukasten-blocks', [
     'options' => [],
     'components' => [],
@@ -99,41 +101,15 @@ function getBlockArray(\Kirby\Cms\Block $block)
 
         case 'image':
             $blockArray['content'] = $block->toArray()['content'];
-
             $image = null;
-            if ($file1 = $block->image()->toFile()) {
-                $image = $file1;
 
+            if ($file1 = $block->image()->toFile()) {
                 $ratioMobile = explode('/', $block->ratioMobile()->value());
                 $ratio = explode('/', $block->ratio()->value());
+                $image = getImageArray($file1, $ratio, $ratioMobile);
 
-                $calculateHeight = function ($width, $ratio) {
-                    return isset($ratio[1]) ? round(($width / $ratio[0]) * $ratio[1]) : $width;
-                };
-
-                $image = [
-                    'url' => $image->url(),
-                    'urlFocus' => $image->crop($image->width(), $calculateHeight($image->width(), $ratio))->url(),
-                    'urlFocusMobile' => $image->crop($image->width(), $calculateHeight($image->width(), $ratioMobile))->url(),
-                    'width' => $image->width(),
-                    'height' => $image->height(),
-                    'alt' => (string)$image->alt(),
-                    'name' => (string)$image->name(),
-                    'thumbhash' => $image->thumbhashUri(),
-                    'identifier' => $image->identifier()->value(),
-                    'classes' => $image->classes()->value(),
-                    'focusX' => json_decode($file1->focusPercentageX()),
-                    'focusY' => json_decode($file1->focusPercentageY()),
-                    'captiontoggle' => $file1->captiontoggle()->toBool(false),
-                    'captiontitle' => $file1->captionobject()->toObject()->captiontitle()->value(),
-                    'captiontextfont' => $file1->captionobject()->toObject()->textfont()->value(),
-                    'captiontextsize' => $file1->captionobject()->toObject()->textsize()->value(),
-                    'captiontextcolor' => $file1->captionobject()->toObject()->textColor()->value(),
-                    'captiontextalign' => $file1->captionobject()->toObject()->textalign()->value(),
-                    'captionoverlay' => $file1->captionobject()->toObject()->captionControls()->options()->value(),
-                    'captionalign' => $file1->captionobject()->toObject()->captionalign()->value(),
-                    'linktoggle' => $file1->linktoggle()->toBool(false),
-                    'linkexternal' => getLinkArray($file1->linkexternal()),
+                // Add copyright-specific properties
+                $image = array_merge($image, [
                     'copyrighttoggle' => $file1->copyrighttoggle()->toBool(false),
                     'copyrighttitle' => $file1->copyrightobject()->toObject()->copyrighttitle()->value(),
                     'copyrighttextfont' => $file1->copyrightobject()->toObject()->textfont()->value(),
@@ -141,8 +117,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
                     'copyrighttextcolor' => $file1->copyrightobject()->toObject()->textColor()->value(),
                     'copyrighbackgroundcolor' => $file1->copyrightobject()->toObject()->copyrightBackground()->value(),
                     'copyrightposition' => $file1->copyrightobject()->toObject()->copyrightposition()->value(),
-
-                ];
+                ]);
             }
 
             $blockArray['content']['image'] = $image;
@@ -152,27 +127,8 @@ function getBlockArray(\Kirby\Cms\Block $block)
             $blockArray['content'] = $block->toArray()['content'];
             $image = null;
             if ($file1 = $block->image()->toFile()) {
-                $image = [
-                    'url' => $file1->url(),
-                    'alt' => (string)$file1->alt(),
-                    'name' => (string)$file1->name(),
-                    'identifier' => $file1->identifier()->value(),
-                    'classes' => $file1->classes()->value(),
-                    'width' => $file1->width(),
-                    'height' => $file1->height(),
-                    'captiontoggle' => $file1->captiontoggle()->toBool(false),
-                    'captiontitle' => $file1->captionobject()->toObject()->captiontitle()->value(),
-                    'captiontextfont' => $file1->captionobject()->toObject()->textfont()->value(),
-                    'captiontextsize' => $file1->captionobject()->toObject()->textsize()->value(),
-                    'captiontextcolor' => $file1->captionobject()->toObject()->textColor()->value(),
-                    'captiontextalign' => $file1->captionobject()->toObject()->textalign()->value(),
-                    'captionoverlay' => $file1->captionobject()->toObject()->captionControls()->options()->value(),
-                    'captionalign' => $file1->captionobject()->toObject()->captionalign()->value(),
-                    'linktoggle' => $file1->linktoggle()->toBool(false),
-                    'linkexternal' => getLinkArray($file1->linkexternal()),
-                ];
+                $image = getImageArray($file1);
             }
-
             $blockArray['content']['image'] = $image;
             break;
 
@@ -180,46 +136,17 @@ function getBlockArray(\Kirby\Cms\Block $block)
             $blockArray['content'] = $block->toArray()['content'];
             $images = [];
 
+            $ratioMobile = explode('/', $block->ratioMobile()->value());
+            $ratio = explode('/', $block->ratio()->value());
+
             foreach ($block->images()->toFiles() as $file) {
-                $image = $file;
-
-                $ratioMobile = explode('/', $block->ratioMobile()->value());
-                $ratio = explode('/', $block->ratio()->value());
-
-                $calculateHeight = function ($width, $ratio) {
-                    return isset($ratio[1]) ? round(($width / $ratio[0]) * $ratio[1]) : $width;
-                };
-
-                $images[] = [
-                    'url' => $image->url(),
-                    'urlFocus' => $image->crop($image->width(), $calculateHeight($image->width(), $ratio))->url(),
-                    'urlFocusMobile' => $image->crop($image->width(), $calculateHeight($image->width(), $ratioMobile))->url(),
-                    'width' => $image->width(),
-                    'height' => $image->height(),
-                    'alt' => (string)$image->alt(),
-                    'name' => (string)$image->name(),
-                    'thumbhash' => $image->thumbhashUri(),
-                    'identifier' => $image->identifier()->value(),
-                    'classes' => $image->classes()->value(),
-                    'focusX' => json_decode($file->focusPercentageX()),
-                    'focusY' => json_decode($file->focusPercentageY()),
-                    'toggle' => $file->toggle()->toBool(false),
-                    'captiontoggle' => $file->captiontoggle()->toBool(false),
-                    'captiontitle' => $file->captionobject()->toObject()->captiontitle()->value(),
-                    'captiontextfont' => $file->captionobject()->toObject()->textfont()->value(),
-                    'captiontextsize' => $file->captionobject()->toObject()->textsize()->value(),
-                    'captiontextcolor' => $file->captionobject()->toObject()->textColor()->value(),
-                    'captiontextalign' => $file->captionobject()->toObject()->textalign()->value(),
-                    'captionoverlay' => $file->captionobject()->toObject()->captionoverlay()->value(),
-                    'captionalign' => $file->captionobject()->toObject()->captionalign()->value(),
-                    'linktoggle' => $file->linktoggle()->toBool(false),
-                    'linkexternal' => getLinkArray($file->linkexternal()),
-                ];
+                $image = getImageArray($file, $ratio, $ratioMobile);
+                $image['toggle'] = $file->toggle()->toBool(false);
+                $images[] = $image;
             }
 
             $blockArray['content']['images'] = $images;
             $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
-
             break;
 
         case "menu":
@@ -331,4 +258,44 @@ function getBlockArray(\Kirby\Cms\Block $block)
     }
 
     return $blockArray;
+}
+
+function getImageArray($file, $ratio = null, $ratioMobile = null)
+{
+    $image = [
+        'url' => $file->url(),
+        'width' => $file->width(),
+        'height' => $file->height(),
+        'alt' => (string)$file->alt(),
+        'name' => (string)$file->name(),
+        'identifier' => $file->identifier()->value(),
+        'classes' => $file->classes()->value(),
+        'captiontoggle' => $file->captiontoggle()->toBool(false),
+        'captiontitle' => $file->captionobject()->toObject()->captiontitle()->value(),
+        'captiontextfont' => $file->captionobject()->toObject()->textfont()->value(),
+        'captiontextsize' => $file->captionobject()->toObject()->textsize()->value(),
+        'captiontextcolor' => $file->captionobject()->toObject()->textColor()->value(),
+        'captiontextalign' => $file->captionobject()->toObject()->textalign()->value(),
+        'captionoverlay' => $file->captionobject()->toObject()->captionControls()->options()->value(),
+        'captionalign' => $file->captionobject()->toObject()->captionalign()->value(),
+        'linktoggle' => $file->linktoggle()->toBool(false),
+        'linkexternal' => getLinkArray($file->linkexternal()),
+    ];
+
+    // Add focus-related properties if ratio is provided and file is not SVG
+    if ($ratio && $ratioMobile && strtolower($file->extension()) !== 'svg') {
+        $calculateHeight = function ($width, $ratio) {
+            return isset($ratio[1]) ? round(($width / $ratio[0]) * $ratio[1]) : $width;
+        };
+
+        $image = array_merge($image, [
+            'thumbhash' => $file->thumbhashUri(),
+            'urlFocus' => $file->crop($file->width(), $calculateHeight($file->width(), $ratio))->url(),
+            'urlFocusMobile' => $file->crop($file->width(), $calculateHeight($file->width(), $ratioMobile))->url(),
+            'focusX' => json_decode($file->focusPercentageX()),
+            'focusY' => json_decode($file->focusPercentageY()),
+        ]);
+    }
+
+    return $image;
 }
