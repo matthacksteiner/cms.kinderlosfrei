@@ -16,6 +16,7 @@ fields:
     type: text
     label: Text
     width: 2/6
+    required: true
   target:
     label: Neues Fenster?
     type: toggle
