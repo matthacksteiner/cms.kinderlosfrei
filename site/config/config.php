@@ -16,7 +16,7 @@ return [
 	'prefixDefaultLocale' => false,
 	'error' => 'z-error',
 	'johannschopplich.deploy-trigger' => [
-		// 'deployUrl' => 'https://api.netlify.com/build_hooks/65142ee2a2de9b24080dcc95',
+		'deployUrl' => 'https://api.netlify.com/build_hooks/65142ee2a2de9b24080dcc95',
 	],
 	'panel' => [
 		'css' => 'assets/css/baukasten-panel.css',
