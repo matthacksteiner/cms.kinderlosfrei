@@ -32,13 +32,22 @@ return [
 			'language' => '*',
 			'method' => 'GET',
 			'action' => function () {
+				$kirby = kirby();
 				$index = [];
+
 				foreach (site()->index() as $page) {
+					$translations = [];
+					// Get URIs for all languages
+					foreach ($kirby->languages() as $language) {
+						$translations[$language->code()] = $page->url($language->code());
+					}
+
 					$index[] = [
+						"id" => $page->id(),
 						"uri" => $page->uri(),
 						"intendedTemplate" => $page->intendedTemplate()->name(),
 						"parent" => $page->intendedTemplate()->name() == 'item' ? $page->parent()->uri() : null,
-
+						"translations" => $translations
 					];
 				}
 
