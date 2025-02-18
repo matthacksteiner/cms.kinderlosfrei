@@ -39,7 +39,7 @@ return [
 					$translations = [];
 					// Get URIs for all languages
 					foreach ($kirby->languages() as $language) {
-						$translations[$language->code()] = $page->url($language->code());
+						$translations[$language->code()] = $page->uri($language->code());
 					}
 
 					$index[] = [
