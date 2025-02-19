@@ -5,6 +5,7 @@ tabs:
   content:
     label: Inhalt
     fields:
+      # Content Fields
       title:
         label: Titel
         type: writer
@@ -13,29 +14,44 @@ tabs:
         nodes: false
         inline: true
         placeholder: field.blocks.heading.placeholder
+        width: 3/4
+      image:
+        label: SVG Icon
+        type: files
+        icon: image
+        layout: list
+        width: 1/4
+        multiple: false
+        back: white
+        query: page.images.filterBy('extension', 'svg')
+        uploads:
+          template: svg
+
       text:
         label: Text
         type: writer
         extends: fields/writer
         marks: false
         nodes: false
-        inline: true
         placeholder: field.blocks.text.placeholder
-      image:
-        label: SVG Icon
-        type: files
-        icon: image
-        layout: cards
-        multiple: false
-        back: white
-        query: page.images.filterBy('extension', 'svg')
-        uploads:
-          template: svg
+
+      # Category Selection
       hoverToggle:
-        label: Hover Text
         type: toggle
-        default: false
-        width: 1/4
+        label: Enable Hover
+        width: 1/2
+        text:
+          - "No"
+          - "Yes"
+
+      linkToggle:
+        type: toggle
+        label: Enable Link
+        width: 1/2
+        text:
+          - "No"
+          - "Yes"
+
       hovertext:
         type: writer
         extends: fields/writer
@@ -44,11 +60,27 @@ tabs:
         inline: true
         placeholder: field.blocks.text.placeholder
         when:
-          hoverToggle: true
+          hoverToggle: true # Shown only if "Enable Hover" is toggled ON
+
+      linkObject:
+        extends: fields/linkField
+        when:
+          linkToggle: true # Shown only if "Enable Link" is toggled ON
 
   settings:
     label: Einstellungen
     fields:
+      # Aspect Ratio Settings
+      aspectHeadline:
+        label: Seitenverhältnis
+        type: headline
+        numbered: false
+      aspectRatio:
+        label: Seitenverhältnis
+        extends: fields/ratio
+        default: 1/1
+
+      # Title Settings
       titleHeadline:
         label: Titel Einstellungen
         type: headline
@@ -57,6 +89,8 @@ tabs:
         extends: groups/titleGroup
         fields:
           titleColor: false
+
+      # Text Settings
       textHeadline:
         label: Text Einstellungen
         type: headline
@@ -65,6 +99,8 @@ tabs:
         extends: groups/textGroup
         fields:
           textColor: false
+
+      # Icon Settings
       sizeHeadline:
         label: Icon Einstellungen
         type: headline
@@ -79,10 +115,14 @@ tabs:
         label: Ausrichtung
         extends: fields/align
         width: 1/4
+
+      # Color Settings
       colorsHeadline:
         label: Farben Einstellungen
         type: headline
         numbered: false
+
+      # Background Colors
       cardBackgroundColor:
         label: Farbe Hintergrund
         type: select
@@ -100,6 +140,8 @@ tabs:
       cardGapColor1:
         type: gap
         width: 1/3
+
+      # Text Colors
       cardTextColor:
         label: Farbe Text
         type: select
@@ -117,6 +159,8 @@ tabs:
       cardGapColor2:
         type: gap
         width: 1/3
+
+      # Border Colors
       cardBorderColor:
         label: Rand Farbe
         type: select
@@ -131,4 +175,5 @@ tabs:
         extends: fields/colors
         width: 1/3
         translate: false
+
       meta: fields/metadata
