@@ -240,6 +240,23 @@ function getBlockArray(\Kirby\Cms\Block $block)
             $blockArray['content']['file'] = $video;
             break;
 
+        case 'card':
+            $blockArray['content'] = $block->toArray()['content'];
+
+            // Extract fields from card.yml
+            $blockArray['content']['title'] = (string)$block->title();
+            $blockArray['content']['text'] = (string)$block->text();
+            $blockArray['content']['hoverToggle'] = $block->hoverToggle()->toBool(false);
+            $blockArray['content']['hovertext'] = (string)$block->hovertext();
+
+            if ($file = $block->image()->toFile()) {
+                $blockArray['content']['image'] = [
+                    'url' => $file->url(),
+                    'alt' => (string)$file->alt(),
+                ];
+            }
+            break;
+
         default:
             $blockArray['content'] = $block->toArray()['content'];
             break;

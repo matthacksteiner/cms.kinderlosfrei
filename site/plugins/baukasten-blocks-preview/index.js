@@ -1,5 +1,67 @@
 panel.plugin("baukasten-blocks-preview/preview", {
 	blocks: {
+		card: {
+			data() {
+				return {
+					text: "No text value",
+					hoverText: "No hover text value",
+				};
+			},
+			computed: {
+				heading() {
+					return this.content.title || "Default Title";
+				},
+				image() {
+					return this.content.image[0] || {};
+				},
+				hoverToggle() {
+					return this.content.hoverToggle || false;
+				},
+			},
+			watch: {
+				page: {
+					handler(value) {
+						if (this.pageId) {
+							this.$api
+								.get("pages/" + this.pageId.replaceAll("/", "+"))
+								.then((page) => {
+									this.text =
+										page.content.text.replace(/(<([^>]+)>)/gi, "") || this.text;
+								});
+						} else {
+							this.text = this.content.text || this.text;
+						}
+					},
+					immediate: true,
+				},
+				hoverToggle: {
+					handler(value) {
+						if (value) {
+							this.hoverText = this.content.hovertext || this.hoverText;
+						}
+					},
+					immediate: true,
+				},
+			},
+			template: `
+			  <div @dblclick="open" class="k-block-type-card">
+			  <h2 class="k-block-type-card-heading">{{ heading }}</h2>
+			  <div class="k-block-type-card-text">{{ text }}</div>
+				<k-aspect-ratio
+				  class="k-block-type-card-image"
+				  cover="true"
+				  ratio="1/1"
+				>
+				  <img
+					v-if="image.url"
+					:src="image.url"
+					alt=""
+					class="k-block-type-card-image-img"
+				  >
+				</k-aspect-ratio>
+			  </div>
+			`,
+		},
 		accordion: {
 			computed: {
 				items() {
@@ -112,6 +174,7 @@ panel.plugin("baukasten-blocks-preview/preview", {
 						:value="item.text"
 						@input="updateItem(content, index, 'text', $event)"
 					  />
+					</summary>
 				  </details>
 				</div>
 				<div v-else>Noch keine Icon Liste Elemente vorhanden.</div>

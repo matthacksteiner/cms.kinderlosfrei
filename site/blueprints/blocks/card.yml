@@ -32,15 +32,17 @@ tabs:
         uploads:
           template: svg
       hoverToggle:
-        label: Hover Effekt
+        label: Hover Text
         type: toggle
         default: false
+        width: 1/4
       hovertext:
-        extends: fields/hover
-        when:
-          hoverToggle: true
-      hoverimage:
-        extends: fields/hover
+        type: writer
+        extends: fields/writer
+        marks: false
+        nodes: false
+        inline: true
+        placeholder: field.blocks.text.placeholder
         when:
           hoverToggle: true
 
@@ -51,12 +53,18 @@ tabs:
         label: Titel Einstellungen
         type: headline
         numbered: false
-      titleGroup: groups/titleGroup
+      titleGroup:
+        extends: groups/titleGroup
+        fields:
+          titleColor: false
       textHeadline:
         label: Text Einstellungen
         type: headline
         numbered: false
-      textGroup: groups/textGroup
+      textGroup:
+        extends: groups/textGroup
+        fields:
+          textColor: false
       sizeHeadline:
         label: Icon Einstellungen
         type: headline
@@ -71,4 +79,56 @@ tabs:
         label: Ausrichtung
         extends: fields/align
         width: 1/4
+      colorsHeadline:
+        label: Farben Einstellungen
+        type: headline
+        numbered: false
+      cardBackgroundColor:
+        label: Farbe Hintergrund
+        type: select
+        default: primary
+        extends: fields/colors
+        width: 1/3
+        translate: false
+      cardBackgroundColorActive:
+        label: Farbe Hintergrund Hover
+        type: select
+        default: primary
+        extends: fields/colors
+        width: 1/3
+        translate: false
+      cardGapColor1:
+        type: gap
+        width: 1/3
+      cardTextColor:
+        label: Farbe Text
+        type: select
+        default: secondary
+        extends: fields/colors
+        width: 1/3
+        translate: false
+      cardTextColorActive:
+        label: Farbe Text Hover
+        type: select
+        default: secondary
+        extends: fields/colors
+        width: 1/3
+        translate: false
+      cardGapColor2:
+        type: gap
+        width: 1/3
+      cardBorderColor:
+        label: Rand Farbe
+        type: select
+        default: primary
+        extends: fields/colors
+        width: 1/3
+        translate: false
+      cardBorderColorActive:
+        label: Rand Farbe Hover
+        type: select
+        default: primary
+        extends: fields/colors
+        width: 1/3
+        translate: false
       meta: fields/metadata
