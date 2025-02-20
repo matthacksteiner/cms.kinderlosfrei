@@ -403,6 +403,7 @@ columns:
             width: 1/2
             translate: false
             toggle: true
+            help: Der Abstand zum Rand wird horizontal verdoppelt.
             fields:
               buttonFont:
                 extends: fields/fontFile

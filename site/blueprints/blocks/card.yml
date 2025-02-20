@@ -69,16 +69,16 @@ tabs:
   settings:
     label: Einstellungen
     fields:
-      # Aspect Ratio Settings
-      aspectHeadline:
-        label: Seitenverhältnis
+      # Display Settings
+      displayHeadline:
+        label: Darstellung
         type: headline
         numbered: false
       aspectRatio:
         label: Seitenverhältnis
         type: select
         placeholder: false
-        width: 1/4
+        width: 1/2
         required: true
         default: 1/1
         options:
@@ -92,6 +92,13 @@ tabs:
           3/4: "3:4"
           4/5: "4:5"
           1/2: "1:2"
+      justify:
+        label: Ausrichtung
+        extends: fields/align
+        options:
+          two: "2 + 1 Elemente"
+          one: "1 + 2 Elemente"
+        width: 1/2
 
       # Title Settings
       titleHeadline:
@@ -192,13 +199,25 @@ tabs:
         label: Randbreite
         type: number
         placeholder: 0
-        width: 1/2
+        width: 1/4
         translate: false
       cardBorderRadius:
         label: Randradius
         type: number
         placeholder: 0
-        width: 1/2
+        width: 1/4
+        translate: false
+      cardBorderPaddingDesktop:
+        label: Randabstand 🖥️
+        type: number
+        placeholder: 0
+        width: 1/4
+        translate: false
+      cardBorderPaddingMobile:
+        label: Randabstand 📱
+        type: number
+        placeholder: 0
+        width: 1/4
         translate: false
 
       meta: fields/metadata
