@@ -94,7 +94,7 @@ tabs:
           1/2: "1:2"
       justify:
         label: Ausrichtung
-        extends: fields/align
+        extends: fields/adjust
         options:
           two: "2 + 1 Elemente"
           one: "1 + 2 Elemente"
