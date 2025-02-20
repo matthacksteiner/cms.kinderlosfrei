@@ -37,7 +37,7 @@ tabs:
       # Category Selection
       hoverToggle:
         type: toggle
-        label: Enable Hover
+        label: Enable Hover Text
         width: 1/2
         text:
           - "No"
