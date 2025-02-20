@@ -141,18 +141,15 @@ tabs:
         type: select
         default: primary
         extends: fields/colors
-        width: 1/3
+        width: 1/2
         translate: false
       cardBackgroundColorActive:
         label: Farbe Hintergrund Hover
         type: select
         default: primary
         extends: fields/colors
-        width: 1/3
+        width: 1/2
         translate: false
-      cardGapColor1:
-        type: gap
-        width: 1/3
 
       # Text Colors
       cardTextColor:
@@ -160,18 +157,15 @@ tabs:
         type: select
         default: secondary
         extends: fields/colors
-        width: 1/3
+        width: 1/2
         translate: false
       cardTextColorActive:
         label: Farbe Text Hover
         type: select
         default: secondary
         extends: fields/colors
-        width: 1/3
+        width: 1/2
         translate: false
-      cardGapColor2:
-        type: gap
-        width: 1/3
 
       # Border Colors
       cardBorderColor:
@@ -179,14 +173,32 @@ tabs:
         type: select
         default: primary
         extends: fields/colors
-        width: 1/3
+        width: 1/2
         translate: false
       cardBorderColorActive:
         label: Rand Farbe Hover
         type: select
         default: primary
         extends: fields/colors
-        width: 1/3
+        width: 1/2
+        translate: false
+
+      # Border Settings
+      cardBorderHeadline:
+        label: Rand Einstellungen
+        type: headline
+        numbered: false
+      cardBorderWidth:
+        label: Randbreite
+        type: number
+        placeholder: 0
+        width: 1/2
+        translate: false
+      cardBorderRadius:
+        label: Randradius
+        type: number
+        placeholder: 0
+        width: 1/2
         translate: false
 
       meta: fields/metadata

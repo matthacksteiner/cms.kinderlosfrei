@@ -218,9 +218,10 @@ function getBlockArray(\Kirby\Cms\Block $block)
             break;
 
         case 'card':
-            // Get base content array
             $content = $block->toArray()['content'];
             $blockArray['content'] = $content;
+            $blockArray['content']['hovertoggle'] = $block->hovertoggle()->toBool(false);
+            $blockArray['content']['linktoggle'] = $block->linktoggle()->toBool(false);
             $image = null;
             if ($file1 = $block->image()->toFile()) {
                 $image = getSvgArray($file1);
