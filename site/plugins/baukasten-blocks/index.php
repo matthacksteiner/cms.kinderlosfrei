@@ -222,6 +222,11 @@ function getBlockArray(\Kirby\Cms\Block $block)
             $blockArray['content'] = $content;
             $blockArray['content']['hovertoggle'] = $block->hovertoggle()->toBool(false);
             $blockArray['content']['linktoggle'] = $block->linktoggle()->toBool(false);
+            $linkobject = [];
+            if ($block->linkobject()->isNotEmpty()) {
+                $linkobject = getLinkArray($block->linkobject());
+                $blockArray['content']['linkobject'] = $linkobject;
+            }
             $image = null;
             if ($file1 = $block->image()->toFile()) {
                 $image = getSvgArray($file1);
