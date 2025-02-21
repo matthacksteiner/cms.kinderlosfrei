@@ -1,3 +1,3 @@
 <?php
 
-Kirby::plugin('custom/layout-grid-values', []);
+Kirby::plugin('baukasten/layout-grid-values', []);

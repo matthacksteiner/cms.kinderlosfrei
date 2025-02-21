@@ -1,4 +1,4 @@
-window.panel.plugin("custom/layout-grid-values", {
+window.panel.plugin("baukasten/layout-grid-values", {
 	components: {
 		"k-layout-column": {
 			extends: "k-layout-column",
