@@ -5,3 +5,7 @@ options:
   space-around: umgebender Abstand
   space-between: Abstand dazwischen
   space-evenly: Abstand gleichmäßig
+  normal: Normal
+  start: Start
+  center: Mittig
+  end: Ende

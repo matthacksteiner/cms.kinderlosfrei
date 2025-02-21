@@ -53,3 +53,33 @@ details summary .k-writer {
 	font-size: 4em;
 	color: #ccc;
 }
+
+.k-block-type-card {
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	padding: 1rem;
+}
+
+.k-block-type-card-heading {
+	font-size: 1.25rem;
+	font-weight: 600;
+	margin-bottom: 0.75rem;
+}
+
+.k-block-type-card-text {
+	font-size: 1rem;
+	line-height: 1.5;
+	margin-bottom: 1rem;
+}
+
+.k-block-type-card-image {
+	width: 100%;
+	max-width: 24px;
+}
+
+.k-block-type-card-image-img {
+	width: 24px;
+	height: auto;
+	object-fit: cover;
+}
