@@ -2,44 +2,11 @@ type: layout
 extends: fields/layoutSizes
 
 fieldsets:
-  text:
-    label: Text
-    type: group
-    fieldsets:
-      title: blocks/heading
-      text: blocks/text
-      quoteSlider: blocks/quoteSlider
-  media:
-    label: Medien
-    type: group
-    fieldsets:
-      image:
-        extends: blocks/image
-      slider:
-        extends: blocks/slider
-        name: Slider
-      vector:
-        extends: blocks/vector
-        name: Vektor
-      video:
-        extends: blocks/video
-  elements:
-    label: Elemente
-    type: group
-    fieldsets:
-      button: blocks/button
-      buttonBar: blocks/buttonBar
-      accordion: blocks/accordion
-      iconlist: blocks/iconlist
-      card: blocks/card
-      menu: blocks/menu
+  text: fields/fieldsets-text
+  media: fields/fieldsets-media
+  elements: fields/fieldsets-elements
   tools:
-    label: Werkzeuge
-    type: group
-    open: false
+    extends: fields/fieldsets-tools
     fieldsets:
-      divider: blocks/divider
-      line: blocks/line
       columns: blocks/columns
       grid: blocks/grid
-      code: blocks/code
