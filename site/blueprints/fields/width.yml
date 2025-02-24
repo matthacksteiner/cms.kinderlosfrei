@@ -1,5 +1,9 @@
 type: select
 options:
+  - value: "5"
+    text: 5%
+  - value: "10"
+    text: 10%
   - value: "20"
     text: 20%
   - value: "33"
