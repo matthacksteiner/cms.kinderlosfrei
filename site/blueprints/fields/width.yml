@@ -19,5 +19,5 @@ options:
   - value: auto
     text: Automatisch
 default: "100"
-after: %
+after: "%"
 width: 1/4

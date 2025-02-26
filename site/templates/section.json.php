@@ -1,6 +1,6 @@
 <?php
 
-/** @var Page $page */
+/** @var Kirby\Cms\Page $page */
 /** @var Array $json */
 
 use Kirby\Cms\Page;

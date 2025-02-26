@@ -137,6 +137,55 @@ function getBlockArray(\Kirby\Cms\Block $block)
             $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
             break;
 
+        case 'gallery':
+            $blockArray['content'] = $block->toArray()['content'];
+            $images = [];
+
+            foreach ($block->images()->toFiles() as $file) {
+                $image = $file;
+
+                $ratioMobile = explode('/', $block->ratioMobile()->value());
+                $ratio = explode('/', $block->ratio()->value());
+
+                $calculateHeight = function ($width, $ratio) {
+                    return isset($ratio[1]) ? round(($width / $ratio[0]) * $ratio[1]) : $width;
+                };
+
+                $images[] = [
+                    'url' => $image->url(),
+                    'urlFocus' => $image->crop($image->width(), $calculateHeight($image->width(), $ratio))->url(),
+                    'urlFocusMobile' => $image->crop($image->width(), $calculateHeight($image->width(), $ratioMobile))->url(),
+                    'width' => $image->width(),
+                    'height' => $image->height(),
+                    'alt' => (string)$image->alt(),
+                    'name' => (string)$image->name(),
+                    'identifier' => $image->identifier()->value(),
+                    'classes' => $image->classes()->value(),
+                    'focusX' => json_decode($file->focusPercentageX()),
+                    'focusY' => json_decode($file->focusPercentageY()),
+                    'captiontoggle' => $file->captiontoggle()->toBool(false),
+                    'captiontitle' => $file->captionobject()->toObject()->captiontitle()->value(),
+                    'captiontextfont' => $file->captionobject()->toObject()->textfont()->value(),
+                    'captiontextsize' => $file->captionobject()->toObject()->textsize()->value(),
+                    'captiontextcolor' => $file->captionobject()->toObject()->textColor()->value(),
+                    'captiontextalign' => $file->captionobject()->toObject()->textalign()->value(),
+                    'captionoverlay' => $file->captionobject()->toObject()->captionoverlay()->value(),
+                    'captionalign' => $file->captionobject()->toObject()->captionalign()->value(),
+                    'linktoggle' => $file->linktoggle()->toBool(false),
+                    'linkexternal' => getLinkArray($file->linkexternal()),
+                ];
+            }
+
+            $blockArray['content']['images'] = $images;
+            $blockArray['content']['layoutType'] = $block->layoutType()->value();
+            $blockArray['content']['lightbox'] = $block->lightbox()->toBool(false);
+            $blockArray['content']['viewMobile'] = $block->viewMobile()->value();
+            $blockArray['content']['viewDesktop'] = $block->viewDesktop()->value();
+            $blockArray['content']['viewPaddingMobile'] = $block->viewPaddingMobile()->value();
+            $blockArray['content']['viewPaddingDesktop'] = $block->viewPaddingDesktop()->value();
+
+            break;
+
         case "menu":
             $blockArray['content'] = $block->toArray()['content'];
             foreach ($block->nav()->toStructure() as $key => $item) {
