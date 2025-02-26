@@ -263,6 +263,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
 
             $blockArray['content']['images'] = $images;
             $blockArray['content']['layoutType'] = $block->layoutType()->value();
+            $blockArray['content']['lightbox'] = $block->lightbox()->toBool(false);
             $blockArray['content']['viewMobile'] = $block->viewMobile()->value();
             $blockArray['content']['viewDesktop'] = $block->viewDesktop()->value();
             $blockArray['content']['viewPaddingMobile'] = $block->viewPaddingMobile()->value();

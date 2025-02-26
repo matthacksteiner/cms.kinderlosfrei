@@ -39,11 +39,16 @@ tabs:
       layoutType:
         label: Layout
         type: select
-        width: 1/1
+        width: 3/4
         default: grid
         options:
           grid: Grid
           masonry: Mosaik
+      lightbox:
+        label: Lightbox
+        type: toggle
+        width: 1/4
+        default: false
       viewMobile:
         label: Bilder pro Reihe 📱
         type: number
