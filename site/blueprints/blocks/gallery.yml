@@ -44,7 +44,6 @@ tabs:
         options:
           grid: Grid
           masonry: Mosaik
-          justified: Ausgerichtet
       viewMobile:
         label: Bilder pro Reihe 📱
         type: number
