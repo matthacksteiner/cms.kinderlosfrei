@@ -48,12 +48,12 @@ tabs:
         label: Lightbox
         type: toggle
         width: 1/4
-        default: false
+        default: true
       viewMobile:
         label: Bilder pro Reihe 📱
         type: number
         width: 1/4
-        default: 1
+        default: 2
         min: 1
         max: 10
         placeholder: 1
@@ -61,7 +61,7 @@ tabs:
         label: Bilder pro Reihe 🖥️
         type: number
         width: 1/4
-        default: 1
+        default: 4
         min: 1
         max: 10
         placeholder: 1
@@ -69,7 +69,7 @@ tabs:
         label: Zwischenabstand 📱
         type: number
         width: 1/4
-        default: 0
+        default: 12
         min: 0
         placeholder: 0
         after: px
@@ -77,7 +77,7 @@ tabs:
         label: Zwischenabstand 🖥️
         type: number
         width: 1/4
-        default: 0
+        default: 24
         min: 0
         placeholder: 0
         after: px

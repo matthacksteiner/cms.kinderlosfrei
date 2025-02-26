@@ -6,6 +6,9 @@ fieldsets:
   slider:
     extends: blocks/slider
     name: Slider
+  gallery:
+    extends: blocks/gallery
+    name: Galerie
   vector:
     extends: blocks/vector
     name: Vektor
