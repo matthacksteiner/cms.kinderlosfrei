@@ -1,8 +1,16 @@
 <?php
 
+use Kirby\Cms\App as Kirby;
+
 define('KIRBY_HELPER_DUMP', false);
 
-include '../vendor/autoload.php';
+// Check if the autoload.php file exists
+$autoloadPath = __DIR__ . '/../vendor/autoload.php';
+if (!file_exists($autoloadPath)) {
+  die('The autoload.php file does not exist. Please run `composer install` in the root directory of your project.');
+}
+
+include $autoloadPath;
 
 $kirby = new Kirby([
   'roots' => [

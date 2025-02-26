@@ -21,6 +21,10 @@ columns:
                     options:
                       - page
                       - url
+                  classnames:
+                    label: CSS Klassen
+                    type: text
+                    help: Nutze die Klasse 'cta', um den Link in einen Button zu ändern.
 
           navHambuger:
             width: 1/2

@@ -4,7 +4,7 @@
 		"Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
 		"This file is @generated automatically"
 	],
-	"content-hash": "c64c29cf15ff58acd3ce645106f1c334",
+	"content-hash": "79c466c0e022c754ca7fcc6edf3f14ed",
 	"packages": [
 		{
 			"name": "bnomei/kirby3-janitor",
@@ -160,16 +160,16 @@
 		},
 		{
 			"name": "claviska/simpleimage",
-			"version": "4.2.0",
+			"version": "4.2.1",
 			"source": {
 				"type": "git",
 				"url": "https://github.com/claviska/SimpleImage.git",
-				"reference": "dfbe53c01dae8467468ef2b817c09b786a7839d2"
+				"reference": "ec6d5021e5a7153a2520d64c59b86b6f3c4157c5"
 			},
 			"dist": {
 				"type": "zip",
-				"url": "https://api.github.com/repos/claviska/SimpleImage/zipball/dfbe53c01dae8467468ef2b817c09b786a7839d2",
-				"reference": "dfbe53c01dae8467468ef2b817c09b786a7839d2",
+				"url": "https://api.github.com/repos/claviska/SimpleImage/zipball/ec6d5021e5a7153a2520d64c59b86b6f3c4157c5",
+				"reference": "ec6d5021e5a7153a2520d64c59b86b6f3c4157c5",
 				"shasum": ""
 			},
 			"require": {
@@ -201,7 +201,7 @@
 			"description": "A PHP class that makes working with images as simple as possible.",
 			"support": {
 				"issues": "https://github.com/claviska/SimpleImage/issues",
-				"source": "https://github.com/claviska/SimpleImage/tree/4.2.0"
+				"source": "https://github.com/claviska/SimpleImage/tree/4.2.1"
 			},
 			"funding": [
 				{
@@ -209,7 +209,7 @@
 					"type": "github"
 				}
 			],
-			"time": "2024-04-15T16:07:16+00:00"
+			"time": "2024-11-22T13:25:03+00:00"
 		},
 		{
 			"name": "composer/semver",
@@ -357,16 +357,16 @@
 		},
 		{
 			"name": "filp/whoops",
-			"version": "2.16.0",
+			"version": "2.17.0",
 			"source": {
 				"type": "git",
 				"url": "https://github.com/filp/whoops.git",
-				"reference": "befcdc0e5dce67252aa6322d82424be928214fa2"
+				"reference": "075bc0c26631110584175de6523ab3f1652eb28e"
 			},
 			"dist": {
 				"type": "zip",
-				"url": "https://api.github.com/repos/filp/whoops/zipball/befcdc0e5dce67252aa6322d82424be928214fa2",
-				"reference": "befcdc0e5dce67252aa6322d82424be928214fa2",
+				"url": "https://api.github.com/repos/filp/whoops/zipball/075bc0c26631110584175de6523ab3f1652eb28e",
+				"reference": "075bc0c26631110584175de6523ab3f1652eb28e",
 				"shasum": ""
 			},
 			"require": {
@@ -416,7 +416,7 @@
 			],
 			"support": {
 				"issues": "https://github.com/filp/whoops/issues",
-				"source": "https://github.com/filp/whoops/tree/2.16.0"
+				"source": "https://github.com/filp/whoops/tree/2.17.0"
 			},
 			"funding": [
 				{
@@ -424,7 +424,7 @@
 					"type": "github"
 				}
 			],
-			"time": "2024-09-25T12:00:00+00:00"
+			"time": "2025-01-25T12:00:00+00:00"
 		},
 		{
 			"name": "getkirby/cli",
@@ -494,21 +494,21 @@
 		},
 		{
 			"name": "getkirby/cms",
-			"version": "4.5.0",
+			"version": "4.6.1",
 			"source": {
 				"type": "git",
 				"url": "https://github.com/getkirby/kirby.git",
-				"reference": "94cc37ee7c3004ebb4950a53f14e1329ed4d28d3"
+				"reference": "e29f216630ee1c2ab7e3f8f1bb3d335541121587"
 			},
 			"dist": {
 				"type": "zip",
-				"url": "https://api.github.com/repos/getkirby/kirby/zipball/94cc37ee7c3004ebb4950a53f14e1329ed4d28d3",
-				"reference": "94cc37ee7c3004ebb4950a53f14e1329ed4d28d3",
+				"url": "https://api.github.com/repos/getkirby/kirby/zipball/e29f216630ee1c2ab7e3f8f1bb3d335541121587",
+				"reference": "e29f216630ee1c2ab7e3f8f1bb3d335541121587",
 				"shasum": ""
 			},
 			"require": {
 				"christian-riesen/base32": "1.6.0",
-				"claviska/simpleimage": "4.2.0",
+				"claviska/simpleimage": "4.2.1",
 				"composer/semver": "3.4.3",
 				"ext-ctype": "*",
 				"ext-curl": "*",
@@ -521,15 +521,15 @@
 				"ext-mbstring": "*",
 				"ext-openssl": "*",
 				"ext-simplexml": "*",
-				"filp/whoops": "2.16.0",
+				"filp/whoops": "2.17.0",
 				"getkirby/composer-installer": "^1.2.1",
-				"laminas/laminas-escaper": "2.14.0",
+				"laminas/laminas-escaper": "2.15.0",
 				"michelf/php-smartypants": "1.8.1",
-				"php": "~8.1.0 || ~8.2.0 || ~8.3.0",
-				"phpmailer/phpmailer": "6.9.2",
+				"php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0",
+				"phpmailer/phpmailer": "6.9.3",
 				"symfony/polyfill-intl-idn": "1.31.0",
 				"symfony/polyfill-mbstring": "1.31.0",
-				"symfony/yaml": "6.4.13"
+				"symfony/yaml": "6.4.18"
 			},
 			"replace": {
 				"symfony/polyfill-php72": "*"
@@ -593,7 +593,7 @@
 					"type": "custom"
 				}
 			],
-			"time": "2024-11-28T10:10:23+00:00"
+			"time": "2025-02-06T15:39:59+00:00"
 		},
 		{
 			"name": "getkirby/composer-installer",
@@ -968,17 +968,72 @@
 			"time": "2024-07-18T11:15:46+00:00"
 		},
 		{
-			"name": "laminas/laminas-escaper",
-			"version": "2.14.0",
+			"name": "johannschopplich/kirby-deploy-trigger",
+			"version": "1.0.4",
 			"source": {
 				"type": "git",
-				"url": "https://github.com/laminas/laminas-escaper.git",
-				"reference": "0f7cb975f4443cf22f33408925c231225cfba8cb"
+				"url": "https://github.com/johannschopplich/kirby-deploy-trigger.git",
+				"reference": "c6b85b49b34490c44660b3e33eb2a5900776b276"
 			},
 			"dist": {
 				"type": "zip",
-				"url": "https://api.github.com/repos/laminas/laminas-escaper/zipball/0f7cb975f4443cf22f33408925c231225cfba8cb",
-				"reference": "0f7cb975f4443cf22f33408925c231225cfba8cb",
+				"url": "https://api.github.com/repos/johannschopplich/kirby-deploy-trigger/zipball/c6b85b49b34490c44660b3e33eb2a5900776b276",
+				"reference": "c6b85b49b34490c44660b3e33eb2a5900776b276",
+				"shasum": ""
+			},
+			"require": {
+				"getkirby/composer-installer": "^1"
+			},
+			"require-dev": {
+				"getkirby/cms": "^4",
+				"vlucas/phpdotenv": "^5"
+			},
+			"type": "kirby-plugin",
+			"extra": {
+				"kirby-cms-path": false
+			},
+			"notification-url": "https://packagist.org/downloads/",
+			"license": [
+				"MIT"
+			],
+			"authors": [
+				{
+					"name": "Johann Schopplich",
+					"email": "hello@johannschopplich.com",
+					"homepage": "https://johannschopplich.com"
+				}
+			],
+			"description": "Kirby Panel plugin to trigger deployments on any platform",
+			"homepage": "https://github.com/johannschopplich/kirby-deploy-trigger#readme",
+			"keywords": [
+				"deployment",
+				"kirby",
+				"vercel"
+			],
+			"support": {
+				"issues": "https://github.com/johannschopplich/kirby-deploy-trigger/issues",
+				"source": "https://github.com/johannschopplich/kirby-deploy-trigger/tree/v1.0.4"
+			},
+			"funding": [
+				{
+					"url": "https://kirby.tools",
+					"type": "custom"
+				}
+			],
+			"time": "2025-01-20T20:37:50+00:00"
+		},
+		{
+			"name": "laminas/laminas-escaper",
+			"version": "2.15.0",
+			"source": {
+				"type": "git",
+				"url": "https://github.com/laminas/laminas-escaper.git",
+				"reference": "c612b0488ae486284c39885efca494c180f16351"
+			},
+			"dist": {
+				"type": "zip",
+				"url": "https://api.github.com/repos/laminas/laminas-escaper/zipball/c612b0488ae486284c39885efca494c180f16351",
+				"reference": "c612b0488ae486284c39885efca494c180f16351",
 				"shasum": ""
 			},
 			"require": {
@@ -990,12 +1045,12 @@
 				"zendframework/zend-escaper": "*"
 			},
 			"require-dev": {
-				"infection/infection": "^0.27.9",
-				"laminas/laminas-coding-standard": "~3.0.0",
+				"infection/infection": "^0.27.11",
+				"laminas/laminas-coding-standard": "~3.0.1",
 				"maglnet/composer-require-checker": "^3.8.0",
-				"phpunit/phpunit": "^9.6.16",
+				"phpunit/phpunit": "^9.6.22",
 				"psalm/plugin-phpunit": "^0.19.0",
-				"vimeo/psalm": "^5.21.1"
+				"vimeo/psalm": "^5.26.1"
 			},
 			"type": "library",
 			"autoload": {
@@ -1027,7 +1082,7 @@
 					"type": "community_bridge"
 				}
 			],
-			"time": "2024-10-24T10:12:53+00:00"
+			"time": "2024-12-17T19:39:54+00:00"
 		},
 		{
 			"name": "league/climate",
@@ -1288,16 +1343,16 @@
 		},
 		{
 			"name": "phpmailer/phpmailer",
-			"version": "v6.9.2",
+			"version": "v6.9.3",
 			"source": {
 				"type": "git",
 				"url": "https://github.com/PHPMailer/PHPMailer.git",
-				"reference": "a7b17b42fa4887c92146243f3d2f4ccb962af17c"
+				"reference": "2f5c94fe7493efc213f643c23b1b1c249d40f47e"
 			},
 			"dist": {
 				"type": "zip",
-				"url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/a7b17b42fa4887c92146243f3d2f4ccb962af17c",
-				"reference": "a7b17b42fa4887c92146243f3d2f4ccb962af17c",
+				"url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/2f5c94fe7493efc213f643c23b1b1c249d40f47e",
+				"reference": "2f5c94fe7493efc213f643c23b1b1c249d40f47e",
 				"shasum": ""
 			},
 			"require": {
@@ -1357,7 +1412,7 @@
 			"description": "PHPMailer is a full-featured email creation and transfer class for PHP",
 			"support": {
 				"issues": "https://github.com/PHPMailer/PHPMailer/issues",
-				"source": "https://github.com/PHPMailer/PHPMailer/tree/v6.9.2"
+				"source": "https://github.com/PHPMailer/PHPMailer/tree/v6.9.3"
 			},
 			"funding": [
 				{
@@ -1365,45 +1420,7 @@
 					"type": "github"
 				}
 			],
-			"time": "2024-10-09T10:07:50+00:00"
-		},
-		{
-			"name": "pju/kirby-webhook-field",
-			"version": "1.1.2",
-			"source": {
-				"type": "git",
-				"url": "https://github.com/pju-/kirby-webhook-field.git",
-				"reference": "637494f80e755402a1455b86f6f5c2e6554dcbdf"
-			},
-			"dist": {
-				"type": "zip",
-				"url": "https://api.github.com/repos/pju-/kirby-webhook-field/zipball/637494f80e755402a1455b86f6f5c2e6554dcbdf",
-				"reference": "637494f80e755402a1455b86f6f5c2e6554dcbdf",
-				"shasum": ""
-			},
-			"require": {
-				"getkirby/composer-installer": "^1.1"
-			},
-			"type": "kirby-plugin",
-			"extra": {
-				"installer-name": "webhook-field"
-			},
-			"notification-url": "https://packagist.org/downloads/",
-			"license": [
-				"GPL-3.0-or-later"
-			],
-			"authors": [
-				{
-					"name": "Philip Jonas Ulrich",
-					"email": "hi@philipjonas.cc"
-				}
-			],
-			"description": "A Kirby 3 plugin providing a field to easily use webhooks, e.g. for deploying your site to services such as Netlify ",
-			"support": {
-				"issues": "https://github.com/pju-/kirby-webhook-field/issues",
-				"source": "https://github.com/pju-/kirby-webhook-field/tree/1.1.2"
-			},
-			"time": "2021-10-21T13:43:14+00:00"
+			"time": "2024-11-24T18:04:13+00:00"
 		},
 		{
 			"name": "psr/http-client",
@@ -1713,6 +1730,54 @@
 				"source": "https://github.com/Seldaek/cli-prompt/tree/1.0.4"
 			},
 			"time": "2020-12-15T21:32:01+00:00"
+		},
+		{
+			"name": "srwiez/thumbhash",
+			"version": "v1.3.0",
+			"source": {
+				"type": "git",
+				"url": "https://github.com/SRWieZ/thumbhash.git",
+				"reference": "3983c6f1aec32d8a037cc66175c0550f12c3f9e2"
+			},
+			"dist": {
+				"type": "zip",
+				"url": "https://api.github.com/repos/SRWieZ/thumbhash/zipball/3983c6f1aec32d8a037cc66175c0550f12c3f9e2",
+				"reference": "3983c6f1aec32d8a037cc66175c0550f12c3f9e2",
+				"shasum": ""
+			},
+			"require": {
+				"php": "^7.3 || ^8.0"
+			},
+			"require-dev": {
+				"ext-gd": "*",
+				"ext-imagick": "*",
+				"pestphp/pest": "^1.0"
+			},
+			"type": "library",
+			"autoload": {
+				"files": [
+					"src/helpers.php"
+				],
+				"psr-4": {
+					"Thumbhash\\": "src/"
+				}
+			},
+			"notification-url": "https://packagist.org/downloads/",
+			"license": [
+				"MIT"
+			],
+			"authors": [
+				{
+					"name": "Eser DENIZ",
+					"email": "srwiez@gmail.com"
+				}
+			],
+			"description": "A brief description of your package",
+			"support": {
+				"issues": "https://github.com/SRWieZ/thumbhash/issues",
+				"source": "https://github.com/SRWieZ/thumbhash/tree/v1.3.0"
+			},
+			"time": "2024-10-16T06:10:12+00:00"
 		},
 		{
 			"name": "sylvainjule/backups",
@@ -2205,16 +2270,16 @@
 		},
 		{
 			"name": "symfony/yaml",
-			"version": "v6.4.13",
+			"version": "v6.4.18",
 			"source": {
 				"type": "git",
 				"url": "https://github.com/symfony/yaml.git",
-				"reference": "e99b4e94d124b29ee4cf3140e1b537d2dad8cec9"
+				"reference": "bf598c9d9bb4a22f495a4e26e4c4fce2f8ecefc5"
 			},
 			"dist": {
 				"type": "zip",
-				"url": "https://api.github.com/repos/symfony/yaml/zipball/e99b4e94d124b29ee4cf3140e1b537d2dad8cec9",
-				"reference": "e99b4e94d124b29ee4cf3140e1b537d2dad8cec9",
+				"url": "https://api.github.com/repos/symfony/yaml/zipball/bf598c9d9bb4a22f495a4e26e4c4fce2f8ecefc5",
+				"reference": "bf598c9d9bb4a22f495a4e26e4c4fce2f8ecefc5",
 				"shasum": ""
 			},
 			"require": {
@@ -2257,7 +2322,7 @@
 			"description": "Loads and dumps YAML files",
 			"homepage": "https://symfony.com",
 			"support": {
-				"source": "https://github.com/symfony/yaml/tree/v6.4.13"
+				"source": "https://github.com/symfony/yaml/tree/v6.4.18"
 			},
 			"funding": [
 				{
@@ -2273,7 +2338,62 @@
 					"type": "tidelift"
 				}
 			],
-			"time": "2024-09-25T14:18:03+00:00"
+			"time": "2025-01-07T09:44:41+00:00"
+		},
+		{
+			"name": "tobimori/kirby-thumbhash",
+			"version": "1.1.1",
+			"source": {
+				"type": "git",
+				"url": "https://github.com/tobimori/kirby-thumbhash.git",
+				"reference": "9cd6c2d93f171a8cd484a686d267ff8adbb2b9fe"
+			},
+			"dist": {
+				"type": "zip",
+				"url": "https://api.github.com/repos/tobimori/kirby-thumbhash/zipball/9cd6c2d93f171a8cd484a686d267ff8adbb2b9fe",
+				"reference": "9cd6c2d93f171a8cd484a686d267ff8adbb2b9fe",
+				"shasum": ""
+			},
+			"require": {
+				"getkirby/composer-installer": "^1.2",
+				"php": ">=8.0.0",
+				"srwiez/thumbhash": "^1.1"
+			},
+			"require-dev": {
+				"getkirby/cms": "^3.8"
+			},
+			"type": "kirby-plugin",
+			"extra": {
+				"kirby-cms-path": false
+			},
+			"autoload": {
+				"psr-4": {
+					"tobimori\\": "classes/"
+				}
+			},
+			"notification-url": "https://packagist.org/downloads/",
+			"license": [
+				"MIT"
+			],
+			"authors": [
+				{
+					"name": "Tobias Möritz",
+					"email": "tobias@moeritz.io"
+				}
+			],
+			"description": "Kirby Image placeholders with the smarter ThumbHash integration",
+			"homepage": "https://github.com/tobimori/kirby-thumbhash#readme",
+			"support": {
+				"issues": "https://github.com/tobimori/kirby-thumbhash/issues",
+				"source": "https://github.com/tobimori/kirby-thumbhash/tree/1.1.1"
+			},
+			"funding": [
+				{
+					"url": "https://github.com/tobimori",
+					"type": "github"
+				}
+			],
+			"time": "2024-04-12T16:48:19+00:00"
 		}
 	],
 	"packages-dev": [],

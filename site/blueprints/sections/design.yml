@@ -393,7 +393,7 @@ columns:
         type: fields
         fields:
           buttonHeadline:
-            label: Button
+            label: Globale Button Einstellungen
             type: headline
             numbered: true
           buttonSettings:
@@ -403,6 +403,7 @@ columns:
             width: 1/2
             translate: false
             toggle: true
+            help: Der Abstand zum Rand wird horizontal verdoppelt.
             fields:
               buttonFont:
                 extends: fields/fontFile

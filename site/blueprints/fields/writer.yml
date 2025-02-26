@@ -1,6 +1,7 @@
 label: Text
 icon: text
 type: writer
+counter: true
 marks:
   - bold
   - italic

@@ -60,16 +60,6 @@ tabs:
                 translate: false
                 help: >
                   Die URL der Webseite. Diese wird für alle OG Tags und Links verwendet. Konfiguration über die deutschen Seite.
-          deploy:
-            type: fields
-            fields:
-              deploy:
-                type: webhook
-                label: Deploy
-              deployInfo:
-                label: false
-                type: info
-                text: Dieser Button deployt die Änderungen auf den Webserver und macht diese somit sichtbar.
   settings:
     label: Einstellungen
     icon: settings

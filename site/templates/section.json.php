@@ -29,6 +29,7 @@ function getItems(\Kirby\Cms\Page $page)
         'height' => $image->height(),
         'alt' => (string) $image->alt(),
         'name' => (string)$image->name(),
+        'thumbhash' => $image->thumbhashUri(),
         'orientation' => $image->orientation(),
       ];
     }

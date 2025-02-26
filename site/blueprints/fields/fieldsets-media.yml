@@ -1,0 +1,13 @@
+label: Medien
+type: group
+fieldsets:
+  image:
+    extends: blocks/image
+  slider:
+    extends: blocks/slider
+    name: Slider
+  vector:
+    extends: blocks/vector
+    name: Vektor
+  video:
+    extends: blocks/video
