@@ -70,10 +70,14 @@ tabs:
         options:
           slide: Slide
           fade: Fade
-      gap:
-        label: Abstand
-        type: gap
+      direction:
+        label: Richtung
+        type: select
         width: 1/4
+        default: ltr
+        options:
+          rtl: Rechts nach Links
+          ltr: Links nach Rechts
       viewMobile:
         label: Anzahl der Bilder 📱
         type: number
