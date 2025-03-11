@@ -93,8 +93,8 @@ panel.plugin("baukasten-blocks-preview/preview", {
 					<k-writer
 					  class="label"
 					  ref="text"
-					  :nodes="false"
-					  :marks="false"
+					  :nodes="true"
+					  :marks="true"
 					  :value="item.text"
 					  @input="updateItem(content, index, 'text', $event)"
 					/>

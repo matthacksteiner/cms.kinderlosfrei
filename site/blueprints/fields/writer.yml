@@ -8,3 +8,5 @@ marks:
   - underline
   - link
   - email
+  - sub
+  - sup
