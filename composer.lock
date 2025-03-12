@@ -1267,22 +1267,25 @@
 		},
 		{
 			"name": "microman/kirby-column-blocks",
-			"version": "1.1.1",
+			"version": "1.2.1",
 			"source": {
 				"type": "git",
 				"url": "https://github.com/plain-solutions-gmbh/kirby-column-blocks.git",
-				"reference": "04b019bb8ddd3820a1926cb3641130e6f9b3ce65"
+				"reference": "8fd51aea2b2a9736cb660a15bb3b11ae0da16026"
 			},
 			"dist": {
 				"type": "zip",
-				"url": "https://api.github.com/repos/plain-solutions-gmbh/kirby-column-blocks/zipball/04b019bb8ddd3820a1926cb3641130e6f9b3ce65",
-				"reference": "04b019bb8ddd3820a1926cb3641130e6f9b3ce65",
+				"url": "https://api.github.com/repos/plain-solutions-gmbh/kirby-column-blocks/zipball/8fd51aea2b2a9736cb660a15bb3b11ae0da16026",
+				"reference": "8fd51aea2b2a9736cb660a15bb3b11ae0da16026",
 				"shasum": ""
 			},
 			"require": {
-				"getkirby/composer-installer": "^1.2"
+				"getkirby/composer-installer": "^1.1"
 			},
 			"type": "kirby-plugin",
+			"extra": {
+				"title": "Column Block"
+			},
 			"notification-url": "https://packagist.org/downloads/",
 			"license": [
 				"MIT"
@@ -1290,21 +1293,22 @@
 			"authors": [
 				{
 					"name": "Roman Gsponer",
-					"email": "mail@microman.ch"
+					"email": "kirby@plain-solutions.net"
 				}
 			],
 			"description": "Use columns in block fields based on the layout field.",
+			"homepage": "https://plain-solutions.net/801524",
 			"support": {
 				"issues": "https://github.com/plain-solutions-gmbh/kirby-column-blocks/issues",
-				"source": "https://github.com/plain-solutions-gmbh/kirby-column-blocks/tree/1.1.1"
+				"source": "https://github.com/plain-solutions-gmbh/kirby-column-blocks/tree/1.2.1"
 			},
 			"funding": [
 				{
 					"url": "https://www.paypal.com/donate/?hosted_button_id=ZMV4BV3X7EUT4",
-					"type": "other"
+					"type": "PayPal"
 				}
 			],
-			"time": "2024-08-18T13:13:36+00:00"
+			"time": "2025-03-11T14:26:28+00:00"
 		},
 		{
 			"name": "microman/kirby-grid-blocks",
