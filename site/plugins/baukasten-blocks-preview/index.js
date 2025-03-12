@@ -9,7 +9,10 @@ panel.plugin("baukasten-blocks-preview/preview", {
 			},
 			computed: {
 				heading() {
-					return this.content.title || "Default Title";
+					const title = this.content.title || "Default Title";
+					const textarea = document.createElement("textarea");
+					textarea.innerHTML = title;
+					return textarea.value;
 				},
 				image() {
 					return this.content.image[0] || {};
@@ -25,11 +28,19 @@ panel.plugin("baukasten-blocks-preview/preview", {
 							this.$api
 								.get("pages/" + this.pageId.replaceAll("/", "+"))
 								.then((page) => {
-									this.text =
+									let processedText =
 										page.content.text.replace(/(<([^>]+)>)/gi, "") || this.text;
+									// Decode HTML entities in the text
+									const textarea = document.createElement("textarea");
+									textarea.innerHTML = processedText;
+									this.text = textarea.value;
 								});
 						} else {
-							this.text = this.content.text || this.text;
+							let processedText = this.content.text || this.text;
+							// Decode HTML entities in the text
+							const textarea = document.createElement("textarea");
+							textarea.innerHTML = processedText;
+							this.text = textarea.value;
 						}
 					},
 					immediate: true,
