@@ -40,6 +40,7 @@ function getItems(\Kirby\Cms\Page $page)
       "description" => (string) $item->description()->escape(),
       "parent" => strtolower((string) $page->title()),
       'thumbnail' => $thumbnail,
+      'coverOnly' => $item->coverOnly()->toBool(false),
       'status' => $item->status(),
       'position' => $item->num(),
     ];

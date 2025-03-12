@@ -268,6 +268,11 @@ function indexJson()
 	$kirby = kirby();
 	$index = [];
 	foreach (site()->index() as $page) {
+		// Skip pages that have coverOnly set to true
+		if ($page->intendedTemplate()->name() == 'item' && $page->coverOnly()->toBool(false)) {
+			continue;
+		}
+
 		$translations = [];
 		foreach ($kirby->languages() as $language) {
 			$translations[$language->code()] = $page->uri($language->code());
@@ -278,6 +283,9 @@ function indexJson()
 			"intendedTemplate" => $page->intendedTemplate()->name(),
 			"parent"           => $page->intendedTemplate()->name() == 'item'
 				? $page->parent()->uri()
+				: null,
+			"coverOnly"        => $page->intendedTemplate()->name() == 'item'
+				? $page->coverOnly()->toBool(false)
 				: null,
 			"translations"     => $translations
 		];

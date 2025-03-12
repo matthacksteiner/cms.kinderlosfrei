@@ -24,6 +24,11 @@ tabs:
             label: Beschreibung
             type: text
             help: "Wird in der Übersicht angezeigt."
+          coverOnly:
+            label: Cover Only
+            type: toggle
+            default: false
+            help: "Wenn aktiviert, wird der Eintrag nur als Cover angezeigt und es gibt keine Unterseiten."
 
   media: tabs/media
   meta: tabs/meta/site
