@@ -63,11 +63,9 @@ tabs:
       thumbnail:
         label: Cover
         type: files
-        help: "Wird nur angezeigt, wenn Autoplay deaktiviert ist. Das Bild sollte die gleiche Größe wie das Video haben."
+        help: "Das Bild sollte die gleiche Größe wie das Video haben."
         uploads:
           template: pixel
-        when:
-          source: local
       options:
         type: checkboxes
         label: Optionen
