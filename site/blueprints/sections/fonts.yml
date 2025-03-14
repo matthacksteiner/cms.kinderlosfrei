@@ -8,7 +8,7 @@ columns:
           fontFile:
             label: Schrift Dateien
             type: structure
-            help: Die Schriftdateien müssen im Format WOFF und WOFF2 vorliegen. Sie können auf https://transfonter.org/ mit den default Einstellungen generiert werden. Die Werte "sans" und "serif" sind nicht erlaubt.
+            help: Die Schriftdateien müssen im Format WOFF2 vorliegen. Sie können auf https://transfonter.org/ mit den default Einstellungen generiert werden. Die Werte "sans" und "serif" sind nicht erlaubt.
             width: 1/2
             translate: false
             fields:
@@ -18,16 +18,6 @@ columns:
                 type: text
                 width: 1/1
                 required: true
-              file1:
-                label: Datei WOFF
-                type: files
-                multiple: false
-                required: true
-                help: Erlaubtes Format - WOFF
-                query: site.files.filterBy('template', 'woff')
-                uploads:
-                  template: woff
-                width: 1/2
               file2:
                 label: Datei WOFF2
                 type: files
