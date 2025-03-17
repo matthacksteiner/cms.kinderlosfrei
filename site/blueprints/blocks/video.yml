@@ -56,6 +56,20 @@ tabs:
         width: 1/2
         when:
           source: remote
+      width:
+        label: Breite
+        type: number
+        width: 1/2
+        help: Breite des Videos in Pixeln
+        when:
+          source: local
+      height:
+        label: Höhe
+        type: number
+        width: 1/2
+        help: Höhe des Videos in Pixeln
+        when:
+          source: local
       optionsHeadline:
         label: Wiedergabe
         type: headline
