@@ -148,4 +148,5 @@ tabs:
               default: center
             when:
               toggle: true
+      loading: fields/loading
       meta: fields/metadata
