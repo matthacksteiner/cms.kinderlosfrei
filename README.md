@@ -135,4 +135,4 @@ A working CMS subdomain with correct DNS settings and an SSL certificate (e.g., 
 
 ---
 
-This guide provides a clear and structured setup process for combining a Kirby CMS backend with an Astro frontend. Follow the steps carefully to ensure a smooth installation and deployment.
+This guide provides a clear and structured setup process for combining a Kirby CMS backend with an Astro frontend. Follow the steps carefully to ensure a smooth installation and deployment..
