@@ -17,7 +17,7 @@ This is the Kirby CMS backend part of the Baukasten project. It works in conjunc
 
 ### Automated Update
 
-Run the script `update-template-version.sh` to fetch and merge the latest changes from the template repository. Use Git Bash or WSL on Windows.
+Run the script `update-template-version.sh` to fetch and merge the latest changes from the template repository. Use Git Bash or WSL on Windows
 
 ### Manual Update
 
