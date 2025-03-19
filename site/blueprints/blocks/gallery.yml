@@ -81,4 +81,5 @@ tabs:
         min: 0
         placeholder: 0
         after: px
+      loading: fields/loading
       meta: fields/metadata
