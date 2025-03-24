@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "79c466c0e022c754ca7fcc6edf3f14ed",
+    "content-hash": "7c95b3ac6aa8bcddfdfa321623b5fc89",
     "packages": [
         {
             "name": "bnomei/kirby3-janitor",
@@ -1267,16 +1267,16 @@
         },
         {
             "name": "microman/kirby-column-blocks",
-            "version": "1.2.2",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/plain-solutions-gmbh/kirby-column-blocks.git",
-                "reference": "b7f52be289fa8909307959302667dd23441ec0e4"
+                "reference": "8fd51aea2b2a9736cb660a15bb3b11ae0da16026"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/plain-solutions-gmbh/kirby-column-blocks/zipball/b7f52be289fa8909307959302667dd23441ec0e4",
-                "reference": "b7f52be289fa8909307959302667dd23441ec0e4",
+                "url": "https://api.github.com/repos/plain-solutions-gmbh/kirby-column-blocks/zipball/8fd51aea2b2a9736cb660a15bb3b11ae0da16026",
+                "reference": "8fd51aea2b2a9736cb660a15bb3b11ae0da16026",
                 "shasum": ""
             },
             "require": {
@@ -1300,7 +1300,7 @@
             "homepage": "https://plain-solutions.net/801524",
             "support": {
                 "issues": "https://github.com/plain-solutions-gmbh/kirby-column-blocks/issues",
-                "source": "https://github.com/plain-solutions-gmbh/kirby-column-blocks/tree/1.2.2"
+                "source": "https://github.com/plain-solutions-gmbh/kirby-column-blocks/tree/1.2.1"
             },
             "funding": [
                 {
@@ -1308,7 +1308,7 @@
                     "type": "PayPal"
                 }
             ],
-            "time": "2025-03-20T16:01:07+00:00"
+            "time": "2025-03-11T14:26:28+00:00"
         },
         {
             "name": "microman/kirby-grid-blocks",

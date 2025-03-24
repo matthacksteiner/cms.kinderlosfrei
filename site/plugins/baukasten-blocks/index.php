@@ -109,8 +109,10 @@ function getBlockArray(\Kirby\Cms\Block $block)
                     'copyrighttextcolor'    => $file1->copyrightobject()->toObject()->textColor()->value(),
                     'copyrighbackgroundcolor' => $file1->copyrightobject()->toObject()->copyrightBackground()->value(),
                     'copyrightposition'     => $file1->copyrightobject()->toObject()->copyrightposition()->value(),
+
                 ]);
             }
+            $blockArray['content']['abovefold'] = $block->abovefold()->toBool(false);
             $blockArray['content']['image'] = $image;
             break;
 
