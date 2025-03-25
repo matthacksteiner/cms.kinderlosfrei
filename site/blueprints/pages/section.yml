@@ -129,3 +129,4 @@ tabs:
             label: Seitenverhältnis 🖥️
             width: 1/2
             required: false
+  meta: tabs/meta/site

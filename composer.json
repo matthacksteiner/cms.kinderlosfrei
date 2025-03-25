@@ -5,7 +5,7 @@
 		"php": ">=8.1",
 		"getkirby/cms": "^4",
 		"fabianmichael/kirby-meta": "^1.0",
-		"microman/kirby-column-blocks": "1.2.1",
+		"microman/kirby-column-blocks": "^1.2.1",
 		"microman/kirby-grid-blocks": "^1.0",
 		"getkirby/cli": "^1.5",
 		"bnomei/kirby3-janitor": "^4.3",
