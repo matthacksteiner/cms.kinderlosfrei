@@ -137,6 +137,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
             }
             $blockArray['content']['images'] = $images;
             $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
+            $blockArray['content']['abovefold'] = $block->abovefold()->toBool(false);
             break;
 
         case 'gallery':
@@ -158,6 +159,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
             $blockArray['content']['viewDesktop'] = $block->viewDesktop()->value();
             $blockArray['content']['viewPaddingMobile'] = $block->viewPaddingMobile()->value();
             $blockArray['content']['viewPaddingDesktop'] = $block->viewPaddingDesktop()->value();
+            $blockArray['content']['abovefold'] = $block->abovefold()->toBool(false);
 
             break;
 
@@ -237,6 +239,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
                     'alt' => (string)$file2->alt(),
                 ];
             }
+            $blockArray['content']['abovefold'] = $block->abovefold()->toBool(false);
             $blockArray['content']['thumbnail'] = $thumb;
             $blockArray['content']['file'] = $video;
             break;
