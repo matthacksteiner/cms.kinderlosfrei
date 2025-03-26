@@ -74,7 +74,7 @@ tabs:
         label: Richtung
         type: select
         width: 1/4
-        default: rtl
+        default: ltr
         options:
           rtl: Rechts nach Links
           ltr: Links nach Rechts
