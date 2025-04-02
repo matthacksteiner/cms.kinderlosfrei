@@ -254,9 +254,13 @@ function getAnalytics($site)
 	$googleAnalyticsCode = $site->googleAnalyticsToggle()->toBool(false)
 		? (string)$site->googleAnalyticsCode()
 		: null;
+	$analyticsLink = $site->analyticsLink()->isNotEmpty()
+		? getLinkArray($site->analyticsLink())
+		: null;
 	return [
 		'searchConsoleCode'  => $searchConsoleCode,
 		'googleAnalyticsCode' => $googleAnalyticsCode,
+		'analyticsLink'       => $analyticsLink,
 	];
 }
 
@@ -383,5 +387,6 @@ function globalJson()
 		"searchConsoleCode"     => $analytics['searchConsoleCode'],
 		"googleAnalyticsToggle" => $site->googleAnalyticsToggle()->toBool(false),
 		"googleAnalyticsCode"   => $analytics['googleAnalyticsCode'],
+		"analyticsLink"         => $analytics['analyticsLink'],
 	]);
 }

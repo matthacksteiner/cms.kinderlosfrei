@@ -49,3 +49,25 @@ columns:
             placeholder: "G-224EMLTRPD"
             when:
               googleAnalyticsToggle: true
+  analyticsNav:
+    width: 1/2
+    sections:
+      links:
+        type: fields
+        fields:
+          analyticsLink:
+            extends: fields/linkField
+            label: Link zu Datenschutzerklärung
+            fields:
+              linkText:
+                required: true
+              link:
+                options:
+                  - page
+                  - url
+              anchorToggle: false
+              anchor: false
+              target: false
+              classnames: false
+            help: >
+              Dieser Link wird im Footer des Cookie Modals angezeigt.
