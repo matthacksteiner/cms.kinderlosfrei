@@ -326,5 +326,6 @@ function getSvgArray($file)
         'classes'    => $file->classes()->value(),
         'linktoggle' => $file->linktoggle()->toBool(false),
         'linkexternal' => getLinkArray($file->linkexternal()),
+        'source'     => file_get_contents($file->root()),
     ];
 }
