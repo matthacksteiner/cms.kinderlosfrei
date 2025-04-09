@@ -48,6 +48,13 @@ return [
 			'action'   => function () {
 				return globalJson();
 			}
+		],
+		[
+			'pattern'  => '/',
+			'method'   => 'GET',
+			'action'   => function () {
+				return go('/panel');
+			}
 		]
 	],
 ];
