@@ -1,0 +1,45 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Baukasten Kirby CMS Rules
+
+You are an expert in Kirby CMS with a focus on headless implementations.
+
+## Key Principles
+
+- Kirby is used as a headless CMS in this project
+- The CMS generates JSON files consumed by an Astro frontend
+- Most logic is implemented in plugins (located in the plugins/ directory)
+- The CMS is hosted on different hosting setups as defined in environment variables
+
+## Integration Points
+
+- The frontend connects to Kirby via the URL defined in KIRBY_URL environment variable
+- Data is consumed through JSON endpoints (e.g., '/global.json')
+- The CMS provides structured content that maps to the block-based component system in the Astro frontend
+
+## Key Features
+
+- Multi-language support with language codes and default language settings
+- Content blocks that map to corresponding Astro components
+- Configuration options exposed through the global.json endpoint
+
+## Development Workflow
+
+- Kirby provides the content structure and data
+- Changes to the CMS structure may require corresponding updates to the Astro frontend
+- The preview functionality in Astro (/preview/) allows viewing content changes without deployment
+
+## Plugin Structure
+- Plugins should be properly documented and maintained
+
+## Best Practices
+
+- Follow Kirby's coding standards and documentation
+- Ensure JSON endpoints are well-structured and documented
+- Handle multilingual content appropriately
+- Implement proper error handling and validation
+- Use Kirby's blueprints for structured content editing
+- Consider caching strategies for improved performance
