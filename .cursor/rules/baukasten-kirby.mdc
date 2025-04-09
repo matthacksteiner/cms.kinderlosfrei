@@ -1,7 +1,7 @@
 ---
 description: 
 globs: 
-alwaysApply: true
+alwaysApply: false
 ---
 # Baukasten Kirby CMS Rules
 
@@ -33,6 +33,8 @@ You are an expert in Kirby CMS with a focus on headless implementations.
 - The preview functionality in Astro (/preview/) allows viewing content changes without deployment
 
 ## Plugin Structure
+
+- Custom plugins extend Kirby's functionality (e.g., lang-folder-rename)
 - Plugins should be properly documented and maintained
 
 ## Best Practices
