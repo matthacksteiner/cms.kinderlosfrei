@@ -159,6 +159,7 @@ function getLogoFile($site)
 			"source" => file_get_contents($file->root()),
 			"width"  => $file->width(),
 			"height" => $file->height(),
+			"source" => file_get_contents($file->root()),
 		];
 	}
 	return [];

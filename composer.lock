@@ -969,16 +969,16 @@
         },
         {
             "name": "johannschopplich/kirby-deploy-trigger",
-            "version": "1.0.4",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johannschopplich/kirby-deploy-trigger.git",
-                "reference": "c6b85b49b34490c44660b3e33eb2a5900776b276"
+                "reference": "94a9888947768342d8c260c6007e2c15ae5ac2af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johannschopplich/kirby-deploy-trigger/zipball/c6b85b49b34490c44660b3e33eb2a5900776b276",
-                "reference": "c6b85b49b34490c44660b3e33eb2a5900776b276",
+                "url": "https://api.github.com/repos/johannschopplich/kirby-deploy-trigger/zipball/94a9888947768342d8c260c6007e2c15ae5ac2af",
+                "reference": "94a9888947768342d8c260c6007e2c15ae5ac2af",
                 "shasum": ""
             },
             "require": {
@@ -1012,7 +1012,7 @@
             ],
             "support": {
                 "issues": "https://github.com/johannschopplich/kirby-deploy-trigger/issues",
-                "source": "https://github.com/johannschopplich/kirby-deploy-trigger/tree/v1.0.4"
+                "source": "https://github.com/johannschopplich/kirby-deploy-trigger/tree/v1.0.6"
             },
             "funding": [
                 {
@@ -1020,7 +1020,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2025-01-20T20:37:50+00:00"
+            "time": "2025-04-07T13:52:30+00:00"
         },
         {
             "name": "laminas/laminas-escaper",
