@@ -194,14 +194,10 @@ function getFonts($site)
 		$file1 = $fontItem->file1()->toFile();
 		$file2 = $fontItem->file2()->toFile();
 		if ($file1 && $file2) {
-			$fontData1 = file_get_contents($file1->root());
-			$fontData2 = file_get_contents($file2->root());
 			$fonts[] = [
 				"name"        => (string)$fontItem->name(),
 				"url1"        => (string)$file1->url(),
 				"url2"        => (string)$file2->url(),
-				"base64Data1" => base64_encode($fontData1),
-				"base64Data2" => base64_encode($fontData2),
 			];
 		}
 	}
