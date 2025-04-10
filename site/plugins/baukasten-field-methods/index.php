@@ -2,8 +2,9 @@
 
 use Kirby\Toolkit\Str;
 use Kirby\Content\Field;
+use Kirby\Cms\App;
 
-Kirby::plugin("baukasten/field-methods", [
+App::plugin("baukasten/field-methods", [
 	"fieldMethods" => [
 		"getLinkArray" => function ($field) {
 			return getLinkArray($field, $title);
@@ -81,7 +82,11 @@ function determineUri($linkType, $linkField)
 
 	switch ($linkType) {
 		case 'page':
-			$uri = $linkField->toPage()?->uri();
+			$page = $linkField->toPage();
+			if ($page && $page->isHomePage()) {
+				return '';
+			}
+			$uri = $page?->uri();
 			break;
 		case 'file':
 			$uri = $linkField->toUrl();
@@ -89,7 +94,7 @@ function determineUri($linkType, $linkField)
 	}
 
 	if ($uri === 'home') {
-		$uri = '/';
+		$uri = '';
 	}
 
 	return $uri;
