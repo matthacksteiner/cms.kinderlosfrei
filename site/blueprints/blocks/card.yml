@@ -149,14 +149,12 @@ tabs:
         default: primary
         extends: fields/colors
         width: 1/2
-        translate: false
       cardBackgroundColorActive:
         label: Farbe Hintergrund Hover
         type: select
         default: primary
         extends: fields/colors
         width: 1/2
-        translate: false
 
       # Text Colors
       cardTextColor:
@@ -165,14 +163,12 @@ tabs:
         default: secondary
         extends: fields/colors
         width: 1/2
-        translate: false
       cardTextColorActive:
         label: Farbe Text Hover
         type: select
         default: secondary
         extends: fields/colors
         width: 1/2
-        translate: false
 
       # Border Colors
       cardBorderColor:
@@ -181,14 +177,12 @@ tabs:
         default: primary
         extends: fields/colors
         width: 1/2
-        translate: false
       cardBorderColorActive:
         label: Rand Farbe Hover
         type: select
         default: primary
         extends: fields/colors
         width: 1/2
-        translate: false
 
       # Border Settings
       cardBorderHeadline:
@@ -200,24 +194,20 @@ tabs:
         type: number
         placeholder: 0
         width: 1/4
-        translate: false
       cardBorderRadius:
         label: Randradius
         type: number
         placeholder: 0
         width: 1/4
-        translate: false
       cardBorderPaddingDesktop:
         label: Randabstand 🖥️
         type: number
         placeholder: 0
         width: 1/4
-        translate: false
       cardBorderPaddingMobile:
         label: Randabstand 📱
         type: number
         placeholder: 0
         width: 1/4
-        translate: false
 
       meta: fields/metadata
