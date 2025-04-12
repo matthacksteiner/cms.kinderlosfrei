@@ -30,13 +30,7 @@ jobs:
           key: ${{ secrets.DEPLOY_KEY_PRIVATE }}
           script: |
             cd /home/${{ secrets.UBERSPACE_USER }}/html/${{ secrets.UBERSPACE_PATH }}/
-            # Preserve composer.lock if it exists to maintain consistent dependencies
-            if [ ! -f composer.lock ]; then
-              # Only remove vendor and kirby if lock file doesn't exist
-              rm -rf vendor
-              rm -rf kirby
-              composer install --no-interaction --prefer-dist --optimize-autoloader
-            else
-              # Use composer update if lock file exists
-              composer install --no-interaction --prefer-dist --optimize-autoloader
-            fi
+            rm composer.lock
+            rm -rf vendor
+            rm -rf kirby
+            composer install --no-interaction --prefer-dist --optimize-autoloader
