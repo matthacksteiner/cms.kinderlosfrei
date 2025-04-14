@@ -131,7 +131,11 @@ function getBlockArray(\Kirby\Cms\Block $block)
             $ratioMobile = explode('/', $block->ratioMobile()->value());
             $ratio       = explode('/', $block->ratio()->value());
             foreach ($block->images()->toFiles() as $file) {
-                $image = getImageArray($file, $ratio, $ratioMobile);
+                if (strtolower($file->extension()) === 'svg') {
+                    $image = getSvgArray($file);
+                } else {
+                    $image = getImageArray($file, $ratio, $ratioMobile);
+                }
                 $image['toggle'] = $file->toggle()->toBool(false);
                 $images[] = $image;
             }
