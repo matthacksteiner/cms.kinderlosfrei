@@ -50,6 +50,7 @@ tabs:
           line: Linie
           full: Vollbild
           overlay: Overlay
+          ticker: Ticker
       color:
         label: Farbe
         type: select
