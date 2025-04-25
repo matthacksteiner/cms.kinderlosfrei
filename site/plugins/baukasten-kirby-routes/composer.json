@@ -3,10 +3,11 @@
 	"description": "A Kirby CMS plugin that provides a way to view all routes in your Kirby setup",
 	"type": "kirby-plugin",
 	"license": "MIT",
+	"version": "1.0.0",
 	"authors": [
 		{
-			"name": "Baukasten",
-			"email": "info@baukasten.com"
+			"name": "Matthias Hacksteiner",
+			"email": "contact@matthiashacksteiner.net"
 		}
 	],
 	"require": {
