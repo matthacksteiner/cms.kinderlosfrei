@@ -23,8 +23,9 @@ tabs:
             sortable: false
             status: published
             layout: cardlets
-            size: small
+            size: medium
             image: icon
+            cover: true
             templates:
               - home
               - default
@@ -43,26 +44,7 @@ tabs:
             size: small
             image: icon
             create: false
+            help: >
+              Konfiguration über die deutschen Seite.
             templates:
               - error
-          frontend:
-            type: fields
-            fields:
-              frontendURL:
-                label: Frontend URL
-                placeholder: https://baukasten.netlify.app
-                type: url
-                required: false
-                translate: false
-                help: >
-                  Die URL der Webseite. Diese wird für alle OG Tags und Links verwendet. Konfiguration über die deutschen Seite.
-          deploy:
-            type: fields
-            fields:
-              deploy:
-                type: webhook
-                label: Deploy on Netlify
-              deployInfo:
-                label: false
-                type: info
-                text: Dieser Button deployt die Änderungen auf den Webserver und macht diese somit sichtbar.
