@@ -191,12 +191,10 @@ function getFonts($site)
 {
 	$fonts = [];
 	foreach ($site->fontFile()->toStructure() as $fontItem) {
-		$file1 = $fontItem->file1()->toFile();
 		$file2 = $fontItem->file2()->toFile();
-		if ($file1 && $file2) {
+		if ($file2) {
 			$fonts[] = [
 				"name"        => (string)$fontItem->name(),
-				"url1"        => (string)$file1->url(),
 				"url2"        => (string)$file2->url(),
 			];
 		}

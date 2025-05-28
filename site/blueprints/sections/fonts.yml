@@ -16,7 +16,7 @@ columns:
                 label: Name
                 pattern: "^(?!.*(?:serif|sans))[a-zA-Z0-9]+$"
                 type: text
-                width: 1/1
+                width: 1/2
                 required: true
               file2:
                 label: Datei WOFF2
