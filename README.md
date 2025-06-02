@@ -124,7 +124,10 @@ This project uses the [kirby3-dotenv plugin](https://github.com/bnomei/kirby3-do
    - `UBERSPACE_USER`: Username for the server (e.g., `fifth`).
    - `DEPLOY_KEY_PRIVATE`: Private SSH key (content of `neuerKeyFuerGithub` file, including `BEGIN OPENSSH PRIVATE KEY` and `END OPENSSH PRIVATE KEY`).
    - `UBERSPACE_PATH`: Path to the directory on the server (e.g., `cms.baukasten.matthiashacksteiner.net`).
+   - `DEPLOY_URL`: Your Netlify build hook URL (e.g., `https://api.netlify.com/build_hooks/YOUR_BUILD_HOOK_ID`).
 3. Add the public key to the server's `~/.ssh/authorized_keys` file (use the content of `neuerKeyFuerGithub.pub`).
+
+**Note:** The `.env` file is automatically created on the server during deployment using the GitHub Secrets, ensuring sensitive information stays secure while being available where needed.
 
 Source: [Matthias Andrasch's Tutorial](https://matthias-andrasch.eu/2021/tutorial-webseite-mittels-github-actions-deployment-zu-uberspace-uebertragen-rsync/)
 
