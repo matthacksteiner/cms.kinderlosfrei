@@ -4,10 +4,6 @@ use Kirby\Filesystem\Dir;
 use Kirby\Filesystem\F;
 use Kirby\Http\Response;
 
-// Load environment variables before configuration
-require_once __DIR__ . '/../plugins/kirby3-dotenv/global.php';
-loadenv();
-
 /*
 |--------------------------------------------------------------------------
 | Kirby Configuration Array
@@ -25,9 +21,6 @@ return [
 	'languages'       => true,
 	'prefixDefaultLocale' => false,
 	'error'           => 'z-error',
-	'johannschopplich.deploy-trigger' => [
-		'deployUrl' => env('DEPLOY_URL', 'https://api.netlify.com/build_hooks/65142ee2a2de9b24080dcc95'),
-	],
 	'panel' => [
 		'css'     => 'assets/css/baukasten-panel.css',
 		'favicon' => 'assets/img/baukasten-favicon.ico',
@@ -36,6 +29,13 @@ return [
 		'quality' => 99,
 		'format'  => 'webp',
 	],
+	'ready' => function () {
+		return [
+			'johannschopplich.deploy-trigger' => [
+				'deployUrl' => env('DEPLOY_URL', 'https://api.netlify.com/build_hooks/65142ee2a2de9b24080dcc95'),
+			],
+		];
+	},
 	'routes' => [
 		[
 			'pattern'  => 'index.json',
@@ -394,5 +394,9 @@ function globalJson()
 		"googleAnalyticsToggle" => $site->googleAnalyticsToggle()->toBool(false),
 		"googleAnalyticsCode"   => $analytics['googleAnalyticsCode'],
 		"analyticsLink"         => $analytics['analyticsLink'],
+
+		"claimText" => (string) $site->headerClaim()->toObject()->claimText(),
+		"claimFont" => (string) $site->headerClaim()->toObject()->claimFont(),
+		"claimFontSize" => (string) $site->headerClaim()->toObject()->claimFontSize(),
 	]);
 }
