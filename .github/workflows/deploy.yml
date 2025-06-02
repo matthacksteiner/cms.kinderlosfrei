@@ -30,10 +30,10 @@ jobs:
           key: ${{ secrets.DEPLOY_KEY_PRIVATE }}
           script: |
             cd /home/${{ secrets.UBERSPACE_USER }}/html/${{ secrets.UBERSPACE_PATH }}/
-            cat > .env << EOF
+            bash -c 'cat > .env << EOF
             # Kirby CMS Environment Variables
             DEPLOY_URL=${{ secrets.DEPLOY_URL }}
-            EOF
+            EOF'
   composer:
     name: Build
     runs-on: ubuntu-latest
