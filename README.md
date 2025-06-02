@@ -66,6 +66,37 @@ This project uses semantic versioning for automatic version management. The vers
 5. Run `composer install` via SSH on the server.
 6. Set the document root to `/public`.
 
+## 2. Environment Configuration
+
+This project uses the [kirby3-dotenv plugin](https://github.com/bnomei/kirby3-dotenv) to manage environment variables securely.
+
+### Setup Environment Variables
+
+1. **Copy the example file:**
+
+   ```bash
+   cp .env.example .env
+   ```
+
+2. **Configure your environment variables in `.env`:**
+
+   ```env
+   # Kirby CMS Environment Variables
+
+   # Netlify Deploy Hook URL
+   # Get this from your Netlify site settings > Build & deploy > Build hooks
+   DEPLOY_URL=https://api.netlify.com/build_hooks/YOUR_BUILD_HOOK_ID
+   ```
+
+3. **Update your deploy URL:**
+   - Go to your Netlify site settings
+   - Navigate to **Build & deploy > Build hooks**
+   - Copy your build hook URL and replace `YOUR_BUILD_HOOK_ID` in the `.env` file
+
+### Available Environment Variables
+
+- `DEPLOY_URL`: Netlify build hook URL for automated deployments
+
 ### For Custom Servers
 
 1. **DNS Settings:** Adjust DNS settings on Gandi.net (e.g., `subdomain 10800 IN CNAME matthiashacksteiner.net`).
@@ -135,4 +166,4 @@ A working CMS subdomain with correct DNS settings and an SSL certificate (e.g., 
 
 ---
 
-This guide provides a clear and structured setup process for combining a Kirby CMS backend with an Astro frontend. Follow the steps carefully to ensure a smooth installation and deployment..
+This guide provides a clear and structured setup process for combining a Kirby CMS backend with an Astro frontend. Follow the steps carefully to ensure a smooth installation and deployment.
