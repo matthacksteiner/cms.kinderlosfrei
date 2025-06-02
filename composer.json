@@ -10,7 +10,8 @@
 		"bnomei/kirby3-janitor": "^4.3",
 		"sylvainjule/backups": "^1.0",
 		"johannschopplich/kirby-deploy-trigger": "^1.0",
-		"tobimori/kirby-thumbhash": "^1.1"
+		"tobimori/kirby-thumbhash": "^1.1",
+		"bnomei/kirby3-dotenv": "^5.0"
 	},
 	"config": {
 		"allow-plugins": {
