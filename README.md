@@ -2,8 +2,6 @@
 
 This is the Kirby CMS backend part of the Baukasten project. It works in conjunction with the [Baukasten Frontend](https://github.com/matthacksteiner/baukasten).
 
-**Template Release:** v0.0.0
-
 ## Project Structure
 
 ```
@@ -37,34 +35,14 @@ Run the script `update-template-version.sh` to fetch and merge the latest change
 
 ---
 
-## Semantic Versioning
-
-This project uses semantic versioning for automatic version management. The version number is incremented based on commit message patterns:
-
-- `major:` in commit message: Increments major version (e.g., 1.0.0 -> 2.0.0)
-- `feat:` in commit message: Increments minor version (e.g., 1.0.0 -> 1.1.0)
-- `fix:` in commit message: Increments patch version (e.g., 1.0.0 -> 1.0.1)
-
-> **Note:** If no pattern is found, the version is incremented by 0.0.1.
-
----
-
 # Setup Instructions
 
 ## 1. Kirby CMS Installation
 
 1. Create a new repository from the [CMS Baukasten template](https://github.com/matthacksteiner/cms.baukasten).
-2. Navigate to the HTML directory on your server:
-   ```bash
-   cd /var/www/virtual/fifth/html
-   ```
-3. Clone the repository into the directory.
-4. Remove the default content from the new repository:
-   ```bash
-   git rm -r --cached content
-   ```
-5. Run `composer install` via SSH on the server.
-6. Set the document root to `/public`.
+2. Run `composer install`.
+3. Set the document root to `/public`.
+4. Visit the site with `/panel` at the end of the URL.
 
 ## 2. Environment Configuration
 
@@ -95,7 +73,7 @@ This project uses the [kirby3-dotenv plugin](https://github.com/bnomei/kirby3-do
 
 ### Available Environment Variables
 
-- `DEPLOY_URL`: Netlify build hook URL for automated deployments
+`DEPLOY_URL`: Netlify build hook URL for automated deployments
 
 ### For Custom Servers
 
@@ -152,20 +130,8 @@ A working CMS subdomain with correct DNS settings and an SSL certificate (e.g., 
 
 ### PHP
 
-- PHP 8.1, 8.2, or 8.3 (PHP 8.2 recommended; PHP 7.4 is not supported)
-- Required PHP extensions:
-  - gd or ImageMagick
-  - ctype
-  - curl
-  - dom
-  - filter
-  - hash
-  - iconv
-  - json
-  - libxml
-  - mbstring
-  - openssl
-  - SimpleXML
+- PHP 8.2+ (PHP 7.4 is not supported)
+- Required PHP extensions: gd or ImageMagick, ctype, curl, dom, filter, hash, iconv, json, libxml, mbstring, openssl, SimpleXML
 
 ---
 
