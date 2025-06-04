@@ -19,6 +19,7 @@ You are an expert in Kirby CMS with a focus on headless implementations.
 The project follows this structure:
 ```
 content/             - Content folders for each section
+docs/                - All project documentation
 kirby/               - Core Kirby CMS files (should not be modified)
 site/
   blueprints/        - Structure definitions for content
@@ -94,3 +95,13 @@ vendor/              - Composer dependencies
 - When modifying blueprints, update corresponding Astro components
 - Check latest Kirby documentation at https://getkirby.com/docs
 - Follow the convention over configuration approach
+- **All documentation must be placed in the `docs/` folder** - This includes technical documentation, setup guides, API documentation, and any other project-related documentation
+
+## Documentation Standards
+
+- Place all project documentation in the `docs/` folder at the project root
+- Use clear, descriptive filenames for documentation files
+- Organize documentation by topic or feature when the docs folder becomes extensive
+- Keep documentation up-to-date with code changes
+- Use Markdown (.md) format for consistency
+- Include both technical and user-facing documentation as appropriate
