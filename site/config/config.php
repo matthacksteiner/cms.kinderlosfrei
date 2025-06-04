@@ -29,6 +29,46 @@ return [
 		'quality' => 99,
 		'format'  => 'webp',
 	],
+	'cache' => [
+		// Enable page cache for better performance
+		'pages' => [
+			'active' => true,
+			'ignore' => function ($page) {
+				// Don't cache preview pages or error pages
+				return $page->template()->name() === 'error' ||
+					str_contains($page->uri(), 'preview');
+			}
+		],
+		// Custom API cache for JSON endpoints
+		'api' => [
+			'active' => true,
+			'type' => 'file'
+		]
+	],
+	'hooks' => [
+		// Clear API cache when content is updated
+		'page.create:after' => function ($page) {
+			kirby()->cache('api')->flush();
+		},
+		'page.update:after' => function ($newPage, $oldPage) {
+			kirby()->cache('api')->flush();
+		},
+		'page.delete:after' => function ($status, $page) {
+			kirby()->cache('api')->flush();
+		},
+		'site.update:after' => function ($newSite, $oldSite) {
+			kirby()->cache('api')->flush();
+		},
+		'file.create:after' => function ($file) {
+			kirby()->cache('api')->flush();
+		},
+		'file.update:after' => function ($newFile, $oldFile) {
+			kirby()->cache('api')->flush();
+		},
+		'file.delete:after' => function ($status, $file) {
+			kirby()->cache('api')->flush();
+		}
+	],
 	'ready' => function () {
 		return [
 			'johannschopplich.deploy-trigger' => [
@@ -42,7 +82,7 @@ return [
 			'language' => '*',
 			'method'   => 'GET',
 			'action'   => function () {
-				return indexJson();
+				return indexJsonCached();
 			}
 		],
 		[
@@ -50,7 +90,7 @@ return [
 			'language' => '*',
 			'method'   => 'GET',
 			'action'   => function () {
-				return globalJson();
+				return globalJsonCached();
 			}
 		],
 		[
@@ -271,9 +311,67 @@ function getAnalytics($site)
 }
 
 /**
- * Handles the index.json route action.
+ * Handles the cached index.json route action.
  */
-function indexJson()
+function indexJsonCached()
+{
+	$kirby = kirby();
+	$apiCache = $kirby->cache('api');
+	$language = $kirby->language() ? $kirby->language()->code() : 'default';
+	$cacheKey = 'index.' . $language;
+
+	// Try to get cached data
+	$cached = $apiCache->get($cacheKey);
+	if ($cached !== null) {
+		$response = Response::json($cached);
+		$response->header('X-Cache-Status', 'HIT');
+		return $response;
+	}
+
+	// Generate fresh data
+	$data = indexJsonData();
+
+	// Cache for 30 minutes (1800 seconds)
+	$apiCache->set($cacheKey, $data, 30);
+
+	$response = Response::json($data);
+	$response->header('X-Cache-Status', 'MISS');
+	return $response;
+}
+
+/**
+ * Handles the cached global.json route action.
+ */
+function globalJsonCached()
+{
+	$kirby = kirby();
+	$apiCache = $kirby->cache('api');
+	$language = $kirby->language() ? $kirby->language()->code() : 'default';
+	$cacheKey = 'global.' . $language;
+
+	// Try to get cached data
+	$cached = $apiCache->get($cacheKey);
+	if ($cached !== null) {
+		$response = Response::json($cached);
+		$response->header('X-Cache-Status', 'HIT');
+		return $response;
+	}
+
+	// Generate fresh data
+	$data = globalJsonData();
+
+	// Cache for 60 minutes (3600 seconds)
+	$apiCache->set($cacheKey, $data, 60);
+
+	$response = Response::json($data);
+	$response->header('X-Cache-Status', 'MISS');
+	return $response;
+}
+
+/**
+ * Generates the index data (extracted from original indexJson function).
+ */
+function indexJsonData()
 {
 	$kirby = kirby();
 	$index = [];
@@ -300,19 +398,19 @@ function indexJson()
 			"translations"     => $translations
 		];
 	}
-	return Response::json($index);
+	return $index;
 }
 
 /**
- * Handles the global.json route action.
+ * Generates the global data (extracted from original globalJson function).
  */
-function globalJson()
+function globalJsonData()
 {
 	$site   = site();
 	$kirby  = kirby();
 	$analytics = getAnalytics($site);
 
-	return Response::json([
+	return [
 		"kirbyUrl"              => (string)$kirby->url('index'),
 		"siteUrl"               => (string)$site->url(),
 		"siteTitle"             => (string)$site->title(),
@@ -398,5 +496,21 @@ function globalJson()
 		"claimText" => (string) $site->headerClaim()->toObject()->claimText(),
 		"claimFont" => (string) $site->headerClaim()->toObject()->claimFont(),
 		"claimFontSize" => (string) $site->headerClaim()->toObject()->claimFontSize(),
-	]);
+	];
+}
+
+/**
+ * Handles the index.json route action.
+ */
+function indexJson()
+{
+	return Response::json(indexJsonData());
+}
+
+/**
+ * Handles the global.json route action.
+ */
+function globalJson()
+{
+	return Response::json(globalJsonData());
 }
