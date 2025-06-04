@@ -31,7 +31,6 @@ Run the script `update-template-version.sh` to fetch and merge the latest change
    ```bash
    git merge template/main --allow-unrelated-histories
    ```
-4. Run the script `update-template-version.sh` to update the version in `README.md` or manually edit the file.
 
 ---
 
@@ -67,9 +66,9 @@ This project uses the [kirby3-dotenv plugin](https://github.com/bnomei/kirby3-do
    ```
 
 3. **Update your deploy URL:**
-   - Go to your Netlify site settings
-   - Navigate to **Build & deploy > Build hooks**
-   - Copy your build hook URL and replace `YOUR_BUILD_HOOK_ID` in the `.env` file
+   - In your Netlify site, go to **Site > Project configuration > Build & deploy > Build hooks**
+   - Create a new build hook if needed, then copy the build hook URL
+   - Replace `YOUR_BUILD_HOOK_ID` in the `.env` file with the actual value from your build hook URL
 
 ### Available Environment Variables
 
@@ -107,7 +106,7 @@ This project uses the [kirby3-dotenv plugin](https://github.com/bnomei/kirby3-do
 
 **Note:** The `.env` file is automatically created on the server during deployment using the GitHub Secrets, ensuring sensitive information stays secure while being available where needed.
 
-Source: [Matthias Andrasch's Tutorial](https://matthias-andrasch.eu/2021/tutorial-webseite-mittels-github-actions-deployment-zu-uberspace-uebertragen-rsync/)
+Source and more information: [Matthias Andrasch's Tutorial](https://matthias-andrasch.eu/2021/tutorial-webseite-mittels-github-actions-deployment-zu-uberspace-uebertragen-rsync/)
 
 ---
 
