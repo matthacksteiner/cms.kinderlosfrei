@@ -30,42 +30,15 @@ return [
 		'format'  => 'webp',
 	],
 	'cache' => [
-		// Enable page cache for better performance
-		'pages' => [
-			'active' => true,
-			'ignore' => function ($page) {
-				// Don't cache preview pages or error pages
-				return $page->template()->name() === 'error' ||
-					str_contains($page->uri(), 'preview');
-			}
-		],
-		// Custom API cache for JSON endpoints
-		'api' => [
-			'active' => true,
-			'type' => 'file'
-		]
+		// Simple API cache for build performance
+		'api' => true
 	],
 	'hooks' => [
-		// Clear API cache when content is updated
-		'page.create:after' => function ($page) {
-			kirby()->cache('api')->flush();
-		},
+		// Simple cache invalidation - only clear when content actually changes
 		'page.update:after' => function ($newPage, $oldPage) {
 			kirby()->cache('api')->flush();
 		},
-		'page.delete:after' => function ($status, $page) {
-			kirby()->cache('api')->flush();
-		},
 		'site.update:after' => function ($newSite, $oldSite) {
-			kirby()->cache('api')->flush();
-		},
-		'file.create:after' => function ($file) {
-			kirby()->cache('api')->flush();
-		},
-		'file.update:after' => function ($newFile, $oldFile) {
-			kirby()->cache('api')->flush();
-		},
-		'file.delete:after' => function ($status, $file) {
 			kirby()->cache('api')->flush();
 		}
 	],
@@ -323,20 +296,14 @@ function indexJsonCached()
 	// Try to get cached data
 	$cached = $apiCache->get($cacheKey);
 	if ($cached !== null) {
-		$response = Response::json($cached);
-		$response->header('X-Cache-Status', 'HIT');
-		return $response;
+		return Response::json($cached);
 	}
 
-	// Generate fresh data
+	// Generate fresh data and cache for 7 days
 	$data = indexJsonData();
+	$apiCache->set($cacheKey, $data, 10080);
 
-	// Cache for 30 minutes (1800 seconds)
-	$apiCache->set($cacheKey, $data, 30);
-
-	$response = Response::json($data);
-	$response->header('X-Cache-Status', 'MISS');
-	return $response;
+	return Response::json($data);
 }
 
 /**
@@ -352,20 +319,14 @@ function globalJsonCached()
 	// Try to get cached data
 	$cached = $apiCache->get($cacheKey);
 	if ($cached !== null) {
-		$response = Response::json($cached);
-		$response->header('X-Cache-Status', 'HIT');
-		return $response;
+		return Response::json($cached);
 	}
 
-	// Generate fresh data
+	// Generate fresh data and cache for 30 days
 	$data = globalJsonData();
+	$apiCache->set($cacheKey, $data, 43200);
 
-	// Cache for 60 minutes (3600 seconds)
-	$apiCache->set($cacheKey, $data, 60);
-
-	$response = Response::json($data);
-	$response->header('X-Cache-Status', 'MISS');
-	return $response;
+	return Response::json($data);
 }
 
 /**
