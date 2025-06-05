@@ -125,7 +125,7 @@ jobs:
             echo "Template files to exclude: $TEMPLATE_IGNORE_LIST"
           else
             echo "Warning: .templateignore file not found, using default exclusions"
-            TEMPLATE_IGNORE_LIST=".github/workflows/update-child-repos.yml|.github/child-repositories.json"
+            TEMPLATE_IGNORE_LIST=".github/workflows/update-cms-child-repos.yml|.github/child-repositories.json"
           fi
 
           # Function to remove template-specific files
