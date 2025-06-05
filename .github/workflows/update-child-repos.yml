@@ -170,14 +170,21 @@ jobs:
             fi
 
             echo "Checking if conflicts are only on template-ignored files..."
+            echo "Template ignore list: '$TEMPLATE_IGNORE_LIST'"
+            echo "Conflicted files: '$conflict_files'"
 
             # Check each conflict file against template ignore list
             while IFS= read -r conflict_file; do
               [[ -z "$conflict_file" ]] && continue
 
+              echo "  Checking conflict file: '$conflict_file'"
+
               local is_template_file=false
               IFS='|' read -ra IGNORE_FILES <<< "$TEMPLATE_IGNORE_LIST"
+              echo "  Template ignore array: ${IGNORE_FILES[*]}"
+
               for ignore_file in "${IGNORE_FILES[@]}"; do
+                echo "    Comparing '$conflict_file' with '$ignore_file'"
                 if [[ "$conflict_file" == "$ignore_file" ]]; then
                   echo "  ↳ Conflict on template-ignored file: $conflict_file"
                   is_template_file=true
