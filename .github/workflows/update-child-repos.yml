@@ -1,0 +1,433 @@
+name: Update Child CMS Repositories
+
+on:
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'Commit message for the update'
+        required: true
+        default: 'Update from CMS template repository'
+      branchName:
+        description: 'Branch name in child repositories where changes will be committed'
+        required: true
+        default: 'update-from-cms-template'
+      createPR:
+        description: 'Create a pull request in child repositories'
+        required: true
+        type: boolean
+        default: false
+      conflictStrategy:
+        description: 'How to handle merge conflicts'
+        required: true
+        type: choice
+        options:
+          - abort-on-conflicts
+          - create-conflict-pr
+        default: 'create-conflict-pr'
+      dryRun:
+        description: 'Perform a dry run without making actual changes'
+        required: false
+        type: boolean
+        default: false
+      deleteTempBranch:
+        description: 'Delete temporary branch after successful merge to main/master'
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  update-child-repos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout template repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate inputs
+        run: |
+          # Validate branch name format
+          if [[ ! "${{ github.event.inputs.branchName }}" =~ ^[a-zA-Z0-9/_-]+$ ]]; then
+            echo "Error: Invalid branch name format"
+            exit 1
+          fi
+
+          # Check if child repositories file exists
+          if [[ ! -f ".github/child-repositories.json" ]]; then
+            echo "Error: .github/child-repositories.json not found"
+            exit 1
+          fi
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global init.defaultBranch main
+
+      - name: Read and validate child repositories
+        id: read-repos
+        run: |
+          # Validate JSON structure
+          if ! jq empty .github/child-repositories.json 2>/dev/null; then
+            echo "Error: Invalid JSON in child-repositories.json"
+            exit 1
+          fi
+
+          # Check if repositories array exists and is not empty
+          REPO_COUNT=$(jq '.repositories | length' .github/child-repositories.json)
+          if [[ "$REPO_COUNT" -eq 0 ]]; then
+            echo "Error: No repositories found in child-repositories.json"
+            exit 1
+          fi
+
+          echo "Found $REPO_COUNT CMS repositories to update"
+          echo "repos=$(cat .github/child-repositories.json | jq -c .)" >> $GITHUB_OUTPUT
+
+      - name: Process child CMS repositories
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          COMMIT_MESSAGE: ${{ github.event.inputs.message }}
+          BRANCH_NAME: ${{ github.event.inputs.branchName }}
+          CREATE_PR: ${{ github.event.inputs.createPR }}
+          CONFLICT_STRATEGY: ${{ github.event.inputs.conflictStrategy }}
+          DRY_RUN: ${{ github.event.inputs.dryRun }}
+          DELETE_TEMP_BRANCH: ${{ github.event.inputs.deleteTempBranch }}
+        run: |
+          set -euo pipefail
+
+          # Validate required environment variables
+          if [[ -z "$GITHUB_TOKEN" ]]; then
+            echo "Error: PAT_TOKEN secret not configured"
+            exit 1
+          fi
+
+          # Create temporary directory
+          TEMP_DIR=$(mktemp -d)
+          cd "$TEMP_DIR"
+          echo "Working in temporary directory: $TEMP_DIR"
+
+          # Generate unique branch name
+          TIMESTAMP=$(date +%Y%m%d%H%M%S)
+          UNIQUE_BRANCH_NAME="${BRANCH_NAME}-${TIMESTAMP}"
+          echo "Using branch name: $UNIQUE_BRANCH_NAME"
+
+          # Configure git credentials
+          git config --global credential.helper "store --file=$TEMP_DIR/.git-credentials"
+          echo "https://x-access-token:${GITHUB_TOKEN}@github.com" > "$TEMP_DIR/.git-credentials"
+          chmod 600 "$TEMP_DIR/.git-credentials"
+
+          # Read template ignore list
+          TEMPLATE_IGNORE_FILE="$GITHUB_WORKSPACE/.templateignore"
+          if [[ -f "$TEMPLATE_IGNORE_FILE" ]]; then
+            echo "Reading template ignore list from .templateignore..."
+            TEMPLATE_IGNORE_LIST=$(grep -v '^#' "$TEMPLATE_IGNORE_FILE" | grep -v '^$' | tr '\n' '|' | sed 's/|$//')
+            echo "Template files to exclude: $TEMPLATE_IGNORE_LIST"
+          else
+            echo "Warning: .templateignore file not found, using default exclusions"
+            TEMPLATE_IGNORE_LIST=".github/workflows/update-child-repos.yml|.github/child-repositories.json|.github/workflows/deploy.yml"
+          fi
+
+          # Function to remove template-specific files
+          remove_template_files() {
+            echo "Removing template-specific files from merged changes..."
+            local files_removed=false
+
+            IFS='|' read -ra IGNORE_FILES <<< "$TEMPLATE_IGNORE_LIST"
+            for file in "${IGNORE_FILES[@]}"; do
+              if [[ -f "$file" ]]; then
+                git rm -f "$file" 2>/dev/null || rm -f "$file"
+                echo "  ✓ Removed $file"
+                files_removed=true
+              elif [[ -d "$file" ]]; then
+                git rm -rf "$file" 2>/dev/null || rm -rf "$file"
+                echo "  ✓ Removed directory $file"
+                files_removed=true
+              fi
+            done
+
+            echo "$files_removed"
+          }
+
+          # Read repositories from JSON
+          REPOSITORIES=$(echo '${{ steps.read-repos.outputs.repos }}' | jq -r '.repositories[].url // empty')
+
+          if [[ -z "$REPOSITORIES" ]]; then
+            echo "Error: No repository URLs found"
+            exit 1
+          fi
+
+          # Initialize counters
+          TOTAL_REPOS=0
+          SUCCESS_COUNT=0
+          CONFLICT_COUNT=0
+          ERROR_COUNT=0
+
+          SUCCESS_REPOS=()
+          CONFLICT_REPOS=()
+          ERROR_REPOS=()
+
+          for REPO_URL in $REPOSITORIES; do
+            TOTAL_REPOS=$((TOTAL_REPOS + 1))
+            echo "==========================================="
+            echo "Processing CMS repository $TOTAL_REPOS: $REPO_URL"
+            echo "==========================================="
+
+            # Validate repository URL format
+            if [[ ! "$REPO_URL" =~ ^https://github\.com/[^/]+/[^/]+\.git$ ]] && [[ ! "$REPO_URL" =~ ^https://github\.com/[^/]+/[^/]+$ ]]; then
+              echo "Error: Invalid repository URL format: $REPO_URL"
+              ERROR_COUNT=$((ERROR_COUNT + 1))
+              ERROR_REPOS+=("$REPO_URL")
+              continue
+            fi
+
+            # Extract repository name
+            REPO_NAME=$(basename "$REPO_URL" .git)
+            REPO_DIR="$REPO_NAME"
+
+            # Add .git suffix if not present
+            if [[ ! "$REPO_URL" =~ \.git$ ]]; then
+              REPO_URL="${REPO_URL}.git"
+            fi
+
+            # Clean up existing directory
+            if [[ -d "$REPO_DIR" ]]; then
+              rm -rf "$REPO_DIR"
+            fi
+
+            # Clone child repository
+            echo "Cloning repository..."
+            REPO_URL_WITH_TOKEN=$(echo "$REPO_URL" | sed -e "s|https://|https://x-access-token:$GITHUB_TOKEN@|")
+
+            if ! git clone "$REPO_URL_WITH_TOKEN" "$REPO_DIR" 2>/dev/null; then
+              echo "Error: Failed to clone repository: $REPO_URL"
+              ERROR_COUNT=$((ERROR_COUNT + 1))
+              ERROR_REPOS+=("$REPO_NAME")
+              continue
+            fi
+
+            cd "$REPO_DIR"
+
+            # Check for main/master branch
+            DEFAULT_BRANCH="main"
+            if ! git show-ref --verify --quiet refs/remotes/origin/main; then
+              if git show-ref --verify --quiet refs/remotes/origin/master; then
+                DEFAULT_BRANCH="master"
+                echo "Using master branch as default"
+              else
+                echo "Error: Neither main nor master branch found"
+                cd ..
+                ERROR_COUNT=$((ERROR_COUNT + 1))
+                ERROR_REPOS+=("$REPO_NAME")
+                continue
+              fi
+            fi
+
+            git checkout "$DEFAULT_BRANCH"
+
+            if [[ "$DRY_RUN" == "true" ]]; then
+              echo "DRY RUN: Would create branch $UNIQUE_BRANCH_NAME and merge CMS template changes"
+              cd ..
+              SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
+              SUCCESS_REPOS+=("$REPO_NAME")
+              continue
+            fi
+
+            # Create new branch
+            echo "Creating branch: $UNIQUE_BRANCH_NAME"
+            git checkout -b "$UNIQUE_BRANCH_NAME"
+
+            # Add template remote
+            echo "Adding CMS template remote..."
+            TEMPLATE_URL_WITH_TOKEN="https://x-access-token:$GITHUB_TOKEN@github.com/${{ github.repository }}.git"
+
+            if ! git remote add template "$TEMPLATE_URL_WITH_TOKEN" 2>/dev/null; then
+              echo "Warning: Template remote might already exist"
+            fi
+
+            # Fetch template changes
+            echo "Fetching CMS template changes..."
+            if ! git fetch template; then
+              echo "Error: Failed to fetch template changes"
+              cd ..
+              ERROR_COUNT=$((ERROR_COUNT + 1))
+              ERROR_REPOS+=("$REPO_NAME")
+              continue
+            fi
+
+            # Merge template changes
+            echo "Attempting to merge CMS template changes..."
+            CONFLICTS=false
+            CONFLICT_FILES=""
+
+            if ! git merge template/main --allow-unrelated-histories -m "$COMMIT_MESSAGE" --no-edit; then
+              echo "Merge conflicts detected"
+              CONFLICTS=true
+              CONFLICT_COUNT=$((CONFLICT_COUNT + 1))
+              CONFLICT_REPOS+=("$REPO_NAME")
+
+              if [[ "$CONFLICT_STRATEGY" == "abort-on-conflicts" ]]; then
+                echo "Aborting merge due to conflicts"
+                git merge --abort
+                cd ..
+                continue
+              elif [[ "$CONFLICT_STRATEGY" == "create-conflict-pr" ]]; then
+                CONFLICT_FILES=$(git diff --name-only --diff-filter=U || echo "Unable to determine conflict files")
+                remove_template_files
+                git add .
+                if ! git commit -m "${COMMIT_MESSAGE} [CONTAINS CONFLICTS]" \
+                    -m "This commit contains merge conflicts that need to be resolved manually:" \
+                    -m "$CONFLICT_FILES"; then
+                  echo "Error: Failed to commit conflicts"
+                  cd ..
+                  ERROR_COUNT=$((ERROR_COUNT + 1))
+                  ERROR_REPOS+=("$REPO_NAME")
+                  continue
+                fi
+              fi
+            else
+              echo "Successfully merged changes without conflicts"
+              TEMPLATE_FILES_REMOVED=$(remove_template_files)
+
+              if [[ "$TEMPLATE_FILES_REMOVED" == "true" ]]; then
+                echo "Committing removal of template-specific files..."
+                git add .
+                git commit -m "Remove template-specific files from child CMS repository" --allow-empty
+              fi
+
+              SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
+              SUCCESS_REPOS+=("$REPO_NAME")
+            fi
+
+            # Push changes
+            echo "Pushing changes to remote..."
+            if ! git push -f origin "$UNIQUE_BRANCH_NAME"; then
+              echo "Error: Failed to push branch"
+              cd ..
+              ERROR_COUNT=$((ERROR_COUNT + 1))
+              ERROR_REPOS+=("$REPO_NAME")
+              continue
+            fi
+
+            # Merge if no conflicts
+            if [[ "$CONFLICTS" == "false" ]]; then
+              echo "Merging changes into $DEFAULT_BRANCH..."
+
+              if ! git diff --quiet || ! git diff --cached --quiet; then
+                echo "Working directory not clean, committing remaining changes..."
+                git add .
+                git commit -m "Finalize CMS template update changes" --allow-empty
+              fi
+
+              git checkout "$DEFAULT_BRANCH"
+              git merge "$UNIQUE_BRANCH_NAME"
+
+              if ! git push origin "$DEFAULT_BRANCH"; then
+                echo "Error: Failed to push to $DEFAULT_BRANCH"
+                ERROR_COUNT=$((ERROR_COUNT + 1))
+                ERROR_REPOS+=("$REPO_NAME")
+                cd ..
+                continue
+              fi
+              echo "Successfully updated $DEFAULT_BRANCH branch"
+
+              if [[ "$DELETE_TEMP_BRANCH" == "true" ]]; then
+                echo "Deleting temporary branch: $UNIQUE_BRANCH_NAME"
+                if git push origin --delete "$UNIQUE_BRANCH_NAME" 2>/dev/null; then
+                  echo "✅ Temporary branch deleted successfully"
+                else
+                  echo "⚠️  Warning: Failed to delete temporary branch"
+                fi
+              fi
+            fi
+
+            # Create PR if requested
+            if [[ "$CREATE_PR" == "true" ]]; then
+              echo "Creating pull request..."
+
+              if ! command -v gh &> /dev/null; then
+                echo "Error: GitHub CLI not available"
+                cd ..
+                ERROR_COUNT=$((ERROR_COUNT + 1))
+                ERROR_REPOS+=("$REPO_NAME")
+                continue
+              fi
+
+              unset GH_TOKEN
+
+              if ! echo "$GITHUB_TOKEN" | gh auth login --with-token; then
+                echo "Error: Failed to authenticate with GitHub CLI"
+                cd ..
+                ERROR_COUNT=$((ERROR_COUNT + 1))
+                ERROR_REPOS+=("$REPO_NAME")
+                continue
+              fi
+
+              PR_TITLE="Update from CMS template repository"
+              PR_BODY="This PR updates the Kirby CMS repository with the latest changes from the template repository."
+
+              if [[ "$CONFLICTS" == "true" ]]; then
+                PR_TITLE="[NEEDS RESOLUTION] $PR_TITLE"
+                PR_BODY="${PR_BODY}\n\n⚠️ **This PR contains merge conflicts that need to be resolved manually.**\n\nConflicting files:\n\`\`\`\n${CONFLICT_FILES}\n\`\`\`"
+              fi
+
+              if gh pr create \
+                --title "$PR_TITLE" \
+                --body "$PR_BODY" \
+                --base "$DEFAULT_BRANCH" \
+                --head "$UNIQUE_BRANCH_NAME"; then
+                echo "✅ Pull request created successfully"
+              else
+                echo "Error: Failed to create pull request"
+                ERROR_COUNT=$((ERROR_COUNT + 1))
+                ERROR_REPOS+=("$REPO_NAME")
+              fi
+            fi
+
+            cd ..
+            echo "Completed processing CMS repository: $REPO_URL"
+          done
+
+          # Cleanup
+          cd /
+          rm -rf "$TEMP_DIR"
+
+          # Summary
+          echo "==========================================="
+          echo "CMS REPOSITORIES UPDATE SUMMARY"
+          echo "==========================================="
+          echo "Total repositories processed: $TOTAL_REPOS"
+          echo ""
+
+          if [[ ${#SUCCESS_REPOS[@]} -gt 0 ]]; then
+            echo "✅ SUCCESSFUL UPDATES ($SUCCESS_COUNT):"
+            for repo in "${SUCCESS_REPOS[@]}"; do
+              echo "  • $repo"
+            done
+            echo ""
+          fi
+
+          if [[ ${#CONFLICT_REPOS[@]} -gt 0 ]]; then
+            echo "⚠️  UPDATES WITH CONFLICTS ($CONFLICT_COUNT):"
+            for repo in "${CONFLICT_REPOS[@]}"; do
+              echo "  • $repo"
+            done
+            echo ""
+          fi
+
+          if [[ ${#ERROR_REPOS[@]} -gt 0 ]]; then
+            echo "❌ ERRORS ENCOUNTERED ($ERROR_COUNT):"
+            for repo in "${ERROR_REPOS[@]}"; do
+              echo "  • $repo"
+            done
+            echo ""
+          fi
+
+          if [[ "$ERROR_COUNT" -gt 0 ]]; then
+            echo "⚠️  Some CMS repositories failed to update"
+            exit 1
+          elif [[ "$CONFLICT_COUNT" -gt 0 ]]; then
+            echo "⚠️  Some CMS repositories have conflicts that need manual resolution"
+          else
+            echo "✅ All CMS repositories updated successfully"
+          fi
