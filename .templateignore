@@ -4,9 +4,6 @@
 # GitHub Actions workflows for template maintenance
 .github/workflows/update-child-repos.yml
 
-# Deployment workflow (child repositories may have different deployment setups)
-.github/workflows/deploy.yml
-
 # Template configuration files
 .github/child-repositories.json
 
@@ -19,6 +16,9 @@ init-project.sh
 # Environment files (child repositories will have their own)
 .env
 herd.yml
+
+# Kirby CMS license file (each installation has its own)
+site/config/.license
 
 # This file itself (template ignore list)
 .templateignore
