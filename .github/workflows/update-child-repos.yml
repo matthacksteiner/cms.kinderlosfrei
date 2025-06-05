@@ -240,10 +240,12 @@ jobs:
           SUCCESS_COUNT=0
           CONFLICT_COUNT=0
           ERROR_COUNT=0
+          NO_CHANGES_COUNT=0
 
           SUCCESS_REPOS=()
           CONFLICT_REPOS=()
           ERROR_REPOS=()
+          NO_CHANGES_REPOS=()
 
           for REPO_URL in $REPOSITORIES; do
             TOTAL_REPOS=$((TOTAL_REPOS + 1))
@@ -333,8 +335,48 @@ jobs:
               continue
             fi
 
-            # Merge template changes
-            echo "Attempting to merge CMS template changes..."
+            # Check if there are actually any changes to merge
+            echo "Checking for changes between child repository and template..."
+
+            # Compare the trees to see if there are actual differences
+            CHILD_TREE=$(git rev-parse HEAD^{tree})
+            TEMPLATE_TREE=$(git rev-parse template/main^{tree})
+
+            if [[ "$CHILD_TREE" == "$TEMPLATE_TREE" ]]; then
+                            echo "✅ No changes detected - child repository is already up to date with template"
+              echo "Skipping merge and cleaning up..."
+
+              # Switch back to main branch and delete the temporary branch
+              git checkout "$DEFAULT_BRANCH"
+              git branch -D "$UNIQUE_BRANCH_NAME"
+
+              cd ..
+              NO_CHANGES_COUNT=$((NO_CHANGES_COUNT + 1))
+              NO_CHANGES_REPOS+=("$REPO_NAME")
+              continue
+            fi
+
+            # Check if merge would result in changes
+            echo "Changes detected, attempting to merge CMS template changes..."
+            MERGE_BASE=$(git merge-base HEAD template/main 2>/dev/null || echo "no-merge-base")
+
+            if [[ "$MERGE_BASE" != "no-merge-base" ]]; then
+              # Check if template/main is already merged
+              if git merge-base --is-ancestor template/main HEAD; then
+                                echo "✅ Template changes are already merged into child repository"
+                echo "Skipping merge and cleaning up..."
+
+                # Switch back to main branch and delete the temporary branch
+                git checkout "$DEFAULT_BRANCH"
+                git branch -D "$UNIQUE_BRANCH_NAME"
+
+                cd ..
+                NO_CHANGES_COUNT=$((NO_CHANGES_COUNT + 1))
+                NO_CHANGES_REPOS+=("$REPO_NAME")
+                continue
+              fi
+            fi
+
             CONFLICTS=false
             CONFLICT_FILES=""
 
@@ -415,6 +457,25 @@ jobs:
               fi
             else
               echo "Successfully merged changes without conflicts"
+
+              # Check if the merge actually introduced any changes
+              if git diff --quiet HEAD~1 HEAD; then
+                echo "✅ Merge completed but no changes were introduced"
+                echo "Template and child repository were already in sync"
+
+                # Reset to previous commit to clean up the empty merge
+                git reset --hard HEAD~1
+
+                # Switch back to main branch and delete the temporary branch
+                git checkout "$DEFAULT_BRANCH"
+                git branch -D "$UNIQUE_BRANCH_NAME"
+
+                cd ..
+                NO_CHANGES_COUNT=$((NO_CHANGES_COUNT + 1))
+                NO_CHANGES_REPOS+=("$REPO_NAME")
+                continue
+              fi
+
               TEMPLATE_FILES_REMOVED=$(remove_template_files)
 
               if [[ "$TEMPLATE_FILES_REMOVED" == "true" ]]; then
@@ -531,6 +592,14 @@ jobs:
             echo "✅ SUCCESSFUL UPDATES ($SUCCESS_COUNT):"
             for repo in "${SUCCESS_REPOS[@]}"; do
               echo "  • $repo"
+            done
+            echo ""
+          fi
+
+          if [[ ${#NO_CHANGES_REPOS[@]} -gt 0 ]]; then
+            echo "ℹ️  NO CHANGES NEEDED ($NO_CHANGES_COUNT):"
+            for repo in "${NO_CHANGES_REPOS[@]}"; do
+              echo "  • $repo (already up to date)"
             done
             echo ""
           fi
