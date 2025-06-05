@@ -135,14 +135,24 @@ jobs:
 
             IFS='|' read -ra IGNORE_FILES <<< "$TEMPLATE_IGNORE_LIST"
             for file in "${IGNORE_FILES[@]}"; do
-              if [[ -f "$file" ]]; then
-                git rm -f "$file" 2>/dev/null || rm -f "$file"
-                echo "  ✓ Removed $file"
-                files_removed=true
-              elif [[ -d "$file" ]]; then
-                git rm -rf "$file" 2>/dev/null || rm -rf "$file"
-                echo "  ✓ Removed directory $file"
-                files_removed=true
+              # Only remove files that were added by the template merge
+              # Check if file exists in template but not in original child repo
+              if git show template/main:"$file" >/dev/null 2>&1; then
+                # File exists in template, check if it was in child repo before merge
+                if ! git show HEAD~1:"$file" >/dev/null 2>&1; then
+                  # File was NOT in child repo before, so it came from template - remove it
+                  if [[ -f "$file" ]]; then
+                    git rm -f "$file" 2>/dev/null || rm -f "$file"
+                    echo "  ✓ Removed template file $file"
+                    files_removed=true
+                  elif [[ -d "$file" ]]; then
+                    git rm -rf "$file" 2>/dev/null || rm -rf "$file"
+                    echo "  ✓ Removed template directory $file"
+                    files_removed=true
+                  fi
+                else
+                  echo "  ↳ Preserved existing child repo file: $file"
+                fi
               fi
             done
 
