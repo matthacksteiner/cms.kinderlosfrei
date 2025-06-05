@@ -3,6 +3,18 @@
 		{
 			"description": "Laterna",
 			"url": "https://github.com/matthacksteiner/cms.laterna-bezau.at"
+		},
+		{
+			"description": "Kaufmann Klub",
+			"url": "https://github.com/matthacksteiner/cms.kaufmannklub.at"
+		},
+		{
+			"description": "Arch Broger",
+			"url": "https://github.com/matthacksteiner/cms.arch.broger.at"
+		},
+		{
+			"description": "Betina Ammann Physio",
+			"url": "https://github.com/matthacksteiner/cms.betinaamann-physio.at"
 		}
 	]
 }
