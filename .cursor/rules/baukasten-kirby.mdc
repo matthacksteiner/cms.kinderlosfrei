@@ -26,19 +26,37 @@ site/
     blocks/          - Block-based content definitions
     fields/          - Custom field definitions
     files/           - File upload definitions
+    groups/          - Blueprint groups
     pages/           - Page type definitions
+    sections/        - Custom sections
+    tabs/            - Blueprint tabs
+    users/           - User role definitions
   config/            - Configuration files for Kirby
   controllers/       - PHP controllers for templates
   languages/         - Language definitions
   models/            - Custom page models
   plugins/           - Custom plugins extending functionality
     baukasten-blocks/          - Block definitions for Baukasten
-    baukasten-layouts/         - Layout definitions
-    baukasten-programmable-blueprints/ - Dynamic blueprint generation
+    baukasten-blocks-preview/  - Preview functionality for blocks
+    baukasten-field-labels/    - Custom field labels
+    baukasten-field-methods/   - Custom field methods
+    baukasten-grid-blocks/     - Grid-based block layouts
     baukasten-kirby-routes/    - Custom API routes
+    baukasten-layouts/         - Layout definitions
+    baukasten-mime/            - MIME type handling
+    baukasten-programmable-blueprints/ - Dynamic blueprint generation
+    baukasten-sitemap/         - Sitemap generation
+    backups/                   - Backup functionality
+    kirby-column-blocks/       - Column-based block layouts
+    kirby-deploy-trigger/      - Deployment triggers
     kirby-thumbhash/           - Image processing plugin
+    kirby3-janitor/            - Cleanup and maintenance tools
+    meta/                      - Meta information handling
   templates/         - PHP templates for rendering
 public/              - Publicly accessible files
+  assets/            - CSS, JS, and image assets
+    css/             - Compiled CSS files
+    img/             - Static images
   media/             - Uploaded files and media
   panel/             - Kirby Panel (admin interface)
 storage/             - Cache and session storage
@@ -51,6 +69,7 @@ vendor/              - Composer dependencies
 - Data is consumed through JSON endpoints (e.g., '/global.json')
 - The CMS provides structured content that maps to the block-based component system in the Astro frontend
 - The Kirby API routes are defined in plugins/baukasten-kirby-routes/
+- Deploy triggers can automatically notify the frontend when content changes
 
 ## Content Structure
 
@@ -59,6 +78,7 @@ vendor/              - Composer dependencies
 - Page content is structured using blocks
 - Blocks are defined in site/blueprints/blocks/
 - Content is exposed via JSON endpoints for the Astro frontend
+- Grid and column-based layouts available for complex content structures
 
 ## Key Features
 
@@ -67,6 +87,12 @@ vendor/              - Composer dependencies
 - Configuration options exposed through the global.json endpoint
 - Robust media handling with image processing capabilities
 - Thumbhash generation for image placeholders
+- Preview functionality for content blocks
+- Automated sitemap generation
+- Deploy triggers for frontend updates
+- Grid-based and column-based block layouts
+- Custom field methods and labels
+- Programmable blueprint generation
 
 ## Development Workflow
 
@@ -74,15 +100,28 @@ vendor/              - Composer dependencies
 - Changes to the CMS structure may require corresponding updates to the Astro frontend
 - The preview functionality in Astro (/preview/) allows viewing content changes without deployment
 - Panel interface for content editors at /panel
+- Deploy triggers can automatically rebuild the frontend when content changes
+- Block preview functionality allows real-time content editing
 
 ## Plugin Structure
 
 - Custom plugins extend Kirby's functionality
 - baukasten-blocks - Provides block-based content definitions
-- baukasten-layouts - Provides layout components
+- baukasten-blocks-preview - Enables real-time block previews
+- baukasten-field-labels - Custom field labeling system
+- baukasten-field-methods - Extended field functionality
+- baukasten-grid-blocks - Grid-based layout system
 - baukasten-kirby-routes - Creates API endpoints for Astro
+- baukasten-layouts - Layout components and definitions
+- baukasten-mime - MIME type handling and validation
 - baukasten-programmable-blueprints - Dynamic blueprint generation
+- baukasten-sitemap - Automated sitemap generation
+- backups - Backup and restore functionality
+- kirby-column-blocks - Column-based layout system
+- kirby-deploy-trigger - Deployment automation
 - kirby-thumbhash - Image processing and optimization
+- kirby3-janitor - Maintenance and cleanup tools
+- meta - Meta information and SEO handling
 
 ## Best Practices
 
@@ -95,6 +134,10 @@ vendor/              - Composer dependencies
 - When modifying blueprints, update corresponding Astro components
 - Check latest Kirby documentation at https://getkirby.com/docs
 - Follow the convention over configuration approach
+- Leverage the extensive plugin ecosystem for enhanced functionality
+- Use programmable blueprints for dynamic content structures
+- Implement deploy triggers for seamless frontend updates
+- Utilize block preview functionality for better content editing experience
 - **All documentation must be placed in the `docs/` folder** - This includes technical documentation, setup guides, API documentation, and any other project-related documentation
 
 ## Documentation Standards
@@ -105,3 +148,5 @@ vendor/              - Composer dependencies
 - Keep documentation up-to-date with code changes
 - Use Markdown (.md) format for consistency
 - Include both technical and user-facing documentation as appropriate
+- Document plugin functionality and integration points
+- Maintain API endpoint documentation for frontend consumption
