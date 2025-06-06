@@ -30,7 +30,55 @@ The CMS provides structured content via JSON endpoints that are consumed by the 
 
 ## Quick Start
 
-### 1. Installation
+### 1. Automatic Setup
+
+```bash
+./setup-baukasten-project.sh
+```
+
+This will guide you through:
+
+1. **Project Configuration**
+
+   - Project name and domain setup
+   - CMS hosting choice (Uberspace or custom PHP hosting)
+   - Repository naming conventions
+
+2. **GitHub Repository Setup**
+
+   - Creates frontend repository (`project-name`)
+   - Creates CMS repository (`cms.project-name`)
+   - Configures repository settings and descriptions
+
+3. **Netlify Site Configuration**
+
+   - Creates Netlify site for frontend
+   - Configures build settings and environment variables
+   - Sets up custom domain configuration
+
+4. **Deployment Automation**
+
+   - Creates GitHub Actions workflows
+   - Sets up deploy hooks for automatic rebuilds
+   - Configures SSH keys for server deployment
+
+5. **Initial Content Setup** (Uberspace only)
+   - Automatically uploads and extracts default content
+   - Configures proper permissions and structure
+
+#### 1.1. Prerequisites
+
+Before running the setup script, ensure you have:
+
+- **GitHub CLI (gh)** - [Installation guide](https://cli.github.com/)
+- **Netlify CLI** - Install with `npm install -g netlify-cli`
+- **Git** - Version control system
+- **Node.js 18+** - For frontend development
+- **SSH key access** - For Uberspace deployment (if using Uberspace hosting)
+
+### 2. Manual Setup
+
+#### 2.1. Create a new repository from the template
 
 1. Create a new repository from the [CMS Baukasten template](https://github.com/matthacksteiner/cms.baukasten)
 2. Install dependencies:
