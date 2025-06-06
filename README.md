@@ -103,9 +103,6 @@ The initialization script creates a `.env` file with default settings. Configure
 # Get this from your Netlify site settings > Build & deploy > Build hooks
 DEPLOY_URL=https://api.netlify.com/build_hooks/YOUR_BUILD_HOOK_ID
 
-# Development settings
-KIRBY_DEBUG=true
-KIRBY_PANEL_INSTALL=true
 ```
 
 **Important**: Replace `YOUR_BUILD_HOOK_ID` with your actual Netlify build hook URL to enable automatic frontend deployments when content changes.

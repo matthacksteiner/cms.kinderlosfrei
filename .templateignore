@@ -2,7 +2,8 @@
 # These files are automatically removed during the update process
 
 # GitHub Actions workflows for template maintenance
-.github/workflows/update-child-repos.yml
+.github/workflows/update-cms-child-repos.yml
+.github/workflows/deploy.yml
 
 # Template configuration files
 .github/child-repositories.json
@@ -10,12 +11,21 @@
 # Template documentation
 README.template-tool.md
 
-# Initialization script (will be manually run once, then removed)
+# Template maintenance and setup scripts
 init-project.sh
+setup-baukasten-project.sh
+update-template-version.sh
+
+# Default content package
+baukasten-default-content.zip
 
 # Environment files (child repositories will have their own)
 .env
+.env.example
 herd.yml
+
+# System files
+.DS_Store
 
 # Kirby CMS license file (each installation has its own)
 site/config/.license

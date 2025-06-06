@@ -1071,8 +1071,6 @@ setup_domains() {
     esac
 
     echo ""
-    echo "3. For .netlify.app domains, no additional setup is required."
-    echo ""
 
     if confirm "Have you configured your custom domains (if applicable)?"; then
         log_success "Domain configuration noted"
