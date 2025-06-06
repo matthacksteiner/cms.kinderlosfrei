@@ -1,21 +1,84 @@
 # Baukasten CMS
 
-This is the Kirby CMS backend part of the Baukasten project. It works in conjunction with the [Baukasten Frontend](https://github.com/matthacksteiner/baukasten).
+This is the Kirby CMS backend part of the Baukasten project. It works in conjunction with the [Baukasten Frontend](https://github.com/matthacksteiner/baukasten) to provide a modern headless CMS solution.
 
-## Project Structure
+## 📚 Documentation
+
+For comprehensive technical documentation, please refer to the **[docs/](./docs/)** folder:
+
+- **[Getting Started](./docs/index.md)** - Complete documentation index
+- **[Project Structure](./docs/project-structure.md)** - Directory organization and conventions
+- **[Configuration & Setup](./docs/configuration-setup.md)** - Installation and environment setup
+- **[API Endpoints](./docs/api-endpoints.md)** - JSON API documentation
+- **[Blocks System](./docs/blocks-system.md)** - Content block architecture
+- **[Custom Plugins](./docs/custom-plugins.md)** - Plugin functionality and development
+- **[Blueprints & Fields](./docs/blueprints-fields.md)** - Content structure definitions
+- **[Performance & Caching](./docs/performance-caching.md)** - Optimization strategies
+- **[Content Management](./docs/content-management.md)** - Editorial workflow and best practices
+- **[Deployment & Hosting](./docs/deployment-hosting.md)** - Hosting setup and deployment options
+
+## Project Architecture
 
 ```
 ├── Frontend (separate repository)
-│   └── Astro-based frontend application
+│   └── Astro-based frontend application consuming JSON from CMS
 └── Backend (this repository)
-    └── Kirby CMS installation
+    └── Kirby CMS providing headless API endpoints
 ```
 
-## Updating the Template
+The CMS provides structured content via JSON endpoints that are consumed by the Astro frontend. Content is managed through blocks for maximum flexibility and includes multi-language support.
+
+## Quick Start
+
+### 1. Installation
+
+1. Create a new repository from the [CMS Baukasten template](https://github.com/matthacksteiner/cms.baukasten)
+2. Install dependencies:
+   ```bash
+   composer install
+   ```
+3. Initialize the project:
+   ```bash
+   ./init-project.sh
+   ```
+4. Configure your web server to point to the `/public` directory
+5. Visit your site with `/panel` at the end of the URL
+
+### 2. Environment Setup
+
+The initialization script creates a `.env` file with default settings. Configure the required environment variables:
+
+```env
+# Kirby CMS Environment Variables
+
+# Netlify Deploy Hook URL (required for automatic deployments)
+# Get this from your Netlify site settings > Build & deploy > Build hooks
+DEPLOY_URL=https://api.netlify.com/build_hooks/YOUR_BUILD_HOOK_ID
+
+# Development settings
+KIRBY_DEBUG=true
+KIRBY_PANEL_INSTALL=true
+```
+
+**Important**: Replace `YOUR_BUILD_HOOK_ID` with your actual Netlify build hook URL to enable automatic frontend deployments when content changes.
+
+## Key Features
+
+- **Headless Architecture**: JSON API endpoints for frontend consumption
+- **Block-Based Content**: Flexible content structure using reusable blocks
+- **Multi-Language Support**: Built-in internationalization
+- **Automatic Deployments**: Triggers frontend builds when content changes
+- **Performance Optimized**: API caching with intelligent invalidation
+- **Custom Plugins**: Extended functionality for content processing
+- **Modern Image Handling**: WebP conversion and ThumbHash generation
+
+## Template Updates
 
 ### Automated Update
 
-Run the script `update-template-version.sh` to fetch and merge the latest changes from the template repository. Use Git Bash or WSL on Windows
+```bash
+./update-template-version.sh
+```
 
 ### Manual Update
 
@@ -23,115 +86,53 @@ Run the script `update-template-version.sh` to fetch and merge the latest change
    ```bash
    git remote add template https://github.com/matthacksteiner/cms.baukasten
    ```
-2. Fetch all changes:
+2. Fetch and merge changes:
    ```bash
    git fetch --all
-   ```
-3. Merge the changes:
-   ```bash
    git merge template/main --allow-unrelated-histories
    ```
 
----
+## Deployment Options
 
-# Setup Instructions
+The CMS supports various hosting environments:
 
-## 1. Kirby CMS Installation
+- **Shared Hosting**: Traditional web hosting with PHP support
+- **VPS/Dedicated Servers**: Full control with custom configuration
+- **Cloud Hosting**: Scalable solutions like Uberspace, DigitalOcean
+- **Docker**: Containerized deployment for consistent environments
 
-1. Create a new repository from the [CMS Baukasten template](https://github.com/matthacksteiner/cms.baukasten).
-2. Run `composer install`.
-3. Set the document root to `/public`.
-4. Visit the site with `/panel` at the end of the URL.
+### Automated Deployment (GitHub Actions)
 
-## 2. Environment Configuration
+For automated deployment to servers like Uberspace, the project includes GitHub Actions workflows. Configure these secrets in your repository:
 
-This project uses the [kirby3-dotenv plugin](https://github.com/bnomei/kirby3-dotenv) to manage environment variables securely.
+- `UBERSPACE_HOST`: Server hostname
+- `UBERSPACE_USER`: Server username
+- `DEPLOY_KEY_PRIVATE`: SSH private key
+- `UBERSPACE_PATH`: Target directory path
+- `DEPLOY_URL`: Netlify build hook URL
 
-### Setup Environment Variables
+See [Deployment & Hosting](./docs/deployment-hosting.md) for detailed setup instructions.
 
-1. **Copy the example file:**
+## System Requirements
 
-   ```bash
-   cp .env.example .env
-   ```
+- **PHP**: 8.2+ (PHP 7.4 not supported)
+- **Web Server**: Apache 2 or Nginx with URL rewriting
+- **PHP Extensions**: gd/ImageMagick, ctype, curl, dom, filter, hash, iconv, json, libxml, mbstring, openssl, SimpleXML
+- **SSL Certificate**: Required for production use
+- **Composer**: For dependency management
 
-2. **Configure your environment variables in `.env`:**
+## Development Workflow
 
-   ```env
-   # Kirby CMS Environment Variables
+1. **Content Management**: Use the Kirby Panel (`/panel`) for content editing
+2. **Structure Changes**: Modify blueprints in `site/blueprints/`
+3. **Custom Logic**: Extend functionality via plugins in `site/plugins/`
+4. **Frontend Integration**: Content automatically syncs to frontend via API
+5. **Deployment**: Automated builds trigger when content or code changes
 
-   # Netlify Deploy Hook URL
-   # Get this from your Netlify site settings > Build & deploy > Build hooks
-   DEPLOY_URL=https://api.netlify.com/build_hooks/YOUR_BUILD_HOOK_ID
-   ```
+## Support & Documentation
 
-3. **Update your deploy URL:**
-   - In your Netlify site, go to **Site > Project configuration > Build & deploy > Build hooks**
-   - Create a new build hook if needed, then copy the build hook URL
-   - Replace `YOUR_BUILD_HOOK_ID` in the `.env` file with the actual value from your build hook URL
+- **Project Documentation**: [docs/](./docs/) folder contains comprehensive guides
+- **Kirby Documentation**: [getkirby.com/docs](https://getkirby.com/docs)
+- **Template Source**: [github.com/matthacksteiner/cms.baukasten](https://github.com/matthacksteiner/cms.baukasten)
 
-### Available Environment Variables
-
-`DEPLOY_URL`: Netlify build hook URL for automated deployments
-
-### For Custom Servers
-
-1. **DNS Settings:** Adjust DNS settings on Gandi.net (e.g., `subdomain 10800 IN CNAME matthiashacksteiner.net`).
-2. **Add Domain:** Create the domain on Uberspace:
-   ```bash
-   uberspace web domain add domain.de
-   uberspace web domain add www.domain.de
-   ```
-3. **Create Symlinks:**
-   ```bash
-   cd /var/www/virtual/fifth
-   ln -s html/domain.de/public domain.de
-   ln -s html/domain.de/public www.domain.de
-   ```
-
-### GitHub Actions for Automated Deployment
-
-1. Generate an SSH key on your local machine:
-   ```bash
-   ssh-keygen -f neuerKeyFuerGithub -t ed25519 -a 100
-   ```
-   Leave the password empty.
-2. In the new repository, go to **Settings > Secrets and variables > Actions** and add the following secrets:
-   - `UBERSPACE_HOST`: Hostname of the server (e.g., `lacerta.uberspace.de`).
-   - `UBERSPACE_USER`: Username for the server (e.g., `fifth`).
-   - `DEPLOY_KEY_PRIVATE`: Private SSH key (content of `neuerKeyFuerGithub` file, including `BEGIN OPENSSH PRIVATE KEY` and `END OPENSSH PRIVATE KEY`).
-   - `UBERSPACE_PATH`: Path to the directory on the server (e.g., `cms.baukasten.matthiashacksteiner.net`).
-   - `DEPLOY_URL`: Your Netlify build hook URL (e.g., `https://api.netlify.com/build_hooks/YOUR_BUILD_HOOK_ID`).
-3. Add the public key to the server's `~/.ssh/authorized_keys` file (use the content of `neuerKeyFuerGithub.pub`).
-
-**Note:** The `.env` file is automatically created on the server during deployment using the GitHub Secrets, ensuring sensitive information stays secure while being available where needed.
-
-Source and more information: [Matthias Andrasch's Tutorial](https://matthias-andrasch.eu/2021/tutorial-webseite-mittels-github-actions-deployment-zu-uberspace-uebertragen-rsync/)
-
----
-
-## Requirements for Headless Kirby CMS
-
-### Accounts
-
-- FTP or SFTP access
-- Hosting login credentials
-- SSH access (if available)
-
-### Subdomain
-
-A working CMS subdomain with correct DNS settings and an SSL certificate (e.g., `cms.domain.com`).
-
-### Server
-
-- Apache 2 or Nginx
-- URL rewriting enabled
-
-### PHP
-
-- PHP 8.2+ (PHP 7.4 is not supported)
-- Required PHP extensions: gd or ImageMagick, ctype, curl, dom, filter, hash, iconv, json, libxml, mbstring, openssl, SimpleXML
-
----
-
-This guide provides a clear and structured setup process for combining a Kirby CMS backend with an Astro frontend. Follow the steps carefully to ensure a smooth installation and deployment.
+For technical issues or questions, refer to the documentation or check the project's issue tracker.
