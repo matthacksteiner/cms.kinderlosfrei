@@ -3,7 +3,6 @@
 
 # GitHub Actions workflows for template maintenance
 .github/workflows/update-cms-child-repos.yml
-.github/workflows/deploy.yml
 
 # Template configuration files
 .github/child-repositories.json

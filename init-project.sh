@@ -56,13 +56,7 @@ else
     echo "✗ child-repositories.json not found"
   fi
 
-  # Remove deployment workflow as child repos may have different setups
-  if [ -f .github/workflows/deploy.yml ]; then
-    rm .github/workflows/deploy.yml
-    echo "✓ Removed deploy.yml"
-  else
-    echo "✗ deploy.yml not found"
-  fi
+  # Note: deploy.yml is kept as it's needed for GitHub Actions deployment
 fi
 
 # Create a basic .env file for child repositories
@@ -71,14 +65,9 @@ cat > .env << 'EOF'
 # Kirby CMS Environment Variables
 # Copy this file to .env and configure for your environment
 
-# Deployment URL (configure for your hosting)
+# Get this from your Netlify site settings > Build & deploy > Build hooks
 DEPLOY_URL=https://yourdomain.com
 
-# Panel settings
-KIRBY_PANEL_INSTALL=true
-
-# Debug mode (set to false in production)
-KIRBY_DEBUG=true
 EOF
 echo "✓ Created .env template"
 

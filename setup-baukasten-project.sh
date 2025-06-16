@@ -54,6 +54,7 @@ NETLIFY_SITE_ID=""
 NETLIFY_CMS_SITE_ID=""
 DEPLOY_HOOK_URL=""
 WORKING_SSH_KEY=""
+EXISTING_NETLIFY_SITE_ID=""
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 # =============================================================================
@@ -127,6 +128,14 @@ check_prerequisites() {
         missing_tools+=("Node.js")
     fi
 
+    if ! command -v curl &> /dev/null; then
+        missing_tools+=("curl")
+    fi
+
+    if ! command -v host &> /dev/null; then
+        missing_tools+=("host (DNS utilities)")
+    fi
+
     if [ ${#missing_tools[@]} -ne 0 ]; then
         log_error "Missing required tools:"
         for tool in "${missing_tools[@]}"; do
@@ -139,6 +148,8 @@ check_prerequisites() {
         echo "  - GitHub CLI: https://cli.github.com/"
         echo "  - Netlify CLI: npm install -g netlify-cli"
         echo "  - Node.js: https://nodejs.org/"
+        echo "  - curl: Usually pre-installed on most systems"
+        echo "  - host: Usually available in dnsutils/bind-utils package"
         exit 1
     fi
 
@@ -155,6 +166,179 @@ check_prerequisites() {
     fi
 
     log_success "All prerequisites are satisfied"
+}
+
+check_netlify_domain_availability() {
+    local project_name="$1"
+    local domain_name="${project_name}.netlify.app"
+
+    log_info "Checking if ${domain_name} is available..."
+
+    # Check if a site with this name already exists in the user's account
+    local existing_site=$(netlify api listSites 2>/dev/null | jq -r ".[] | select(.name == \"$project_name\") | .id" 2>/dev/null || echo "")
+
+    if [ -n "$existing_site" ]; then
+        log_warning "You already have a Netlify site named '$project_name' (ID: $existing_site)"
+        echo ""
+        echo "Options:"
+        echo "  1. Use the existing site (recommended if this is the same project)"
+        echo "  2. Try a different project name"
+        echo "  3. Delete the existing site and create a new one (destructive)"
+        echo ""
+
+        local choice
+        while true; do
+            choice=$(prompt_input "Choose an option [1-3]" "1")
+            case $choice in
+                1)
+                    log_info "Will use existing Netlify site: $project_name"
+                    # Store the existing site ID for later use
+                    EXISTING_NETLIFY_SITE_ID="$existing_site"
+                    return 0
+                    ;;
+                2)
+                    return 1
+                    ;;
+                3)
+                    echo ""
+                    log_warning "⚠️  WARNING: This will permanently delete the existing site and all its data!"
+                    log_warning "This includes: deploy history, environment variables, domain settings, etc."
+                    echo ""
+                    if confirm "Are you absolutely sure you want to delete the existing site?"; then
+                        log_info "Deleting existing site..."
+                        if netlify api deleteSite --data="{\"site_id\": \"$existing_site\"}" &>/dev/null; then
+                            log_success "Existing site deleted successfully"
+                            # Clear the variable since we deleted the site
+                            EXISTING_NETLIFY_SITE_ID=""
+                            # Continue to check if domain is available elsewhere
+                            break
+                        else
+                            log_error "Failed to delete existing site"
+                            return 1
+                        fi
+                    else
+                        log_info "Site deletion cancelled"
+                        return 1
+                    fi
+                    ;;
+                *)
+                    log_warning "Please choose 1, 2, or 3"
+                    ;;
+            esac
+        done
+    fi
+
+        # Check if the domain is publicly accessible (indicates it's taken by someone else)
+    local response_code=$(curl -s -o /dev/null -w "%{http_code}" "https://${domain_name}" 2>/dev/null || echo "000")
+
+    if [[ "$response_code" =~ ^(200|301|302|403)$ ]]; then
+        log_warning "The domain ${domain_name} is already taken by another Netlify user"
+        echo ""
+        echo "This means another user has already claimed this domain name."
+        echo "You have these options:"
+        echo "  1. Choose a different project name"
+        echo "  2. Use a custom domain for your frontend instead"
+        echo ""
+
+        local choice
+        while true; do
+            choice=$(prompt_input "Choose an option [1-2]" "1")
+            case $choice in
+                1)
+                    return 1  # This will prompt for a new project name
+                    ;;
+                2)
+                    log_info "You can proceed with this project name but must use a custom domain"
+                    log_warning "The default ${domain_name} subdomain will NOT be available"
+                    return 0  # Allow to continue with custom domain
+                    ;;
+                *)
+                    log_warning "Please choose 1 or 2"
+                    ;;
+            esac
+        done
+    fi
+
+    # Additional check: try to resolve the domain
+    if host "${domain_name}" &>/dev/null; then
+        # If it resolves but doesn't return a successful HTTP response, it might still be taken
+        if [ "$response_code" != "404" ] && [ "$response_code" != "000" ]; then
+            log_warning "The domain ${domain_name} may be taken (HTTP $response_code)"
+            echo "This could indicate the domain is reserved or taken by another user."
+            if ! confirm "Do you want to continue anyway? (you'll need to use a custom domain)"; then
+                return 1
+            fi
+        fi
+    fi
+
+    log_success "Domain ${domain_name} appears to be available"
+    return 0
+}
+
+validate_domain_name() {
+    local domain="$1"
+    local domain_type="$2"  # "frontend" or "cms"
+
+    # Check if domain is empty
+    if [ -z "$domain" ]; then
+        log_error "Domain cannot be empty"
+        return 1
+    fi
+
+    # For frontend domains, allow .netlify.app subdomains
+    if [ "$domain_type" = "frontend" ] && [[ "$domain" =~ ^[a-z0-9-]+\.netlify\.app$ ]]; then
+        return 0
+    fi
+
+    # For Uberspace, allow .uber.space domains
+    if [ "$domain_type" = "cms" ] && [[ "$domain" =~ ^[a-z0-9-]+\.uber\.space$ ]]; then
+        return 0
+    fi
+
+    # Check for basic domain format requirements
+    # Must contain at least one dot and end with valid TLD
+    if [[ ! "$domain" =~ \. ]]; then
+        log_error "Invalid domain format: '$domain' (missing TLD)"
+        echo "Domain must contain at least one dot and a valid TLD"
+        return 1
+    fi
+
+    # Extract and validate TLD (last part after final dot)
+    local tld="${domain##*.}"
+    if [[ ! "$tld" =~ ^[a-zA-Z]{2,}$ ]]; then
+        log_error "Invalid TLD: '$tld' (must be at least 2 letters)"
+        echo "Domain must end with a valid TLD (e.g., .com, .org, .net, .app)"
+        return 1
+    fi
+
+    # Check for invalid characters (no spaces, special chars except hyphens and dots)
+    if [[ "$domain" =~ [^a-zA-Z0-9.-] ]]; then
+        log_error "Invalid characters in domain: '$domain'"
+        echo "Domain can only contain letters, numbers, hyphens, and dots"
+        return 1
+    fi
+
+    # Check that domain doesn't start or end with hyphen or dot
+    if [[ "$domain" =~ ^[-.]|[-.]$ ]]; then
+        log_error "Invalid domain format: '$domain'"
+        echo "Domain cannot start or end with hyphen or dot"
+        return 1
+    fi
+
+    # Check for consecutive dots or hyphens
+    if [[ "$domain" =~ \.\.|-- ]]; then
+        log_error "Invalid domain format: '$domain'"
+        echo "Domain cannot contain consecutive dots or hyphens"
+        return 1
+    fi
+
+    # Additional check for obvious localhost/invalid domains
+    if [[ "$domain" =~ ^(localhost|127\.0\.0\.1|0\.0\.0\.0|.*\.local)$ ]]; then
+        log_error "Invalid domain: '$domain' (localhost/local domains not allowed)"
+        return 1
+    fi
+
+    return 0
 }
 
 check_uberspace_ssh() {
@@ -227,22 +411,59 @@ gather_project_info() {
     echo "  • Frontend domain: 'myportfolio.com', 'company.com', 'my-blog.netlify.app'"
     echo "  • CMS domain: 'cms.myportfolio.com', 'admin.company.com', 'username.uber.space'"
     echo ""
+    echo "⚠️  Important: Domains must be fully qualified (include .com, .org, etc.)"
+    echo "    Invalid: 'cms.mysite' → Valid: 'cms.mysite.com'"
+    echo ""
 
-    PROJECT_NAME=$(prompt_input "Enter your project name (lowercase, hyphens allowed)" "my-portfolio")
+    # Project name input and validation loop
+    local project_name_valid=false
+    while [ "$project_name_valid" = false ]; do
+        PROJECT_NAME=$(prompt_input "Enter your project name (lowercase, hyphens allowed)" "my-portfolio")
 
-    # Validate project name
-    if [[ ! "$PROJECT_NAME" =~ ^[a-z0-9-]+$ ]]; then
-        log_error "Project name must contain only lowercase letters, numbers, and hyphens"
-        exit 1
-    fi
+        # Validate project name format
+        if [[ ! "$PROJECT_NAME" =~ ^[a-z0-9-]+$ ]]; then
+            log_error "Project name must contain only lowercase letters, numbers, and hyphens"
+            continue
+        fi
 
-    DOMAIN_NAME=$(prompt_input "Enter your frontend domain (without https://)" "${PROJECT_NAME}.netlify.app")
+        # Check if the corresponding .netlify.app domain is available
+        local domain_check_result
+        if check_netlify_domain_availability "$PROJECT_NAME"; then
+            domain_check_result="available"
+            project_name_valid=true
+        else
+            # Domain is not available - could be user's own site or another user's site
+            # The check_netlify_domain_availability function handles the user interaction
+            domain_check_result="unavailable"
 
-    # Validate domain name is not empty
-    if [ -z "$DOMAIN_NAME" ]; then
-        log_error "Frontend domain cannot be empty"
-        exit 1
-    fi
+            # If we reach here, it means the user chose to try a different name
+            # (unless they chose to continue with custom domain, which returns 0)
+            if [ $? -eq 0 ]; then
+                # User chose to continue with custom domain
+                log_info "Proceeding with project name '$PROJECT_NAME' - custom domain required"
+                project_name_valid=true
+            else
+                # User chose to try a different project name
+                continue
+            fi
+        fi
+    done
+
+    # Frontend domain input and validation loop
+    local frontend_domain_valid=false
+    while [ "$frontend_domain_valid" = false ]; do
+        DOMAIN_NAME=$(prompt_input "Enter your frontend domain (without https://)" "${PROJECT_NAME}.netlify.app")
+
+        if validate_domain_name "$DOMAIN_NAME" "frontend"; then
+            frontend_domain_valid=true
+        else
+            echo ""
+            if ! confirm "Do you want to try a different frontend domain?"; then
+                log_error "Valid frontend domain is required to continue"
+                exit 1
+            fi
+        fi
+    done
 
     echo ""
     echo "CMS Hosting Options (Kirby CMS requires PHP hosting):"
@@ -259,20 +480,49 @@ gather_project_info() {
                 UBERSPACE_USER=$(prompt_input "Enter your Uberspace username" "fifth")
                 UBERSPACE_HOST=$(prompt_input "Enter your Uberspace host" "lacerta.uberspace.de")
                 local default_domain="${UBERSPACE_USER}.uber.space"
-                CMS_DOMAIN=$(prompt_input "Enter your CMS domain (without https://)" "$default_domain")
-                if [ -z "$CMS_DOMAIN" ]; then
-                    log_error "CMS domain cannot be empty"
-                    exit 1
-                fi
+
+                # CMS domain input and validation loop
+                local cms_domain_valid=false
+                while [ "$cms_domain_valid" = false ]; do
+                    CMS_DOMAIN=$(prompt_input "Enter your CMS domain (without https://)" "$default_domain")
+
+                    if validate_domain_name "$CMS_DOMAIN" "cms"; then
+                        cms_domain_valid=true
+                    else
+                        echo ""
+                        echo "For Uberspace hosting, you need either:"
+                        echo "  - A .uber.space subdomain (e.g., ${UBERSPACE_USER}.uber.space)"
+                        echo "  - A fully qualified custom domain (e.g., cms.example.com)"
+                        echo ""
+                        if ! confirm "Do you want to try a different CMS domain?"; then
+                            log_error "Valid CMS domain is required to continue"
+                            exit 1
+                        fi
+                    fi
+                done
                 break
                 ;;
             2)
                 CMS_HOSTING="custom"
-                CMS_DOMAIN=$(prompt_input "Enter your CMS domain (without https://)" "cms.${PROJECT_NAME}.com")
-                if [ -z "$CMS_DOMAIN" ]; then
-                    log_error "CMS domain cannot be empty"
-                    exit 1
-                fi
+
+                # CMS domain input and validation loop for custom hosting
+                local cms_domain_valid=false
+                while [ "$cms_domain_valid" = false ]; do
+                    CMS_DOMAIN=$(prompt_input "Enter your CMS domain (without https://)" "cms.${PROJECT_NAME}.com")
+
+                    if validate_domain_name "$CMS_DOMAIN" "cms"; then
+                        cms_domain_valid=true
+                    else
+                        echo ""
+                        echo "For custom hosting, you need a fully qualified domain name with a valid TLD"
+                        echo "Examples: cms.example.com, admin.mysite.org, kirby.company.net"
+                        echo ""
+                        if ! confirm "Do you want to try a different CMS domain?"; then
+                            log_error "Valid CMS domain is required to continue"
+                            exit 1
+                        fi
+                    fi
+                done
                 break
                 ;;
             *)
@@ -284,6 +534,9 @@ gather_project_info() {
     FRONTEND_REPO="${PROJECT_NAME}"
     CMS_REPO="cms.${PROJECT_NAME}"
 
+    # Uberspace folder name should always match the CMS repository name
+    UBERSPACE_FOLDER="cms.$PROJECT_NAME"
+
     echo ""
     log_info "Project configuration:"
     echo "  Project name: $PROJECT_NAME"
@@ -293,6 +546,7 @@ gather_project_info() {
     if [ "$CMS_HOSTING" = "uberspace" ]; then
         echo "  Uberspace user: $UBERSPACE_USER"
         echo "  Uberspace host: $UBERSPACE_HOST"
+        echo "  Uberspace folder: $UBERSPACE_FOLDER"
     fi
     echo "  Frontend repo: $FRONTEND_REPO"
     echo "  CMS repo: $CMS_REPO"
@@ -462,19 +716,11 @@ setup_netlify_sites() {
     # Setup frontend site (always on Netlify)
     cd "$work_dir/$FRONTEND_REPO"
 
-    # Check if a Netlify site with this name already exists
-    local existing_site=$(netlify api listSites | jq -r ".[] | select(.name == \"$PROJECT_NAME\") | .id" 2>/dev/null || echo "")
-
-    if [ -n "$existing_site" ]; then
-        log_warning "Netlify site '$PROJECT_NAME' already exists (ID: $existing_site)"
-        if confirm "Do you want to use the existing Netlify site?"; then
-            log_info "Linking to existing Netlify site..."
-            netlify link --id "$existing_site"
-            NETLIFY_SITE_ID="$existing_site"
-        else
-            log_error "Please choose a different project name or delete the existing Netlify site"
-            exit 1
-        fi
+    # Check if we're reusing an existing site from the configuration phase
+    if [ -n "$EXISTING_NETLIFY_SITE_ID" ]; then
+        log_info "Using existing Netlify site '$PROJECT_NAME' (ID: $EXISTING_NETLIFY_SITE_ID)"
+        netlify link --id "$EXISTING_NETLIFY_SITE_ID"
+        NETLIFY_SITE_ID="$EXISTING_NETLIFY_SITE_ID"
     else
         # Unlink from template site if already linked
         if netlify status &> /dev/null; then
@@ -636,13 +882,13 @@ DEPLOY_URL=$DEPLOY_HOOK_URL
 #
 # To deploy to Uberspace (manual method):
 # 1. SSH to your Uberspace: ssh $UBERSPACE_USER@$UBERSPACE_HOST
-# 2. Clone this repo: git clone https://github.com/$(gh api user --jq '.login')/$CMS_REPO.git \$HOME/html/cms.$PROJECT_NAME
+# 2. Clone this repo: git clone https://github.com/$(gh api user --jq '.login')/$CMS_REPO.git \$HOME/html/$UBERSPACE_FOLDER
 # 3. Configure domain if needed: uberspace web domain add $CMS_DOMAIN
 #
 # For GitHub Actions deployment, add these secrets to your repository:
 # - UBERSPACE_HOST: $UBERSPACE_HOST
 # - UBERSPACE_USER: $UBERSPACE_USER
-# - UBERSPACE_PATH: (your domain or subdirectory if needed)
+# - UBERSPACE_PATH: html/$UBERSPACE_FOLDER
 # - DEPLOY_KEY_PRIVATE: (your SSH private key for Uberspace)
 # - DEPLOY_URL: $DEPLOY_HOOK_URL
 EOF
@@ -686,7 +932,7 @@ setup_github_secrets() {
     if [ "$CMS_HOSTING" = "uberspace" ]; then
         gh secret set UBERSPACE_HOST --body "$UBERSPACE_HOST" --repo "$github_user/$CMS_REPO"
         gh secret set UBERSPACE_USER --body "$UBERSPACE_USER" --repo "$github_user/$CMS_REPO"
-        gh secret set UBERSPACE_PATH --body "html/cms.$PROJECT_NAME" --repo "$github_user/$CMS_REPO"
+        gh secret set UBERSPACE_PATH --body "html/$UBERSPACE_FOLDER" --repo "$github_user/$CMS_REPO"
 
         # Use existing SSH key for GitHub Actions
         setup_ssh_deployment_key "$github_user" "$CMS_REPO"
@@ -797,51 +1043,67 @@ setup_github_actions() {
 
     if [ "$CMS_HOSTING" = "uberspace" ]; then
         cat > .github/workflows/deploy.yml << 'EOF'
-name: Deploy to Uberspace
-
+# Warning: deletes all files on uberspace which are not in repo, use without --delete if unsure
+name: Deploy2uberspace
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  workflow_dispatch:
-
+    branches:
+      - main
 jobs:
-  deploy:
+  sync:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Setup SSH key
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.DEPLOY_KEY_PRIVATE }}" > ~/.ssh/uberspace_deploy
-        chmod 600 ~/.ssh/uberspace_deploy
-        ssh-keyscan -H ${{ secrets.UBERSPACE_HOST }} >> ~/.ssh/known_hosts
-
-    - name: Deploy to Uberspace
-      run: |
-        # Create target directory if it doesn't exist
-        ssh -i ~/.ssh/uberspace_deploy -o StrictHostKeyChecking=no \
-          ${{ secrets.UBERSPACE_USER }}@${{ secrets.UBERSPACE_HOST }} \
-          "mkdir -p ${{ secrets.UBERSPACE_PATH }}"
-
-        # Sync files to Uberspace subdirectory
-        rsync -avz --delete \
-          -e "ssh -i ~/.ssh/uberspace_deploy -o StrictHostKeyChecking=no" \
-          ./ ${{ secrets.UBERSPACE_USER }}@${{ secrets.UBERSPACE_HOST }}:${{ secrets.UBERSPACE_PATH }}/
-
-    - name: Trigger frontend rebuild
-      if: github.ref == 'refs/heads/main'
-      run: |
-        curl -X POST ${{ secrets.DEPLOY_URL }}
-
-    - name: Cleanup SSH key
-      if: always()
-      run: |
-        rm -f ~/.ssh/uberspace_deploy
+      - uses: actions/checkout@v4
+      - name: Create target directory
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.UBERSPACE_HOST }}
+          username: ${{ secrets.UBERSPACE_USER }}
+          key: ${{ secrets.DEPLOY_KEY_PRIVATE }}
+          script: |
+            mkdir -p /home/${{ secrets.UBERSPACE_USER }}/html/${{ secrets.UBERSPACE_PATH }}
+      - name: Rsync Deployments Action
+        uses: Burnett01/rsync-deployments@6.0.0
+        with:
+          switches: -avzr --delete --exclude="content" --exclude="languages" --exclude=".vscode" --exclude=".git" --exclude=".license" --exclude=".github" --exclude=".env" --exclude="node_modules" --exclude="media" --exclude="stats" --exclude="vendor" --exclude="kirby" --exclude="storage" --exclude="sass" --exclude=".DS_Store"
+          remote_path: /home/${{ secrets.UBERSPACE_USER }}/html/${{ secrets.UBERSPACE_PATH }}/
+          remote_host: ${{ secrets.UBERSPACE_HOST }}
+          remote_user: ${{ secrets.UBERSPACE_USER }}
+          remote_key: ${{ secrets.DEPLOY_KEY_PRIVATE }}
+  create-env:
+    name: Create Environment File
+    runs-on: ubuntu-latest
+    needs: sync
+    steps:
+      - name: Create .env file on server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.UBERSPACE_HOST }}
+          username: ${{ secrets.UBERSPACE_USER }}
+          key: ${{ secrets.DEPLOY_KEY_PRIVATE }}
+          script: |
+            cd /home/${{ secrets.UBERSPACE_USER }}/html/${{ secrets.UBERSPACE_PATH }}/
+            bash -c 'cat > .env << EOF
+            # Kirby CMS Environment Variables
+            DEPLOY_URL=${{ secrets.DEPLOY_URL }}
+            EOF'
+  composer:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: create-env
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.UBERSPACE_HOST }}
+          username: ${{ secrets.UBERSPACE_USER }}
+          key: ${{ secrets.DEPLOY_KEY_PRIVATE }}
+          script: |
+            cd /home/${{ secrets.UBERSPACE_USER }}/html/${{ secrets.UBERSPACE_PATH }}/
+            rm composer.lock
+            rm -rf vendor
+            rm -rf kirby
+            composer install --no-interaction --prefer-dist --optimize-autoloader
 EOF
     else
         cat > .github/workflows/deploy.yml << 'EOF'
@@ -975,15 +1237,18 @@ setup_initial_content() {
     fi
 
         if $extract_ssh_cmd "$UBERSPACE_USER@$UBERSPACE_HOST" "bash -c '
+        # Set up trap to ensure cleanup happens even if script fails
+        trap \"echo \\\"Cleaning up temporary files...\\\"; rm -f $temp_zip\" EXIT
+
         set -e
 
         # Ensure CMS directory exists (create if needed since content is excluded from deployment)
-        if [ ! -d \$HOME/html/cms.$PROJECT_NAME ]; then
-            echo \"Creating CMS directory at \$HOME/html/cms.$PROJECT_NAME\"
-            mkdir -p \$HOME/html/cms.$PROJECT_NAME
+        if [ ! -d \$HOME/html/$UBERSPACE_FOLDER ]; then
+            echo \"Creating CMS directory at \$HOME/html/$UBERSPACE_FOLDER\"
+            mkdir -p \$HOME/html/$UBERSPACE_FOLDER
         fi
 
-        cd \$HOME/html/cms.$PROJECT_NAME
+        cd \$HOME/html/$UBERSPACE_FOLDER
 
         # Remove existing content folder to prevent conflicts during extraction
         if [ -d content ]; then
@@ -1017,10 +1282,17 @@ setup_initial_content() {
             echo \"Warning: content folder not found after extraction\"
         fi
 
-        # Clean up temporary zip
-        rm $temp_zip
+        # Run initialization script to remove template files
+        echo \"Running initialization script to clean up template files...\"
+        if [ -f init-project.sh ]; then
+            echo \"y\" | sh init-project.sh
+            echo \"Template cleanup completed\"
+        else
+            echo \"Warning: init-project.sh not found, skipping template cleanup\"
+        fi
 
         echo \"Initial content setup complete!\"
+        echo \"Temporary zip file will be cleaned up automatically\"
     '"; then
         log_success "Initial content extracted and configured"
         log_info "Content is now available at: https://$CMS_DOMAIN"
@@ -1030,7 +1302,7 @@ setup_initial_content() {
         log_info "The content archive was uploaded to: $temp_zip"
         log_info "You can manually extract the content:"
         echo "  1. SSH to Uberspace: ssh $UBERSPACE_USER@$UBERSPACE_HOST"
-        echo "  2. Navigate to: cd \$HOME/html/cms.$PROJECT_NAME"
+        echo "  2. Navigate to: cd \$HOME/html/$UBERSPACE_FOLDER"
         echo "  3. Extract: unzip -q $temp_zip -d ."
         echo "  4. Set permissions: chmod -R 755 content/"
         echo "  5. Clean up: rm $temp_zip"
@@ -1045,7 +1317,7 @@ setup_initial_content() {
 setup_domains() {
     log_step "Domain setup assistance"
 
-    echo "Domain setup requires manual configuration:"
+    echo "Domain setup requires configuration:"
     echo ""
     echo "1. Frontend domain ($DOMAIN_NAME):"
     echo "   - If using a custom domain, add these DNS records:"
@@ -1056,11 +1328,29 @@ setup_domains() {
     case "$CMS_HOSTING" in
         "uberspace")
             echo "2. CMS domain ($CMS_DOMAIN):"
-            echo "   - SSH to your Uberspace: ssh $UBERSPACE_USER@$UBERSPACE_HOST"
-            echo "   - If using a custom domain, add it: uberspace web domain add $CMS_DOMAIN"
-            echo "   - Configure DNS for custom domain:"
-            echo "     A: $CMS_DOMAIN -> [Uberspace IP - check uberspace web domain list]"
-            echo "   - For .uber.space subdomain, no DNS setup needed"
+            echo ""
+
+            # Check if it's a custom domain (not .uber.space)
+            if [[ "$CMS_DOMAIN" != *".uber.space" ]]; then
+                if confirm "Do you want to automatically setup the domain '$CMS_DOMAIN' on Uberspace?"; then
+                    setup_uberspace_domain_automatic
+                else
+                    echo "   Manual setup instructions:"
+                    echo "   - SSH to your Uberspace: ssh $UBERSPACE_USER@$UBERSPACE_HOST"
+                    echo "   - Add domain: uberspace web domain add $CMS_DOMAIN"
+                    echo "   - Add www subdomain: uberspace web domain add www.$CMS_DOMAIN"
+                    echo "   - Create symlinks:"
+                    echo "     cd /var/www/virtual/$UBERSPACE_USER"
+                    echo "     ln -s html/$UBERSPACE_FOLDER/public $CMS_DOMAIN"
+                    echo "     ln -s html/$UBERSPACE_FOLDER/public www.$CMS_DOMAIN"
+                    echo "   - Configure DNS for custom domain:"
+                    echo "     A: $CMS_DOMAIN -> [Uberspace IP - check uberspace web domain list]"
+                    echo "     A: www.$CMS_DOMAIN -> [Uberspace IP]"
+                fi
+            else
+                echo "   - Using .uber.space subdomain - no additional setup needed"
+                echo "   - Your CMS will be available at: https://$CMS_DOMAIN"
+            fi
             ;;
         "custom")
             echo "2. CMS domain ($CMS_DOMAIN):"
@@ -1072,10 +1362,103 @@ setup_domains() {
 
     echo ""
 
-    if confirm "Have you configured your custom domains (if applicable)?"; then
-        log_success "Domain configuration noted"
+    if confirm "Have you configured your domains?"; then
+        log_success "Domain configuration completed"
     else
         log_warning "Remember to configure domains before going live"
+    fi
+}
+
+setup_uberspace_domain_automatic() {
+    log_info "Setting up domain automatically on Uberspace - this may take a while..."
+
+    # Test SSH connection using the working key
+    local ssh_cmd="ssh -o ConnectTimeout=10 -o BatchMode=yes"
+    if [ -n "$WORKING_SSH_KEY" ]; then
+        ssh_cmd="$ssh_cmd -i $WORKING_SSH_KEY"
+    fi
+
+    if ! $ssh_cmd "$UBERSPACE_USER@$UBERSPACE_HOST" exit 2>/dev/null; then
+        log_error "Cannot connect to Uberspace via SSH. Falling back to manual instructions."
+        return 1
+    fi
+
+    log_info "Connected to Uberspace. Setting up domain: $CMS_DOMAIN"
+
+    # Execute domain setup commands on Uberspace
+    if $ssh_cmd "$UBERSPACE_USER@$UBERSPACE_HOST" "bash -c '
+        set -e
+
+        echo \"Setting up domain: $CMS_DOMAIN\"
+
+        # Check if domain already exists
+        if uberspace web domain list | grep -q \"$CMS_DOMAIN\"; then
+            echo \"Domain $CMS_DOMAIN already exists, skipping...\"
+        else
+            echo \"Adding domain: $CMS_DOMAIN\"
+            uberspace web domain add $CMS_DOMAIN
+        fi
+
+        # Check if www subdomain already exists
+        if uberspace web domain list | grep -q \"www.$CMS_DOMAIN\"; then
+            echo \"Domain www.$CMS_DOMAIN already exists, skipping...\"
+        else
+            echo \"Adding www subdomain: www.$CMS_DOMAIN\"
+            uberspace web domain add www.$CMS_DOMAIN
+        fi
+
+        # Navigate to virtual directory
+        cd /var/www/virtual/$UBERSPACE_USER
+
+                        # Check if symlink for main domain already exists
+        if [ -L \"$CMS_DOMAIN\" ] || [ -e \"$CMS_DOMAIN\" ]; then
+            echo \"Symlink $CMS_DOMAIN already exists, skipping...\"
+        else
+            echo \"Creating symlink: $CMS_DOMAIN -> html/$UBERSPACE_FOLDER/public\"
+            ln -s html/$UBERSPACE_FOLDER/public $CMS_DOMAIN
+        fi
+
+        # Check if symlink for www subdomain already exists
+        if [ -L \"www.$CMS_DOMAIN\" ] || [ -e \"www.$CMS_DOMAIN\" ]; then
+            echo \"Symlink www.$CMS_DOMAIN already exists, skipping...\"
+        else
+            echo \"Creating symlink: www.$CMS_DOMAIN -> html/$UBERSPACE_FOLDER/public\"
+            ln -s html/$UBERSPACE_FOLDER/public www.$CMS_DOMAIN
+        fi
+
+        echo \"Domain setup completed successfully!\"
+        echo \"Domains added:\"
+        uberspace web domain list | grep \"$CMS_DOMAIN\" || echo \"No domains found (this might be normal)\"
+
+        echo \"\"
+        echo \"Next steps:\"
+        echo \"1. Configure DNS records:\"
+        echo \"   A: $CMS_DOMAIN -> \$(uberspace web domain list | head -1 | awk \"{print \\\$2}\" || echo \"[check uberspace web domain list]\")\"
+        echo \"   A: www.$CMS_DOMAIN -> \$(uberspace web domain list | head -1 | awk \"{print \\\$2}\" || echo \"[check uberspace web domain list]\")\"
+        echo \"2. Wait for DNS propagation (up to 24 hours)\"
+        echo \"3. Your CMS will be available at: https://$CMS_DOMAIN\"
+    '"; then
+        log_success "Domain setup completed on Uberspace!"
+        echo ""
+        log_info "Important: Configure your DNS records to point to your Uberspace server:"
+        echo "  A: $CMS_DOMAIN -> [Uberspace IP]"
+        echo "  A: www.$CMS_DOMAIN -> [Uberspace IP]"
+        echo ""
+        echo "To get your Uberspace IP address, run:"
+        echo "  ssh $UBERSPACE_USER@$UBERSPACE_HOST 'uberspace web domain list'"
+    else
+        log_error "Failed to setup domain automatically"
+        echo ""
+        log_info "Please setup manually:"
+        echo "  1. SSH to Uberspace: ssh $UBERSPACE_USER@$UBERSPACE_HOST"
+        echo "  2. Add domains:"
+        echo "     uberspace web domain add $CMS_DOMAIN"
+        echo "     uberspace web domain add www.$CMS_DOMAIN"
+        echo "  3. Create symlinks:"
+        echo "     cd /var/www/virtual/$UBERSPACE_USER"
+        echo "     ln -s html/$UBERSPACE_FOLDER/public $CMS_DOMAIN"
+        echo "     ln -s html/$UBERSPACE_FOLDER/public www.$CMS_DOMAIN"
+        return 1
     fi
 }
 
@@ -1133,7 +1516,7 @@ final_steps() {
             echo "2. Wait for frontend deployment to complete (check Netlify dashboard)"
             echo "3. Deploy CMS to Uberspace:"
             echo "   ssh $UBERSPACE_USER@$UBERSPACE_HOST"
-            echo "   git clone https://github.com/$(gh api user --jq '.login')/$CMS_REPO.git \$HOME/html/cms.$PROJECT_NAME"
+            echo "   git clone https://github.com/$(gh api user --jq '.login')/$CMS_REPO.git \$HOME/html/$UBERSPACE_FOLDER"
             echo "   # Configure domain if needed: uberspace web domain add $CMS_DOMAIN"
             echo "4. Set up initial content (run setup again or manual upload)"
             echo "5. Access your CMS at: https://$CMS_DOMAIN/panel"
@@ -1141,8 +1524,8 @@ final_steps() {
             echo "7. Test that content changes trigger frontend rebuilds"
             echo ""
             echo "Useful commands:"
-            echo "  - Manual deploy: ssh $UBERSPACE_USER@$UBERSPACE_HOST 'cd \$HOME/html/cms.$PROJECT_NAME && git pull'"
-            echo "  - Check deployment: ssh $UBERSPACE_USER@$UBERSPACE_HOST 'ls -la \$HOME/html/cms.$PROJECT_NAME'"
+            echo "  - Manual deploy: ssh $UBERSPACE_USER@$UBERSPACE_HOST 'cd \$HOME/html/$UBERSPACE_FOLDER && git pull'"
+            echo "  - Check deployment: ssh $UBERSPACE_USER@$UBERSPACE_HOST 'ls -la \$HOME/html/$UBERSPACE_FOLDER'"
             ;;
         "custom")
             echo "1. Verify environment variables are set:"
@@ -1251,12 +1634,22 @@ setup_content_only() {
     CMS_DOMAIN=$(prompt_input "Enter your CMS domain" "${UBERSPACE_USER}.uber.space")
     CMS_HOSTING="uberspace"
 
+    # Determine Uberspace folder name based on domain
+    if [[ "$CMS_DOMAIN" != *".uber.space" ]]; then
+        # Use domain name as folder name for custom domains
+        UBERSPACE_FOLDER="$CMS_DOMAIN"
+    else
+        # Fall back to cms.projectname for .uber.space domains
+        UBERSPACE_FOLDER="cms.$PROJECT_NAME"
+    fi
+
     echo ""
     log_info "Configuration:"
     echo "  Project name: $PROJECT_NAME"
     echo "  Uberspace user: $UBERSPACE_USER"
     echo "  Uberspace host: $UBERSPACE_HOST"
     echo "  CMS domain: $CMS_DOMAIN"
+    echo "  Uberspace folder: $UBERSPACE_FOLDER"
     echo ""
 
     if confirm "Is this configuration correct?"; then
