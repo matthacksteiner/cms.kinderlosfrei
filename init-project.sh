@@ -23,12 +23,6 @@ if [ -f "baukasten-default-content.zip" ]; then
       echo "✓ Removed existing content"
     fi
 
-    # Remove existing languages if present
-    if [ -d "site/languages" ]; then
-      rm -rf site/languages
-      echo "✓ Removed existing languages"
-    fi
-
     # Extract default content
     echo "Extracting default content..."
     if unzip -o -q baukasten-default-content.zip; then
@@ -42,27 +36,12 @@ if [ -f "baukasten-default-content.zip" ]; then
         echo "✓ Content moved to root directory"
       fi
 
-      # Handle nested directory structures - look for languages folder and move to site/ if needed
-      languages_dir=$(find . -name "languages" -type d -not -path "./site/languages" | head -1)
-      if [ -n "$languages_dir" ] && [ "$languages_dir" != "./site/languages" ]; then
-        echo "Moving languages from $languages_dir to site/..."
-        mkdir -p site/
-        mv "$languages_dir" ./site/languages
-        echo "✓ Languages moved to site/ directory"
-      fi
-
       # Set proper permissions for content folder
       if [ -d "content" ]; then
         chmod -R 755 content/
         echo "✓ Set permissions for content folder"
       else
         echo "⚠️  Warning: content folder not found after extraction"
-      fi
-
-      # Set proper permissions for languages folder
-      if [ -d "site/languages" ]; then
-        chmod -R 755 site/languages/
-        echo "✓ Set permissions for languages folder"
       fi
 
       echo "✓ Default content setup complete!"
