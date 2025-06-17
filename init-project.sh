@@ -128,13 +128,21 @@ else
   # Note: deploy.yml is kept as it's a useful template for GitHub Actions deployment
 fi
 
-# THIRD: Ensure default German language file exists
+# THIRD: Set up clean language configuration with only German
 echo "Setting up default language configuration..."
-mkdir -p site/languages
 
-if [ ! -f "site/languages/de.php" ]; then
-  echo "Creating default German language file..."
-  cat > site/languages/de.php << 'EOF'
+# Ensure languages directory exists and is empty
+if [ -d "site/languages" ]; then
+  rm -rf site/languages/*
+  echo "✓ Cleared existing language files"
+else
+  mkdir -p site/languages
+  echo "✓ Created languages directory"
+fi
+
+# Create only the German language file
+echo "Creating default German language file..."
+cat > site/languages/de.php << 'EOF'
 <?php
 
 return [
@@ -151,10 +159,8 @@ return [
     'url' => NULL
 ];
 EOF
-  echo "✓ Created default German language file"
-else
-  echo "✓ German language file already exists"
-fi
+echo "✓ Created default German language file"
+echo "✓ Language configuration complete!"
 
 # Create a basic .env file for child repositories
 echo "Creating basic .env file for child repository..."

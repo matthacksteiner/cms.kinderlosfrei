@@ -479,7 +479,7 @@ gather_project_info() {
                 CMS_HOSTING="uberspace"
                 UBERSPACE_USER=$(prompt_input "Enter your Uberspace username" "fifth")
                 UBERSPACE_HOST=$(prompt_input "Enter your Uberspace host" "lacerta.uberspace.de")
-                local default_domain="${UBERSPACE_USER}.uber.space"
+                local default_domain="cms.${PROJECT_NAME}.matthiashacksteiner.net"
 
                 # CMS domain input and validation loop
                 local cms_domain_valid=false
@@ -1595,7 +1595,7 @@ setup_content_only() {
     PROJECT_NAME=$(prompt_input "Enter your project name" "my-portfolio")
     UBERSPACE_USER=$(prompt_input "Enter your Uberspace username" "fifth")
     UBERSPACE_HOST=$(prompt_input "Enter your Uberspace host" "lacerta.uberspace.de")
-    CMS_DOMAIN=$(prompt_input "Enter your CMS domain" "cms.${PROJECT_NAME}.matthiashacksteiner.net")
+    CMS_DOMAIN=$(prompt_input "Enter your CMS domain" "${UBERSPACE_USER}.uber.space")
     CMS_HOSTING="uberspace"
 
     # Determine Uberspace folder name based on domain
