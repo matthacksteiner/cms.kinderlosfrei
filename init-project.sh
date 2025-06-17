@@ -59,7 +59,30 @@ else
   # Note: deploy.yml is kept as it's a useful template for GitHub Actions deployment
 fi
 
+# Handle content folder replacement
+echo ""
+echo "Replacing template content with default content..."
+
+if [ -f "baukasten-default-content.zip" ]; then
+    if [ -d "content" ]; then
+        rm -rf content
+        echo "✓ Removed template content"
+    fi
+
+    echo "Extracting default content..."
+    if unzip -q "baukasten-default-content.zip" -d .; then
+        echo "✓ Extracted default content"
+        rm "baukasten-default-content.zip"
+        echo "✓ Removed baukasten-default-content.zip"
+    else
+        echo "⚠️  Failed to extract content"
+    fi
+else
+    echo "⚠️  Warning: baukasten-default-content.zip not found in current directory"
+fi
+
 # Create a basic .env file for child repositories
+echo ""
 echo "Creating basic .env file for child repository..."
 cat > .env << 'EOF'
 # Kirby CMS Environment Variables

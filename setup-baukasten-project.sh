@@ -647,10 +647,10 @@ clone_and_setup_repos() {
     # Setup frontend environment
     log_info "Setting up frontend environment..."
     cat > .env << EOF
-DEBUG_MODE=false
-KIRBY_URL=https://$CMS_DOMAIN
-NETLIFY_URL=https://$DOMAIN_NAME
-EOF
+    DEBUG_MODE=false
+    KIRBY_URL=https://$CMS_DOMAIN
+    NETLIFY_URL=https://$DOMAIN_NAME
+    EOF
 
     # Initial commit for frontend (only if there are changes)
     git add .
