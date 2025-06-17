@@ -17,7 +17,8 @@ __MACOSX
 /public/media
 /public/assets/dist
 /kirby
-site/languages
+site/languages/*
+!site/languages/de.php
 
 site/plugins/*
 !site/plugins/baukasten-blocks/

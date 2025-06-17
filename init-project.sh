@@ -132,17 +132,17 @@ fi
 echo "Setting up default language configuration..."
 
 # Ensure languages directory exists and is empty
-if [ -d "site/languages" ]; then
+    if [ -d "site/languages" ]; then
   rm -rf site/languages/*
   echo "✓ Cleared existing language files"
 else
   mkdir -p site/languages
   echo "✓ Created languages directory"
-fi
+      fi
 
 # Create only the German language file
-echo "Creating default German language file..."
-cat > site/languages/de.php << 'EOF'
+  echo "Creating default German language file..."
+  cat > site/languages/de.php << 'EOF'
 <?php
 
 return [
@@ -159,7 +159,7 @@ return [
     'url' => NULL
 ];
 EOF
-echo "✓ Created default German language file"
+  echo "✓ Created default German language file"
 echo "✓ Language configuration complete!"
 
 # Create a basic .env file for child repositories
