@@ -18,6 +18,7 @@ tabs:
             multiple: false
             type: files
             help: "Dieses Bild dient als Anzeigebild in der Übersicht."
+            required: true
             uploads:
               template: pixel
           description:
