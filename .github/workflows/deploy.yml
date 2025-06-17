@@ -9,6 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Create target directory
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.UBERSPACE_HOST }}
+          username: ${{ secrets.UBERSPACE_USER }}
+          key: ${{ secrets.DEPLOY_KEY_PRIVATE }}
+          script: |
+            mkdir -p /home/${{ secrets.UBERSPACE_USER }}/html/${{ secrets.UBERSPACE_PATH }}
       - name: Rsync Deployments Action
         uses: Burnett01/rsync-deployments@6.0.0
         with:

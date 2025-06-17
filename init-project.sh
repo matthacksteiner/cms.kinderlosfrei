@@ -56,7 +56,7 @@ else
     echo "✗ child-repositories.json not found"
   fi
 
-  # Note: deploy.yml is kept as it's needed for GitHub Actions deployment
+  # Note: deploy.yml is kept as it's a useful template for GitHub Actions deployment
 fi
 
 # Create a basic .env file for child repositories

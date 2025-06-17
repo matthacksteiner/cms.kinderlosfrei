@@ -888,7 +888,7 @@ DEPLOY_URL=$DEPLOY_HOOK_URL
 # For GitHub Actions deployment, add these secrets to your repository:
 # - UBERSPACE_HOST: $UBERSPACE_HOST
 # - UBERSPACE_USER: $UBERSPACE_USER
-# - UBERSPACE_PATH: html/$UBERSPACE_FOLDER
+# - UBERSPACE_PATH: $UBERSPACE_FOLDER
 # - DEPLOY_KEY_PRIVATE: (your SSH private key for Uberspace)
 # - DEPLOY_URL: $DEPLOY_HOOK_URL
 EOF
@@ -932,7 +932,7 @@ setup_github_secrets() {
     if [ "$CMS_HOSTING" = "uberspace" ]; then
         gh secret set UBERSPACE_HOST --body "$UBERSPACE_HOST" --repo "$github_user/$CMS_REPO"
         gh secret set UBERSPACE_USER --body "$UBERSPACE_USER" --repo "$github_user/$CMS_REPO"
-        gh secret set UBERSPACE_PATH --body "html/$UBERSPACE_FOLDER" --repo "$github_user/$CMS_REPO"
+        gh secret set UBERSPACE_PATH --body "$UBERSPACE_FOLDER" --repo "$github_user/$CMS_REPO"
 
         # Use existing SSH key for GitHub Actions
         setup_ssh_deployment_key "$github_user" "$CMS_REPO"
@@ -1035,14 +1035,22 @@ setup_github_actions() {
     local work_dir="$HOME/Sites"
     local github_user=$(gh api user --jq '.login')
 
-    # Setup GitHub Actions for CMS deployment to Uberspace
+    # Setup GitHub Actions for CMS deployment
     cd "$work_dir/$CMS_REPO"
 
-    log_info "Creating GitHub Actions workflow for CMS deployment..."
+    log_info "Setting up GitHub Actions workflow for CMS deployment..."
     mkdir -p .github/workflows
 
     if [ "$CMS_HOSTING" = "uberspace" ]; then
-        cat > .github/workflows/deploy.yml << 'EOF'
+        # Copy the deployment workflow from the template
+        if [ -f "$SCRIPT_DIR/.github/workflows/deploy.yml" ]; then
+            log_info "Copying Uberspace deployment workflow from template..."
+            cp "$SCRIPT_DIR/.github/workflows/deploy.yml" .github/workflows/deploy.yml
+            log_success "Uberspace deployment workflow copied successfully"
+        else
+            log_warning "Template deploy.yml not found, creating basic workflow..."
+            # Fallback to inline generation if template file is missing
+            cat > .github/workflows/deploy.yml << 'EOF'
 # Warning: deletes all files on uberspace which are not in repo, use without --delete if unsure
 name: Deploy2uberspace
 on:
@@ -1105,7 +1113,10 @@ jobs:
             rm -rf kirby
             composer install --no-interaction --prefer-dist --optimize-autoloader
 EOF
+        fi
     else
+        # Create a simple workflow for custom hosting
+        log_info "Creating custom hosting deployment workflow..."
         cat > .github/workflows/deploy.yml << 'EOF'
 name: Deploy CMS
 
@@ -1136,7 +1147,7 @@ jobs:
 EOF
     fi
 
-    log_success "GitHub Actions workflow created"
+    log_success "GitHub Actions workflow configured"
 
     # Commit and push the workflow
     git add .github/workflows/deploy.yml
@@ -1474,13 +1485,13 @@ test_setup() {
     # Test frontend deployment
     cd "$work_dir/$FRONTEND_REPO"
     log_info "Triggering frontend deployment..."
-    git commit --allow-empty -m "Test deployment" || log_warning "Empty commit failed - repository might be up to date"
+    git commit --allow-empty -m "Initial deployment trigger from setup script" || log_warning "Empty commit failed - repository might be up to date"
     git push || log_warning "Push failed - repository might already be up to date"
 
     # Test CMS deployment
     cd "$work_dir/$CMS_REPO"
     log_info "Triggering CMS deployment..."
-    git commit --allow-empty -m "Test deployment" || log_warning "Empty commit failed - repository might be up to date"
+    git commit --allow-empty -m "Initial deployment trigger from setup script" || log_warning "Empty commit failed - repository might be up to date"
     git push || log_warning "Push failed - repository might already be up to date"
 
     echo ""
@@ -1514,14 +1525,18 @@ final_steps() {
             echo "     • KIRBY_URL = https://$CMS_DOMAIN"
             echo "     • NETLIFY_URL = https://$DOMAIN_NAME"
             echo "2. Wait for frontend deployment to complete (check Netlify dashboard)"
-            echo "3. Deploy CMS to Uberspace:"
+            echo "3. Initialize CMS project (remove template files):"
+            echo "   cd $HOME/Sites/$CMS_REPO"
+            echo "   ./init-project.sh"
+            echo "   git add . && git commit -m \"Initialize project: remove template files\" && git push"
+            echo "4. Deploy CMS to Uberspace:"
             echo "   ssh $UBERSPACE_USER@$UBERSPACE_HOST"
             echo "   git clone https://github.com/$(gh api user --jq '.login')/$CMS_REPO.git \$HOME/html/$UBERSPACE_FOLDER"
             echo "   # Configure domain if needed: uberspace web domain add $CMS_DOMAIN"
-            echo "4. Set up initial content (run setup again or manual upload)"
-            echo "5. Access your CMS at: https://$CMS_DOMAIN/panel"
-            echo "6. Create your admin user account"
-            echo "7. Test that content changes trigger frontend rebuilds"
+            echo "5. Set up initial content (run setup again or manual upload)"
+            echo "6. Access your CMS at: https://$CMS_DOMAIN/panel"
+            echo "7. Create your admin user account"
+            echo "8. Test that content changes trigger frontend rebuilds"
             echo ""
             echo "Useful commands:"
             echo "  - Manual deploy: ssh $UBERSPACE_USER@$UBERSPACE_HOST 'cd \$HOME/html/$UBERSPACE_FOLDER && git pull'"
@@ -1534,12 +1549,16 @@ final_steps() {
             echo "     • KIRBY_URL = https://$CMS_DOMAIN"
             echo "     • NETLIFY_URL = https://$DOMAIN_NAME"
             echo "2. Wait for frontend deployment to complete (check Netlify dashboard)"
-            echo "3. Deploy CMS to your PHP hosting provider manually"
-            echo "4. Ensure PHP 8.1+ and required extensions (GD, mbstring, etc.) are available"
-            echo "5. Access your CMS at: https://$CMS_DOMAIN/panel"
-            echo "6. Create your admin user account"
-            echo "7. Add some content"
-            echo "8. Test that content changes trigger frontend rebuilds"
+            echo "3. Initialize CMS project (remove template files):"
+            echo "   cd $HOME/Sites/$CMS_REPO"
+            echo "   ./init-project.sh"
+            echo "   git add . && git commit -m \"Initialize project: remove template files\" && git push"
+            echo "4. Deploy CMS to your PHP hosting provider manually"
+            echo "5. Ensure PHP 8.1+ and required extensions (GD, mbstring, etc.) are available"
+            echo "6. Access your CMS at: https://$CMS_DOMAIN/panel"
+            echo "7. Create your admin user account"
+            echo "8. Add some content"
+            echo "9. Test that content changes trigger frontend rebuilds"
             echo ""
             echo "Useful commands:"
             echo "  - Deploy CMS: Follow your hosting provider's deployment process"
@@ -1551,23 +1570,6 @@ final_steps() {
     echo "  - Frontend: $HOME/Sites/$FRONTEND_REPO"
     echo "  - CMS: $HOME/Sites/$CMS_REPO"
     echo ""
-    echo "Common commands:"
-    echo "  - Local frontend dev: cd $HOME/Sites/$FRONTEND_REPO && npm run dev"
-    echo "  - Deploy frontend: cd $HOME/Sites/$FRONTEND_REPO && git push"
-    echo ""
-    echo "Need help? Check the documentation:"
-    echo "  - Frontend: $HOME/Sites/$FRONTEND_REPO/docs/"
-    echo "  - CMS: $HOME/Sites/$CMS_REPO/docs/"
-    echo ""
-
-    if [ "$CMS_HOSTING" = "uberspace" ]; then
-        echo "Uberspace specific notes:"
-        echo "  - Your CMS repository includes deployment instructions in .env"
-        echo "  - Use 'uberspace web log' to check for errors"
-        echo "  - PHP errors: 'tail -f ~/logs/error_log'"
-        echo "  - Uberspace documentation: https://manual.uberspace.de/"
-        echo ""
-    fi
 
     log_success "Setup complete! 🚀"
 }
