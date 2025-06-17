@@ -647,10 +647,10 @@ clone_and_setup_repos() {
     # Setup frontend environment
     log_info "Setting up frontend environment..."
     cat > .env << EOF
-    DEBUG_MODE=false
-    KIRBY_URL=https://$CMS_DOMAIN
-    NETLIFY_URL=https://$DOMAIN_NAME
-    EOF
+DEBUG_MODE=false
+KIRBY_URL=https://$CMS_DOMAIN
+NETLIFY_URL=https://$DOMAIN_NAME
+EOF
 
     # Initial commit for frontend (only if there are changes)
     git add .
@@ -1050,7 +1050,7 @@ setup_github_actions() {
         else
             log_warning "Template deploy.yml not found, creating basic workflow..."
             # Fallback to inline generation if template file is missing
-            cat > .github/workflows/deploy.yml << 'EOF'
+        cat > .github/workflows/deploy.yml << 'EOF'
 # Warning: deletes all files on uberspace which are not in repo, use without --delete if unsure
 name: Deploy2uberspace
 on:
@@ -1519,49 +1519,11 @@ final_steps() {
 
     case "$CMS_HOSTING" in
         "uberspace")
-            echo "1. Verify environment variables are set:"
-            echo "   - Go to: https://app.netlify.com/sites/$NETLIFY_SITE_ID/settings/env"
-            echo "   - Ensure these variables exist:"
-            echo "     • KIRBY_URL = https://$CMS_DOMAIN"
-            echo "     • NETLIFY_URL = https://$DOMAIN_NAME"
-            echo "2. Wait for frontend deployment to complete (check Netlify dashboard)"
-            echo "3. Initialize CMS project (remove template files):"
+            echo "1. Open CMS project locally and run the initialize script (remove template files):"
             echo "   cd $HOME/Sites/$CMS_REPO"
             echo "   ./init-project.sh"
             echo "   git add . && git commit -m \"Initialize project: remove template files\" && git push"
-            echo "4. Deploy CMS to Uberspace:"
-            echo "   ssh $UBERSPACE_USER@$UBERSPACE_HOST"
-            echo "   git clone https://github.com/$(gh api user --jq '.login')/$CMS_REPO.git \$HOME/html/$UBERSPACE_FOLDER"
-            echo "   # Configure domain if needed: uberspace web domain add $CMS_DOMAIN"
-            echo "5. Set up initial content (run setup again or manual upload)"
-            echo "6. Access your CMS at: https://$CMS_DOMAIN/panel"
-            echo "7. Create your admin user account"
-            echo "8. Test that content changes trigger frontend rebuilds"
-            echo ""
-            echo "Useful commands:"
-            echo "  - Manual deploy: ssh $UBERSPACE_USER@$UBERSPACE_HOST 'cd \$HOME/html/$UBERSPACE_FOLDER && git pull'"
-            echo "  - Check deployment: ssh $UBERSPACE_USER@$UBERSPACE_HOST 'ls -la \$HOME/html/$UBERSPACE_FOLDER'"
-            ;;
-        "custom")
-            echo "1. Verify environment variables are set:"
-            echo "   - Go to: https://app.netlify.com/sites/$NETLIFY_SITE_ID/settings/env"
-            echo "   - Ensure these variables exist:"
-            echo "     • KIRBY_URL = https://$CMS_DOMAIN"
-            echo "     • NETLIFY_URL = https://$DOMAIN_NAME"
-            echo "2. Wait for frontend deployment to complete (check Netlify dashboard)"
-            echo "3. Initialize CMS project (remove template files):"
-            echo "   cd $HOME/Sites/$CMS_REPO"
-            echo "   ./init-project.sh"
-            echo "   git add . && git commit -m \"Initialize project: remove template files\" && git push"
-            echo "4. Deploy CMS to your PHP hosting provider manually"
-            echo "5. Ensure PHP 8.1+ and required extensions (GD, mbstring, etc.) are available"
-            echo "6. Access your CMS at: https://$CMS_DOMAIN/panel"
-            echo "7. Create your admin user account"
-            echo "8. Add some content"
-            echo "9. Test that content changes trigger frontend rebuilds"
-            echo ""
-            echo "Useful commands:"
-            echo "  - Deploy CMS: Follow your hosting provider's deployment process"
+            echo "2. Access your CMS at: https://$CMS_DOMAIN/panel"
             ;;
     esac
 

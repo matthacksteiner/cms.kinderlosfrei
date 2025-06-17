@@ -59,30 +59,59 @@ else
   # Note: deploy.yml is kept as it's a useful template for GitHub Actions deployment
 fi
 
-# Handle content folder replacement
-echo ""
-echo "Replacing template content with default content..."
-
+# Setup default content if available
 if [ -f "baukasten-default-content.zip" ]; then
+  echo "Found baukasten-default-content.zip, setting up default content..."
+
+  # Check if unzip is available
+  if ! command -v unzip &> /dev/null; then
+    echo "⚠️  Warning: unzip command not found. Please install unzip to extract default content."
+    echo "Default content setup skipped."
+  else
+    # Backup existing content if present
     if [ -d "content" ]; then
-        rm -rf content
-        echo "✓ Removed template content"
+      backup_name="content.backup.$(date +%s)"
+      mv content "$backup_name"
+      echo "✓ Backed up existing content to $backup_name"
     fi
 
+    # Extract default content
     echo "Extracting default content..."
-    if unzip -q "baukasten-default-content.zip" -d .; then
-        echo "✓ Extracted default content"
-        rm "baukasten-default-content.zip"
-        echo "✓ Removed baukasten-default-content.zip"
+    if unzip -o -q baukasten-default-content.zip; then
+      echo "✓ Default content extracted successfully"
+
+      # Handle nested directory structures - look for content folder and move to root if needed
+      content_dir=$(find . -name "content" -type d -not -path "./content" | head -1)
+      if [ -n "$content_dir" ] && [ "$content_dir" != "./content" ]; then
+        echo "Moving content from $content_dir to root..."
+        mv "$content_dir" ./content
+        echo "✓ Content moved to root directory"
+      fi
+
+      # Set proper permissions for content folder
+      if [ -d "content" ]; then
+        chmod -R 755 content/
+        echo "✓ Set permissions for content folder"
+      else
+        echo "⚠️  Warning: content folder not found after extraction"
+      fi
+
+      # Remove the zip file after successful extraction
+      rm baukasten-default-content.zip
+      echo "✓ Removed baukasten-default-content.zip"
+
+      echo "✓ Default content setup complete!"
     else
-        echo "⚠️  Failed to extract content"
+      echo "✗ Failed to extract default content"
+      echo "The baukasten-default-content.zip file may be corrupted or invalid."
+      echo "Please check the file and try again manually."
     fi
+  fi
 else
-    echo "⚠️  Warning: baukasten-default-content.zip not found in current directory"
+  echo "No baukasten-default-content.zip found, skipping default content setup."
 fi
 
 # Create a basic .env file for child repositories
-echo ""
 echo "Creating basic .env file for child repository..."
 cat > .env << 'EOF'
 # Kirby CMS Environment Variables
