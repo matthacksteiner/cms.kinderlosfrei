@@ -1293,6 +1293,42 @@ setup_initial_content() {
             echo \"Warning: content folder not found after extraction\"
         fi
 
+        # Set up clean language configuration with only German
+        echo \"Setting up language configuration...\"
+
+        # Ensure site directory exists
+        mkdir -p site
+
+        # Handle languages directory
+        if [ -d site/languages ]; then
+            rm -rf site/languages/*
+            echo \"Cleared existing language files\"
+        else
+            mkdir -p site/languages
+            echo \"Created languages directory\"
+        fi
+
+        # Create only the German language file
+        cat > site/languages/de.php << 'EOFPHP'
+<?php
+
+return [
+    'code' => 'de',
+    'default' => true,
+    'direction' => 'ltr',
+    'locale' => [
+        'LC_ALL' => 'de_DE'
+    ],
+    'name' => 'Deutsch',
+    'translations' => [
+
+    ],
+    'url' => NULL
+];
+EOFPHP
+        chmod 755 site/languages/de.php
+        echo \"Created default German language file\"
+
         # Run initialization script to remove template files
         echo \"Running initialization script to clean up template files...\"
         if [ -f init-project.sh ]; then
