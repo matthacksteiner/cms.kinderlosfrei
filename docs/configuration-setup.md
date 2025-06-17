@@ -57,6 +57,64 @@ The project uses the [kirby3-dotenv plugin](https://github.com/bnomei/kirby3-dot
 - **`KIRBY_DEBUG`**: Enable/disable debug mode (default: false in production)
 - **`KIRBY_CACHE`**: Enable/disable caching (default: true)
 
+### .env File Setup
+
+The `.env` file contains environment-specific configuration:
+
+```bash
+# Kirby CMS Environment Variables
+DEPLOY_URL=https://yourdomain.com
+```
+
+### Language Configuration
+
+#### Default Language Setup
+
+New projects automatically receive a default German language configuration. The `init-project.sh` script:
+
+1. **Extracts languages from default content**: If `baukasten-default-content.zip` contains a `languages` folder, it will be extracted to `site/languages/`
+2. **Creates default German language**: If no German language file exists, creates `site/languages/de.php` with German as the default language
+3. **Ensures single default**: Sets German as the only default language and sets other languages to `default => false`
+
+#### Language File Structure
+
+Language files are located in `site/languages/` and follow this structure:
+
+```php
+<?php
+// site/languages/de.php
+return [
+    'code' => 'de',
+    'default' => true,        // Only one language should be default
+    'direction' => 'ltr',
+    'locale' => [
+        'LC_ALL' => 'de_DE'
+    ],
+    'name' => 'Deutsch',
+    'translations' => [
+        // Custom translations go here
+    ],
+    'url' => NULL
+];
+```
+
+#### Multi-language Setup
+
+To add additional languages:
+
+1. Create language files in `site/languages/` (e.g., `en.php`, `fr.php`)
+2. Set `default => false` for non-default languages
+3. Configure language-specific URLs if needed
+4. Add translations in the `translations` array
+
+#### Deployment Considerations
+
+The GitHub Actions deployment workflow excludes the `languages` folder to allow different websites to have different language configurations. This means:
+
+- **Template level**: Languages are included in `baukasten-default-content.zip`
+- **Project level**: Each project maintains its own language configuration
+- **Deployment**: Language files are not overwritten during deployment
+
 ## Main Configuration (`site/config/config.php`)
 
 The central configuration file contains several key settings:
@@ -252,3 +310,9 @@ This provides detailed error messages and debugging information.
 - Use CDN for media files
 - Optimize database queries if using custom plugins
 - Enable gzip compression at server level
+
+## Content Configuration
+
+### Default Content System
+
+// ... existing code ...

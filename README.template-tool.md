@@ -135,3 +135,78 @@ The template includes a deployment workflow (`.github/workflows/deploy.yml`) con
 ---
 
 **Note**: This file is automatically removed when initializing a new project from this template.
+
+# Baukasten CMS Template Tool Guide
+
+This document explains how to maintain and update the Baukasten CMS template.
+
+## Template Structure
+
+The template includes several maintenance files:
+
+- `setup-baukasten-project.sh` - Sets up new child repositories
+- `init-project.sh` - Initializes child projects after template use
+- `update-template-version.sh` - Updates template versions
+- `.templateignore` - Files to exclude from child repositories
+- `baukasten-default-content.zip` - Default content package
+
+## Updating Default Content Package
+
+The `baukasten-default-content.zip` should include:
+
+### Content Structure
+
+- `content/` - Default content pages and structure
+- `site/languages/` - Default language configuration
+
+### Creating the Content Package
+
+When updating the default content package:
+
+1. **Include current content**: Package the `content/` folder with representative content
+2. **Include language configuration**: Package the `site/languages/` folder with:
+   - `de.php` (German as default language)
+   - Any additional languages needed for the template
+3. **Maintain structure**: Ensure the zip maintains the correct directory structure
+
+Example command to create the package:
+
+```bash
+# From the template root directory
+zip -r baukasten-default-content.zip content/ site/languages/
+```
+
+### Language Configuration in Default Content
+
+The default content should include:
+
+- **German (de.php)**: Set as default language (`'default' => true`)
+- **Additional languages**: Set as non-default (`'default' => false`)
+
+This ensures that new projects have:
+
+- A working default language configuration
+- Consistent language setup across projects
+- Flexibility to add more languages per project
+
+### Template vs Project Language Handling
+
+**Template Level (this repository)**:
+
+- Languages are packaged in `baukasten-default-content.zip`
+- Template can be updated with new language configurations
+- Changes propagate to new projects using the template
+
+**Project Level (child repositories)**:
+
+- Languages are excluded from deployment (`deploy.yml` excludes `languages`)
+- Each project maintains its own language configuration
+- Projects can customize languages without affecting template
+
+**Deployment Level**:
+
+- GitHub Actions excludes `languages` folder during deployment
+- Allows different staging/production language setups
+- Prevents accidental overwriting of project-specific languages
+
+## Child Repository Management

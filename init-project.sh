@@ -75,6 +75,13 @@ if [ -f "baukasten-default-content.zip" ]; then
       echo "✓ Backed up existing content to $backup_name"
     fi
 
+    # Backup existing languages if present
+    if [ -d "site/languages" ]; then
+      backup_name="site/languages.backup.$(date +%s)"
+      mv site/languages "$backup_name"
+      echo "✓ Backed up existing languages to $backup_name"
+    fi
+
     # Extract default content
     echo "Extracting default content..."
     if unzip -o -q baukasten-default-content.zip; then
@@ -88,12 +95,27 @@ if [ -f "baukasten-default-content.zip" ]; then
         echo "✓ Content moved to root directory"
       fi
 
+      # Handle nested directory structures - look for languages folder and move to site/ if needed
+      languages_dir=$(find . -name "languages" -type d -not -path "./site/languages" | head -1)
+      if [ -n "$languages_dir" ] && [ "$languages_dir" != "./site/languages" ]; then
+        echo "Moving languages from $languages_dir to site/..."
+        mkdir -p site/
+        mv "$languages_dir" ./site/languages
+        echo "✓ Languages moved to site/ directory"
+      fi
+
       # Set proper permissions for content folder
       if [ -d "content" ]; then
         chmod -R 755 content/
         echo "✓ Set permissions for content folder"
       else
         echo "⚠️  Warning: content folder not found after extraction"
+      fi
+
+      # Set proper permissions for languages folder
+      if [ -d "site/languages" ]; then
+        chmod -R 755 site/languages/
+        echo "✓ Set permissions for languages folder"
       fi
 
       # Remove the zip file after successful extraction
@@ -110,6 +132,62 @@ if [ -f "baukasten-default-content.zip" ]; then
 else
   echo "No baukasten-default-content.zip found, skipping default content setup."
 fi
+
+# Ensure default German language file exists
+echo "Setting up default language configuration..."
+mkdir -p site/languages
+
+if [ ! -f "site/languages/de.php" ]; then
+  echo "Creating default German language file..."
+  cat > site/languages/de.php << 'EOF'
+<?php
+
+return [
+    'code' => 'de',
+    'default' => true,
+    'direction' => 'ltr',
+    'locale' => [
+        'LC_ALL' => 'de_DE'
+    ],
+    'name' => 'Deutsch',
+    'translations' => [
+
+    ],
+    'url' => NULL
+];
+EOF
+  echo "✓ Created default German language file"
+else
+  echo "✓ German language file already exists"
+fi
+
+# Ensure German is set as default language
+if [ -f "site/languages/de.php" ]; then
+  # Check if German is already set as default
+  if ! grep -q "'default' => true" site/languages/de.php; then
+    echo "Setting German as default language..."
+    # Use sed to update the default setting
+    sed -i.bak "s/'default' => false/'default' => true/g" site/languages/de.php
+    rm site/languages/de.php.bak 2>/dev/null || true
+    echo "✓ German language set as default"
+  else
+    echo "✓ German is already set as default language"
+  fi
+
+  # Ensure other language files have default => false
+  for lang_file in site/languages/*.php; do
+    if [ "$lang_file" != "site/languages/de.php" ] && [ -f "$lang_file" ]; then
+      if grep -q "'default' => true" "$lang_file"; then
+        echo "Updating $(basename "$lang_file") to not be default..."
+        sed -i.bak "s/'default' => true/'default' => false/g" "$lang_file"
+        rm "${lang_file}.bak" 2>/dev/null || true
+        echo "✓ Updated $(basename "$lang_file")"
+      fi
+    fi
+  done
+fi
+
+echo "✓ Language configuration complete!"
 
 # Create a basic .env file for child repositories
 echo "Creating basic .env file for child repository..."
