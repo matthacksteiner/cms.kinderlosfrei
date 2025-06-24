@@ -64,7 +64,7 @@ remove_template_files() {
         # Fallback for backwards compatibility
         for file in "init-project.sh" "setup-baukasten-project.sh" "update-template-version.sh" \
                    ".github/workflows/update-cms-child-repos.yml" ".github/child-repositories.json" \
-                   "README.template-tool.md" "baukasten-default-content.zip" ".env" ".env.example" \
+                   "README.template-tool.md" ".env" ".env.example" \
                    "herd.yml" ".templateignore"; do
             if [ -f "$file" ] || [ -d "$file" ]; then
                 if git show template/main:"$file" >/dev/null 2>&1; then

@@ -8,54 +8,7 @@
 
 echo "Initializing Kirby CMS project by removing template maintenance files..."
 
-# FIRST: Setup default content if available (before removing template files)
-if [ -f "baukasten-default-content.zip" ]; then
-  echo "Found baukasten-default-content.zip, setting up default content..."
-
-  # Check if unzip is available
-  if ! command -v unzip &> /dev/null; then
-    echo "⚠️  Warning: unzip command not found. Please install unzip to extract default content."
-    echo "Default content setup skipped."
-  else
-    # Remove existing content if present
-    if [ -d "content" ]; then
-      rm -rf content
-      echo "✓ Removed existing content"
-    fi
-
-    # Extract default content
-    echo "Extracting default content..."
-    if unzip -o -q baukasten-default-content.zip; then
-      echo "✓ Default content extracted successfully"
-
-      # Handle nested directory structures - look for content folder and move to root if needed
-      content_dir=$(find . -name "content" -type d -not -path "./content" | head -1)
-      if [ -n "$content_dir" ] && [ "$content_dir" != "./content" ]; then
-        echo "Moving content from $content_dir to root..."
-        mv "$content_dir" ./content
-        echo "✓ Content moved to root directory"
-      fi
-
-      # Set proper permissions for content folder
-      if [ -d "content" ]; then
-        chmod -R 755 content/
-        echo "✓ Set permissions for content folder"
-      else
-        echo "⚠️  Warning: content folder not found after extraction"
-      fi
-
-      echo "✓ Default content setup complete!"
-    else
-      echo "✗ Failed to extract default content"
-      echo "The baukasten-default-content.zip file may be corrupted or invalid."
-      echo "Please check the file and try again manually."
-    fi
-  fi
-else
-  echo "No baukasten-default-content.zip found, skipping default content setup."
-fi
-
-# SECOND: Remove template files (including the zip file after it's been used)
+# Remove template files
 # Read files to remove from .templateignore
 if [ -f ".templateignore" ]; then
   echo "Reading template files to remove from .templateignore..."

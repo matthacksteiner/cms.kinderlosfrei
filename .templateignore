@@ -15,8 +15,7 @@ init-project.sh
 setup-baukasten-project.sh
 update-template-version.sh
 
-# Default content package
-baukasten-default-content.zip
+
 
 # Environment files (child repositories will have their own)
 .env

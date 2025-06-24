@@ -70,11 +70,7 @@ DEPLOY_URL=https://yourdomain.com
 
 #### Default Language Setup
 
-New projects automatically receive a default German language configuration. The `init-project.sh` script:
-
-1. **Extracts languages from default content**: If `baukasten-default-content.zip` contains a `languages` folder, it will be extracted to `site/languages/`
-2. **Creates default German language**: If no German language file exists, creates `site/languages/de.php` with German as the default language
-3. **Ensures single default**: Sets German as the only default language and sets other languages to `default => false`
+New projects automatically receive a default German language configuration.
 
 #### Language File Structure
 
@@ -111,7 +107,6 @@ To add additional languages:
 
 The GitHub Actions deployment workflow excludes the `languages` folder to allow different websites to have different language configurations. This means:
 
-- **Template level**: Languages are included in `baukasten-default-content.zip`
 - **Project level**: Each project maintains its own language configuration
 - **Deployment**: Language files are not overwritten during deployment
 
