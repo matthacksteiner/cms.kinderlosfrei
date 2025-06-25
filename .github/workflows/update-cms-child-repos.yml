@@ -363,6 +363,18 @@ jobs:
 
             git checkout "$DEFAULT_BRANCH"
 
+            # After fetching template remote, before merge or dry-run logic
+            echo "==========================================="
+            echo "🔄 Comparing: $REPO_NAME"
+            echo "==========================================="
+            echo "🔍 Diff summary between template and $REPO_NAME:"
+            git fetch template
+            git diff --stat template/main..main || echo "No differences found."
+            echo ""
+            echo "🔍 First 20 lines of diff:"
+            git diff --color=always template/main..main | head -20 || echo "No differences found."
+            echo ""
+
             if [[ "$DRY_RUN" == "true" ]]; then
               echo "DRY RUN: Would create branch $UNIQUE_BRANCH_NAME and merge CMS template changes"
               cd ..
