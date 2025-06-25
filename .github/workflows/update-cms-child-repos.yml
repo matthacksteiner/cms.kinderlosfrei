@@ -154,6 +154,14 @@ jobs:
           echo "https://x-access-token:${GITHUB_TOKEN}@github.com" > "$TEMP_DIR/.git-credentials"
           chmod 600 "$TEMP_DIR/.git-credentials"
 
+          # Initialize GitHub Actions Summary
+          echo "# 🔄 CMS Template Update Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Mode:** $(if [[ "$DRY_RUN" == "true" ]]; then echo "🧪 Dry Run"; else echo "🚀 Live Update"; fi)" >> $GITHUB_STEP_SUMMARY
+          echo "**Conflict Strategy:** $CONFLICT_STRATEGY" >> $GITHUB_STEP_SUMMARY
+          echo "**Create PR:** $CREATE_PR" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
           # Read template ignore list with better error handling
           TEMPLATE_IGNORE_FILE="$GITHUB_WORKSPACE/.templateignore"
           if [[ -f "$TEMPLATE_IGNORE_FILE" ]]; then
@@ -165,6 +173,179 @@ jobs:
             echo "Warning: .templateignore file not found, using default exclusions"
             TEMPLATE_IGNORE_LIST=".github/workflows/update-cms-child-repos.yml|.github/child-repositories.json"
           fi
+
+          # Enhanced visual formatting functions
+          print_header() {
+            local title="$1"
+            local char="${2:-=}"
+            local length=60
+            printf '\n%s\n' "$(printf '%*s' "$length" '' | tr ' ' "$char")"
+            printf '🏷️  %s\n' "$title"
+            printf '%s\n' "$(printf '%*s' "$length" '' | tr ' ' "$char")"
+          }
+
+          print_status() {
+            local status="$1"
+            local message="$2"
+            case "$status" in
+              "success") echo "✅ $message" ;;
+              "warning") echo "⚠️  $message" ;;
+              "error") echo "❌ $message" ;;
+              "info") echo "ℹ️  $message" ;;
+              "processing") echo "🔄 $message" ;;
+              *) echo "📝 $message" ;;
+            esac
+          }
+
+          # Enhanced diff analysis function
+          analyze_changes() {
+            local repo_name="$1"
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "## 📊 Analysis: $repo_name" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            # Get comprehensive diff statistics
+            local added_files=$(git diff --name-status template/main..HEAD | grep -c '^A' || echo "0")
+            local modified_files=$(git diff --name-status template/main..HEAD | grep -c '^M' || echo "0")
+            local deleted_files=$(git diff --name-status template/main..HEAD | grep -c '^D' || echo "0")
+            local total_files=$(git diff --name-only template/main..HEAD | wc -l || echo "0")
+
+            # Line changes statistics
+            local line_stats=$(git diff --numstat template/main..HEAD | awk '{added+=$1; deleted+=$2} END {printf "%d +%d -%d", added+deleted, added, deleted}')
+
+            if [[ "$total_files" -eq 0 ]]; then
+              echo "🎯 **Status:** Up to date - No changes needed" >> $GITHUB_STEP_SUMMARY
+              print_status "info" "Repository $repo_name is already up to date"
+              return 0
+            fi
+
+            # Create visual summary table
+            echo "| Metric | Count |" >> $GITHUB_STEP_SUMMARY
+            echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+            echo "| 📁 Total Files Changed | $total_files |" >> $GITHUB_STEP_SUMMARY
+            echo "| ➕ Files Added | $added_files |" >> $GITHUB_STEP_SUMMARY
+            echo "| 📝 Files Modified | $modified_files |" >> $GITHUB_STEP_SUMMARY
+            echo "| ❌ Files Deleted | $deleted_files |" >> $GITHUB_STEP_SUMMARY
+            echo "| 📊 Line Changes | $line_stats |" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            # Categorize files by type
+            echo "<details><summary>📋 Detailed File Changes</summary>" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### File Categories" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            # Configuration files
+            local config_files=$(git diff --name-only template/main..HEAD | grep -E '\.(yml|yaml|json|php|js|ts)$' || echo "")
+            if [[ -n "$config_files" ]]; then
+              echo "**⚙️ Configuration Files:**" >> $GITHUB_STEP_SUMMARY
+              while IFS= read -r file; do
+                [[ -n "$file" ]] && echo "- \`$file\`" >> $GITHUB_STEP_SUMMARY
+              done <<< "$config_files"
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            # Documentation files
+            local doc_files=$(git diff --name-only template/main..HEAD | grep -E '\.(md|txt|rst)$' || echo "")
+            if [[ -n "$doc_files" ]]; then
+              echo "**📚 Documentation:**" >> $GITHUB_STEP_SUMMARY
+              while IFS= read -r file; do
+                [[ -n "$file" ]] && echo "- \`$file\`" >> $GITHUB_STEP_SUMMARY
+              done <<< "$doc_files"
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            # Template/Blueprint files (CMS specific)
+            local template_files=$(git diff --name-only template/main..HEAD | grep -E 'blueprints/|templates/|models/|controllers/' || echo "")
+            if [[ -n "$template_files" ]]; then
+              echo "**🏗️ CMS Structure (Blueprints/Templates):**" >> $GITHUB_STEP_SUMMARY
+              while IFS= read -r file; do
+                [[ -n "$file" ]] && echo "- \`$file\`" >> $GITHUB_STEP_SUMMARY
+              done <<< "$template_files"
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            # Plugin files
+            local plugin_files=$(git diff --name-only template/main..HEAD | grep -E 'plugins/' || echo "")
+            if [[ -n "$plugin_files" ]]; then
+              echo "**🔌 Plugins:**" >> $GITHUB_STEP_SUMMARY
+              while IFS= read -r file; do
+                [[ -n "$file" ]] && echo "- \`$file\`" >> $GITHUB_STEP_SUMMARY
+              done <<< "$plugin_files"
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            # Other files
+            local other_files=$(git diff --name-only template/main..HEAD | grep -vE '\.(yml|yaml|json|php|js|ts|md|txt|rst)$|blueprints/|templates/|models/|controllers/|plugins/' || echo "")
+            if [[ -n "$other_files" ]]; then
+              echo "**📄 Other Files:**" >> $GITHUB_STEP_SUMMARY
+              while IFS= read -r file; do
+                [[ -n "$file" ]] && echo "- \`$file\`" >> $GITHUB_STEP_SUMMARY
+              done <<< "$other_files"
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            echo "</details>" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            # Risk assessment
+            local risk_level="🟢 Low"
+            if [[ "$total_files" -gt 20 ]] || [[ "$modified_files" -gt 10 ]]; then
+              risk_level="🟡 Medium"
+            fi
+            if [[ "$total_files" -gt 50 ]] || [[ "$deleted_files" -gt 5 ]] || echo "$config_files" | grep -q "config\.php\|composer\.json"; then
+              risk_level="🔴 High"
+            fi
+
+            echo "**🎯 Risk Assessment:** $risk_level" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            # Show diff preview
+            echo "<details><summary>🔍 Diff Preview (First 50 lines)</summary>" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo '```diff' >> $GITHUB_STEP_SUMMARY
+            git diff template/main..HEAD | head -50 >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            echo "</details>" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            return 1  # Indicates changes were found
+          }
+
+          # Enhanced conflict prediction function
+          predict_conflicts() {
+            local repo_name="$1"
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### 🔮 Conflict Prediction" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            # Get files that exist in both template and child repo
+            local common_files=$(comm -12 <(git ls-tree -r --name-only template/main | sort) <(git ls-tree -r --name-only HEAD | sort))
+            local potential_conflicts=0
+
+            if [[ -n "$common_files" ]]; then
+              echo "**Files with potential conflicts:**" >> $GITHUB_STEP_SUMMARY
+              while IFS= read -r file; do
+                [[ -z "$file" ]] && continue
+
+                # Check if file has different content
+                if ! git diff --quiet template/main:$file HEAD:$file 2>/dev/null; then
+                  echo "- ⚠️ \`$file\`" >> $GITHUB_STEP_SUMMARY
+                  potential_conflicts=$((potential_conflicts + 1))
+                fi
+              done <<< "$common_files"
+
+              if [[ "$potential_conflicts" -eq 0 ]]; then
+                echo "- ✅ No conflicts predicted" >> $GITHUB_STEP_SUMMARY
+              fi
+            else
+              echo "- ✅ No common files found - minimal conflict risk" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Conflict Risk:** $(if [[ "$potential_conflicts" -eq 0 ]]; then echo "🟢 Low"; elif [[ "$potential_conflicts" -lt 5 ]]; then echo "🟡 Medium"; else echo "🔴 High"; fi)" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+          }
 
           # Function to safely remove template-specific files
           remove_template_files() {
@@ -292,18 +473,24 @@ jobs:
           ERROR_REPOS=()
           NO_CHANGES_REPOS=()
 
+          # Add repositories overview to summary
+          echo "## 📋 Repositories Overview" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          REPO_COUNT=$(echo "$REPOSITORIES" | wc -l)
+          echo "**Total repositories to process:** $REPO_COUNT" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
           # Process each repository with improved error handling
           while IFS= read -r REPO_URL; do
             [[ -z "$REPO_URL" ]] && continue
 
             TOTAL_REPOS=$((TOTAL_REPOS + 1))
-            echo "==========================================="
-            echo "Processing CMS repository $TOTAL_REPOS: $REPO_URL"
-            echo "==========================================="
+            print_header "Processing CMS repository $TOTAL_REPOS: $(basename "$REPO_URL" .git)"
+            print_status "processing" "Starting analysis of $(basename "$REPO_URL" .git)"
 
             # Enhanced URL validation with stricter regex
             if [[ ! "$REPO_URL" =~ ^https://github\.com/[a-zA-Z0-9._-]+/[a-zA-Z0-9._-]+(\.git)?/?$ ]]; then
-              echo "Error: Invalid repository URL format: $REPO_URL"
+              print_status "error" "Invalid repository URL format: $REPO_URL"
               ERROR_COUNT=$((ERROR_COUNT + 1))
               ERROR_REPOS+=("$REPO_URL")
               continue
@@ -322,7 +509,7 @@ jobs:
             [[ -d "$REPO_DIR" ]] && rm -rf "$REPO_DIR"
 
             # Clone with retry logic
-            echo "Cloning CMS repository..."
+            print_status "processing" "Cloning CMS repository..."
             REPO_URL_WITH_TOKEN=$(echo "$REPO_URL" | sed -e "s|https://|https://x-access-token:$GITHUB_TOKEN@|")
 
             RETRY_COUNT=0
@@ -334,13 +521,13 @@ jobs:
 
               RETRY_COUNT=$((RETRY_COUNT + 1))
               if [[ $RETRY_COUNT -eq $MAX_RETRIES ]]; then
-                echo "Error: Failed to clone repository after $MAX_RETRIES attempts: $REPO_URL"
+                print_status "error" "Failed to clone repository after $MAX_RETRIES attempts: $REPO_URL"
                 ERROR_COUNT=$((ERROR_COUNT + 1))
                 ERROR_REPOS+=("$REPO_NAME")
                 continue 2
               fi
 
-              echo "Clone attempt $RETRY_COUNT failed, retrying in 5 seconds..."
+              print_status "warning" "Clone attempt $RETRY_COUNT failed, retrying in 5 seconds..."
               sleep 5
             done
 
@@ -352,9 +539,9 @@ jobs:
               DEFAULT_BRANCH="main"
             elif git show-ref --verify --quiet refs/remotes/origin/master; then
               DEFAULT_BRANCH="master"
-              echo "Using master branch as default"
+              print_status "info" "Using master branch as default"
             else
-              echo "Error: Neither main nor master branch found"
+              print_status "error" "Neither main nor master branch found"
               cd ..
               ERROR_COUNT=$((ERROR_COUNT + 1))
               ERROR_REPOS+=("$REPO_NAME")
@@ -363,42 +550,18 @@ jobs:
 
             git checkout "$DEFAULT_BRANCH"
 
-            # After fetching template remote, before merge or dry-run logic
-            echo "==========================================="
-            echo "🔄 Comparing: $REPO_NAME"
-            echo "==========================================="
-            echo "🔍 Diff summary between template and $REPO_NAME:"
-            git fetch template
-            git diff --stat template/main..main || echo "No differences found."
-            echo ""
-            echo "🔍 First 20 lines of diff:"
-            git diff --color=always template/main..main | head -20 || echo "No differences found."
-            echo ""
-
-            if [[ "$DRY_RUN" == "true" ]]; then
-              echo "DRY RUN: Would create branch $UNIQUE_BRANCH_NAME and merge CMS template changes"
-              cd ..
-              SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
-              SUCCESS_REPOS+=("$REPO_NAME")
-              continue
-            fi
-
-            # Create new branch
-            echo "Creating branch: $UNIQUE_BRANCH_NAME"
-            git checkout -b "$UNIQUE_BRANCH_NAME"
-
             # Add template remote with error handling
-            echo "Adding CMS template remote..."
+            print_status "processing" "Adding CMS template remote..."
             TEMPLATE_URL_WITH_TOKEN="https://x-access-token:$GITHUB_TOKEN@github.com/${{ github.repository }}.git"
 
             if ! git remote add template "$TEMPLATE_URL_WITH_TOKEN"; then
-              echo "Warning: Template remote might already exist, removing and re-adding..."
+              print_status "warning" "Template remote might already exist, removing and re-adding..."
               git remote remove template || true
               git remote add template "$TEMPLATE_URL_WITH_TOKEN"
             fi
 
             # Fetch template changes with retry
-            echo "Fetching CMS template changes..."
+            print_status "processing" "Fetching CMS template changes..."
             RETRY_COUNT=0
             while [[ $RETRY_COUNT -lt $MAX_RETRIES ]]; do
               if git fetch template; then
@@ -407,43 +570,79 @@ jobs:
 
               RETRY_COUNT=$((RETRY_COUNT + 1))
               if [[ $RETRY_COUNT -eq $MAX_RETRIES ]]; then
-                echo "Error: Failed to fetch template changes after $MAX_RETRIES attempts"
+                print_status "error" "Failed to fetch template changes after $MAX_RETRIES attempts"
                 cd ..
                 ERROR_COUNT=$((ERROR_COUNT + 1))
                 ERROR_REPOS+=("$REPO_NAME")
                 continue 2
               fi
 
-              echo "Fetch attempt $RETRY_COUNT failed, retrying in 5 seconds..."
+              print_status "warning" "Fetch attempt $RETRY_COUNT failed, retrying in 5 seconds..."
               sleep 5
             done
 
+            # Enhanced analysis of changes
+            if analyze_changes "$REPO_NAME"; then
+              print_status "info" "Repository $REPO_NAME is already up to date"
+              cd ..
+              NO_CHANGES_COUNT=$((NO_CHANGES_COUNT + 1))
+              NO_CHANGES_REPOS+=("$REPO_NAME")
+              continue
+            fi
+
+            # Predict conflicts before attempting merge
+            predict_conflicts "$REPO_NAME"
+
+            if [[ "$DRY_RUN" == "true" ]]; then
+              print_status "info" "DRY RUN: Would create branch $UNIQUE_BRANCH_NAME and merge CMS template changes"
+              cd ..
+              SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
+              SUCCESS_REPOS+=("$REPO_NAME")
+              continue
+            fi
+
+            # Create new branch
+            print_status "processing" "Creating branch: $UNIQUE_BRANCH_NAME"
+            git checkout -b "$UNIQUE_BRANCH_NAME"
+
             # Merge template changes
-            echo "Merging CMS template changes..."
+            print_status "processing" "Merging CMS template changes..."
             CONFLICTS=false
 
             if ! git merge template/main --no-edit; then
-              echo "Merge conflicts detected"
+              print_status "warning" "Merge conflicts detected"
+
+              # Log conflict details to summary
+              echo "### ⚠️ Conflicts Detected in $REPO_NAME" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "**Conflicting files:**" >> $GITHUB_STEP_SUMMARY
+              git diff --name-only --diff-filter=U | while read file; do
+                echo "- \`$file\`" >> $GITHUB_STEP_SUMMARY
+              done
+              echo "" >> $GITHUB_STEP_SUMMARY
 
               # Check if conflicts are only on template files
               ONLY_TEMPLATE_CONFLICTS=$(check_template_only_conflicts)
 
               if [[ "$ONLY_TEMPLATE_CONFLICTS" == "true" ]]; then
-                echo "✅ Conflicts are only on template-ignored files, auto-resolving..."
+                print_status "success" "Conflicts are only on template-ignored files, auto-resolving..."
+                echo "**Resolution:** Auto-resolved (template files only)" >> $GITHUB_STEP_SUMMARY
+                echo "" >> $GITHUB_STEP_SUMMARY
+
                 if auto_resolve_template_conflicts; then
                   # Security: Use safe commit message
                   if ! git commit -m "$(printf '%s' "$COMMIT_MESSAGE")" \
                       -m "Auto-resolved conflicts on template-ignored files"; then
-                    echo "Error: Failed to commit auto-resolved conflicts"
+                    print_status "error" "Failed to commit auto-resolved conflicts"
                     cd ..
                     ERROR_COUNT=$((ERROR_COUNT + 1))
                     ERROR_REPOS+=("$REPO_NAME")
                     continue
                   fi
                 else
-                  echo "❌ Failed to auto-resolve template conflicts"
+                  print_status "error" "Failed to auto-resolve template conflicts"
                   if [[ "$CONFLICT_STRATEGY" == "abort-on-conflicts" ]]; then
-                    echo "Aborting merge due to conflicts"
+                    print_status "info" "Aborting merge due to conflicts"
                     git merge --abort
                     cd ..
                     ERROR_COUNT=$((ERROR_COUNT + 1))
@@ -452,7 +651,10 @@ jobs:
                   fi
                 fi
               else
-                echo "❌ Real conflicts detected on non-template files"
+                print_status "error" "Real conflicts detected on non-template files"
+                echo "**Resolution:** Manual intervention required" >> $GITHUB_STEP_SUMMARY
+                echo "" >> $GITHUB_STEP_SUMMARY
+
                 CONFLICTS=true
                 CONFLICT_COUNT=$((CONFLICT_COUNT + 1))
                 CONFLICT_REPOS+=("$REPO_NAME")
@@ -464,7 +666,7 @@ jobs:
                 done < <(git diff --name-only --diff-filter=U || echo "Unable to determine conflict files")
 
                 if [[ "$CONFLICT_STRATEGY" == "abort-on-conflicts" ]]; then
-                  echo "Aborting merge due to conflicts"
+                  print_status "info" "Aborting merge due to conflicts"
                   git merge --abort
                   cd ..
                   continue
@@ -475,7 +677,7 @@ jobs:
                   if ! git commit -m "$(printf '%s [CONTAINS CONFLICTS]' "$COMMIT_MESSAGE")" \
                       -m "This commit contains merge conflicts that need to be resolved manually:" \
                       -m "$(printf '%s' "$CONFLICT_FILES")"; then
-                    echo "Error: Failed to commit conflicts"
+                    print_status "error" "Failed to commit conflicts"
                     cd ..
                     ERROR_COUNT=$((ERROR_COUNT + 1))
                     ERROR_REPOS+=("$REPO_NAME")
@@ -484,12 +686,12 @@ jobs:
                 fi
               fi
             else
-              echo "Successfully merged CMS template changes without conflicts"
+              print_status "success" "Successfully merged CMS template changes without conflicts"
 
               # Check if the merge actually introduced any changes
               if git diff --quiet HEAD~1 HEAD; then
-                echo "✅ Merge completed but no changes were introduced"
-                echo "CMS template and child repository were already in sync"
+                print_status "info" "Merge completed but no changes were introduced"
+                print_status "info" "CMS template and child repository were already in sync"
 
                 # Reset to previous commit to clean up the empty merge
                 git reset --hard HEAD~1
@@ -507,7 +709,7 @@ jobs:
               TEMPLATE_FILES_REMOVED=$(remove_template_files)
 
               if [[ "$TEMPLATE_FILES_REMOVED" == "true" ]]; then
-                echo "Committing removal of template-specific files..."
+                print_status "processing" "Committing removal of template-specific files..."
                 git add .
                 git commit -m "Remove template-specific files from child repository" --allow-empty
               fi
@@ -517,9 +719,9 @@ jobs:
             fi
 
             # Push changes with error handling
-            echo "Pushing changes to remote..."
+            print_status "processing" "Pushing changes to remote..."
             if ! git push -f origin "$UNIQUE_BRANCH_NAME"; then
-              echo "Error: Failed to push branch"
+              print_status "error" "Failed to push branch"
               cd ..
               ERROR_COUNT=$((ERROR_COUNT + 1))
               ERROR_REPOS+=("$REPO_NAME")
@@ -528,11 +730,11 @@ jobs:
 
             # If there were no conflicts, merge the update branch into default branch and push
             if [[ "$CONFLICTS" == "false" ]]; then
-              echo "Merging changes into $DEFAULT_BRANCH..."
+              print_status "processing" "Merging changes into $DEFAULT_BRANCH..."
 
               # Ensure working directory is clean before checkout
               if ! git diff --quiet || ! git diff --cached --quiet; then
-                echo "Working directory not clean, committing remaining changes..."
+                print_status "info" "Working directory not clean, committing remaining changes..."
                 git add .
                 git commit -m "Finalize template update changes" --allow-empty
               fi
@@ -541,32 +743,32 @@ jobs:
               git merge "$UNIQUE_BRANCH_NAME"
 
               if ! git push origin "$DEFAULT_BRANCH"; then
-                echo "Error: Failed to push to $DEFAULT_BRANCH"
+                print_status "error" "Failed to push to $DEFAULT_BRANCH"
                 ERROR_COUNT=$((ERROR_COUNT + 1))
                 ERROR_REPOS+=("$REPO_NAME")
                 cd ..
                 continue
               fi
-              echo "Successfully updated $DEFAULT_BRANCH branch"
+              print_status "success" "Successfully updated $DEFAULT_BRANCH branch"
 
               # Delete temporary branch if requested
               if [[ "$DELETE_TEMP_BRANCH" == "true" ]]; then
-                echo "Deleting temporary branch: $UNIQUE_BRANCH_NAME"
+                print_status "processing" "Deleting temporary branch: $UNIQUE_BRANCH_NAME"
                 if git push origin --delete "$UNIQUE_BRANCH_NAME"; then
-                  echo "✅ Temporary branch deleted successfully"
+                  print_status "success" "Temporary branch deleted successfully"
                 else
-                  echo "⚠️  Warning: Failed to delete temporary branch"
+                  print_status "warning" "Failed to delete temporary branch"
                 fi
               fi
             fi
 
             # Create PR if requested
             if [[ "$CREATE_PR" == "true" ]]; then
-              echo "Creating pull request..."
+              print_status "processing" "Creating pull request..."
 
               # Verify gh CLI is available
               if ! command -v gh &> /dev/null; then
-                echo "Error: GitHub CLI not available"
+                print_status "error" "GitHub CLI not available"
                 cd ..
                 ERROR_COUNT=$((ERROR_COUNT + 1))
                 ERROR_REPOS+=("$REPO_NAME")
@@ -578,7 +780,7 @@ jobs:
 
               # Use GITHUB_TOKEN directly with gh CLI
               if ! echo "$GITHUB_TOKEN" | gh auth login --with-token; then
-                echo "Error: Failed to authenticate with GitHub CLI"
+                print_status "error" "Failed to authenticate with GitHub CLI"
                 cd ..
                 ERROR_COUNT=$((ERROR_COUNT + 1))
                 ERROR_REPOS+=("$REPO_NAME")
@@ -598,56 +800,76 @@ jobs:
                 --body "$PR_BODY" \
                 --base "$DEFAULT_BRANCH" \
                 --head "$UNIQUE_BRANCH_NAME"; then
-                echo "✅ Pull request created successfully"
+                print_status "success" "Pull request created successfully"
+
+                # Add PR link to summary
+                PR_URL="https://github.com/$(gh repo view --json owner,name -q '.owner.login + "/" + .name')/pull/$(gh pr view --json number -q '.number')"
+                echo "**PR Created:** [$PR_TITLE]($PR_URL)" >> $GITHUB_STEP_SUMMARY
+                echo "" >> $GITHUB_STEP_SUMMARY
               else
-                echo "Error: Failed to create pull request"
+                print_status "error" "Failed to create pull request"
                 ERROR_COUNT=$((ERROR_COUNT + 1))
                 ERROR_REPOS+=("$REPO_NAME")
               fi
             fi
 
             cd ..
-            echo "Completed processing CMS repository: $REPO_URL"
+            print_status "success" "Completed processing repository: $REPO_URL"
           done <<< "$REPOSITORIES"
 
           # Enhanced summary output
-          echo "==========================================="
-          echo "CMS REPOSITORIES UPDATE SUMMARY"
-          echo "==========================================="
+          print_header "CMS REPOSITORIES UPDATE SUMMARY" "="
           echo "Total CMS repositories processed: $TOTAL_REPOS"
           echo ""
 
+          # Add final summary to GitHub Actions Summary
+          echo "## 🎯 Final Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Status | Count | Repositories |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|--------------|" >> $GITHUB_STEP_SUMMARY
+
           # Output detailed results
           [[ ${#SUCCESS_REPOS[@]} -gt 0 ]] && {
-            echo "✅ SUCCESSFUL UPDATES ($SUCCESS_COUNT):"
+            print_status "success" "SUCCESSFUL UPDATES ($SUCCESS_COUNT):"
             printf "  • %s\n" "${SUCCESS_REPOS[@]}"
+            echo "| ✅ Success | $SUCCESS_COUNT | $(IFS=', '; echo "${SUCCESS_REPOS[*]}") |" >> $GITHUB_STEP_SUMMARY
             echo ""
           }
 
           [[ ${#NO_CHANGES_REPOS[@]} -gt 0 ]] && {
-            echo "ℹ️  NO CHANGES NEEDED ($NO_CHANGES_COUNT):"
+            print_status "info" "NO CHANGES NEEDED ($NO_CHANGES_COUNT):"
             printf "  • %s (already up to date)\n" "${NO_CHANGES_REPOS[@]}"
+            echo "| ℹ️ No Changes | $NO_CHANGES_COUNT | $(IFS=', '; echo "${NO_CHANGES_REPOS[*]}") |" >> $GITHUB_STEP_SUMMARY
             echo ""
           }
 
           [[ ${#CONFLICT_REPOS[@]} -gt 0 ]] && {
-            echo "⚠️  UPDATES WITH CONFLICTS ($CONFLICT_COUNT):"
+            print_status "warning" "UPDATES WITH CONFLICTS ($CONFLICT_COUNT):"
             printf "  • %s\n" "${CONFLICT_REPOS[@]}"
+            echo "| ⚠️ Conflicts | $CONFLICT_COUNT | $(IFS=', '; echo "${CONFLICT_REPOS[*]}") |" >> $GITHUB_STEP_SUMMARY
             echo ""
           }
 
           [[ ${#ERROR_REPOS[@]} -gt 0 ]] && {
-            echo "❌ ERRORS ENCOUNTERED ($ERROR_COUNT):"
+            print_status "error" "ERRORS ENCOUNTERED ($ERROR_COUNT):"
             printf "  • %s\n" "${ERROR_REPOS[@]}"
+            echo "| ❌ Errors | $ERROR_COUNT | $(IFS=', '; echo "${ERROR_REPOS[*]}") |" >> $GITHUB_STEP_SUMMARY
             echo ""
           }
 
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Total Processed:** $TOTAL_REPOS repositories" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
           # Set appropriate exit code
           if [[ "$ERROR_COUNT" -gt 0 ]]; then
-            echo "⚠️  Some CMS repositories failed to update"
+            print_status "warning" "Some CMS repositories failed to update"
+            echo "🎯 **Overall Status:** ⚠️ Completed with errors" >> $GITHUB_STEP_SUMMARY
             exit 1
           elif [[ "$CONFLICT_COUNT" -gt 0 ]]; then
-            echo "⚠️  Some CMS repositories have conflicts that need manual resolution"
+            print_status "warning" "Some CMS repositories have conflicts that need manual resolution"
+            echo "🎯 **Overall Status:** ⚠️ Completed with conflicts" >> $GITHUB_STEP_SUMMARY
           else
-            echo "✅ All CMS repositories updated successfully"
+            print_status "success" "All CMS repositories updated successfully"
+            echo "🎯 **Overall Status:** ✅ All updates successful" >> $GITHUB_STEP_SUMMARY
           fi
