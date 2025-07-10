@@ -114,11 +114,15 @@ tabs:
               placeholder:
                 label: Platzhalter
                 type: text
-    information:
-      label: Information
-      type: info
-      text: |
-        Dieses Formular wird mit Netlify Forms versendet.
+      information:
+        label: Information
+        type: info
+        text: |
+          Dieses Formular wird mit Netlify Forms versendet.
+
+          Netlify Konfiguration:
+          - **Formularerkennung aktivieren:** Netlify Dashboard → Forms
+          - **E-Mail Benachrichtigungen hinzufügen:** Project configuration → Notifications
   einstellungen:
     label: Einstellungen
     fields:
