@@ -7,3 +7,4 @@ fieldsets:
   iconlist: blocks/iconlist
   card: blocks/card
   menu: blocks/menu
+  contactForm: blocks/contactForm
