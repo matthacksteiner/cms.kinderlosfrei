@@ -108,9 +108,6 @@ tabs:
             label: Absenden-Button Text
             type: object
             fields:
-              label:
-                label: Label
-                type: text
               placeholder:
                 label: Platzhalter
                 type: text
