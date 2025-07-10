@@ -3,6 +3,7 @@ description:
 globs:
 alwaysApply: true
 ---
+
 # Baukasten Kirby CMS Rules
 
 You are an expert in Kirby CMS with a focus on headless implementations.
@@ -17,6 +18,7 @@ You are an expert in Kirby CMS with a focus on headless implementations.
 ## Project Structure
 
 The project follows this structure:
+
 ```
 content/             - Content folders for each section
 docs/                - All project documentation
@@ -102,6 +104,42 @@ vendor/              - Composer dependencies
 - Panel interface for content editors at /panel
 - Deploy triggers can automatically rebuild the frontend when content changes
 - Block preview functionality allows real-time content editing
+
+## Block Creation Standards
+
+When creating a new block type in the Baukasten system, the following requirements MUST be followed:
+
+### Blueprint Structure
+
+- Create a blueprint file in `site/blueprints/blocks/[blockname].yml` following the same structure as existing blocks
+- The block MUST be part of a fieldset defined in `site/blueprints/fields/fieldsets-*.yml`
+- Include appropriate field definitions with consistent naming conventions
+- Define proper field validation and help text where applicable
+
+### Plugin Integration
+
+- Add the new block type to the `baukasten-blocks` plugin in `site/plugins/baukasten-blocks/index.php`
+- Create a new case in the `getBlockArray()` function's switch statement for the block type
+- Follow the existing pattern for processing block content and converting it to the appropriate array structure
+- Handle any special field types (files, links, structures) using the established helper functions:
+  - `getImageArray()` for image files
+  - `getSvgArray()` for SVG files
+  - `getLinkArray()` for link objects
+  - `processBlocks()` for nested blocks
+  - `processMetadataAttributes()` for metadata handling
+
+### Frontend Compatibility
+
+- Ensure the block data structure is compatible with the corresponding Astro component in the frontend
+- The block content array should match the expected props structure in the Astro component
+- Convert boolean values appropriately using `toBool()` method
+- Process file references to include all necessary metadata (URL, alt text, dimensions, etc.)
+
+### Naming Conventions
+
+- Use camelCase for block type names in the blueprint filename
+- Follow the existing naming pattern: `Block[TypeName]` for the corresponding Astro component
+- Maintain consistency with existing field names and structures
 
 ## Plugin Structure
 

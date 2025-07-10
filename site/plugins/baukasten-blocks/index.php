@@ -265,6 +265,21 @@ function getBlockArray(\Kirby\Cms\Block $block)
             $blockArray['content']['image'] = $image;
             break;
 
+        case 'form':
+            $blockArray['content'] = $block->toArray()['content'];
+
+            // Process success page link if available
+            $successPage = [];
+            if ($block->successpage()->isNotEmpty()) {
+                $successPage = getLinkArray($block->successpage());
+            }
+            $blockArray['content']['successpage'] = $successPage;
+
+            // Convert boolean fields
+            $blockArray['content']['buttonlocal'] = $block->buttonlocal()->toBool(false);
+
+            break;
+
         default:
             $blockArray['content'] = $block->toArray()['content'];
             break;
