@@ -48,6 +48,7 @@ tabs:
           firstname:
             type: object
             label: Vorname Feld
+            width: 1/2
             fields:
               label:
                 label: Label
@@ -61,6 +62,7 @@ tabs:
           lastname:
             type: object
             label: Nachname Feld
+            width: 1/2
             fields:
               label:
                 label: Label
@@ -74,6 +76,7 @@ tabs:
           email:
             type: object
             label: E-Mail Feld
+            width: 1/2
             fields:
               label:
                 label: Label
@@ -88,6 +91,7 @@ tabs:
           message:
             type: object
             label: Nachricht Feld
+            width: 1/2
             fields:
               label:
                 label: Label
@@ -107,10 +111,35 @@ tabs:
           submitButton:
             label: Absenden-Button Text
             type: object
+            width: 1/2
             fields:
               placeholder:
                 label: Platzhalter
                 type: text
+          successMessage:
+            label: Erfolgsmeldung
+            type: object
+            width: 1/1
+            fields:
+              text:
+                label: Text
+                type: textarea
+                buttons: false
+                rows: 3
+                default: Vielen Dank! Ihre Nachricht wurde erfolgreich versendet.
+                help: Text, der angezeigt wird, wenn das Formular erfolgreich abgeschickt wurde.
+          errorMessage:
+            label: Fehlermeldung
+            type: object
+            width: 1/1
+            fields:
+              text:
+                label: Text
+                type: textarea
+                default: Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.
+                buttons: false
+                rows: 3
+                help: Text, der angezeigt wird, wenn das Formular einen Fehler hat.
       information:
         label: Information
         type: info
