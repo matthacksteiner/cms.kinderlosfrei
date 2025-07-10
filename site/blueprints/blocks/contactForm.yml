@@ -185,7 +185,7 @@ tabs:
         default: left
         width: 1/4
       formBorderRadius:
-        label: Formular-Rand
+        label: Felder-Rundung
         type: number
         placeholder: 0
         after: px
