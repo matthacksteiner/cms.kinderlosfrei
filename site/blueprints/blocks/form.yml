@@ -66,19 +66,13 @@ tabs:
                 label: Label
                 type: text
                 default: Vorname
-                when:
-                  enabled: true
               placeholder:
                 label: Platzhalter
                 type: text
                 default: Ihr Vorname
-                when:
-                  enabled: true
               help:
                 label: Hilfe Text
                 type: text
-                when:
-                  enabled: true
           nachname:
             type: object
             label: Nachname Feld
@@ -87,19 +81,13 @@ tabs:
                 label: Label
                 type: text
                 default: Nachname
-                when:
-                  enabled: true
               placeholder:
                 label: Platzhalter
                 type: text
                 default: Ihr Nachname
-                when:
-                  enabled: true
               help:
                 label: Hilfe Text
                 type: text
-                when:
-                  enabled: true
           email:
             type: object
             label: E-Mail Feld
@@ -108,19 +96,13 @@ tabs:
                 label: Label
                 type: text
                 default: E-Mail
-                when:
-                  enabled: true
               placeholder:
                 label: Platzhalter
                 type: text
                 default: ihre@email.de
-                when:
-                  enabled: true
               help:
                 label: Hilfe Text
                 type: text
-                when:
-                  enabled: true
           nachricht:
             type: object
             label: Nachricht Feld
@@ -129,27 +111,19 @@ tabs:
                 label: Label
                 type: text
                 default: Nachricht
-                when:
-                  enabled: true
               placeholder:
                 label: Platzhalter
                 type: text
                 default: Ihre Nachricht an uns
-                when:
-                  enabled: true
               rows:
                 label: Zeilen
                 type: number
                 default: 5
                 min: 2
                 max: 10
-                when:
-                  enabled: true
               help:
                 label: Hilfe Text
                 type: text
-                when:
-                  enabled: true
   einstellungen:
     label: Einstellungen
     fields:

@@ -83,12 +83,12 @@
             "version": "4.4.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/bnomei/kirby3-janitor.git",
+                "url": "https://github.com/bnomei/kirby-janitor.git",
                 "reference": "c48d5b1fd2e5974f48d9ba08476c62b070aa830e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bnomei/kirby3-janitor/zipball/c48d5b1fd2e5974f48d9ba08476c62b070aa830e",
+                "url": "https://api.github.com/repos/bnomei/kirby-janitor/zipball/c48d5b1fd2e5974f48d9ba08476c62b070aa830e",
                 "reference": "c48d5b1fd2e5974f48d9ba08476c62b070aa830e",
                 "shasum": ""
             },
@@ -148,27 +148,9 @@
                 "render"
             ],
             "support": {
-                "issues": "https://github.com/bnomei/kirby3-janitor/issues",
-                "source": "https://github.com/bnomei/kirby3-janitor/tree/v4.4.2"
+                "issues": "https://github.com/bnomei/kirby-janitor/issues",
+                "source": "https://github.com/bnomei/kirby-janitor/tree/v4.4.2"
             },
-            "funding": [
-                {
-                    "url": "https://buymeacoff.ee/bnomei",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://paypal.me/bnomei",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/bnomei",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/bnomei",
-                    "type": "patreon"
-                }
-            ],
             "time": "2024-09-12T12:55:01+00:00"
         },
         {
