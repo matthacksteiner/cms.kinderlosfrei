@@ -184,6 +184,12 @@ tabs:
           right: Rechts
         default: left
         width: 1/3
+      formBorderRadius:
+        label: Formular-Rand
+        type: number
+        placeholder: 0
+        after: px
+        width: 1/3
       textHeadline:
         label: Text Einstellungen
         type: headline
