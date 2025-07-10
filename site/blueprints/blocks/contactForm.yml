@@ -164,7 +164,7 @@ tabs:
           medium: Mittel
           large: Groß
         default: medium
-        width: 1/3
+        width: 1/4
       formWidth:
         label: Formular-Breite
         type: select
@@ -174,7 +174,7 @@ tabs:
           medium: Mittel (50%)
           small: Klein (33%)
         default: full
-        width: 1/3
+        width: 1/4
       formAlign:
         label: Formular-Ausrichtung
         type: select
@@ -183,13 +183,13 @@ tabs:
           center: Zentriert
           right: Rechts
         default: left
-        width: 1/3
+        width: 1/4
       formBorderRadius:
         label: Formular-Rand
         type: number
         placeholder: 0
         after: px
-        width: 1/3
+        width: 1/4
       textHeadline:
         label: Text Einstellungen
         type: headline
