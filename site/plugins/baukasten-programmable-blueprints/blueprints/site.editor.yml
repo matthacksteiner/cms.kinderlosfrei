@@ -17,6 +17,15 @@ tabs:
             templates:
               - default
               - section
+          contentMainUnlisted:
+            headline: Unveröffentlicht
+            type: pages
+            status: unlisted
+            layout: list
+            size: small
+            templates:
+              - default
+              - section
           contentMain:
             headline: Veröffentlicht
             type: pages

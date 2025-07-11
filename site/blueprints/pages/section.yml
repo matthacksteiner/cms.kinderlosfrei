@@ -14,6 +14,14 @@ tabs:
         size: small
         templates:
           - item
+      contentMainUnlisted:
+        label: Unveröffentlicht
+        type: pages
+        status: unlisted
+        layout: list
+        size: small
+        templates:
+          - item
       contentMain:
         label: Veröffentlicht
         type: pages

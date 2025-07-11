@@ -336,7 +336,7 @@ function indexJsonData()
 {
 	$kirby = kirby();
 	$index = [];
-	foreach (site()->index() as $page) {
+	foreach (site()->index(true) as $page) {
 		// Skip pages that have coverOnly set to true
 		if ($page->intendedTemplate()->name() == 'item' && $page->coverOnly()->toBool(false)) {
 			continue;
@@ -349,6 +349,7 @@ function indexJsonData()
 		$index[] = [
 			"id"               => $page->id(),
 			"uri"              => $page->uri(),
+			"status"           => $page->status(),
 			"intendedTemplate" => $page->intendedTemplate()->name(),
 			"parent"           => $page->intendedTemplate()->name() == 'item'
 				? $page->parent()->uri()
