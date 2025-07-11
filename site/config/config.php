@@ -29,19 +29,6 @@ return [
 		'quality' => 99,
 		'format'  => 'webp',
 	],
-	'cache' => [
-		// Simple API cache for build performance
-		'api' => true
-	],
-	'hooks' => [
-		// Simple cache invalidation - only clear when content actually changes
-		'page.update:after' => function ($newPage, $oldPage) {
-			kirby()->cache('api')->flush();
-		},
-		'site.update:after' => function ($newSite, $oldSite) {
-			kirby()->cache('api')->flush();
-		}
-	],
 	'ready' => function () {
 		return [
 			'johannschopplich.deploy-trigger' => [
@@ -55,7 +42,7 @@ return [
 			'language' => '*',
 			'method'   => 'GET',
 			'action'   => function () {
-				return indexJsonCached();
+				return indexJson();
 			}
 		],
 		[
@@ -63,7 +50,7 @@ return [
 			'language' => '*',
 			'method'   => 'GET',
 			'action'   => function () {
-				return globalJsonCached();
+				return globalJson();
 			}
 		],
 		[
@@ -336,7 +323,7 @@ function indexJsonData()
 {
 	$kirby = kirby();
 	$index = [];
-	foreach (site()->index(true) as $page) {
+	foreach (site()->index() as $page) {
 		// Skip pages that have coverOnly set to true
 		if ($page->intendedTemplate()->name() == 'item' && $page->coverOnly()->toBool(false)) {
 			continue;
@@ -349,7 +336,6 @@ function indexJsonData()
 		$index[] = [
 			"id"               => $page->id(),
 			"uri"              => $page->uri(),
-			"status"           => $page->status(),
 			"intendedTemplate" => $page->intendedTemplate()->name(),
 			"parent"           => $page->intendedTemplate()->name() == 'item'
 				? $page->parent()->uri()
