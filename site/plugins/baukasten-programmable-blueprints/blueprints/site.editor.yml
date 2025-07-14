@@ -30,7 +30,7 @@ tabs:
             headline: Veröffentlicht
             type: pages
             sortable: false
-            status: published
+            status: listed
             layout: cardlets
             size: medium
             image: icon
