@@ -336,6 +336,7 @@ function indexJsonData()
 		$index[] = [
 			"id"               => $page->id(),
 			"uri"              => $page->uri(),
+			"status"           => $page->status(),
 			"intendedTemplate" => $page->intendedTemplate()->name(),
 			"parent"           => $page->intendedTemplate()->name() == 'item'
 				? $page->parent()->uri()

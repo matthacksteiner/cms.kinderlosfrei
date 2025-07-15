@@ -45,7 +45,16 @@ tabs:
       sidebar:
         width: 1/3
         sections:
-          contentMainSpecial:
+          contentMainHome:
+            headline: Startseite
+            type: pages
+            layout: list
+            size: small
+            image: icon
+            create: false
+            templates:
+              - home
+          contentMainError:
             headline: Error Seite
             type: pages
             layout: list
