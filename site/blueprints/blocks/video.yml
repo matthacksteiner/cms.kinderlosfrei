@@ -56,6 +56,13 @@ tabs:
         width: 1/2
         when:
           source: remote
+      info:
+        label: Info
+        type: info
+        width: 1/1
+        text: "Für externe Videosquellen kann nicht Original verwendet werden."
+        when:
+          source: remote
       width:
         label: Breite
         type: number
