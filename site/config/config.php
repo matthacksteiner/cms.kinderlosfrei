@@ -17,7 +17,6 @@ return [
 	],
 	'panel.install'   => true,
 	'date.handler'    => 'strftime',
-	'locale'          => 'de_AT.utf-8',
 	'languages'       => true,
 	'prefixDefaultLocale' => false,
 	'error'           => 'z-error',
