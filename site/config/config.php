@@ -269,6 +269,45 @@ function getAnalytics($site)
 	];
 }
 
+/**
+ * Get next and previous page navigation for pages within the same parent/section
+ */
+function getPageNavigation($page)
+{
+	if (!$page->parent()) {
+		return ['nextPage' => null, 'prevPage' => null];
+	}
+
+	// Get all siblings that are listed and not set as cover-only
+	$siblings = $page->parent()->children()->listed()->filter(function ($sibling) {
+		return !($sibling->intendedTemplate()->name() == 'item' && $sibling->coverOnly()->toBool(false));
+	});
+
+	$nextPage = null;
+	$prevPage = null;
+
+	// Use Kirby's built-in navigation methods with custom collection
+	if ($next = $page->nextListed($siblings)) {
+		$nextPage = [
+			'title' => (string) $next->title(),
+			'uri' => $next->uri(),
+			'id' => $next->id(),
+		];
+	}
+
+	if ($prev = $page->prevListed($siblings)) {
+		$prevPage = [
+			'title' => (string) $prev->title(),
+			'uri' => $prev->uri(),
+			'id' => $prev->id(),
+		];
+	}
+
+	return [
+		'nextPage' => $nextPage,
+		'prevPage' => $prevPage,
+	];
+}
 
 
 /**
@@ -299,7 +338,8 @@ function indexJsonData()
 			"coverOnly"        => $page->intendedTemplate()->name() == 'item'
 				? $page->coverOnly()->toBool(false)
 				: null,
-			"translations"     => $translations
+			"translations"     => $translations,
+			"navigation"       => getPageNavigation($page),
 		];
 	}
 	return $index;

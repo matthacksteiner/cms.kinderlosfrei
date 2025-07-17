@@ -5,3 +5,4 @@ fieldsets:
   divider: blocks/divider
   line: blocks/line
   code: blocks/code
+  navigation: blocks/navigation

@@ -83,3 +83,48 @@ details summary .k-writer {
 	height: auto;
 	object-fit: cover;
 }
+
+/* Navigation Block Preview Styles */
+.nav-preview {
+	padding: 0.75rem;
+	border-radius: 0.375rem;
+}
+
+.nav-buttons {
+	display: flex;
+	gap: 0.75rem;
+	align-items: center;
+}
+
+.nav-align--left {
+	justify-content: flex-start;
+}
+
+.nav-align--right {
+	justify-content: flex-end;
+}
+
+.nav-align--center {
+	justify-content: center;
+}
+
+.nav-align--between {
+	justify-content: space-between;
+}
+
+.nav-btn {
+	padding: 0.375rem 0.75rem;
+	border-radius: 0.25rem;
+	font-size: 0.875rem;
+	font-weight: 500;
+	border: 1px solid;
+	cursor: default;
+	white-space: nowrap;
+}
+
+.nav-btn--prev,
+.nav-btn--next {
+	background: #6c757d;
+	color: white;
+	border-color: #6c757d;
+}

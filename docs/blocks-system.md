@@ -1,335 +1,518 @@
-# Blocks System
+# Blocks System Documentation
 
-The Baukasten-CMS implements a comprehensive block-based content system that allows editors to build flexible page layouts using predefined content blocks. This system is central to the headless CMS architecture and provides structured content for the Astro frontend.
+The Baukasten CMS uses a comprehensive block-based content system that allows for flexible, structured content creation. Each block corresponds to a reusable component that can be configured through the Kirby Panel and rendered in the Astro frontend.
 
-## Overview
+## System Overview
 
 The blocks system consists of:
+- **Kirby Blueprints**: Define the structure and fields for content editors
+- **Kirby Block Processing**: Converts block data to JSON for the frontend
+- **Astro Components**: Render the blocks in the frontend
+- **TypeScript Definitions**: Provide type safety for block props
+- **Preview Components**: Optional previews in the Kirby Panel
 
-- **Block Blueprints**: YAML definitions in `site/blueprints/blocks/`
-- **Block Processing**: PHP logic in the `baukasten-blocks` plugin
-- **JSON Conversion**: Structured data output for frontend consumption
-- **Multi-language Support**: Localized block content
+## How to Create a New Block
 
-## Available Block Types
+Follow this comprehensive guide to create a new block in the Baukasten system:
 
-### Text Blocks
+### 1. Kirby CMS Implementation
 
-- **`text`**: Rich text content with formatting options
-- **`title`**: Headline blocks with configurable heading levels
-- **`code`**: Code blocks with syntax highlighting support
-
-### Media Blocks
-
-- **`image`**: Single images with responsive settings and copyright information
-- **`vector`**: SVG graphics and illustrations
-- **`slider`**: Image carousels with navigation controls
-- **`gallery`**: Photo galleries with lightbox functionality
-
-### Layout Blocks
-
-- **`columns`**: Multi-column layouts with flexible widths
-- **`grid`**: Complex grid layouts with nested content
-- **`divider`**: Visual separators and spacing elements
-- **`line`**: Horizontal rules and decorative lines
-
-### Interactive Blocks
-
-- **`button`**: Call-to-action buttons with link objects
-- **`buttonBar`**: Multiple buttons in a row
-- **`menu`**: Navigation menus with structured links
-- **`accordion`**: Collapsible content sections
-
-### Content Blocks
-
-- **`card`**: Content cards with images and text
-- **`quote`**: Blockquotes and testimonials
-- **`iconList`**: Lists with icon graphics
-
-## Block Blueprint Structure
-
-Blocks are defined as YAML blueprints in `site/blueprints/blocks/`. Here's an example of an image block:
+#### Step 1.1: Create the Blueprint
+Create a new blueprint file: `site/blueprints/blocks/[blockname].yml`
 
 ```yaml
-# site/blueprints/blocks/image.yml
-name: Image
-icon: image
-preview: image
-fields:
-  image:
-    label: Image
-    type: files
-    layout: cards
-    template: image
-    min: 1
-    max: 1
+name: Block Name (Display Name)
+icon: icon-name  # Choose from Kirby's icon set
 
-  alt:
-    label: Alt Text
-    type: text
-    help: Alternative text for accessibility
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      # Add your content fields here
+      toggle:
+        label: Enable Feature
+        type: toggle
+        default: true
+        width: 1/2
+      customText:
+        label: Custom Text
+        type: text
+        default: "Default text"
+        when:
+          toggle: true
+        width: 1/2
 
-  caption:
-    label: Caption
-    type: text
-
-  ratio:
-    label: Aspect Ratio (Desktop)
-    type: select
-    options:
-      16/9: 16:9 (Widescreen)
-      4/3: 4:3 (Standard)
-      1/1: 1:1 (Square)
-      3/2: 3:2 (Photo)
-
-  ratioMobile:
-    label: Aspect Ratio (Mobile)
-    type: select
-    options:
-      16/9: 16:9 (Widescreen)
-      4/3: 4:3 (Standard)
-      1/1: 1:1 (Square)
-
-  abovefold:
-    label: Above the Fold
-    type: toggle
-    help: Mark as priority for loading optimization
+  settings:
+    label: Einstellungen
+    fields:
+      info:
+        label: Info
+        type: info
+        text: |
+          Brief description of what this block does.
+      align:
+        extends: fields/align
+        label: Alignment
+        width: 1/4
+      # Add other common settings
+      buttonLocal:
+        extends: groups/buttonGroup
+        label: Button Styling
+      meta: fields/metadata
 ```
 
-## Block Processing
+#### Step 1.2: Add to Fieldsets
+Add your block to the appropriate fieldset in `site/blueprints/fields/fieldsets-*.yml`:
 
-The `baukasten-blocks` plugin handles the conversion of Kirby blocks to JSON format:
-
-### Main Processing Function
-
-```php
-function processBlocks($blocks) {
-    $result = [];
-    foreach ($blocks as $block) {
-        $blockData = getBlockArray($block);
-        if ($blockData) {
-            $result[] = $blockData;
-        }
-    }
-    return $result;
-}
+```yaml
+# For example, in fieldsets-elements.yml
+elements:
+  label: Elements
+  type: group
+  fieldsets:
+    # ... existing blocks ...
+    blockname:
+      extends: blocks/blockname
+      preview: blockname  # Optional: for preview
 ```
 
-### Individual Block Processing
-
-Each block type has specific processing logic:
-
-```php
-function getBlockArray(\Kirby\Cms\Block $block) {
-    $blockArray = [
-        "id"      => $block->id(),
-        "type"    => $block->type(),
-        "content" => [],
-    ];
-
-    switch ($block->type()) {
-        case 'image':
-            $blockArray['content'] = $block->toArray()['content'];
-            $image = null;
-            if ($file1 = $block->image()->toFile()) {
-                $ratioMobile = explode('/', $block->ratioMobile()->value());
-                $ratio       = explode('/', $block->ratio()->value());
-                $image       = getImageArray($file1, $ratio, $ratioMobile);
-
-                // Add copyright-specific properties
-                $image = array_merge($image, [
-                    'copyrighttoggle' => $file1->copyrighttoggle()->toBool(false),
-                    'copyrighttitle' => $file1->copyrightobject()->toObject()->copyrighttitle()->value(),
-                    // ... additional copyright fields
-                ]);
-            }
-            $blockArray['content']['abovefold'] = $block->abovefold()->toBool(false);
-            $blockArray['content']['image'] = $image;
-            break;
-
-        // ... other block types
-    }
-
-    return $blockArray;
-}
-```
-
-## Complex Layout Blocks
-
-### Columns Block
-
-The columns block allows for flexible multi-column layouts:
+#### Step 1.3: Add Block Processing
+Add a new case to the switch statement in `site/plugins/baukasten-blocks/index.php`:
 
 ```php
-case 'columns':
-    $layout = $block->layout()->toLayouts()->first();
-    if ($layout !== null) {
-        $blockArray['content'] = [
-            "columns" => processColumns($layout->columns())
-        ];
-    }
-    break;
-```
-
-### Grid Block
-
-Grid blocks support complex layouts with multiple rows and columns:
-
-```php
-case 'grid':
-    $allGrids = [];
-    $title    = $block->title()->value();
-    foreach ($block->grid()->toLayouts() as $layout) {
-        $allGrids[] = [
-            "id"      => $layout->id(),
-            "columns" => processColumns($layout->columns()),
-        ];
-    }
-    $blockArray['content'] = [
-        "title" => $title,
-        "grid"  => $allGrids,
-    ];
-    break;
-```
-
-### Column Processing
-
-```php
-function processColumns($columnsCollection) {
-    $columns = [];
-    foreach ($columnsCollection as $column) {
-        $columns[] = [
-            "id"     => $column->id(),
-            "width"  => $column->width(),
-            "span"   => $column->span(),
-            "nested" => true,
-            "blocks" => processBlocks($column->blocks())
-        ];
-    }
-    return $columns;
-}
-```
-
-## Image Processing
-
-Images receive enhanced metadata for responsive design and optimization:
-
-```php
-function getImageArray($file, $ratio = null, $ratioMobile = null) {
-    return [
-        "src"         => (string)$file->url(),
-        "alt"         => (string)$file->alt()->or(''),
-        "width"       => $file->width(),
-        "height"      => $file->height(),
-        "thumbhash"   => (string)$file->thumbhash()->value(),
-        "ratio"       => $ratio,
-        "ratioMobile" => $ratioMobile,
-        "caption"     => (string)$file->caption()->value(),
-        "copyright"   => (string)$file->copyright()->value(),
-    ];
-}
-```
-
-### SVG Processing
-
-SVG files receive special handling:
-
-```php
-function getSvgArray($file) {
-    return [
-        "src"    => (string)$file->url(),
-        "alt"    => (string)$file->alt()->or(''),
-        "source" => file_get_contents($file->root()),
-        "width"  => $file->width(),
-        "height" => $file->height(),
-    ];
-}
-```
-
-## Link Objects
-
-Many blocks support link objects for navigation:
-
-```php
-// Button block with link object
-case 'button':
+case 'blockname':
     $blockArray['content'] = $block->toArray()['content'];
-    $linkobject = [];
-    if ($block->linkobject()->isNotEmpty()) {
-        $linkobject = getLinkArray($block->linkobject());
-        $blockArray['content']['linkobject'] = $linkobject;
-    }
+    // Process boolean fields
+    $blockArray['content']['toggle'] = $block->toggle()->toBool(true);
+    // Process text fields
+    $blockArray['content']['customText'] = $block->customText()->value();
+    // Process local button settings
     $blockArray['content']['buttonlocal'] = $block->buttonlocal()->toBool(false);
+
+    // For image fields:
+    // $image = null;
+    // if ($file = $block->image()->toFile()) {
+    //     $image = getImageArray($file, $ratio, $ratioMobile);
+    // }
+    // $blockArray['content']['image'] = $image;
+
+    // For link fields:
+    // $linkobject = getLinkArray($block->linkobject());
+    // $blockArray['content']['linkobject'] = $linkobject;
+
+    // For structure fields (lists):
+    // foreach ($block->list()->toStructure() as $key => $item) {
+    //     $linkobject = getLinkArray($item->linkobject());
+    //     $blockArray['content']['list'][$key]["linkobject"] = $linkobject;
+    // }
+
     break;
 ```
 
-## JSON Output Example
+#### Step 1.4: Create Preview (Optional)
+Add a preview component in `site/plugins/baukasten-blocks-preview/index.js`:
 
-A processed image block produces this JSON structure:
+```javascript
+blockname: {
+    computed: {
+        isEnabled() {
+            return this.content.toggle !== false;
+        },
+        displayText() {
+            return this.content.customText || "Default text";
+        },
+    },
+    template: `
+    <div @dblclick="open" class="block-preview">
+        <div v-if="isEnabled" class="preview-content">
+            <h3>Block Name</h3>
+            <p>{{ displayText }}</p>
+        </div>
+        <div v-else class="preview-disabled">
+            Block is disabled
+        </div>
+    </div>
+    `,
+},
+```
 
-```json
-{
-	"id": "block-uuid",
-	"type": "image",
-	"content": {
-		"image": {
-			"src": "/media/pages/about/image.jpg",
-			"alt": "Team photo",
-			"width": 1200,
-			"height": 800,
-			"thumbhash": "base64-encoded-hash",
-			"ratio": ["16", "9"],
-			"ratioMobile": ["4", "3"],
-			"caption": "Our amazing team",
-			"copyrighttoggle": false,
-			"copyrighttitle": ""
-		},
-		"caption": "Our team working together",
-		"abovefold": true
-	}
+Add corresponding CSS in `site/plugins/baukasten-blocks-preview/index.css`:
+
+```css
+.block-preview {
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    border: 1px solid #e5e5e5;
+}
+
+.preview-content {
+    /* Your preview styles */
+}
+
+.preview-disabled {
+    opacity: 0.5;
+    color: #666;
 }
 ```
 
-## Extending the Block System
+### 2. Astro Frontend Implementation
 
-### Adding New Block Types
+#### Step 2.1: Create the Astro Component
+Create `src/blocks/Block[Name].astro`:
 
-1. **Create Blueprint**: Add a new YAML file in `site/blueprints/blocks/`
-2. **Add Processing Logic**: Extend the `getBlockArray()` function in the blocks plugin
-3. **Frontend Component**: Create corresponding Astro component in the frontend
+```astro
+---
+import Link from '@components/Link.astro';
+import { toRem } from '@lib/helpers';
 
-### Custom Fields
+const {
+    toggle,
+    customText,
+    align,
+    buttonLocal,
+    buttonSettings,
+    buttonColors,
+    metadata,
+    global,
+    data, // Include if block needs page/navigation data
+} = Astro.props;
 
-Blocks can include custom fields defined in `site/blueprints/fields/`:
+// Process styling variables
+const useLocalStyling = buttonLocal;
+const buttonFont = useLocalStyling
+    ? buttonSettings?.buttonFont
+    : global.buttonFont;
 
-```yaml
-customField:
-  type: myCustomField
-  label: Custom Field
-  # ... field configuration
+// Process alignment classes
+const alignmentClass = align === 'left'
+    ? 'justify-start'
+    : align === 'right'
+    ? 'justify-end'
+    : align === 'center'
+    ? 'justify-center'
+    : 'justify-between';
+
+// Early return if block shouldn't render
+if (!toggle) {
+    return null;
+}
+---
+
+<div
+    id={metadata?.identifier || undefined}
+    class:list={[
+        'blockName',
+        'blocks',
+        alignmentClass,
+        metadata?.classes,
+    ]}
+    {...metadata?.attributes || {}}
+>
+    <div class="block-content">
+        <p class="custom-text">{customText}</p>
+        <!-- Add your block content here -->
+    </div>
+</div>
+
+<style
+    lang="css"
+    define:vars={{
+        buttonFont,
+    }}
+>
+    .blockName {
+        font-family: var(--buttonFont);
+    }
+
+    .block-content {
+        /* Your component styles */
+    }
+
+    .custom-text {
+        /* Text styles */
+    }
+</style>
 ```
 
-## Performance Considerations
+#### Step 2.2: Add to Blocks.astro
+Import and add your component to `src/components/Blocks.astro`:
 
-- **Lazy Loading**: Images marked as `abovefold: false` can be lazy-loaded
-- **Thumbhash**: Provides instant image placeholders
-- **Responsive Images**: Multiple aspect ratios for different devices
-- **SVG Inlining**: SVG source included for performance optimization
+```astro
+---
+// ... existing imports ...
+import BlockName from '@blocks/BlockName.astro';
+---
 
-## Multi-Language Support
+<!-- In the component -->
+{blocks?.map((block) => {
+    switch (block.type) {
+        // ... existing cases ...
+        case 'blockname':
+            return (
+                <BlockName
+                    {...block.content}
+                    global={global}
+                    data={data}
+                />
+            );
+        // ... rest of cases ...
+    }
+})}
+```
 
-Blocks automatically support multi-language content:
+#### Step 2.3: Add TypeScript Definitions
+Add interface to `src/types/blocks.types.ts`:
 
-- Field values are localized based on current language
-- Image alt text and captions can be translated
-- Link objects respect language-specific URLs
+```typescript
+// Block Name Props
+export interface BlockNameProps extends BaseBlockProps {
+    toggle: boolean;
+    customText: string;
+    align?: 'left' | 'center' | 'right' | 'between';
+    buttonLocal?: boolean;
+    buttonSettings?: {
+        buttonFont?: string;
+        buttonFontSize?: string;
+        buttonPadding?: number;
+        buttonBorderRadius?: number;
+        buttonBorderWidth?: number;
+    };
+    buttonColors?: {
+        buttonTextColor?: string;
+        buttonTextColorActive?: string;
+        buttonBackgroundColor?: string;
+        buttonBackgroundColorActive?: string;
+        buttonBorderColor?: string;
+        buttonBorderColorActive?: string;
+    };
+    metadata?: {
+        identifier?: string;
+        classes?: string;
+        attributes?: Record<string, any>;
+    };
+}
+```
 
-## Content Validation
+### 3. Data Flow Considerations
 
-Blocks include validation rules:
+#### For Blocks Requiring Page Data
+If your block needs access to page-specific data (like navigation, current page info, etc.):
 
-- Required fields prevent publishing incomplete content
-- File type restrictions ensure proper media handling
-- Field constraints maintain content consistency
+1. **Add data generation in `site/config/config.php`**:
+```php
+function getCustomBlockData($page) {
+    return [
+        'customProperty' => $page->someField()->value(),
+        // Add other data your block needs
+    ];
+}
 
-This comprehensive block system provides the foundation for flexible, maintainable content management while ensuring optimal performance and user experience in the frontend.
+// In indexJsonData function:
+$data['customBlock'] = getCustomBlockData($page);
+```
+
+2. **Update component hierarchy** to pass `data` prop through:
+   - `Blocks.astro` → `BlockColumns.astro` → `Layouts.astro` → `BlockGrid.astro` → `Section.astro`
+
+3. **Access in your block component**:
+```astro
+---
+const { data } = Astro.props;
+const customData = data?.customBlock;
+---
+```
+
+### 4. Common Patterns and Best Practices
+
+#### Field Processing Patterns
+- **Boolean fields**: `$block->fieldName()->toBool(defaultValue)`
+- **Text fields**: `$block->fieldName()->value()`
+- **Image fields**: Use `getImageArray($file, $ratio, $ratioMobile)`
+- **Link fields**: Use `getLinkArray($block->linkField())`
+- **Structure/List fields**: Loop through `$block->listField()->toStructure()`
+
+#### Component Patterns
+- **Conditional rendering**: Use early returns for disabled blocks
+- **Styling**: Use CSS custom properties with `define:vars`
+- **Global vs Local settings**: Always provide fallbacks to global settings
+- **Responsive design**: Use mobile-first approach with lg: breakpoints
+
+#### Naming Conventions
+- **Blueprint files**: `kebab-case.yml`
+- **Astro components**: `PascalCase.astro` (e.g., `BlockNavigation.astro`)
+- **CSS classes**: `kebab-case` (e.g., `block-navigation`)
+- **TypeScript interfaces**: `PascalCase` with `Props` suffix
+
+### 5. Testing Your Block
+
+#### Basic Testing (Required)
+1. **Kirby Panel**: Verify fields appear correctly and save properly
+2. **JSON Output**: Check `/page.json` endpoints contain your block data
+3. **Astro Rendering**: Ensure block renders without errors
+4. **Responsive**: Test on different screen sizes
+5. **TypeScript**: Verify no type errors
+
+#### Unit Testing (Optional - For Complex Components)
+For complex blocks with multiple features, conditional logic, or intricate styling systems, consider creating automated tests:
+
+**Create Test File**: `src/blocks/__tests__/Block[Name].test.js`
+
+```javascript
+import { experimental_AstroContainer as AstroContainer } from 'astro/container';
+import { describe, expect, test } from 'vitest';
+import BlockName from '../BlockName.astro';
+
+describe('BlockName Component', () => {
+	// Mock global settings
+	const mockGlobal = {
+		buttonFontSize: 'medium',
+		buttonFont: 'Arial',
+		buttonPadding: 12,
+		// ... other global settings
+	};
+
+	const baseProps = {
+		toggle: true,
+		customText: 'Test content',
+		align: 'center',
+		buttonLocal: false,
+		global: mockGlobal,
+	};
+
+	test('renders basic content correctly', async () => {
+		const container = await AstroContainer.create();
+		const result = await container.renderToString(BlockName, {
+			props: baseProps,
+		});
+
+		expect(result).toContain('Test content');
+		expect(result).toContain('blockName');
+	});
+
+	test('does not render when toggle is false', async () => {
+		const container = await AstroContainer.create();
+		const propsDisabled = {
+			...baseProps,
+			toggle: false,
+		};
+
+		// Expects error when component returns null
+		await expect(async () => {
+			await container.renderToString(BlockName, {
+				props: propsDisabled,
+			});
+		}).rejects.toThrow('Only a [Response]');
+	});
+
+	test('applies local styling when enabled', async () => {
+		const container = await AstroContainer.create();
+		const localProps = {
+			...baseProps,
+			buttonLocal: true,
+			buttonSettings: {
+				buttonFont: 'Georgia',
+				buttonFontSize: 'large',
+			},
+		};
+
+		const result = await container.renderToString(BlockName, {
+			props: localProps,
+		});
+
+		expect(result).toContain('font--large');
+	});
+
+	test('applies metadata classes and attributes', async () => {
+		const container = await AstroContainer.create();
+		const metadataProps = {
+			...baseProps,
+			metadata: {
+				classes: 'custom-class',
+				attributes: {
+					'data-testid': 'test-block',
+				},
+			},
+		};
+
+		const result = await container.renderToString(BlockName, {
+			props: metadataProps,
+		});
+
+		expect(result).toContain('custom-class');
+		expect(result).toContain('data-testid="test-block"');
+	});
+});
+```
+
+**When to Write Tests:**
+- ✅ **Complex conditional logic** (multiple toggle states, feature combinations)
+- ✅ **Advanced styling systems** (local vs global settings, multiple style variants)
+- ✅ **Data processing** (navigation data, complex prop transformations)
+- ✅ **Multiple render states** (error handling, empty states, loading states)
+- ❌ **Simple text/image blocks** with minimal logic
+- ❌ **Purely presentational components** without interactive features
+
+**Test Coverage Goals:**
+- Core functionality works as expected
+- Toggle controls properly show/hide features
+- Local and global styling systems work correctly
+- Error states are handled gracefully
+- Metadata and accessibility features function properly
+
+**Run Tests:**
+```bash
+npm test BlockName.test.js
+```
+
+### 6. Common Issues and Solutions
+
+#### Block Data Not Appearing in Astro
+- Check the case in `baukasten-blocks/index.php` is properly implemented
+- Verify field names match between blueprint and processing
+- Ensure `data` prop is passed through component hierarchy if needed
+
+#### Preview Not Working
+- Verify block name matches in all files
+- Check computed properties are reactive to `this.content` changes
+- Ensure preview is imported in the blocks object
+
+#### Styling Issues
+- Use CSS custom properties for dynamic values
+- Follow existing component patterns for consistency
+- Test with different content lengths and configurations
+
+### 7. Advanced Features
+
+#### Image Handling
+```php
+// In baukasten-blocks processing:
+$ratioMobile = explode('/', $block->ratioMobile()->value());
+$ratio = explode('/', $block->ratio()->value());
+$image = getImageArray($file, $ratio, $ratioMobile);
+```
+
+#### Link Processing
+```php
+// For single links:
+$linkobject = getLinkArray($block->linkobject());
+
+// For structure with links:
+foreach ($block->buttons()->toStructure() as $key => $button) {
+    $linkobject = getLinkArray($button->linkObject());
+    $blockArray['content']['buttons'][$key]['linkobject'] = $linkobject;
+}
+```
+
+#### Complex Layouts
+```astro
+<!-- For blocks with internal layouts -->
+<div class="block-layout">
+    {items?.map((item) => (
+        <div class="layout-item">
+            <ComponentName {...item} />
+        </div>
+    ))}
+</div>
+```
+
+This comprehensive guide covers all aspects of creating new blocks in the Baukasten system, from Kirby CMS configuration to Astro frontend implementation, ensuring consistency and proper functionality across the entire stack.

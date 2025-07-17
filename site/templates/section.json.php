@@ -163,6 +163,9 @@ if ($page->baukastenbuilder()->isNotEmpty()) {
   }
 }
 
+// Add navigation data for section items
+$json["navigation"] = getPageNavigation($page);
+
 if (method_exists($page, 'getJsonData')) {
   $content = $page->content()->toArray();
   $unsetFields = [

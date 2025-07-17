@@ -253,6 +253,15 @@ function getBlockArray(\Kirby\Cms\Block $block)
             $blockArray['content']['image'] = $image;
             break;
 
+        case 'navigation':
+            $blockArray['content'] = $block->toArray()['content'];
+            $blockArray['content']['previousToggle'] = $block->previousToggle()->toBool(true);
+            $blockArray['content']['nextToggle'] = $block->nextToggle()->toBool(true);
+            $blockArray['content']['previousLabel'] = $block->previousLabel()->value();
+            $blockArray['content']['nextLabel'] = $block->nextLabel()->value();
+            $blockArray['content']['buttonlocal'] = $block->buttonlocal()->toBool(false);
+            break;
+
         default:
             $blockArray['content'] = $block->toArray()['content'];
             break;
