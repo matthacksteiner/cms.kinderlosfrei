@@ -170,31 +170,22 @@ function getBlockArray(\Kirby\Cms\Block $block)
         case "menu":
             $blockArray['content'] = $block->toArray()['content'];
             foreach ($block->nav()->toStructure() as $key => $item) {
-                $linkobject = [];
-                if ($item->linkobject()->isNotEmpty()) {
-                    $linkobject = getLinkArray($item->linkobject());
-                }
+                $linkobject = getLinkArray($item->linkobject());
                 $blockArray['content']['nav'][$key]["linkobject"] = $linkobject;
             }
             break;
 
         case 'button':
             $blockArray['content'] = $block->toArray()['content'];
-            $linkobject = [];
-            if ($block->linkobject()->isNotEmpty()) {
-                $linkobject = getLinkArray($block->linkobject());
-                $blockArray['content']['linkobject'] = $linkobject;
-            }
+            $linkobject = getLinkArray($block->linkobject());
+            $blockArray['content']['linkobject'] = $linkobject;
             $blockArray['content']['buttonlocal'] = $block->buttonlocal()->toBool(false);
             break;
 
         case 'buttonBar':
             $blockArray['content'] = $block->toArray()['content'];
             foreach ($block->buttons()->toStructure() as $key => $button) {
-                $linkobject = [];
-                if ($button->linkObject()->isNotEmpty()) {
-                    $linkobject = getLinkArray($button->linkObject());
-                }
+                $linkobject = getLinkArray($button->linkObject());
                 $blockArray['content']['buttons'][$key]['linkobject'] = $linkobject;
             }
             $blockArray['content']['buttonlocal'] = $block->buttonlocal()->toBool(false);
@@ -253,11 +244,8 @@ function getBlockArray(\Kirby\Cms\Block $block)
             $blockArray['content'] = $content;
             $blockArray['content']['hovertoggle'] = $block->hovertoggle()->toBool(false);
             $blockArray['content']['linktoggle'] = $block->linktoggle()->toBool(false);
-            $linkobject = [];
-            if ($block->linkobject()->isNotEmpty()) {
-                $linkobject = getLinkArray($block->linkobject());
-                $blockArray['content']['linkobject'] = $linkobject;
-            }
+            $linkobject = getLinkArray($block->linkobject());
+            $blockArray['content']['linkobject'] = $linkobject;
             $image = null;
             if ($file1 = $block->image()->toFile()) {
                 $image = getSvgArray($file1);
