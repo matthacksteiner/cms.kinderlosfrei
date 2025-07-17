@@ -7,7 +7,7 @@ use Kirby\Cms\App;
 App::plugin("baukasten/field-methods", [
 	"fieldMethods" => [
 		"getLinkArray" => function ($field) {
-			return getLinkArray($field, $title);
+			return getLinkArray($field);
 		},
 	],
 ]);
