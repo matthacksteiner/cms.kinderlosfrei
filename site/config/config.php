@@ -269,51 +269,7 @@ function getAnalytics($site)
 	];
 }
 
-/**
- * Handles the cached index.json route action.
- */
-function indexJsonCached()
-{
-	$kirby = kirby();
-	$apiCache = $kirby->cache('api');
-	$language = $kirby->language() ? $kirby->language()->code() : 'default';
-	$cacheKey = 'index.' . $language;
 
-	// Try to get cached data
-	$cached = $apiCache->get($cacheKey);
-	if ($cached !== null) {
-		return Response::json($cached);
-	}
-
-	// Generate fresh data and cache for 7 days
-	$data = indexJsonData();
-	$apiCache->set($cacheKey, $data, 10080);
-
-	return Response::json($data);
-}
-
-/**
- * Handles the cached global.json route action.
- */
-function globalJsonCached()
-{
-	$kirby = kirby();
-	$apiCache = $kirby->cache('api');
-	$language = $kirby->language() ? $kirby->language()->code() : 'default';
-	$cacheKey = 'global.' . $language;
-
-	// Try to get cached data
-	$cached = $apiCache->get($cacheKey);
-	if ($cached !== null) {
-		return Response::json($cached);
-	}
-
-	// Generate fresh data and cache for 30 days
-	$data = globalJsonData();
-	$apiCache->set($cacheKey, $data, 43200);
-
-	return Response::json($data);
-}
 
 /**
  * Generates the index data (extracted from original indexJson function).
