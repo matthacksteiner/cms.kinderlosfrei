@@ -20,7 +20,7 @@ jobs:
       - name: Rsync Deployments Action
         uses: Burnett01/rsync-deployments@6.0.0
         with:
-          switches: -avzr --delete  --exclude="content" --exclude="site/languages/*" --exclude=".vscode" --exclude=".git" --exclude=".license" --exclude=".github" --exclude=".env" --exclude="node_modules" --exclude="media" --exclude="stats" --exclude="vendor" --exclude="kirby" --exclude="storage" --exclude="sass" --exclude=".DS_Store"
+          switches: -avzr --delete  --exclude="content" --exclude="site/languages" --exclude=".vscode" --exclude=".git" --exclude=".license" --exclude=".github" --exclude=".env" --exclude="node_modules" --exclude="media" --exclude="stats" --exclude="vendor" --exclude="kirby" --exclude="storage" --exclude="sass" --exclude=".DS_Store"
           remote_path: /home/${{ secrets.UBERSPACE_USER }}/html/${{ secrets.UBERSPACE_PATH }}/
           remote_host: ${{ secrets.UBERSPACE_HOST }}
           remote_user: ${{ secrets.UBERSPACE_USER }}
