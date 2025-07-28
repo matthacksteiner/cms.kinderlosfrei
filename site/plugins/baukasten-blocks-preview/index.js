@@ -157,6 +157,40 @@ panel.plugin("baukasten-blocks-preview/preview", {
 			`,
 		},
 
+		featured: {
+			computed: {
+				selectedElements() {
+					if (!this.content.elements || !Array.isArray(this.content.elements)) {
+						return [];
+					}
+					return this.content.elements;
+				},
+				elementCount() {
+					return this.selectedElements.length;
+				},
+			},
+			template: `
+				<div @dblclick="open" class="k-block-type-featured">
+					<div v-if="elementCount > 0" class="k-featured-preview">
+						<div class="k-featured-header">
+							<k-icon type="star" class="k-featured-icon" />
+							<span class="k-featured-count">{{ elementCount }} Element(e) ausgewählt</span>
+						</div>
+						<div class="k-featured-list">
+							<div v-for="element in selectedElements" :key="element" class="k-featured-item">
+								<k-icon type="page" class="k-featured-item-icon" />
+								<span class="k-featured-item-text">{{ element.split('/').pop() }}</span>
+							</div>
+						</div>
+					</div>
+					<div v-else class="k-featured-empty">
+						<k-icon type="star" class="k-featured-empty-icon" />
+						<span>Keine Elemente ausgewählt</span>
+					</div>
+				</div>
+			`,
+		},
+
 		iconlist: {
 			computed: {
 				items() {

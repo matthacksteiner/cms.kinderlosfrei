@@ -8,3 +8,4 @@ fieldsets:
   card: blocks/card
   menu: blocks/menu
   contactForm: blocks/contactForm
+  featured: blocks/featured

@@ -262,6 +262,43 @@ function getBlockArray(\Kirby\Cms\Block $block)
             $blockArray['content']['buttonlocal'] = $block->buttonlocal()->toBool(false);
             break;
 
+        case 'featured':
+            $blockArray['content'] = $block->toArray()['content'];
+            $items = [];
+
+            // Get ratio values for proper image processing
+            $ratioMobile = explode('/', $block->displayratio()->toObject()->ratiomobile()->value() ?: '1/1');
+            $ratio = explode('/', $block->displayratio()->toObject()->ratio()->value() ?: '1/1');
+
+            // Process selected elements
+            if ($selectedElements = $block->elements()->split(',')) {
+                foreach ($selectedElements as $elementId) {
+                    if ($page = page($elementId)) {
+                        $thumbnail = null;
+
+                        // Get thumbnail image if available using the proper getImageArray function
+                        if ($thumbFile = $page->thumbnail()->toFile()) {
+                            $thumbnail = getImageArray($thumbFile, $ratio, $ratioMobile);
+                        }
+
+                        $items[] = [
+                            'id'          => $page->id(),
+                            'title'       => (string)$page->title(),
+                            'description' => (string)$page->description(),
+                            'uri'         => $page->uri(),
+                            'url'         => $page->url(),
+                            'status'      => $page->status(),
+                            'position'    => $page->num(),
+                            'thumbnail'   => $thumbnail,
+                            'coverOnly'   => $page->coverOnly()->toBool(false),
+                        ];
+                    }
+                }
+            }
+
+            $blockArray['content']['items'] = $items;
+            break;
+
         default:
             $blockArray['content'] = $block->toArray()['content'];
             break;
