@@ -59,6 +59,71 @@ function processMetadataAttributes(array $metadataAttributes)
     return $attributes;
 }
 
+/**
+ * Helper function to get ratio arrays from block fields
+ */
+function getRatioArrays($block, $ratioField = 'ratio', $ratioMobileField = 'ratioMobile')
+{
+    return [
+        'ratio' => explode('/', $block->{$ratioField}()->value()),
+        'ratioMobile' => explode('/', $block->{$ratioMobileField}()->value())
+    ];
+}
+
+/**
+ * Helper function to process multiple images with ratios
+ */
+function processImagesWithRatio($files, $ratio, $ratioMobile, $additionalFields = [])
+{
+    $images = [];
+    foreach ($files as $file) {
+        if (strtolower($file->extension()) === 'svg') {
+            $image = getSvgArray($file);
+        } else {
+            $image = getImageArray($file, $ratio, $ratioMobile);
+        }
+
+        // Add any additional fields for this specific file
+        foreach ($additionalFields as $field => $defaultValue) {
+            if (method_exists($file, $field)) {
+                $image[$field] = $file->{$field}()->toBool($defaultValue);
+            }
+        }
+
+        $images[] = $image;
+    }
+    return $images;
+}
+
+/**
+ * Helper function to add copyright properties to an image array
+ */
+function addCopyrightProperties($image, $file)
+{
+    return array_merge($image, [
+        'copyrighttoggle'       => $file->copyrighttoggle()->toBool(false),
+        'copyrighttitle'        => $file->copyrightobject()->toObject()->copyrighttitle()->value(),
+        'copyrighttextfont'     => $file->copyrightobject()->toObject()->textfont()->value(),
+        'copyrighttextsize'     => $file->copyrightobject()->toObject()->textsize()->value(),
+        'copyrighttextcolor'    => $file->copyrightobject()->toObject()->textColor()->value(),
+        'copyrighbackgroundcolor' => $file->copyrightobject()->toObject()->copyrightBackground()->value(),
+        'copyrightposition'     => $file->copyrightobject()->toObject()->copyrightposition()->value(),
+    ]);
+}
+
+/**
+ * Helper function to process structure items with link objects
+ */
+function processStructureWithLinks($structure, $linkField = 'linkobject')
+{
+    $result = [];
+    foreach ($structure as $key => $item) {
+        $result[$key] = $item->toArray();
+        $result[$key][$linkField] = getLinkArray($item->{$linkField}());
+    }
+    return $result;
+}
+
 function getBlockArray(\Kirby\Cms\Block $block)
 {
     $blockArray = [
@@ -67,8 +132,15 @@ function getBlockArray(\Kirby\Cms\Block $block)
         "content" => [],
     ];
 
-    switch ($block->type()) {
+    // Cases that don't use base content first
+    $noBaseContentCases = ['columns', 'grid'];
 
+    // Initialize base content for most cases
+    if (!in_array($block->type(), $noBaseContentCases)) {
+        $blockArray['content'] = $block->toArray()['content'];
+    }
+
+    switch ($block->type()) {
         case 'columns':
             $layout = $block->layout()->toLayouts()->first();
             if ($layout !== null) {
@@ -80,7 +152,6 @@ function getBlockArray(\Kirby\Cms\Block $block)
 
         case 'grid':
             $allGrids = [];
-            $title    = $block->title()->value();
             foreach ($block->grid()->toLayouts() as $layout) {
                 $allGrids[] = [
                     "id"      => $layout->id(),
@@ -88,36 +159,23 @@ function getBlockArray(\Kirby\Cms\Block $block)
                 ];
             }
             $blockArray['content'] = [
-                "title" => $title,
+                "title" => $block->title()->value(),
                 "grid"  => $allGrids,
             ];
             break;
 
         case 'image':
-            $blockArray['content'] = $block->toArray()['content'];
             $image = null;
             if ($file1 = $block->image()->toFile()) {
-                $ratioMobile = explode('/', $block->ratioMobile()->value());
-                $ratio       = explode('/', $block->ratio()->value());
-                $image       = getImageArray($file1, $ratio, $ratioMobile);
-                // Add copyright-specific properties
-                $image = array_merge($image, [
-                    'copyrighttoggle'       => $file1->copyrighttoggle()->toBool(false),
-                    'copyrighttitle'        => $file1->copyrightobject()->toObject()->copyrighttitle()->value(),
-                    'copyrighttextfont'     => $file1->copyrightobject()->toObject()->textfont()->value(),
-                    'copyrighttextsize'     => $file1->copyrightobject()->toObject()->textsize()->value(),
-                    'copyrighttextcolor'    => $file1->copyrightobject()->toObject()->textColor()->value(),
-                    'copyrighbackgroundcolor' => $file1->copyrightobject()->toObject()->copyrightBackground()->value(),
-                    'copyrightposition'     => $file1->copyrightobject()->toObject()->copyrightposition()->value(),
-
-                ]);
+                $ratios = getRatioArrays($block);
+                $image = getImageArray($file1, $ratios['ratio'], $ratios['ratioMobile']);
+                $image = addCopyrightProperties($image, $file1);
             }
             $blockArray['content']['abovefold'] = $block->abovefold()->toBool(false);
             $blockArray['content']['image'] = $image;
             break;
 
         case "vector":
-            $blockArray['content'] = $block->toArray()['content'];
             $image = null;
             if ($file1 = $block->image()->toFile()) {
                 $image = getSvgArray($file1);
@@ -126,35 +184,26 @@ function getBlockArray(\Kirby\Cms\Block $block)
             break;
 
         case 'slider':
-            $blockArray['content'] = $block->toArray()['content'];
-            $images = [];
-            $ratioMobile = explode('/', $block->ratioMobile()->value());
-            $ratio       = explode('/', $block->ratio()->value());
-            foreach ($block->images()->toFiles() as $file) {
-                if (strtolower($file->extension()) === 'svg') {
-                    $image = getSvgArray($file);
-                } else {
-                    $image = getImageArray($file, $ratio, $ratioMobile);
-                }
-                $image['toggle'] = $file->toggle()->toBool(false);
-                $images[] = $image;
-            }
+            $ratios = getRatioArrays($block);
+            $images = processImagesWithRatio(
+                $block->images()->toFiles(),
+                $ratios['ratio'],
+                $ratios['ratioMobile'],
+                ['toggle' => false]
+            );
+
             $blockArray['content']['images'] = $images;
             $blockArray['content']['toggle'] = $block->toggle()->toBool(false);
             $blockArray['content']['abovefold'] = $block->abovefold()->toBool(false);
             break;
 
         case 'gallery':
-            $blockArray['content'] = $block->toArray()['content'];
-            $images = [];
-
-            $ratioMobile = explode('/', $block->ratioMobile()->value());
-            $ratio = explode('/', $block->ratio()->value());
-
-            foreach ($block->images()->toFiles() as $file) {
-                $image = getImageArray($file, $ratio, $ratioMobile);
-                $images[] = $image;
-            }
+            $ratios = getRatioArrays($block);
+            $images = processImagesWithRatio(
+                $block->images()->toFiles(),
+                $ratios['ratio'],
+                $ratios['ratioMobile']
+            );
 
             $blockArray['content']['images'] = $images;
             $blockArray['content']['layoutType'] = $block->layoutType()->value();
@@ -164,40 +213,33 @@ function getBlockArray(\Kirby\Cms\Block $block)
             $blockArray['content']['viewPaddingMobile'] = $block->viewPaddingMobile()->value();
             $blockArray['content']['viewPaddingDesktop'] = $block->viewPaddingDesktop()->value();
             $blockArray['content']['abovefold'] = $block->abovefold()->toBool(false);
-
             break;
 
         case "menu":
-            $blockArray['content'] = $block->toArray()['content'];
             foreach ($block->nav()->toStructure() as $key => $item) {
-                $linkobject = getLinkArray($item->linkobject());
-                $blockArray['content']['nav'][$key]["linkobject"] = $linkobject;
+                $blockArray['content']['nav'][$key] = $item->toArray();
+                $blockArray['content']['nav'][$key]["linkobject"] = getLinkArray($item->linkobject());
             }
             break;
 
         case 'button':
-            $blockArray['content'] = $block->toArray()['content'];
-            $linkobject = getLinkArray($block->linkobject());
-            $blockArray['content']['linkobject'] = $linkobject;
+            $blockArray['content']['linkobject'] = getLinkArray($block->linkobject());
             $blockArray['content']['buttonlocal'] = $block->buttonlocal()->toBool(false);
             break;
 
         case 'buttonBar':
-            $blockArray['content'] = $block->toArray()['content'];
             foreach ($block->buttons()->toStructure() as $key => $button) {
-                $linkobject = getLinkArray($button->linkObject());
-                $blockArray['content']['buttons'][$key]['linkobject'] = $linkobject;
+                $blockArray['content']['buttons'][$key] = $button->toArray();
+                $blockArray['content']['buttons'][$key]['linkobject'] = getLinkArray($button->linkObject());
             }
             $blockArray['content']['buttonlocal'] = $block->buttonlocal()->toBool(false);
             break;
 
         case 'text':
-            $blockArray['content'] = $block->toArray()['content'];
             $blockArray['content']['text'] = (string)$block->text();
             break;
 
         case "iconlist":
-            $blockArray['content'] = $block->toArray()['content'];
             foreach ($block->list()->toStructure() as $key => $item) {
                 $icon = null;
                 if ($file = $item->icon()->toFile()) {
@@ -207,17 +249,16 @@ function getBlockArray(\Kirby\Cms\Block $block)
                         'source' => file_get_contents($file->root()),
                     ];
                 }
+                $blockArray['content']['list'][$key] = $item->toArray();
                 $blockArray['content']['list'][$key]["icon"] = $icon;
             }
             break;
 
         case 'code':
-            $blockArray['content'] = $block->toArray()['content'];
             $blockArray['content']['code'] = (string)$block->code();
             break;
 
         case 'video':
-            $blockArray['content'] = $block->toArray()['content'];
             $video = null;
             $thumb = null;
             if ($file1 = $block->file()->toFile()) {
@@ -240,12 +281,10 @@ function getBlockArray(\Kirby\Cms\Block $block)
             break;
 
         case 'card':
-            $content = $block->toArray()['content'];
-            $blockArray['content'] = $content;
             $blockArray['content']['hovertoggle'] = $block->hovertoggle()->toBool(false);
             $blockArray['content']['linktoggle'] = $block->linktoggle()->toBool(false);
-            $linkobject = getLinkArray($block->linkobject());
-            $blockArray['content']['linkobject'] = $linkobject;
+            $blockArray['content']['linkobject'] = getLinkArray($block->linkobject());
+
             $image = null;
             if ($file1 = $block->image()->toFile()) {
                 $image = getSvgArray($file1);
@@ -254,7 +293,6 @@ function getBlockArray(\Kirby\Cms\Block $block)
             break;
 
         case 'navigation':
-            $blockArray['content'] = $block->toArray()['content'];
             $blockArray['content']['previousToggle'] = $block->previousToggle()->toBool(true);
             $blockArray['content']['nextToggle'] = $block->nextToggle()->toBool(true);
             $blockArray['content']['previousLabel'] = $block->previousLabel()->value();
@@ -263,7 +301,6 @@ function getBlockArray(\Kirby\Cms\Block $block)
             break;
 
         case 'featured':
-            $blockArray['content'] = $block->toArray()['content'];
             $items = [];
 
             // Get ratio values for proper image processing
@@ -300,7 +337,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
             break;
 
         default:
-            $blockArray['content'] = $block->toArray()['content'];
+            // Base content already assigned for default case
             break;
     }
 
