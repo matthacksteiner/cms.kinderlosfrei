@@ -1,5 +1,7 @@
 type: select
 options:
+  - value: "default"
+    text: Standard (Einstellung im Tab Design)
   - value: "0"
     text: 0px
   - value: "8"
@@ -18,8 +20,6 @@ options:
     text: 56px
   - value: "64"
     text: 64px
-  - value: "80"
-    text: 80px
   - value: "80"
     text: 80px
   - value: "96"

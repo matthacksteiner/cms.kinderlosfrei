@@ -80,12 +80,22 @@ fields:
           - value: "12"
             text: 12 Spalten
       gapMobile:
-        label: Abstand Elemente 📱
+        label: Abstand Reihen Elemente 📱
         extends: fields/spacing
         width: 1/2
       gap:
-        label: Abstand Elemente 🖥️
+        label: Abstand Reihen Elemente 🖥️
         extends: fields/spacing
+        width: 1/2
+      gapHorizontalMobile:
+        label: Abstand Spalten Elemente 📱
+        extends: fields/spacing
+        default: default
+        width: 1/2
+      gapHorizontal:
+        label: Abstand Spalten Elemente 🖥️
+        extends: fields/spacing
+        default: default
         width: 1/2
   displayRatio:
     label: Seitenverhältnis der Cover Bilder

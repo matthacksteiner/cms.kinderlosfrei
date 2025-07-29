@@ -333,11 +333,34 @@ function getBlockArray(\Kirby\Cms\Block $block)
                 }
             }
 
+            // Get site object for design fallbacks
+            $site = site();
+
+            // Helper function to get value with fallback to design settings
+            $getValueWithFallback = function ($value, $fallbackSiteField) use ($site) {
+                if ($value === 'default') {
+                    return $site->{$fallbackSiteField}()->value() ?: '16';
+                }
+                return ($value !== null && $value !== '') ? $value : '16';
+            };
+
+            // Get the actual values from block fields
+            $gap = $block->displayGrid()->toObject()->gap()->value();
+            $gapMobile = $block->displayGrid()->toObject()->gapMobile()->value();
+            $gapHorizontal = $block->displayGrid()->toObject()->gapHorizontal()->value();
+            $gapHorizontalMobile = $block->displayGrid()->toObject()->gapHorizontalMobile()->value();
+
             $blockArray['content']['items'] = $items;
             $blockArray['content']['fontTitleToggle'] = $block->fontTitleToggle()->toBool(true);
             $blockArray['content']['fontTextToggle'] = $block->fontTextToggle()->toBool(true);
             $blockArray['content']['captionAlign'] = $block->captionAlign()->value() ?: 'bottom';
             $blockArray['content']['captionControls'] = $block->captionControls()->split(',');
+            $blockArray['content']['grid'] = [
+                'gap' => $getValueWithFallback($gap, 'gridBlockDesktop'),
+                'gapMobile' => $getValueWithFallback($gapMobile, 'gridBlockMobile'),
+                'gapHorizontal' => $getValueWithFallback($gapHorizontal, 'gridGapDesktop'),
+                'gapHorizontalMobile' => $getValueWithFallback($gapHorizontalMobile, 'gridGapMobile'),
+            ];
             break;
 
         default:
