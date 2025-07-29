@@ -102,6 +102,8 @@ function getSettings(\Kirby\Cms\Page $page)
     'caption' => [
       'align' => $page->captionAlign()->value() ?: 'bottom',
       'controls' => $page->captionControls()->split(','),
+      'overlayRange' => $page->captionOverlayRange()->toInt() ?: 50,
+      'color' => $page->captionColor()->value() ?: '#000000',
     ]
   ];
 }

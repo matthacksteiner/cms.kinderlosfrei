@@ -37,14 +37,27 @@ fields:
   captionAlign:
     extends: fields/captionAlign
     default: bottom
-    width: 1/2
+    width: 1/4
   captionControls:
     label: Optionen
     type: checkboxes
-    width: 1/2
+    width: 1/4
     columns: 1
     options:
       overlay: Overlay
+  captionOverlayRange:
+    label: Overlay Transparenz
+    type: range
+    min: 0
+    max: 100
+    step: 1
+    default: 50
+    width: 1/4
+  captionColor:
+    label: Overlay Farbe
+    type: color
+    default: "#000000"
+    width: 1/4
   displayHeadline:
     label: Darstellung
     type: headline

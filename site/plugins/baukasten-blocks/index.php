@@ -355,6 +355,8 @@ function getBlockArray(\Kirby\Cms\Block $block)
             $blockArray['content']['fontTextToggle'] = $block->fontTextToggle()->toBool(true);
             $blockArray['content']['captionAlign'] = $block->captionAlign()->value() ?: 'bottom';
             $blockArray['content']['captionControls'] = $block->captionControls()->split(',');
+            $blockArray['content']['captionOverlayRange'] = $block->captionOverlayRange()->toInt() ?: 50;
+            $blockArray['content']['captionColor'] = $block->captionColor()->value() ?: '#000000';
             $blockArray['content']['grid'] = [
                 'gap' => $getValueWithFallback($gap, 'gridBlockDesktop'),
                 'gapMobile' => $getValueWithFallback($gapMobile, 'gridBlockMobile'),
