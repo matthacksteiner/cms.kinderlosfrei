@@ -334,6 +334,10 @@ function getBlockArray(\Kirby\Cms\Block $block)
             }
 
             $blockArray['content']['items'] = $items;
+            $blockArray['content']['fontTitleToggle'] = $block->fontTitleToggle()->toBool(true);
+            $blockArray['content']['fontTextToggle'] = $block->fontTextToggle()->toBool(true);
+            $blockArray['content']['captionAlign'] = $block->captionAlign()->value() ?: 'bottom';
+            $blockArray['content']['captionControls'] = $block->captionControls()->split(',');
             break;
 
         default:

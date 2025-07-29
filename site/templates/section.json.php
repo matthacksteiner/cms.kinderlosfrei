@@ -66,6 +66,7 @@ function getSettings(\Kirby\Cms\Page $page)
       'spanMobile' => $page->displayGrid()->toObject()->spanMobile()->value() ?: '6',
     ],
     'title' => [
+      'toggle' => $page->fontTitleToggle()->toBool(true),
       'level' => $page->fontTitle()->toObject()->level()->value() ?: 'h2',
       'font' => $page->fontTitle()->toObject()->titleFont()->value(),
       'size' => $page->fontTitle()->toObject()->titleSize()->value(),
@@ -73,10 +74,15 @@ function getSettings(\Kirby\Cms\Page $page)
       'align' => $page->fontTitle()->toObject()->titleAlign()->value(),
     ],
     'text' => [
+      'toggle' => $page->fontTextToggle()->toBool(true),
       'font' => $page->fontText()->toObject()->textFont()->value(),
       'size' => $page->fontText()->toObject()->textSize()->value(),
       'color' => $page->fontText()->toObject()->textColor()->value(),
       'align' => $page->fontText()->toObject()->textAlign()->value(),
+    ],
+    'caption' => [
+      'align' => $page->captionAlign()->value() ?: 'bottom',
+      'controls' => $page->captionControls()->split(','),
     ]
   ];
 }

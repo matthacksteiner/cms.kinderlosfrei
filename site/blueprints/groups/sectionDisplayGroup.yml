@@ -4,10 +4,22 @@ fields:
     label: Schriften
     type: headline
     numbered: false
+  fontTitleToggle:
+    label: Titel aktiv?
+    type: toggle
+    default: true
+    width: 1/2
+  fontTextToggle:
+    label: Text aktiv?
+    type: toggle
+    default: true
+    width: 1/2
   fontTitle:
     type: object
     label: Titel
     width: 1/2
+    when:
+      fontTitleToggle: true
     fields:
       titleSettings:
         label: Titel Einstellungen
@@ -16,10 +28,23 @@ fields:
     type: object
     label: Text
     width: 1/2
+    when:
+      fontTextToggle: true
     fields:
       textSettings:
         label: Text Einstellungen
         extends: groups/textGroup
+  captionAlign:
+    extends: fields/captionAlign
+    default: bottom
+    width: 1/2
+  captionControls:
+    label: Optionen
+    type: checkboxes
+    width: 1/2
+    columns: 1
+    options:
+      overlay: Overlay
   displayHeadline:
     label: Darstellung
     type: headline
