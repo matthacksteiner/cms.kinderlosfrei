@@ -1,4 +1,4 @@
-label: Ausrichtung Untertitel
+label: Beschriftung
 type: select
 default: bottom
 width: 2/6
