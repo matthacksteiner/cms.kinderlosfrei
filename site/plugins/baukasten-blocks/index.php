@@ -396,6 +396,8 @@ function getImageArray($file, $ratio = null, $ratioMobile = null)
         'captiontextalign'  => $file->captionobject()->toObject()->textalign()->value(),
         'captionoverlay'    => $file->captionobject()->toObject()->captionControls()->options()->value(),
         'captionalign'      => $file->captionobject()->toObject()->captionalign()->value(),
+        'captionOverlayRange' => $file->captionobject()->toObject()->captionOverlayRange()->toInt() ?: 50,
+        'captionColor'      => $file->captionobject()->toObject()->captionColor()->value() ?: '#000000',
         'linktoggle'        => $file->linktoggle()->toBool(false),
         'linkexternal'      => getLinkArray($file->linkexternal()),
     ];
