@@ -1,0 +1,137 @@
+:root {
+	--color-gray-900: #182d31;
+	--color-background: #f3f3f4;
+}
+
+.k-tabs {
+	background-color: var(--color-gray-300);
+	gap: 2rem;
+}
+
+.k-header::before {
+	float: right;
+	content: "";
+	margin-top: 10px;
+	width: 150px;
+	height: 35px;
+	background-image: url("../img/baukasten-logo.svg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	clear: right;
+}
+
+.k-items[data-layout="cards"] .k-item-image .k-icon {
+	--icon-size: 64px;
+}
+
+.k-items[data-layout="cardlets"] .k-item-image .k-icon {
+	--icon-size: 48px;
+}
+
+.k-login-view form::before {
+	content: url("../img/baukasten-logo.svg");
+}
+
+.k-login-fields {
+	margin-top: 2rem;
+}
+
+/* .k-layout-selector-option:after {
+	content: attr(value);
+	font-size: 12px;
+	font-weight: bold;
+	display: block;
+	color: #313740;
+	position: relative;
+	top: -50%;
+} */
+
+/* Webhook K4 fix */
+.pju-webhook--btn {
+	display: flex;
+	padding: 1.75em 1.5em 1.875em;
+}
+
+/* Previews  */
+.k-block-container-type-gallery .k-image,
+.k-block-figure-container .k-image {
+	min-height: 50px;
+}
+
+/* Featured Block Preview */
+.k-block-type-featured {
+	padding: 1rem;
+	background: var(--color-white);
+	border-radius: var(--rounded);
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.k-featured-preview {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.k-featured-header {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-weight: 600;
+	color: var(--color-text);
+}
+
+.k-featured-icon {
+	color: var(--color-yellow-500);
+	flex-shrink: 0;
+}
+
+.k-featured-count {
+	font-size: 0.875rem;
+}
+
+.k-featured-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.375rem;
+	margin-left: 1.25rem;
+}
+
+.k-featured-item {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.25rem 0.5rem;
+	background: var(--color-gray-100);
+	border-radius: var(--rounded-sm);
+	font-size: 0.875rem;
+}
+
+.k-featured-item-icon {
+	color: var(--color-text-light);
+	flex-shrink: 0;
+	width: 16px;
+	height: 16px;
+}
+
+.k-featured-item-text {
+	color: var(--color-text);
+	font-family: var(--font-mono);
+	font-size: 0.8125rem;
+}
+
+.k-featured-empty {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 2rem;
+	color: var(--color-text-light);
+	font-style: italic;
+	text-align: center;
+}
+
+.k-featured-empty-icon {
+	color: var(--color-gray-400);
+	flex-shrink: 0;
+}

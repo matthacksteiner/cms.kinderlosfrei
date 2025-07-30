@@ -1,0 +1,15 @@
+{
+	"name": "baukasten/grid-blocks",
+	"description": "Use the layouts field as block for Baukasten CMS",
+	"type": "kirby-plugin",
+	"license": "MIT",
+	"version": "1.0.0",
+	"authors": [
+		{
+			"name": "Matthias Hacksteiner"
+		}
+	],
+	"require": {
+		"getkirby/composer-installer": "^1.2"
+	}
+}

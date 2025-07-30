@@ -1,0 +1,13 @@
+title: Start
+icon: home
+
+options:
+  delete: false
+  status: false
+  template: false
+  duplicate: false
+
+tabs:
+  content: tabs/blocks
+  media: tabs/media
+  meta: tabs/meta/site

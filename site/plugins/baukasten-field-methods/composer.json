@@ -1,0 +1,11 @@
+{
+	"version": "1.0.0",
+	"type": "kirby-plugin",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Matthias Hacksteiner",
+			"email": "contact@matthiashacksteiner.net"
+		}
+	]
+}
