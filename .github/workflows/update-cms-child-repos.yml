@@ -267,7 +267,18 @@ jobs:
             git checkout -b "$UNIQUE_BRANCH_NAME"
             echo "🔀 Merging template changes..."
 
-            if ! git merge template/main --no-edit --allow-unrelated-histories; then
+            # Create a temporary branch from template without template-specific files
+            git checkout -b temp-template template/main
+            if [[ -n "$TEMPLATE_IGNORE_LIST" ]]; then
+              IFS='|' read -ra IGNORE_FILES <<< "$TEMPLATE_IGNORE_LIST"
+              for file in "${IGNORE_FILES[@]}"; do
+                [[ -f "$file" ]] && git rm -f "$file"
+              done
+              git commit -m "Remove template-specific files" --allow-empty
+            fi
+            git checkout "$UNIQUE_BRANCH_NAME"
+
+            if ! git merge temp-template --no-edit --allow-unrelated-histories; then
               echo "⚠️ Merge conflicts detected"
               CONFLICTS=true
               CONFLICT_COUNT=$((CONFLICT_COUNT + 1))
@@ -284,17 +295,12 @@ jobs:
                 git commit -m "$COMMIT_MESSAGE [CONTAINS CONFLICTS]" || true
               fi
             else
-              # Remove template files
-              if [[ -n "$TEMPLATE_IGNORE_LIST" ]]; then
-                IFS='|' read -ra IGNORE_FILES <<< "$TEMPLATE_IGNORE_LIST"
-                for file in "${IGNORE_FILES[@]}"; do
-                  [[ -f "$file" ]] && rm -f "$file"
-                done
-                git add . && git commit -m "Remove template files" --allow-empty
-              fi
               SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
               SUCCESS_REPOS+=("$REPO_NAME")
             fi
+
+            # Clean up temporary branch
+            git branch -D temp-template 2>/dev/null || true
 
             if git push -f origin "$UNIQUE_BRANCH_NAME"; then
               echo "✅ Changes pushed successfully"
