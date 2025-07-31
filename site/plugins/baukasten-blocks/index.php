@@ -322,7 +322,11 @@ function getBlockArray(\Kirby\Cms\Block $block)
                             'id'          => $page->id(),
                             'title'       => (string)$page->title(),
                             'description' => (string)$page->description(),
+<<<<<<< HEAD
                             'uri'         => $page->uri(),
+=======
+                            'uri'         => generatePageUri($page),
+>>>>>>> temp-template
                             'url'         => $page->url(),
                             'status'      => $page->status(),
                             'position'    => $page->num(),

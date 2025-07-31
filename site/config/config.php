@@ -1,9 +1,12 @@
 <?php
 
+<<<<<<< HEAD
 use Kirby\Filesystem\Dir;
 use Kirby\Filesystem\F;
 use Kirby\Http\Response;
 
+=======
+>>>>>>> temp-template
 /*
 |--------------------------------------------------------------------------
 | Kirby Configuration Array
@@ -35,6 +38,7 @@ return [
 			],
 		];
 	},
+<<<<<<< HEAD
 	'routes' => [
 		[
 			'pattern'  => 'index.json',
@@ -458,3 +462,6 @@ function globalJson()
 {
 	return Response::json(globalJsonData());
 }
+=======
+];
+>>>>>>> temp-template
