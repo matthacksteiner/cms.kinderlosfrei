@@ -5,6 +5,9 @@
 
 use Kirby\Cms\Page;
 
+// Set proper JSON headers
+header('Content-Type: application/json; charset=utf-8');
+
 function getItems(\Kirby\Cms\Page $page)
 {
   $items = [];
@@ -237,4 +240,4 @@ if (method_exists($page, 'getJsonData')) {
   }
 }
 
-echo json_encode($json);
+echo json_encode($json, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRESERVE_ZERO_FRACTION);
