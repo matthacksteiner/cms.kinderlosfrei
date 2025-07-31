@@ -82,6 +82,8 @@ class Routes
                             // Found matching page by flat URI, get the actual page
                             $actualPage = $site->find($pageData['id']);
                             if ($actualPage) {
+                                // Ensure proper JSON response
+                                $kirby->response()->type('application/json');
                                 return $actualPage->render([], 'json');
                             }
                         }
@@ -90,6 +92,8 @@ class Routes
                     // Fallback: try direct page lookup
                     $page = $site->find($pageUri);
                     if ($page) {
+                        // Ensure proper JSON response
+                        $kirby->response()->type('application/json');
                         return $page->render([], 'json');
                     }
 
