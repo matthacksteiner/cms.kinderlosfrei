@@ -27,6 +27,10 @@
 		{
 			"description": "fifth music",
 			"url": "https://github.com/matthacksteiner/cms.fifth-music"
+		},
+		{
+			"description": "kinderlosfrei",
+			"url": "https://github.com/matthacksteiner/cms.kinderlosfrei"
 		}
 	]
 }
