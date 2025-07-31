@@ -494,6 +494,22 @@ columns:
                 extends: fields/colors
                 width: 1/3
                 translate: false
+  designSection:
+    width: 1/1
+    sections:
+      section:
+        type: fields
+        fields:
+          designSectionHeadline:
+            label: Sektionen Einstellungen
+            type: headline
+            numbered: true
+          designSectionToggle:
+            type: toggle
+            label: Sektionen anzeigen?
+            width: 1/6
+            default: true
+            help: Sektionen in der URL angezeigen.
   designPagination:
     width: 1/1
     sections:

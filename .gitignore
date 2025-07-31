@@ -32,3 +32,4 @@ site/plugins/*
 !site/plugins/baukasten-kirby-routes/
 !site/plugins/baukasten-grid-blocks/
 !site/plugins/baukasten-cache-manager/
+!site/plugins/baukasten-api/
