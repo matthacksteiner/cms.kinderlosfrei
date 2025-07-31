@@ -267,7 +267,7 @@ jobs:
             git checkout -b "$UNIQUE_BRANCH_NAME"
             echo "🔀 Merging template changes..."
 
-            if ! git merge template/main --no-edit; then
+            if ! git merge template/main --no-edit --allow-unrelated-histories; then
               echo "⚠️ Merge conflicts detected"
               CONFLICTS=true
               CONFLICT_COUNT=$((CONFLICT_COUNT + 1))
