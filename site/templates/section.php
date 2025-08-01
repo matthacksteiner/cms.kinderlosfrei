@@ -1,7 +1,5 @@
 <?php
 
-<<<<<<< HEAD
-=======
 // Check if section pages should be accessible based on toggle setting
 if (!isSectionPageAccessible($page)) {
   // Return 404 when section toggle is disabled
@@ -9,7 +7,6 @@ if (!isSectionPageAccessible($page)) {
   return;
 }
 
->>>>>>> temp-template
 $path = $kirby->request()->path();
 $targetUrl = $site->frontendUrl();
 $targetUrl .= '/' . $path;
