@@ -494,8 +494,6 @@ columns:
                 extends: fields/colors
                 width: 1/3
                 translate: false
-<<<<<<< HEAD
-=======
   designSection:
     width: 1/1
     sections:
@@ -512,7 +510,6 @@ columns:
             width: 1/6
             default: true
             help: Sektionen in der URL angezeigen.
->>>>>>> temp-template
   designPagination:
     width: 1/1
     sections:
