@@ -251,6 +251,7 @@ function getBlockArray(\Kirby\Cms\Block $block)
                 }
                 $blockArray['content']['list'][$key] = $item->toArray();
                 $blockArray['content']['list'][$key]["icon"] = $icon;
+                $blockArray['content']['list'][$key]["linkObject"] = getLinkArray($item->linkObject());
             }
             break;
 

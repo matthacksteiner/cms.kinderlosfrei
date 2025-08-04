@@ -18,11 +18,9 @@ tabs:
             marks: false
             icon: text
             placeholder: Hier kommt der Titel rein…
-          url:
-            label: Url
-            type: text
-            icon: url
-            placeholder: "https://, mailto: oder tel:"
+          linkObject:
+            label: Link
+            extends: fields/linkField
           icon:
             label: Icon
             type: files
