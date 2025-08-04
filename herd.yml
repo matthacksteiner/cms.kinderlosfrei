@@ -1,7 +1,0 @@
-name: cms.baukasten
-php: '8.3'
-secured: false
-aliases: {  }
-services: {  }
-integrations:
-    forge: {  }
