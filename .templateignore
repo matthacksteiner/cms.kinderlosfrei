@@ -30,3 +30,8 @@ site/config/.license
 
 # This file itself (template ignore list)
 .templateignore
+
+
+# AI files
+.kiro
+.cursor
