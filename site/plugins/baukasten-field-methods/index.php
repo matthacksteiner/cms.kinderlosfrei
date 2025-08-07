@@ -83,16 +83,17 @@ function determineUri($linkType, $linkField)
 	switch ($linkType) {
 		case 'page':
 			$page = $linkField->toPage();
-			if ($page && $page->isHomePage()) {
-				return '';
+			if ($page) {
+				// Use generatePageUri helper function to respect designSectionToggle setting
+				$uri = function_exists('generatePageUri') ? generatePageUri($page) : $page->uri();
 			}
-			$uri = $page?->uri();
 			break;
 		case 'file':
 			$uri = $linkField->toUrl();
 			break;
 	}
 
+	// Convert 'home' to empty string for backward compatibility
 	if ($uri === 'home') {
 		$uri = '';
 	}
