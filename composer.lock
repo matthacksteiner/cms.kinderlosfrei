@@ -1382,16 +1382,16 @@
         },
         {
             "name": "microman/kirby-column-blocks",
-            "version": "1.2.3",
+            "version": "1.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/plain-solutions-gmbh/kirby-column-blocks.git",
-                "reference": "97d96b6b561c454dfe89fda78b3f626d76d42a16"
+                "reference": "6ce5ca3567274ac0b9e6e0e8d93d1e959638af19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/plain-solutions-gmbh/kirby-column-blocks/zipball/97d96b6b561c454dfe89fda78b3f626d76d42a16",
-                "reference": "97d96b6b561c454dfe89fda78b3f626d76d42a16",
+                "url": "https://api.github.com/repos/plain-solutions-gmbh/kirby-column-blocks/zipball/6ce5ca3567274ac0b9e6e0e8d93d1e959638af19",
+                "reference": "6ce5ca3567274ac0b9e6e0e8d93d1e959638af19",
                 "shasum": ""
             },
             "require": {
@@ -1415,7 +1415,7 @@
             "homepage": "https://plain-solutions.net/801524",
             "support": {
                 "issues": "https://github.com/plain-solutions-gmbh/kirby-column-blocks/issues",
-                "source": "https://github.com/plain-solutions-gmbh/kirby-column-blocks/tree/1.2.3"
+                "source": "https://github.com/plain-solutions-gmbh/kirby-column-blocks/tree/v1.2.6"
             },
             "funding": [
                 {
@@ -1423,7 +1423,7 @@
                     "type": "PayPal"
                 }
             ],
-            "time": "2025-03-24T16:01:18+00:00"
+            "time": "2025-08-17T18:07:08+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
