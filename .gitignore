@@ -5,6 +5,7 @@ __MACOSX
 .run
 .vscode/sftp.json
 .env
+.ddev
 
 /content
 
