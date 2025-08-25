@@ -6,6 +6,10 @@ __MACOSX
 .vscode/sftp.json
 .env
 
+.ddev/*
+!.ddev/config.yaml
+
+
 /content
 
 /storage/cache

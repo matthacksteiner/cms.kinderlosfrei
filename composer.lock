@@ -1382,16 +1382,16 @@
         },
         {
             "name": "microman/kirby-column-blocks",
-            "version": "1.2.3",
+            "version": "1.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/plain-solutions-gmbh/kirby-column-blocks.git",
-                "reference": "97d96b6b561c454dfe89fda78b3f626d76d42a16"
+                "reference": "6ce5ca3567274ac0b9e6e0e8d93d1e959638af19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/plain-solutions-gmbh/kirby-column-blocks/zipball/97d96b6b561c454dfe89fda78b3f626d76d42a16",
-                "reference": "97d96b6b561c454dfe89fda78b3f626d76d42a16",
+                "url": "https://api.github.com/repos/plain-solutions-gmbh/kirby-column-blocks/zipball/6ce5ca3567274ac0b9e6e0e8d93d1e959638af19",
+                "reference": "6ce5ca3567274ac0b9e6e0e8d93d1e959638af19",
                 "shasum": ""
             },
             "require": {
@@ -1415,7 +1415,7 @@
             "homepage": "https://plain-solutions.net/801524",
             "support": {
                 "issues": "https://github.com/plain-solutions-gmbh/kirby-column-blocks/issues",
-                "source": "https://github.com/plain-solutions-gmbh/kirby-column-blocks/tree/1.2.3"
+                "source": "https://github.com/plain-solutions-gmbh/kirby-column-blocks/tree/v1.2.6"
             },
             "funding": [
                 {
@@ -1423,7 +1423,7 @@
                     "type": "PayPal"
                 }
             ],
-            "time": "2025-03-24T16:01:18+00:00"
+            "time": "2025-08-17T18:07:08+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -1946,16 +1946,16 @@
         },
         {
             "name": "sylvainjule/backups",
-            "version": "1.0.5",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sylvainjule/kirby-backups.git",
-                "reference": "a2ea8347aca0235cdc46d667cbb8f6fa4c23f15f"
+                "reference": "d2d9957802af66258c275c48548e46beaf8b3037"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sylvainjule/kirby-backups/zipball/a2ea8347aca0235cdc46d667cbb8f6fa4c23f15f",
-                "reference": "a2ea8347aca0235cdc46d667cbb8f6fa4c23f15f",
+                "url": "https://api.github.com/repos/sylvainjule/kirby-backups/zipball/d2d9957802af66258c275c48548e46beaf8b3037",
+                "reference": "d2d9957802af66258c275c48548e46beaf8b3037",
                 "shasum": ""
             },
             "require": {
@@ -1975,9 +1975,9 @@
             "description": "Manage backups from the Kirby panel",
             "support": {
                 "issues": "https://github.com/sylvainjule/kirby-backups/issues",
-                "source": "https://github.com/sylvainjule/kirby-backups/tree/1.0.5"
+                "source": "https://github.com/sylvainjule/kirby-backups/tree/1.1.0"
             },
-            "time": "2024-03-06T22:34:32+00:00"
+            "time": "2025-08-06T19:20:33+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
